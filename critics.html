@@ -1,0 +1,1073 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>평론가와 점수 · WineBook</title><meta name="description" content="마스터 오브 와인과 주요 평론가, 100점·20점·별점 체계를 비교하고 같은 와인에 대한 평론가별 점수 차이를 도식으로 정리한 장."><meta property="og:title" content="평론가와 점수 · WineBook"><meta property="og:description" content="마스터 오브 와인과 주요 평론가, 100점·20점·별점 체계를 비교하고 같은 와인에 대한 평론가별 점수 차이를 도식으로 정리한 장."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="critics"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">11장 · 평론가와 점수</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html" aria-current="page"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 11</span><span>MW·평론가·점수 체계</span></div><h1>평론가와 점수</h1><p class="ch-lede">와인 가게의 선반에는 ‘WA 98’, ‘JS 97’, ‘JR 18.5’ 같은 숫자가 붙어 있습니다. 누가 매긴 점수이고, 그 숫자는 어떤 뜻일까요? 이 장에서는 마스터 오브 와인(MW)이라는 자격과 주요 평론가를 소개하고, 서로 다른 점수 체계를 한 그림에 겹쳐 본 뒤 같은 와인에 평론가마다 몇 점을 줬는지 비교합니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>마스터 오브 와인(MW)과 마스터 소믈리에(MS)의 차이를 설명할 수 있다.</li><li>100점·20점·별점 체계에서 각 점수대가 뜻하는 바를 읽을 수 있다.</li><li>같은 와인에 대한 평론가별 점수 차이를 보고 점수의 한계를 이해한다.</li><li>점수를 와인 선택에 현명하게 활용하는 방법을 안다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>마스터 오브 와인</h2>
+<p>마스터 오브 와인(Master of Wine, MW)은 영국 런던의 마스터 오브 와인 협회(IMW)가 주는 자격으로, 와인 업계에서 가장 어렵기로 이름난 시험입니다. 1953년 첫 시험이 치러졌고, 지금까지 이 자격을 가진 사람은 31개국 427명에 불과합니다(2026년 10월 IMW 홈페이지 기준). 블라인드 테이스팅과 포도 재배·양조·사업·시사에 걸친 이론 시험을 통과한 뒤, 독자적인 연구 논문까지 인정받아야 합니다. 평론가 잰시스 로빈슨, 리사 페로티브라운 같은 이름 뒤의 ‘MW’가 바로 이 자격입니다.</p>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th></th><th>마스터 오브 와인(MW)</th><th>마스터 소믈리에(MS)</th></tr></thead>
+  <tbody>
+    <tr><td><b>주관</b></td><td>마스터 오브 와인 협회(1955년 설립, 첫 시험 1953년)</td><td>코트 오브 마스터 소믈리에(1977년)</td></tr>
+    <tr><td><b>초점</b></td><td>와인 산업 전반: 재배, 양조, 유통, 비즈니스, 연구</td><td>레스토랑 서비스: 시음, 서비스, 음료 지식</td></tr>
+    <tr><td><b>시험</b></td><td>블라인드 시음 + 이론 + 연구 논문</td><td>이론(구술) + 서비스 실기 + 블라인드 시음</td></tr>
+    <tr><td><b>대표 인물</b></td><td>잰시스 로빈슨, 팀 앳킨, 리사 페로티브라운</td><td>레스토랑과 호텔의 수석 소믈리에</td></tr>
+  </tbody>
+</table></div>
+
+<h2>주요 평론가와 매체</h2>
+<div class="grid-cards">
+  <div class="card"><h4>와인 애드버킷</h4><p class="meta">100점 · 미국</p><p>로버트 파커가 1978년 창간해 100점제를 대중화했다. 파커는 2019년 은퇴했고 지금은 여러 평론가가 산지를 나눠 맡는다.</p></div>
+  <div class="card"><h4>와인 스펙테이터</h4><p class="meta">100점 · 미국</p><p>잡지와 빈티지 차트로 영향력이 크다. 해마다 ‘올해의 100대 와인’을 발표한다.</p></div>
+  <div class="card"><h4>잰시스 로빈슨 MW</h4><p class="meta">20점 · 영국</p><p>『옥스퍼드 와인 컴패니언』과 『와인 아틀라스』의 저자. 0.5점 단위의 20점제를 쓴다.</p></div>
+  <div class="card"><h4>디캔터</h4><p class="meta">100점 · 영국</p><p>영국의 대표 와인 잡지. 세계 최대 규모의 와인 경연(DWWA)도 연다.</p></div>
+  <div class="card"><h4>비너스</h4><p class="meta">100점 · 미국</p><p>안토니오 갈로니가 2013년 세운 매체. 이탈리아와 부르고뉴 평가로 신뢰가 높다.</p></div>
+  <div class="card"><h4>제임스 서클링 · 젭 더넉 · 버고하운드</h4><p class="meta">100점</p><p>각자 자기 이름의 매체를 운영하는 평론가. 버고하운드(앨런 메도스)는 부르고뉴만 다룬다.</p></div>
+  <div class="card"><h4>감베로 로소</h4><p class="meta">잔 3개 · 이탈리아</p><p>이탈리아 와인 가이드 『비니 디탈리아』. 최고 등급은 ‘트레 비키에리(잔 세 개)’.</p></div>
+  <div class="card"><h4>별점</h4><p class="meta">5개 · 다양한 매체</p><p>마이클 브로드벤트 같은 영국 평론가와 여러 가이드가 쓰는 5단계 표기.</p></div>
+</div>
+
+<h2>점수 체계 겹쳐 보기</h2>
+<p>100점제라고 해서 0점부터 쓰는 것은 아닙니다. 와인 스펙테이터와 와인 애드버킷은 사실상 50점에서 시작하고, 시중의 좋은 와인은 대부분 85~95점 사이에 모입니다. 아래 그림은 같은 높이에 각 매체의 점수 구간과 그 뜻을 겹쳐 놓은 것입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="chart" viewBox="0 0 900 420" role="img" aria-label="와인 점수 체계 비교">
+      <g id="scales"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 11-1.</b> 매체별 점수 구간과 공식 설명. 잰시스 로빈슨의 20점과 별점은 100점제와 공식 환산표가 없어 일반적으로 쓰이는 대략적인 위치에 놓았다.</figcaption>
+</figure>
+
+<section class="sim wide" id="conv" data-title="점수 환산기"><div class="sim-head"><span class="sim-n">실험 11-1</span><h3>점수 환산기</h3></div>
+  <div class="sim-body">
+    <div class="sim-ctrl">
+      <label class="ctl">100점제 점수 <output id="o-sc">93</output><input type="range" id="r-sc" min="80" max="100" step="1" value="93"></label>
+      <p class="small" style="margin:0">슬라이더를 움직이면 같은 점수가 다른 체계에서 어디쯤인지 보여 줍니다. 공식 환산이 아니라 어림값입니다.</p>
+    </div>
+    <div class="sim-out"><div class="readouts" id="conv-out"></div></div>
+  </div>
+  <p class="sim-note">평론가마다 기준과 취향이 다르기 때문에 같은 숫자라도 의미가 조금씩 다릅니다. 점수는 ‘이 평론가가 이 와인을 얼마나 좋게 봤는가’를 나타낼 뿐입니다.</p>
+</section>
+
+<h2>같은 와인, 다른 점수</h2>
+<p>최고급 와인일수록 평론가들의 점수가 비슷하게 높은 경우가 많지만, 몇 점의 차이는 흔합니다. 아래는 다섯 아이콘 와인에 대해 판매처들이 공개한 평론가 점수를 점으로 찍은 것입니다. 점 위의 약어가 평론가입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><svg class="chart crit" viewBox="0 0 720 284" role="img" aria-label="평론가별 점수 분포"><line class="grid" x1="180.0" x2="180.0" y1="22" y2="262"/><text x="180.0" y="278" text-anchor="middle" class="num">94</text><line class="grid" x1="255.0" x2="255.0" y1="22" y2="262"/><text x="255.0" y="278" text-anchor="middle" class="num">95</text><line class="grid" x1="330.0" x2="330.0" y1="22" y2="262"/><text x="330.0" y="278" text-anchor="middle" class="num">96</text><line class="grid" x1="405.0" x2="405.0" y1="22" y2="262"/><text x="405.0" y="278" text-anchor="middle" class="num">97</text><line class="grid" x1="480.0" x2="480.0" y1="22" y2="262"/><text x="480.0" y="278" text-anchor="middle" class="num">98</text><line class="grid" x1="555.0" x2="555.0" y1="22" y2="262"/><text x="555.0" y="278" text-anchor="middle" class="num">99</text><line class="grid" x1="630.0" x2="630.0" y1="22" y2="262"/><text x="630.0" y="278" text-anchor="middle" class="num">100</text><text x="0" y="49.0" style="fill:var(--ink);font-weight:650;font-size:12.5px">샤토 마고 2016</text><text x="0" y="64.0" style="font-size:10px">보르도 · 마고</text><line x1="405.0" x2="630.0" y1="51.0" y2="51.0" style="stroke:var(--t-r2);stroke-width:4;stroke-linecap:round"/><g data-tip="더 와인 인디펜던트(리사 페로티브라운 MW): 100점"><circle cx="630.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="제임스 서클링: 99점"><circle cx="555.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 애드버킷: 99점"><circle cx="555.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 인수지애스트: 99점"><circle cx="555.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="디캔터: 98점"><circle cx="480.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="젭 더넉: 98점"><circle cx="480.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 스펙테이터: 97점"><circle cx="405.0" cy="51.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><text x="405.0" y="40.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WS</text><text x="480.0" y="40.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">DEC·JD</text><text x="555.0" y="40.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">JS·WA·WE</text><text x="630.0" y="40.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">TWI</text><text x="642" y="55.0" style="font-size:11px;fill:var(--ink)">97–100점</text><text x="0" y="95.0" style="fill:var(--ink);font-weight:650;font-size:12.5px">사시카이아 2016</text><text x="0" y="110.0" style="font-size:10px">토스카나 · 볼게리</text><line x1="255.0" x2="630.0" y1="97.0" y2="97.0" style="stroke:var(--t-r2);stroke-width:4;stroke-linecap:round"/><g data-tip="와인 애드버킷: 100점"><circle cx="630.0" cy="97.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 스펙테이터: 97점"><circle cx="405.0" cy="97.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="제임스 서클링: 97점"><circle cx="405.0" cy="97.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="비너스(Vinous): 96점"><circle cx="330.0" cy="97.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="젭 더넉: 95점"><circle cx="255.0" cy="97.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><text x="255.0" y="86.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">JD</text><text x="330.0" y="86.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">VN</text><text x="405.0" y="86.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WS·JS</text><text x="630.0" y="86.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WA</text><text x="642" y="101.0" style="font-size:11px;fill:var(--ink)">95–100점</text><text x="0" y="141.0" style="fill:var(--ink);font-weight:650;font-size:12.5px">몬포르티노 2019</text><text x="0" y="156.0" style="font-size:10px">피에몬테 · 바롤로 리제르바</text><line x1="480.0" x2="630.0" y1="143.0" y2="143.0" style="stroke:var(--t-r2);stroke-width:4;stroke-linecap:round"/><g data-tip="와인 애드버킷: 100점"><circle cx="630.0" cy="143.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="젭 더넉: 100점"><circle cx="630.0" cy="143.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="디캔터: 100점"><circle cx="630.0" cy="143.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="비너스(Vinous): 99점"><circle cx="555.0" cy="143.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="제임스 서클링: 98점"><circle cx="480.0" cy="143.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><text x="480.0" y="132.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">JS</text><text x="555.0" y="132.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">VN</text><text x="630.0" y="132.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WA·JD·DEC</text><text x="642" y="147.0" style="font-size:11px;fill:var(--ink)">98–100점</text><text x="0" y="187.0" style="fill:var(--ink);font-weight:650;font-size:12.5px">라 타슈 2019</text><text x="0" y="202.0" style="font-size:10px">부르고뉴 · DRC</text><line x1="555.0" x2="630.0" y1="189.0" y2="189.0" style="stroke:var(--t-r2);stroke-width:4;stroke-linecap:round"/><g data-tip="디캔터: 100점"><circle cx="630.0" cy="189.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 애드버킷: 99점"><circle cx="555.0" cy="189.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="버고하운드: 99점"><circle cx="555.0" cy="189.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><text x="555.0" y="178.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WA·BH</text><text x="630.0" y="178.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">DEC</text><text x="642" y="193.0" style="font-size:11px;fill:var(--ink)">99–100점</text><text x="0" y="233.0" style="fill:var(--ink);font-weight:650;font-size:12.5px">돔 페리뇽 2008</text><text x="0" y="248.0" style="font-size:10px">샹파뉴</text><line x1="330.0" x2="480.0" y1="235.0" y2="235.0" style="stroke:var(--t-r2);stroke-width:4;stroke-linecap:round"/><g data-tip="비너스(Vinous): 98점"><circle cx="480.0" cy="235.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><g data-tip="와인 애드버킷: 96점"><circle cx="330.0" cy="235.0" r="7" style="fill:var(--st-r);stroke:var(--surface);stroke-width:2"/></g><text x="330.0" y="224.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">WA</text><text x="480.0" y="224.0" text-anchor="middle" style="font-size:9.5px;fill:var(--ink-2)">VN</text><text x="642" y="239.0" style="font-size:11px;fill:var(--ink)">96–98점</text><text x="642" y="253.0" style="font-size:10px">JR 19/20</text></svg></div>
+  <div class="map-legend" style="margin-top:8px"><span>WA 와인 애드버킷</span><span>WS 와인 스펙테이터</span><span>JS 제임스 서클링</span><span>VN 비너스</span><span>DEC 디캔터</span><span>JD 젭 더넉</span><span>BH 버고하운드</span><span>WE 와인 인수지애스트</span><span>TWI 더 와인 인디펜던트</span></div>
+  <figcaption><b>그림 11-2.</b> 평론가별 점수(94~100점 구간). 막대는 최저점과 최고점 사이의 범위다. 같은 와인에도 평론가에 따라 2~3점 차이가 난다. 돔 페리뇽 2008에는 잰시스 로빈슨의 20점제 점수(19점)도 함께 적었다.</figcaption>
+</figure>
+
+<div class="box key"><span class="box-t">점수를 현명하게 쓰는 법</span>
+<ul>
+  <li><b>한 사람보다 여러 사람</b>: 여러 평론가의 점수가 비슷하면 믿을 만하고, 크게 갈리면 스타일이 호불호를 탄다는 뜻일 수 있다.</li>
+  <li><b>나와 취향이 맞는 평론가 찾기</b>: 내가 좋아한 와인에 높은 점수를 준 평론가의 다른 추천을 따라가 보자.</li>
+  <li><b>점수보다 시음 노트</b>: ‘단단하고 닫혀 있다, 10년 뒤부터’ 같은 설명이 숫자보다 쓸모 있을 때가 많다.</li>
+  <li><b>빈티지와 마실 시기</b>: 높은 점수의 어린 와인은 지금 마시면 거칠 수 있다(12장).</li>
+  <li><b>점수를 거부한 생산자도 있다</b>: 피에몬테의 카펠라노는 평론가들에게 자기 와인에 점수를 매기지 말아 달라고 요청한 일로 유명하다.</li>
+</ul></div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>MW는 와인 산업 전반을 다루는 가장 어려운 자격(31개국 427명), MS는 레스토랑 서비스 중심의 소믈리에 자격이다.</li>
+  <li>100점제는 사실상 50점부터 시작하며 90점 이상이 ‘뛰어남’, 95~96점 이상이 ‘최고 수준’이다.</li>
+  <li>잰시스 로빈슨의 20점제에서 17점은 ‘우수’, 18점 이상은 아주 뛰어난 와인이다.</li>
+  <li>같은 와인에도 평론가마다 2~3점 차이가 흔하다. 여러 평가와 시음 노트를 함께 보자.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="2"><p class="q">마스터 오브 와인(MW)에 대한 설명으로 맞는 것은?</p>
+    <ol class="opts"><li>레스토랑 서비스 실기 시험이 중심이다</li><li>블라인드 시음, 이론 시험, 연구 논문을 모두 통과해야 한다</li><li>1년 과정만 마치면 받을 수 있다</li><li>프랑스 정부가 주는 자격이다</li></ol>
+    <div class="why">MW는 런던의 마스터 오브 와인 협회가 주며, 연구 논문까지 통과해야 한다.</div></div>
+  <div class="quiz" data-a="3"><p class="q">와인 스펙테이터에서 90~94점의 뜻은?</p>
+    <ol class="opts"><li>평균</li><li>아주 좋음</li><li>뛰어남(Outstanding)</li><li>클래식</li></ol>
+    <div class="why">95~100 클래식, 90~94 뛰어남, 85~89 아주 좋음, 80~84 좋음이다.</div></div>
+  <div class="quiz" data-a="1"><p class="q">잰시스 로빈슨 MW가 쓰는 점수 체계는?</p>
+    <ol class="opts"><li>20점제</li><li>100점제</li><li>잔 3개</li><li>별 5개</li></ol>
+    <div class="why">0.5점 단위의 20점제를 쓴다. 잔 3개는 이탈리아의 감베로 로소다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>마스터 오브 와인 협회(<a href="https://www.mastersofwine.org/" rel="noopener">mastersofwine.org</a>): MW 수와 국가 수(2026년 10월 확인).</li>
+  <li>점수 구간의 공식 설명: 와인 스펙테이터, 와인 애드버킷, 디캔터, 잰시스 로빈슨 각 매체의 점수 안내.</li>
+  <li>아이콘 와인의 평론가 점수: 각 와인을 판매하는 소매·경매 사이트에 공개된 평론가 점수(2026년 10월 확인).</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="veneto.html"><small>← 이전</small>10장 · 베네토와 남부 이탈리아</a><a class="next" href="vintages.html"><small>다음 →</small>12장 · 빈티지와 시음 적기</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, esc = WB.esc;
+  /* scales ladder: y from score 100 (top) to 50 (bottom) */
+  var Y0 = 30, Y1 = 400;
+  function Y(v) { return Y0 + (100 - v) / 50 * (Y1 - Y0); }
+  var cols = [
+    ['와인 스펙테이터', [[95, 100, '클래식'], [90, 94, '뛰어남'], [85, 89, '아주 좋음'], [80, 84, '좋음'], [75, 79, '평범'], [50, 74, '추천 안 함']]],
+    ['와인 애드버킷', [[96, 100, '특별함'], [90, 95, '뛰어남'], [80, 89, '평균 이상~아주 좋음'], [70, 79, '평균'], [60, 69, '평균 이하'], [50, 59, '받아들일 수 없음']]],
+    ['디캔터', [[98, 100, '예외적'], [95, 97, '뛰어남'], [90, 94, '적극 추천'], [86, 89, '추천'], [83, 85, '칭찬할 만함'], [76, 82, '괜찮음'], [70, 75, '나쁨']]],
+    ['잰시스 로빈슨(20점)', [[98, 100, '20 · 정말 예외적'], [95, 97, '19 · 대단함'], [93, 94, '18 · 우수 이상'], [90, 92, '17 · 우수'], [87, 89, '16 · 훌륭함'], [84, 86, '15 · 평균'], [80, 83, '14 · 지루함']]],
+    ['별점(5개)', [[96, 100, '★★★★★'], [91, 95, '★★★★'], [86, 90, '★★★'], [80, 85, '★★'], [70, 79, '★']]]
+  ];
+  var o = '', X0 = 70, CW = 162;
+  [100, 95, 90, 85, 80, 75, 70, 60, 50].forEach(function (v) { o += '<line class="grid" x1="' + (X0 - 6) + '" x2="' + (X0 + cols.length * CW) + '" y1="' + Y(v) + '" y2="' + Y(v) + '"/><text x="' + (X0 - 12) + '" y="' + (Y(v) + 4) + '" text-anchor="end" class="num">' + v + '</text>'; });
+  cols.forEach(function (c, i) {
+    var x = X0 + i * CW + 6, w = CW - 12;
+    o += '<text x="' + (x + w / 2) + '" y="18" text-anchor="middle" style="fill:var(--ink);font-weight:650;font-size:12px">' + esc(c[0]) + '</text>';
+    c[1].forEach(function (b, j) {
+      var y1 = Y(b[1] + 0.5), y2 = Y(b[0] - 0.5), lvl = Math.max(1, 7 - j);
+      var dark = lvl >= 5;
+      o += '<rect x="' + x + '" y="' + y1 + '" width="' + w + '" height="' + Math.max(2, y2 - y1 - 2) + '" rx="4" style="fill:var(--seq-' + lvl + ')" data-tip="' + esc(c[0] + ' · ' + b[0] + '~' + b[1] + ' · ' + b[2]) + '"/>';
+      if (y2 - y1 > 12) o += '<text x="' + (x + w / 2) + '" y="' + ((y1 + y2) / 2 + 3.5) + '" text-anchor="middle" class="' + (dark ? 'lbl-dark' : 'lbl-light') + '" style="font-size:' + (y2 - y1 > 16 ? 10.5 : 9.5) + 'px">' + esc(b[2]) + '</text>';
+    });
+  });
+  $('#scales').innerHTML = o;
+
+  /* converter */
+  function band(list, v) { for (var i = 0; i < list.length; i++) if (v >= list[i][0] && v <= list[i][1]) return list[i][2]; return '—'; }
+  function draw() {
+    var v = +$('#r-sc').value;
+    $('#o-sc').textContent = v;
+    var jr = v >= 99 ? 20 : v >= 96 ? 19 : v >= 95 ? 18.5 : v >= 93 ? 18 : v >= 92 ? 17.5 : v >= 90 ? 17 : v >= 88 ? 16.5 : v >= 87 ? 16 : v >= 85 ? 15.5 : v >= 84 ? 15 : 14;
+    var st = v >= 96 ? '★★★★★' : v >= 91 ? '★★★★' : v >= 86 ? '★★★' : v >= 80 ? '★★' : '★';
+    $('#conv-out').innerHTML = [
+      ['와인 스펙테이터', band(cols[0][1], v)], ['와인 애드버킷', band(cols[1][1], v)], ['디캔터', band(cols[2][1], v)],
+      ['잰시스 로빈슨(어림)', jr + '/20'], ['별점(어림)', st]
+    ].map(function (r) { return '<div class="readout"><span>' + r[0] + '</span><b>' + esc(r[1]) + '</b></div>'; }).join('');
+  }
+  $('#r-sc').addEventListener('input', draw);
+  draw();
+})();
+</script></body></html>

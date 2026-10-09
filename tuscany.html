@@ -1,0 +1,1250 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>토스카나: 산지오베제와 슈퍼 투스칸 · WineBook</title><meta name="description" content="키안티 클라시코 UGA와 생산자, 브루넬로 디 몬탈치노의 마을과 생산자, 볼게리의 슈퍼 투스칸 와이너리를 지도에서 찾아보는 토스카나 장."><meta property="og:title" content="토스카나: 산지오베제와 슈퍼 투스칸 · WineBook"><meta property="og:description" content="키안티 클라시코 UGA와 생산자, 브루넬로 디 몬탈치노의 마을과 생산자, 볼게리의 슈퍼 투스칸 와이너리를 지도에서 찾아보는 토스카나 장."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="tuscany"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">09장 · 토스카나</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html" aria-current="page"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 09</span><span>키안티 클라시코·몬탈치노·볼게리</span></div><h1>토스카나: 산지오베제와 슈퍼 투스칸</h1><p class="ch-lede">토스카나의 주인공은 산지오베제입니다. 피렌체와 시에나 사이의 키안티 클라시코, 언덕 위 마을 몬탈치노의 브루넬로, 몬테풀치아노의 비노 노빌레가 모두 이 품종으로 만듭니다. 그리고 1970년대, 규정 밖에서 카베르네와 메를로를 쓴 ‘슈퍼 투스칸’이 해안의 볼게리와 키안티에서 나타나 이탈리아 와인의 판도를 바꿨습니다. 이 장에서는 세 개의 상세 지도로 마을과 와이너리를 하나씩 찾아봅니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>산지오베제의 특징과 토스카나 주요 산지(키안티 클라시코, 브루넬로, 비노 노빌레, 볼게리)의 위치를 설명할 수 있다.</li><li>키안티와 키안티 클라시코의 차이, 그리고 아나타·리제르바·그란 셀레치오네의 규정을 구별할 수 있다.</li><li>키안티 클라시코의 11개 UGA와 대표 생산자를 지도에서 찾을 수 있다.</li><li>브루넬로 디 몬탈치노의 북쪽과 남쪽 스타일 차이와 대표 생산자를 안다.</li><li>슈퍼 투스칸이 생긴 이유와 사시카이아·티냐넬로·오르넬라이아·마세토의 블렌드를 비교할 수 있다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>산지오베제의 땅</h2>
+<p>산지오베제(Sangiovese)는 이탈리아에서 가장 많이 심는 레드 품종입니다. 이름은 ‘유피테르의 피(sanguis Jovis)’에서 왔다는 이야기가 전해집니다. 산도가 높고 탄닌이 단단하며, 신 체리·제비꽃·토마토잎·말린 허브·홍차 향이 특징입니다. 숙성하면 가죽, 흙, 말린 체리 쪽으로 옮겨 갑니다. 늦게 익고 껍질이 얇아 해와 땅을 그대로 드러내기 때문에, 같은 품종이라도 산지마다 이름과 얼굴이 다릅니다. 몬탈치노에서는 ‘브루넬로’, 몬테풀치아노에서는 ‘프루뇰로 젠틸레’, 스칸사노에서는 ‘모렐리노’라고 부릅니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="chart" viewBox="0 0 900 380" role="img" aria-label="토스카나 대표 와인의 품종 구성">
+      <g id="blend-bars"></g>
+    </svg>
+    <div class="map-legend" id="blend-legend"></div>
+  </div>
+  <figcaption><b>그림 9-1.</b> 토스카나 대표 와인의 품종 구성. 산지오베제 100%부터 메를로 100%까지, 토스카나 와인은 한 품종에서 시작해 보르도 품종으로 넓어졌다. 블렌드 비율은 대표적인 빈티지 기준의 근사치이며 해마다 조금씩 달라진다. 키안티 클라시코는 와인이 아니라 규정(산지오베제 80% 이상)을 표시했다.</figcaption>
+</figure>
+
+<h2>토스카나 지도</h2>
+<p>토스카나의 고급 와인 산지는 크게 세 곳에 모여 있습니다. 피렌체와 시에나 사이 구릉의 키안티 클라시코, 남쪽 오르차 계곡 위의 몬탈치노와 몬테풀치아노, 그리고 서쪽 해안의 볼게리입니다. 산지를 누르면 개요가 나타나고, 점선 사각형은 아래 상세 지도의 범위입니다.</p>
+
+<div class="mapwrap wide" id="tus">
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-tu" viewBox="0 0 560 619" role="group" aria-label="토스카나 주요 와인 산지 지도"><g class="m-bg"><path class="b b-prov" data-n="Massa-Carrara" d="M2.5 47.6 1.3 46.2 7.5 40 7.9 38.1 10.4 37.7 6.2 36.7 5 33.6 1.2 34.2 -2.7 38 -4.6 42.3 -5 41.4 -5 36.2 -2.2 29.3 -5 27.7 -5 -5 60.5 -5 61.6 -2 65.2 0.6 65.8 2 68.3 2.9 69.9 5.6 71.1 6.3 72.4 5.8 74.1 7.2 76.4 12.8 80 16.8 80.3 20.7 78.5 21.3 74.7 29 65.3 35.5 67.6 46.3 66.9 48.3 67.5 50 64.2 55.6 65 60.2 66.9 61.6 71 62.4 75 65.5 76.9 72.5 76.2 76.3 73.9 77.7 72.6 80.2 72.8 82.3 68 87.3 68.8 90.6 64.3 94 63.6 96.6 61.7 98.3 61.7 101.6 60.2 103.1 55 105.1 39 89.9 31.8 87 28.2 84 30.5 79.4 37.3 73.5 39.3 70.3 39.3 67.8 37.4 65.5 34.7 62.7 28.5 61.3 25 64.5 22.9 69.3 21.5 68 23.1 65.4 23.4 62.3 20.8 59.2 19.6 54.9 20.3 53.4 19.4 51.4 19.9 48.5 18.8 46.7 17.3 46.1 14.8 47.4 7.7 45.7Z"/><path class="b b-prov" data-n="Lucca" d="M177.2 146.3 180.4 149.4 182 155.2 178.3 163.3 174.3 158.9 168.8 157.7 164.1 160.4 162 166.9 159 172.2 156 172.5 153.2 170.9 144 174.2 137.9 170.6 132.4 173.1 131.1 171.6 125.8 169.4 121.7 168.8 119.4 165.4 118.9 162.6 121.5 160.6 121.8 157.5 118.2 155 116 148.2 113.5 152.1 112.9 150.6 111.9 150.8 106.1 154.9 99.2 153.7 96.8 151.7 93.1 151.8 90.3 149.7 79.5 153.7 75.3 141.6 76.3 140 74.9 135.3 65.1 118.1 55 105.1 60.2 103.1 61.7 101.6 61.7 98.3 63.6 96.6 64.3 94 68.8 90.6 68 87.3 72.8 82.3 72.6 80.2 73.9 77.7 76.2 76.3 76.9 72.5 75 65.5 71 62.4 66.9 61.6 65 60.2 64.2 55.6 67.5 49.9 66.9 48.3 67.6 46.3 65.3 35.5 74.7 29 78.5 21.3 80.3 20.7 80 16.8 89.3 11.9 91.8 12.2 93.1 13.8 98 16.1 103.1 16.1 106.7 17.5 113.2 22.9 114.6 27 118.2 29.8 125.9 29 127.8 30.7 130.7 31.7 131.4 32.7 130.3 37.2 138.1 45.6 137.4 47.9 138.5 51 147.9 57.3 150.7 60.2 151.5 62.7 155.8 63.9 156.8 62.7 159.9 62.2 163.8 65.8 168.4 65.6 172.4 67 173.8 68.9 181.2 73.7 181.8 79.5 180.4 85.4 182.9 87.1 184.5 91.2 182.2 93.2 177.4 94.3 174 99.9 170.5 103.6 169.9 113.5 166.9 124 164.7 126.1 167 131.6 165.2 134.7 165.3 138.1 169.7 139 170.8 138.6 169.7 137 171.3 136.3 173.1 139.4 173.3 142.8 174.9 142.9Z"/><path class="b b-prov" data-n="Pistoia" d="M246.8 130.1 244.3 138.4 246.9 142.1 246.8 144 248.6 147.9 246.1 147 244.3 149.2 238 151.6 237.1 153.7 233.6 155.6 231.8 153.4 228.8 152.3 223.4 159 219.3 160.4 213.3 160.9 207.7 158.6 200.5 162.7 201.7 159.6 201.2 156.7 194.8 159.7 190.7 159.1 182 154.9 180.4 149.4 174.9 142.9 173.3 142.8 173.1 139.4 171.3 136.3 169.7 137 170.8 138.6 169.7 139 165.3 138.1 165.2 134.7 167 131.6 164.7 126.1 166.9 124 169.9 113.5 170.5 103.6 174 99.9 177.4 94.3 182.2 93.2 184.5 91.2 182.9 87.1 180.4 85.4 181.8 79.5 181.2 73.7 173.8 68.9 171.7 66.7 168.4 65.6 163.8 65.8 159.9 62.2 159.6 55.9 161.9 54.4 164 50.3 168.1 52.1 174.1 51.2 178.4 51.9 179.1 51.2 188.2 52.2 192.3 58.1 197.7 60.6 198.8 62.8 202.2 64.8 204.4 63.6 205.5 64.3 207.4 65.7 208.8 69.2 213 68.6 215.8 69.3 220.7 73.5 219.6 78.9 222.4 80 223.6 79.9 225.6 76.2 229.5 74.2 233.8 68.1 235.3 63.7 240.3 59.6 240 58.4 242.9 56.9 244.6 57.3 244.7 61.3 242.9 62.2 242 64.9 246.7 69.5 251.7 70.2 253.3 77.1 250.2 85.3 249.8 90.2 246 96.2 244 97.3 244.6 100.2 249.1 99.2 255.1 103.7 257 104.1 254.7 109.2 251.6 111 247.8 116.5 245.5 126 246.9 128.5Z"/><path class="b b-prov" data-n="Firenze" d="M285.5 68.5 291.3 68 294.5 69.5 297.3 67.3 298.8 67.4 298 63.9 296.2 63.9 288.2 59 284 55.7 284 53.1 288 53.5 293.4 50.8 302.5 51.6 306.2 48.1 305.7 46.7 308.7 46.6 311.6 43.9 312.4 39.6 315.4 37.2 320.2 37.1 324 38.3 326.9 33.2 332.8 26.4 339.4 32 340.2 34.5 338.7 38.3 340.1 40.2 342.1 40.9 343 42.6 346.4 43 347.7 44.2 346.8 44.6 347 45.6 349.9 48.5 352.3 49.1 353.6 51.1 354.8 51.7 356.4 50.9 359.7 52.5 361.4 50.5 361.4 48.7 363.9 48 366.8 49.8 375 50.7 375.4 55.2 372.5 57.1 371.7 60.8 369.1 61.2 368.4 64.7 372 62.7 374.8 62.5 380.2 64.8 383.2 68 389.5 61.4 397.9 61.9 403.2 60.3 405 61.9 400.8 72.8 393.8 81.7 392.7 86.6 389.8 92.1 384.5 93.2 385.9 96.8 382.9 97.6 382 101.4 383.8 106 385.1 106.2 391.9 111.8 390 117.3 390.4 118.1 397.6 122.1 397.3 127.7 395.9 132.3 396.2 135.5 392.3 137 387.6 135.7 385.8 137.1 383.2 141.3 383.8 146.4 382.5 145.2 378.6 145.4 377.4 149.5 378.5 152.6 377.2 154.6 373.4 156 373 163.6 371.3 165.9 371.4 167.3 368.5 169.4 370 174.6 366.3 179 367.5 182.2 369 184 371.1 184.5 375 191 374.7 193.4 373.5 194.1 371.8 193.6 359.3 201 361 205.6 352.5 207.4 347.3 211.8 349.7 212.9 351.3 216.9 354.3 220.7 353.7 222.5 355.6 225.4 353.4 226.5 344.3 224 340.2 226.6 339.4 229.2 337.5 230.8 330.7 231.6 328.4 235.4 325.9 235.7 324.7 240.2 321.8 241.7 313.9 242.1 308.7 244.6 306.7 244.2 305 240.1 300.4 236.2 301 240.9 296.9 247.3 295.4 247.9 295.7 249.9 287.8 255.2 286.4 256 283 253.1 279.6 253.2 283.9 245.6 281.4 243.4 276.3 248 273.7 254.6 271.1 257 268.7 257.5 265.5 250.5 259.1 245.7 256.8 242 249.7 239.2 248.8 236 241.3 242 233.5 246.6 231.2 251.7 232.8 255.5 230.6 264.8 223.6 263 221.7 260.3 216.9 262.3 213.6 262.1 211.8 257.7 208.7 256.8 210.7 253.9 209.9 252 207.8 250.8 205.8 251.1 207.6 247.5 203 237.7 204.9 233.2 208.1 231.1 207.1 229.8 204.2 228.9 206.3 225.9 206.4 224 205 221.5 204.9 217.9 202.5 215.6 203.3 213.6 205.7 213.8 208.5 211.7 213.8 215.5 214 213.2 214.6 211.9 215.7 211.8 216.9 207.8 220.1 209.3 226.9 202.4 223 201 221.5 195.5 219.9 195 217.6 191.7 216.7 187.5 214.9 186.1 214.5 183.8 209.2 183.9 203 185.7 203.5 187 202.8 188.5 197.2 188.1 196.2 184 193.2 178.6 190.3 177.8 184.3 173.2 179.4 166.5 178.3 163.3 182 154.9 190.7 159.1 194.8 159.7 201.2 156.7 201.7 159.6 200.5 162.7 207.7 158.6 214.7 161 223 159.2 228.8 152.3 231.8 153.4 233.6 155.6 236.9 160.9 236.6 163.8 243.5 166.9 247.5 165.6 249 169.4 253.8 171.9 255.6 166.6 253.7 164.7 255 162.6 256.5 162.8 258.4 161.6 255.7 159.3 255 154.2 256.6 151.8 260.1 153.9 262.1 153.5 268.4 143.7 272.9 141.7 273.8 139.6 270.7 133.9 273.6 128.5 272.3 127.1 275.9 124.4 277.8 124.5 278.3 123.5 276.5 118.5 279.1 115.4 279.6 113.5 278.4 110.4 279.3 106.6 278.7 104.8 280.4 100.6 279.3 95.9 281.8 94 283.1 89.9 280.5 85.1 282 81.9 282.5 75.8 284.6 73.9 287.7 72.9 284.8 69.8Z"/><path class="b b-prov" data-n="Livorno" d="M169 326.4 167.7 327.4 168.5 330 166.8 332.2 168.6 333.9 173 333.3 173 338.1 169.5 342.5 166.7 342 162.5 343.3 163.8 349.2 166.9 348.9 167.3 353.3 166.3 355.8 167.6 357.5 172.5 357.9 173.8 361.8 175.7 363.6 178.7 363.4 179.3 364.3 178.2 366.6 180.5 371.4 180.4 375.7 177.9 379.5 180.9 381 186.8 378.5 192.9 382.3 193.3 383.9 191 387.9 191.8 394.1 196 396 193.3 397.9 192.5 399.9 189.3 397.5 185.6 396.8 183.8 397.4 183.1 400.7 186.1 404.2 185.9 405.5 183 408 181.7 410.6 177.9 413.5 176.1 418.7 163.6 415.3 147.6 415.1 142.3 416.5 142.3 417.4 143.7 416.8 144.4 418 143.5 420 143.9 418.7 142.6 418.3 139.9 420.6 140.2 422 141.8 421.9 140.4 424.6 136 424.9 132.9 421.3 129.8 421.4 129.5 420.7 130.1 420 127.6 413.8 126.7 405.7 127.3 403.7 129.3 402.4 131.7 403.8 133.8 401.7 133 397.4 135.4 395 137.7 384.9 139.6 360.3 138.7 342 136.8 328.4 132.7 315.4 131.3 312.6 123.6 305 121.4 301.4 121.3 296.5 120 293.6 119 293.6 118.3 288.6 115 280 113.3 278.7 111.5 279.3 110.5 278.2 109.5 273 105 264.9 99.4 260.3 96.8 259.9 94.4 257.3 94.6 254.2 92.5 250.6 91.8 246.3 86.3 235.1 88.7 234.5 87 233 91.6 226.8 92.4 223.8 90.4 227.7 88.8 226.3 89.1 229.2 86.7 230.9 88.6 223.8 112 213 112.5 213.9 117.4 209.2 120 208.9 133.9 210.6 131.9 211.8 131.4 216.4 129.7 218 129.7 221.9 128.7 223.5 126.4 224.2 127.2 232.2 123.9 237.5 125.3 243.1 127.1 244.1 125.9 248.1 129.6 258.7 129.9 263 131.5 264.8 131.5 265.9 127.5 269 127.9 270.7 128.8 269 130 268.7 132.4 268.8 133 270.2 131.8 275.4 129.3 278.9 131.5 282.3 133.5 291.3 140.1 289.7 138.7 293.1 138.5 299.1 136.2 302.6 138.3 303 140.1 306.2 144.8 307.7 145.8 311 156.5 315.5 164.6 315.3 165.8 312.7 168.4 312.9 171.8 310.1 174.2 311.7 174.4 316.2 167.9 320.9ZM36.2 515 38.4 516.4 37.4 517.5 37.7 520.5 40.2 524.4 40.5 528.6 37.8 530.5 29.8 528.7 28.4 525.9 30.3 524.1 32.5 524.8 34.8 523.5 36.8 519.6ZM77.9 477.6 76.1 477.8 73.3 475.9 71.8 476.4 71.3 479.2 72.4 481.1 71.5 483.2 63.3 480.2 52.7 481.8 50.2 481 46.1 478.1 42.1 470.1 42.4 463.8 46.9 459.5 49.5 458.3 57.2 458.7 60.3 457.2 64.9 458.6 68.4 463 72.8 464.6 74.4 463.5 74.2 461 78 461 78.8 456.9 80.3 455.6 79.1 453.5 77.6 453.4 77.8 451.8 79.1 453.1 84.4 455.1 92.2 455.5 92.3 457.4 88.9 458 89.1 459.1 94.8 462.1 98.1 461.4 99.4 460 99.6 455.7 103.4 452.5 105.9 445.6 110.6 439.1 112.7 440.8 112.9 443.2 117.4 446.6 114.3 456.3 115.5 460.3 115.5 468.3 104.6 473.4 110 475.1 109.3 477.1 113 478.7 114.6 480.6 115.4 484.9 114.7 487.6 112.1 489.1 110.2 486.4 107.3 487.7 103.8 486.7 98.3 475.6 98.5 473.6 95.5 471.9 89.7 473.1 91.3 477.6 89.9 480.3 88.4 473.8 87.6 473.2 85.5 473.2 83.6 475.1 82.7 480.4 78.9 479.6ZM0.2 266.6 1.7 268.4 0.1 272.4 -2.6 271.5 -2.7 270 -1.9 267.5 0.1 267.7ZM87.4 596.7 90.1 598.9 91 605.5 88.1 607.6 86.2 607.7 83 606.9 81.9 604.2 84.1 597Z"/><path class="b b-prov" data-n="Pisa" d="M164 160.6 165.8 158.7 168.8 157.7 174.3 158.9 178.2 163.2 179.4 166.5 184.3 173.2 190.3 177.8 193.2 178.6 196.2 184 197.2 188.1 202.8 188.5 203.5 187 203 185.7 209.2 183.9 214.5 183.8 214.9 186.1 216.7 187.5 217.6 191.7 219.9 195 221.5 195.5 223 201 226.9 202.4 220.1 209.3 216.9 207.8 215.7 211.8 214.6 211.9 214 213.2 213.8 215.5 208.5 211.7 205.7 213.8 204.8 213.1 203 213.8 202.5 215.6 204.9 217.9 205 221.5 206.4 224 206.3 225.9 204.2 228.9 207.1 229.8 208.1 231.1 204.9 233.2 203.1 238.9 207.5 246.8 205.8 251.2 207.8 250.8 209.4 251.6 210.7 253.7 208.7 256.8 211.8 257.7 213.6 262.1 216.9 262.3 221.7 260.3 223.6 263 230.6 264.8 236.6 274.4 236.7 278.3 237.8 279.7 241.7 280 241.2 280.9 242.3 286.1 244 287.4 244.2 289.2 243.9 291.8 240.7 297.3 235.4 297.2 234.6 306.5 231.1 305.5 230.7 309.9 234.7 311.5 237.8 314.1 237.7 316.4 239.8 320.6 239.3 327 240.3 329 238.9 331.1 236.8 331 232.1 329.8 228.7 326.8 227.9 327.1 225.2 331.4 227.7 332.6 228.3 339.6 221.5 346.7 221 352.9 218.1 352.5 211.6 353.7 209.3 353.2 206.9 351.3 205.8 351.7 205.9 353.3 201 355.5 199.4 352.7 197.2 352 190 357.9 188.9 356.7 189.1 355 188.2 354.9 186 359.7 185.4 364 182.8 364.8 181.6 366.8 178.8 368.2 178.8 363.5 175.7 363.6 173.8 361.8 172.5 357.9 166.8 357 166.9 348.9 163.8 349.2 163.4 345.8 162.7 343 166.7 342 169.5 342.5 173 338.1 173 333.3 168.6 333.9 166.7 331.7 168.4 330.3 167.7 327.4 169 326.4 167.9 320.9 174.4 316.2 174.5 312 171.8 310.1 168.4 312.9 165.8 312.7 164.6 315.3 156.7 315.5 145.8 311 144.8 307.7 140.1 306.2 138.3 303 136.2 302.6 138.5 299.1 138.7 293.1 140.1 289.7 133.5 291.3 131.5 282.3 129.2 278.8 131.8 275.4 133 270.2 132.4 268.8 130 268.7 128.8 269 127.9 270.7 127.5 269 131.5 265.9 131.5 264.8 129.9 263 129.6 258.7 125.9 248.1 127.1 244.1 125.3 243.1 123.9 237.4 127.2 232.2 126.4 224.2 128.7 223.5 129.7 221.9 129.7 218 131.4 216.4 131.9 211.8 133.9 210.6 125.4 208.9 117.5 209.2 112.5 213.9 112 213 87.6 224.7 85.9 218.3 85 205.9 81.6 195.7 84 194.4 84.5 191.5 83.3 184.6 83.5 177.3 79.5 153.7 90.3 149.7 93.1 151.8 96.8 151.7 99.2 153.7 106.1 154.9 111.9 150.8 112.9 150.6 113.5 152.1 116 148.2 118.2 155 121.8 157.5 121.5 160.6 118.9 162.6 119.4 165.4 121.7 168.8 125.8 169.4 131.1 171.6 132.4 173.1 137.9 170.6 144 174.2 153.2 170.9 156 172.5 159 172.2 162 166.9Z"/><path class="b b-prov" data-n="Arezzo" d="M483 239.7 480.6 245.2 480.8 248.3 491.7 254.2 492.5 254.9 492.2 257.7 483.7 260.7 482 265.2 478.7 268.8 473.3 267.6 470.4 271.3 467.4 272.7 466.4 274.5 467 276.6 468.3 279.1 472.4 279.7 476.5 277.6 477.9 278.5 477.3 288.6 478.1 289.5 480.6 289.3 483.6 287.4 488.5 291.7 490.9 296.9 490.8 304.3 489.2 306.7 490.5 311.3 500.3 314.6 502.1 310.7 501.6 308.8 504.1 304.7 510.5 310.4 507.3 314.4 499.8 317.2 494.2 322.8 488.1 322.8 481.8 328.7 480.2 328.5 472.4 323.7 471.1 324.2 468.9 325.8 470.1 330.9 467.4 342.6 465.8 344.5 462.8 345.7 459 345.6 453.4 349.8 447.5 347.5 444 349.7 440.4 347.7 436.9 353 428.2 343.6 426 338.5 424.9 332.7 420.3 333.9 416.6 333.6 411.9 328.7 406.4 329.6 399.7 323.8 400.3 322.6 397.3 316.1 395.4 314.4 394.6 315 390.5 314.5 386.2 306.3 386 303.6 378.9 297.3 366.4 291.2 363.7 287.4 361.5 286.6 357.7 281.6 358.9 276.8 361.1 273.6 360.3 267.2 362.1 262.1 357.3 262.9 353.9 259.3 351.2 261.5 348.6 256.9 346.4 256.2 343.3 251.9 342.2 250 342.1 246.8 340.6 246.1 336.9 246.5 334.5 241 332.1 239.4 329.6 235.4 328.4 235.4 331.1 231.6 337.5 230.8 339.4 229.2 340.2 226.6 344.3 224 353.4 226.5 355.6 225.4 353.7 222.5 354.3 220.7 351.3 216.9 349.7 212.9 347.3 211.8 352.5 207.4 361 205.6 359.3 201 371.8 193.6 373.5 194.1 374.7 193.4 375 191 371.1 184.5 369 184 367.5 182.2 366.3 179 370 174.6 368.5 169.4 371.4 167.3 371.3 165.9 373 163.6 373.4 156 377.2 154.6 378.5 152.6 377.4 149.5 378.6 145.4 382.5 145.2 383.8 146.4 383.2 141.3 385.8 137.1 387.6 135.7 392.3 137 396.1 135.5 398.8 136.4 401.1 139.8 412.4 144.4 420.5 153.9 425.1 156.3 428.2 153.9 430.5 153.6 435 156 437.3 156.1 440 154.5 440.9 156 440.7 158.9 443.1 160.3 448.4 161.4 449.5 165.7 456.8 169.9 461.8 169 469.5 171.8 469.9 170.8 471.3 171.2 473.2 172.4 473.9 175.5 475.2 176.1 476.7 176.1 483.3 172.1 486.8 173.4 490.3 172.4 494.7 169.5 495.8 169.7 497.3 173.1 502.4 178.4 503.5 175.4 503 174.5 505.5 171.4 509.8 170 512.5 171.5 512.5 172.4 514 172.3 515.4 171.8 516.1 169.6 521.7 168.2 525.6 170.8 529.5 171.2 531.2 172.2 533.6 176.5 540.2 182.8 540.9 185.2 538.1 187 535.5 184.9 532.2 185.3 533.6 194.3 532.4 195.6 529.1 194.4 530.1 191.4 528.6 187.5 528.4 181.4 527.2 178.6 526.6 179.1 525.7 181.9 526.8 188.4 524.2 192.4 520 194.9 513.6 193.5 514.9 195.9 514.6 197.3 511.2 201.1 508.3 202.9 503.4 203.8 500.8 205.7 501.7 208.4 506.1 211.8 507.1 215 504 217.3 501.9 222.4 496.1 230.1 494.1 240 491.9 238.4ZM508.5 154.8 510.4 155.6 511.4 157.3 512 161.8 506.1 163.3 503.5 165.5 503.3 166.8 500 164.9 496.7 156 498.3 154.4 500.9 156.4 503.3 156 507.2 156.9Z"/><path class="b b-prov" data-n="Siena" d="M382.1 443.7 379.5 441.7 378.4 436.8 379.5 434.8 379.9 427.7 379 422.2 376.8 417 376 415.6 373 415.8 367.5 410 359.8 412 357.7 411.2 357.9 408.7 355.2 406.7 351.1 408.5 348.9 412 341.6 413.7 340.1 412.8 338.4 413.5 333 413.3 319.1 410.4 318.6 409.7 321.1 407.8 324.2 407.5 324.5 405.6 322.6 405 321.9 402.9 323.9 403.4 325.3 402.4 322.3 399.3 321.1 399.1 321.4 394.8 319.6 392.3 321 390.7 319.8 389.4 321.8 384.8 321 376 318.2 376.3 314.5 373.5 311.9 375.6 309.9 375.3 309.5 374.3 306.8 377.9 290.7 374 289 374.9 285.3 373.8 281.6 374 279.5 375.3 278.4 377.6 269.6 375.7 268.8 373.8 267.9 373.6 259.3 375.9 255.4 367.8 256.9 364 254.3 361.8 253.9 360.3 254.9 359.1 253.3 357.9 252.9 356 254.5 354.5 254.2 345.7 251.3 346.7 246.7 344.6 245.2 345.1 243.9 347.7 237.7 347.6 228.9 352.4 221 351.6 221.6 346.6 228.3 339.6 227.7 332.6 225.2 331.4 227.9 327.1 228.7 326.8 232.1 329.8 236.8 331 238.9 331.1 240.3 329 239.3 327 239.8 320.6 237.7 316.4 237.8 314.1 234.7 311.5 230.7 309.9 231.1 305.5 234.6 306.5 235.4 297.2 240.7 297.3 243.9 291.8 244.2 289.2 244 287.4 242.3 286.1 241.2 280.9 241.7 280 237.8 279.7 236.7 278.3 236.1 273.3 230.7 265.5 232.8 255.5 231.2 251.7 233.5 246.6 241.3 242 248.8 236 249.7 239.2 256.8 242 259.1 245.7 265.5 250.5 268.7 257.5 271.1 257 273.7 254.6 276.3 248 281.4 243.4 283.9 245.6 281.6 250.4 279.9 253.6 283 253.1 287 256 295.1 250.6 295.4 247.9 296.9 247.3 301 240.9 300.4 236.2 305 240.1 306.7 244.2 308.7 244.6 313.9 242.1 321.8 241.7 324.7 240.2 325.9 235.7 329.6 235.4 332.1 239.4 334.7 241.3 336.9 246.5 340.6 246.1 342.1 246.8 342.2 250 343.3 251.9 346.4 256.2 348.6 256.9 351.2 261.5 353.9 259.3 357.3 262.9 362.1 262.1 360.3 267.2 361.2 273.3 358.9 276.8 358 282.4 361.7 286.8 363.7 287.4 366.4 291.2 378.9 297.3 386 303.6 386.2 306.3 390.5 314.5 394.6 315 395.4 314.4 398.1 317.2 400.3 322.6 399.7 323.8 406.4 329.6 412.2 328.9 416.6 333.6 420.3 333.9 424.9 332.7 426 338.5 428.2 343.6 436.9 353 440.4 347.7 444 349.7 447.5 347.5 453.2 349.9 445.9 354.4 444.3 360.6 442.7 361.8 446.7 372.2 445.2 377.7 447.1 380.2 447.9 383.5 449 384.3 450.5 383.6 451.1 380.9 452.5 379.6 456.1 381.1 458.2 384.9 456 389.6 456 393.7 452.3 406.5 451.2 407.4 451.8 415.6 449 420.8 447.7 428.1 448.6 429.6 452 430.3 453.5 433.1 453.6 439.5 446.9 440 443.9 445.1 438.8 448 439.4 450.6 429 449.7 425.8 452.8 421.7 454 421.1 461.2 420.1 462.7 415.6 456.5 413.1 454.9 411.6 455.1 411.5 456.5 408.2 460.5 406.6 465.5 396.8 461.6 392.4 464.3 388.6 464.9 383.3 461.5 379.8 462 379.4 460.2 381.3 458.9 381.9 455.4 381.3 453.2Z"/><path class="b b-prov" data-n="Grosseto" d="M357.3 572.2 350 570.6 348.5 572.1 348.1 577.1 341.6 584.1 342.2 587 341.4 589.4 321.7 582.9 307.5 580.2 304.1 580.6 302.9 577.5 297.3 576.8 291.6 578.1 287.8 580.1 286.8 582.3 288.2 582.2 287.2 584.3 288.5 586.2 283.8 589 282.9 590.8 283.3 593.4 281.4 593.8 280.2 592.3 277.9 592.4 275 594.5 274.6 591.5 269.3 587.1 262.8 584.8 261.1 580 260.7 574.5 264.8 568.3 266 568.6 268.3 572.3 270.4 570.9 271.6 571.9 276.8 572.3 279.1 569.9 281.4 565.1 283.5 556.4 283.5 548 280.8 540.9 276.2 533.8 274.5 533.2 271.9 534.1 270.8 536.9 268.3 534.8 265.4 528.7 263.1 520.9 261.1 520.2 259.3 518.1 259.3 517.2 260.7 516.8 260 514.2 254.9 510.5 244 505 236.6 487.2 230.3 480.8 223 476.6 211.6 472.4 199 469.3 193.3 469.3 181.3 461 182.3 458.9 182.6 459.8 186.5 459.5 188.9 456.8 191.4 448.4 190.2 441.2 193.8 434.8 191.8 430.1 189.7 427.5 184.5 423.3 176.1 418.7 177.9 413.5 181.7 410.6 183 408 185.9 405.5 186.1 404.2 183.1 400.7 183.8 397.4 185.6 396.8 189.3 397.5 192.5 399.9 193.3 397.9 196.1 395.8 191.8 394.1 191 387.9 193.4 383.7 192.6 382 186.8 378.5 180.9 381 177.8 379.3 180.4 375.7 180.5 371.4 178.8 368.2 181.6 366.8 182.8 364.8 185.7 363.6 187.2 355.8 189.1 355 188.9 356.7 190 357.9 197.1 352 199.3 352.6 201 355.5 205.9 353.3 205.8 351.7 206.9 351.3 209.3 353.2 211.6 353.7 218.1 352.5 221 352.9 222.5 351.8 228.9 352.4 237.7 347.6 243.9 347.7 245.2 345.1 246.7 344.6 251.3 346.7 254.2 345.7 254.5 354.5 252.9 356 253.3 357.9 254.9 359.1 253.9 360.3 254.3 361.8 256.9 364 255.4 367.8 259.3 375.9 267.9 373.6 268.8 373.8 269.6 375.7 278.4 377.6 279.5 375.3 281.6 374 285.3 373.8 289 374.9 290.7 374 306.8 377.9 309.5 374.3 309.9 375.3 311.9 375.6 314.5 373.5 318.2 376.3 321.2 376.3 321.8 384.8 319.8 389.4 321 390.7 319.6 392.3 321.4 394.8 321.1 399.1 322.3 399.3 325.3 402.4 323.9 403.4 321.9 402.9 322.6 405 324.5 405.6 324.3 407.3 319.4 408.8 318.6 409.7 319.8 410.9 333 413.3 338.4 413.5 340.2 412.8 341.6 413.7 348.9 412 351.1 408.5 355.6 406.8 357.9 408.7 357.5 410.8 358.5 411.6 360.2 412 367.5 410 373 415.8 376.1 415.7 379 422.2 379.8 427.1 379.5 434.8 378.4 436.8 379.5 441.7 382.1 443.7 382.3 445.4 381.3 453.2 381.9 455.4 381.3 458.9 379.4 460.2 379.8 462 383.3 461.5 388.6 464.9 392.4 464.3 396.2 461.6 399.1 462 410.4 467.3 413.5 471.2 414.1 473.9 420.6 475.3 421.7 477.5 423 477.6 420.7 481.9 419.1 489.2 414.3 489.8 415.6 499.8 418.9 500.9 420.9 503.9 420 508.3 418.1 508.5 414.7 511.2 407.8 509.7 408.3 514 404.8 519.7 402.9 519.8 402.5 518.4 399.1 518.7 396.9 521.4 392.3 523.3 393.6 526.4 392.8 527.3 389.8 529.1 387.6 528.8 384.3 531.9 382.9 532.4 380.3 531.2 377.7 534.8 375.4 531.5 372.2 530.6 369.8 531.9 371.5 539.6 368 541.8 365.9 547.1 367.1 548.6 371.2 550.2 371.5 551.9 373.1 553.6 378.4 555.6 379.2 559.8 378.3 562.2 378.8 571.5 364.7 570.7 362.4 569.7ZM215.6 585.9 220.1 588.6 222.4 592.4 223.8 596.1 223.6 599.7 225.6 601.2 225 605.2 223.2 607.5 219.6 605.1 214.7 597.5 211.4 596.7 210.9 593.4 211.5 592.4 213.4 593.2 214.4 592.5 214.1 586.1Z"/><path class="b b-prov" data-n="Prato" d="M252.2 71.6 260.8 71.7 269.2 65.8 271.8 66.3 275.1 65.1 285.5 68.5 284.8 69.8 287.7 72.9 284.6 73.9 281.8 77.4 282 81.5 280.5 86.1 283.1 89.9 281.8 94 279.3 95.9 280.4 100.6 278.7 104.8 279.3 106.6 278.4 110.4 279.6 113.5 279.1 115.4 276.5 118.5 278.3 123.5 277.8 124.5 275.9 124.4 272.3 127.1 273.6 128.5 270.7 133.9 273.6 138.4 273.4 141 268.4 143.7 262.1 153.5 260.1 153.9 256.6 151.8 254.8 155.1 255.6 159 258.4 161.6 256.5 162.8 255 162.6 253.7 164.7 255.6 166.6 253.2 172 249 169.4 247.5 165.6 243.5 166.9 236.6 163.8 236.9 160.9 233.6 155.6 237.1 153.7 238 151.6 244.3 149.2 246.1 147 248.6 147.9 246.8 144 246.9 142.1 244.3 138.4 247 129.4 245.5 126 245.9 122.6 248 116.1 251.6 111 254.7 109.2 257 104.1 255.1 103.7 249.1 99.2 244.6 100.2 244 97.3 246 96.2 249.8 90.2 250.2 85.3 253.3 77.1Z"/></g><g class="m-u"><path class="u t-r3" data-k="cc" data-n="Greve in Chianti" d="M308.3 193.4 309.3 193.5 309.5 196.2 310.9 198.2 312.2 198.6 317.6 192.7 320.3 191.2 321.9 190.9 322.4 193.2 324.9 193.1 325.5 193.7 328.1 203.1 326.9 205.1 324.6 205.5 322.6 209.6 323.8 213.8 322.4 215.1 323.3 217 326.3 219.1 329.5 219.8 330.5 221.4 329.6 229.5 330.7 232 329.6 234.4 328.4 235.4 325.9 235.7 324.7 240.2 321.8 241.7 313.9 242.1 308.7 244.6 306.7 244.2 305 240.1 302.3 238.1 301.7 236.5 298.5 236.3 297.4 235.4 298.8 230.5 300.2 230.1 301.2 226.5 299.9 223.5 298.1 221.6 302.6 217.6 303.7 213.3 297.7 205.3 297.4 202.1 298.5 202.4 300.2 201.7 303.7 193.5Z"/><path class="u t-r1" data-k="rufina" data-n="Pontassieve" d="M332.3 167.6 328.9 165 326.5 161.7 325.5 161.7 324.1 164 322.8 160 319.2 153.5 315.6 150.2 317.8 139.6 317 138.1 334.8 136.8 336.4 135.1 340 136.2 343 133.6 350.1 136.3 354 137.5 357.1 140.1 354.3 142.8 350.3 144.2 348.8 146.4 349.2 148.6 348.6 150.6 347.1 150.6 346.2 151.4 346.6 154.1 342.1 159.6 342.6 162.9 339.7 163.7 337 168.7Z"/><path class="u t-r1" data-k="rufina" data-n="Rufina" d="M357.1 140.1 362.3 139.4 362.3 140.3 356 146.3 356.3 147.1 360.7 149.2 363.1 147.9 365.7 148.5 366.5 151.3 366.1 152.4 367.2 154.8 370 156.6 373.4 156 373.2 162.9 369.4 165.1 364.1 162.2 362.8 159.8 358.9 156 355.2 155.1 354.5 155.8 355.6 158.5 353.8 161.2 349.2 159.7 347.3 159.9 347 160.8 345.5 161.4 342.6 161.6 342 160.6 342.1 159.6 346.6 154.1 346.2 151.4 347.1 150.6 348.6 150.6 349.2 148.6 348.8 146.4 350.3 144.2 354.3 142.8Z"/><path class="u t-r2" data-k="cc-part" data-n="San Casciano in Val di Pesa" d="M297.4 202.1 297.7 205.3 303.5 212.8 303.7 214.7 301.6 218.8 293.8 224.5 287.6 224.7 285.7 222.9 283.5 218.4 280.2 220 277.9 220.1 274.9 217.1 270.5 214.4 271.8 211.7 269.4 208.3 269.6 206 275.1 205.7 275.8 204.8 273.6 203 271.7 201.3 269.2 195.1 268 194 278.2 188 282.3 187.1 287.8 189.5 287.1 196.1 288.3 199.8 292.8 200.2 294.6 202.4Z"/><path class="u t-r2" data-k="cc-part" data-n="Barberino Tavarnelle" d="M258.9 245.3 265.7 243.2 267.3 241.2 269.8 240.3 271.3 238.3 270 237.2 270.1 235.2 274.2 230.3 272 227.3 273.1 222.1 277.1 219.1 278.9 220.2 283.1 218.3 285.7 222.9 287.6 224.7 293.8 224.5 298.1 221.6 299.9 223.5 301.2 226.3 300.7 229 300.2 230.1 298.8 230.5 297.4 235.4 298.5 236.3 300.4 236.2 300.8 239.6 301 240.9 300.2 242.7 296.9 247.3 295.4 247.9 295.7 249.9 287 256 283 253.1 279.6 253.2 283.9 245.6 283.8 244.7 281.4 243.4 276.3 248 273.7 254.6 271.1 257 268.7 257.5 267.8 256.8 267.6 254.5 265.7 250.7Z"/><path class="u t-r3" data-k="bolgheri" data-n="Castagneto Carducci" d="M137.2 330.9 142.6 329.2 164.5 326.4 163.8 328.3 162.8 329 164.5 329.9 166.7 329.8 166.8 332.2 168.6 333.9 170.7 333.1 173 333.3 172.4 334.7 173 338.1 170.9 341.6 169.5 342.5 166.7 342 162.7 343 163.4 345.8 163.8 349.5 164.8 351.2 164 352.7 161.6 353.7 160.4 355.5 159.4 362.6 161.4 366.4 158.7 371.3 151 370.1 147.1 368.2 143.2 368.2 139.4 366.6 139.4 349.6Z"/><path class="u t-r3" data-k="cc" data-n="Castellina in Chianti" d="M300.4 236.2 301.7 236.5 302.3 238.1 305 240.1 306.7 244.2 308.7 244.6 308.3 247 310.4 250.7 308.6 253.4 308.5 256 310.9 259.8 307.1 263.4 311.4 267 312.4 272.3 308.2 277.4 307.1 277.3 303.6 280.8 302.5 279.2 297.9 279.4 296.7 283.4 296.3 283.9 294.9 282.7 289.8 281.8 288.8 281 288.2 278.9 288.3 274.9 287.3 274.2 286.8 272.5 290 267.1 289.6 265.6 287.3 263.9 289.5 260.7 288.7 256.4 287.6 255.7 289.5 253.7 292.5 252.5 295.7 249.9 295.4 247.9 296.9 247.3 301 240.9Z"/><path class="u t-r2" data-k="cc-part" data-n="Castelnuovo Berardenga" d="M358.8 277.8 357.7 281.8 361.5 286.6 363.7 287.4 366.4 291.2 368.5 291.7 370.8 293.9 373.2 294.7 371.7 297.6 367.2 301.8 366.2 304.1 362.4 303.1 358.1 305.1 356.3 305 352.3 308 339.3 308.3 329.8 311.9 332.4 310 333.7 304.7 335 299 333.9 295.6 332.9 295.1 331 295.9 322 296.1 317.8 294 314.6 291.1 310.4 292.9 308.5 278.5 308.2 277.4 312.4 272.5 314.6 272.9 316.8 271.7 321.8 271.5 325.2 275.1 326 277.9 329.6 277.4 330.2 281.9 331.7 284.1 331.3 286.4 332.5 292.9 333.8 293.7 335.6 292 339.8 282.5 348.7 275.6 351.9 274.5Z"/><path class="u t-r3" data-k="cc" data-n="Gaiole in Chianti" d="M362.1 262.1 360.3 267.2 361.2 273.3 359.2 275.9 358.8 277.8 351.9 274.5 348.7 275.6 339.8 282.5 335.6 292 334 293.7 332.5 292.9 331.3 286.4 331.7 284.1 330.2 281.9 329.6 277.4 328.5 277.3 327.5 278.1 325.4 277.1 325.2 275.1 321.8 271.5 319.6 267.6 319.1 263.3 319.7 261.2 334.4 252 339.3 252 339.7 250.2 336.9 246.5 340.6 246.1 342.1 246.8 342.2 250 343.3 251.9 346.4 256.2 348.6 256.9 351.2 261.5 353.9 259.3 355.1 259.7 357.3 262.9Z"/><path class="u t-r2" data-k="nobile" data-n="Montepulciano" d="M428.9 344.4 430.3 346.8 436.9 353 438.1 352.1 440.4 347.7 444 349.7 445.4 348.1 447.5 347.5 453.2 349.9 445.9 354.4 445 355.7 444.3 360.6 442.7 361.8 446.7 372.5 445 376.2 445.2 377.7 437.1 381.9 431.3 379.7 427.3 379.2 423.1 380.8 418.5 383.5 417.1 387.3 413.6 391.3 412 389 410.8 389.9 410.2 384 403.3 375.6 404 372.1 403.6 369.2 404.1 368.2 406.7 367.9 411 365.2 412.8 360.7 413.8 355 416.2 354.1 416.9 351.3Z"/><path class="u t-r2" data-k="cc-part" data-n="Poggibonsi" d="M266 251.2 267.6 254.5 267.8 256.8 268.7 257.5 271.1 257 274.3 253.9 275.1 250 276.3 248 281.4 243.4 283.8 244.7 283.9 245.6 281.6 250.4 279.6 253.2 283 253.1 286.4 256 288.7 256.4 289.5 260.8 287.3 263.9 289.6 265.6 290 267.1 286.8 272.5 287.9 275 286.8 275.6 286.8 277.1 285.6 278.5 280.4 279.8 276.6 275.5 277.3 272.4 276.5 271.4 272 270.7 269.9 271.2 269.7 269.2 266 267.6 263.6 264.7 262.9 266 260.6 264.4 265.5 261.3 263.7 255.6Z"/><path class="u t-r3" data-k="cc" data-n="Radda in Chianti" d="M308.7 244.6 313.9 242.1 321.8 241.7 324.7 240.2 325.4 236.6 325.9 235.7 327.3 235.5 329.6 235.4 332.1 239.4 335.1 241.8 337.3 247.6 339.7 250.2 339.3 251.9 334.2 252 319.8 261 319.1 263.3 319.6 267.6 321.8 271.5 316.8 271.7 314.6 272.9 312.4 272.5 311.4 267 307.1 263.4 310.9 259.8 308.5 256 308.6 253.4 310.4 250.7 308.3 247Z"/><path class="u t-g2" data-k="vernaccia" data-n="San Gimignano" d="M248.8 236 249.7 239.2 254.7 241.8 256.8 242 259.1 245.7 266 251.2 263.7 255.6 265.5 261.3 260.6 264.4 259.9 265.7 260.6 267 259.4 269.6 255.9 271.6 253.9 273.6 253.1 275.5 251.9 277 247 279 243.5 279 241.7 280 237.8 279.7 236.7 278.3 236.6 274.4 235.6 272.4 230.7 265.5 232.8 255.5 231.5 254 231.2 251.7 233.5 246.6 241.3 242 243.9 239.2Z"/><path class="u t-r1" data-k="morellino" data-n="Scansano" d="M288.4 465 293.1 462.1 294.7 462.2 294.5 463.5 296.1 464.9 300.3 467.4 302 467.5 304.4 467 307.3 464.1 312.6 463.6 320.7 459.7 328.2 466.7 328.4 470.2 337 476.5 338.2 479.1 338.3 482 342.7 488.1 342.1 488.9 343.5 499.1 341.9 502.2 342.6 510.6 339.9 513.5 337.4 514.8 337.9 516 337.2 517.1 335.7 517.7 332.4 523.6 329.6 523.2 328.6 526.1 327.4 525.6 326.5 523.2 321.3 519.7 321.6 517.2 320.3 509.6 316.4 506 314.1 502.4 311.3 500.9 309.2 500.8 307.7 502.1 305.4 502.5 304.1 498.4 302.1 497.4 299.1 497.5 299.5 490.1 299 488 297.4 486.1 297.5 484.7 296.2 483.2 296.1 481.3 297 479.7 294.6 476.7 292.2 475.2 289.7 470.9 283.9 463.8 286 462.2 286.5 464.1Z"/><path class="u t-r1" data-k="carmignano" data-n="Carmignano" d="M233.6 155.6 237.1 153.7 238 151.6 244.3 149.2 246.1 147 248.5 147.8 250.2 150.1 247.5 150.6 246.8 151.5 249.5 155.1 248.6 158 251.7 159.3 255.1 157.8 256.4 160.2 258.4 161.6 256.5 162.8 255 162.6 253.7 165.3 255.6 166.6 253.4 172 251.4 170.2 249 169.4 247.5 165.6 245.5 165.7 243.5 166.9 241 166.3 236.6 163.8 236.9 160.9Z"/><path class="u t-r3" data-k="brunello" data-n="Brunello di Montalcino" d="M318.6 409.7 320.3 411 323.6 410.8 325.7 412.2 328.7 412.1 332.1 413.3 338.1 413.8 340.2 412.8 342.2 414 345.4 411.9 348.5 412.1 351.2 408.4 354.9 406.8 356.1 407 358 409 361.2 409 362.4 408 363.9 404.9 363.2 401.1 364.5 397.8 363.1 395.3 363.7 393.9 363.3 391.3 364.3 390.6 364.7 388.2 366.2 388.1 366.1 385.1 363.9 385.5 363.3 383.3 364.7 381.3 365.4 378.4 369 376.3 370.8 377.8 371 373.7 368.4 372.7 367.7 369.6 365.7 371.1 364 370 362.3 370.5 360.9 369.5 359.6 370.8 357 371.3 355.3 369.2 351.7 368.7 347.7 368.1 345.9 369.1 342.1 368 341.3 366.9 339.8 368.4 340.3 369.9 339.3 370.7 337.6 368.5 336.3 369.7 334.8 370 334.8 368 333.4 368.3 330.5 367.1 328.3 369.1 327.2 368.1 326.3 368.8 326.6 370.5 325.4 370.7 325.2 372 324.2 372.8 324.1 374.7 321.5 376.7 322 379.8 321.2 382 322.3 384.3 320.5 384.7 321.3 387.8 319.4 389 321.2 391.4 318.9 393 320.6 393.4 321.4 394.5 321.2 399.2 323.6 399.1 323.1 401.6 324.4 402 324.6 402.8 323.9 403.4 321.8 403 322.6 405 324.4 406.2 324 407.6 322.2 408.2 320.4 407.5Z"/></g><g class="m-r"><path class="rv rv-big" data-n="Arno" d="M386.5 298.4 387.3 305.2 389.6 312 393.2 318.2 401.6 323.5 411.8 334.9 419.9 340.8 425.6 342.3 426.2 338.3 424.4 328.6 425 304.7 421.5 280 420.9 268.3 421.7 253.1 419.4 248.6 415.1 246.6 403.3 247.1 393.1 246.4 382.5 244.2 374.3 240.9 365.6 233.2 354.2 220.2 344.5 205.1 340.3 192.2 341.5 174.6 340.2 168.8 334.7 163.9 326.6 162 318.8 163.4 311.5 166.1 304.3 167.2 297.4 165.9 290.3 163.2 279.9 161.8 265.1 163.8 252.1 168.3 245.9 172.7 243.9 175.3 237 175.3 228.8 178.5 219.8 177.5 212.1 180.4 199.3 182.2 189 187.6 180.1 190.4 170.4 196.3 160.8 193.5 140.7 191.5 133 189.3 122 181.9 117.7 185.2 111.4 182.9 107.6 182.9 103.3 184.9 94 191.2 89.2 192.3 83.7 191.1"/></g><g class="m-o"><path class="docg" d="M282.4 187.2 278.4 187.4 277.1 189.4 276.4 188.8 275.7 189.8 272.4 190.7 271.2 192.5 268 194 269.3 195.2 271.7 201.2 276.9 205.7 278.5 208.9 280.2 210.2 282 215.5 283.5 217.1 284 220.3 285 220.9 289 229.7 287.3 231.5 285.9 231.4 286.8 232.3 287.1 233.9 286.3 234.4 286.5 235.9 284.7 238.5 284.4 240.9 282.2 243.3 281.5 243.3 280.2 245.3 278.6 245.8 277.6 247.4 277.8 248.7 279.3 249.8 278.2 253.3 279.5 252.8 279.8 253.7 282.8 253.1 284.2 253.6 286.4 256 287.6 255.8 289.8 256.8 288 259.4 289.4 259.4 289.5 260.9 287.3 263.9 288.9 264.9 288.7 265.7 290.4 266.1 286.4 273.1 288 274.8 287.5 275.2 286.9 274.8 286.7 275.2 288.4 275.1 288.1 276 288.7 276.2 288.1 279 288.9 281.1 289.5 281.9 291.1 281.5 294.6 282.5 296.4 283.9 297.9 279.4 302.5 279 303.8 281.1 305.5 278.2 307 277 308.2 277.4 308.6 281.1 308.1 281.6 309.4 283 309 284.1 309.7 285 309.8 291.5 310.4 292.9 313.1 291.3 313.6 291.7 314.4 290.5 317.5 294 322 296.1 325 295.5 325.2 296.1 326.3 295 327.2 295.8 328.8 295.3 329.1 296.2 329.5 295.3 331 295.9 333.3 295 335.1 298.4 337 296.9 339.3 298 339.8 299.5 341.2 298.5 344 299.5 349.5 294.4 351.7 293.4 352.5 294.2 355.7 293.5 357.3 290 360.3 287.7 360.4 286.5 358.8 284.7 357.6 280.5 358.8 278.1 358.6 276.9 361.1 273.6 361.3 272.2 359.8 266.4 361.4 265.5 362.1 262.1 357.3 262.9 356.4 261.1 353.9 259.3 352 260.6 351.4 261.8 348.5 256.6 347.6 256.9 346.4 256.2 345 254.6 343.2 251.8 343.6 250.1 342.1 250 341.7 249 342.4 246.8 340.6 246.1 336.9 246.5 334.5 241 332.2 239.4 329.6 235.3 328.4 235.8 330.7 232.3 329.6 229.5 329.7 224.5 330.6 221.1 330 221 329.2 219.6 327.7 220.5 325.5 217.8 322.9 216.5 322.5 214.9 324.7 212.6 321.9 210 323.1 209.1 324.8 205.2 326.1 203.9 326.9 205.1 327.6 204.3 327.5 203.2 328.4 202.9 327.1 201.1 327.2 198.5 325.4 193.1 322.2 193.2 321.9 190.9 319.1 191.7 315.1 194.8 312.2 198.6 310.9 198.2 309.5 196.2 309.3 193.5 304.7 193.2 303.7 193.5 302.6 197.4 301.5 198.2 300.2 201.7 298.5 202.4 293.8 202.5 293.2 200.1 291.4 200.5 290.7 199.8 289.7 200.2 288.1 199.7 288.4 197.1 286.8 196.5 287.8 194.9 287.6 191.3 287 190.6 288.2 188.8 286.4 188 284.4 188.5Z"/><path class="docg" d="M318.6 409.7 320.3 411 323.6 410.8 325.7 412.2 328.7 412.1 332.1 413.3 338.1 413.8 340.2 412.8 342.2 414 343.7 413.5 345.4 411.9 346.6 412.4 348.5 412.1 349.8 411.1 351.2 408.4 352.5 408.3 353 407.4 354.9 406.8 356.1 407 358 409 361.2 409 362.4 408 363.9 404.9 363.2 401.1 364.5 397.8 363.1 395.3 363.7 393.9 363.3 391.3 364.3 390.6 364.7 388.2 366.2 388.1 366.1 385.1 365.1 385.7 363.9 385.5 363.3 383.3 364.7 381.3 365.4 378.4 369 376.3 370.8 377.8 371 373.7 368.4 372.7 367.7 369.6 365.7 371.1 364 370 362.3 370.5 360.9 369.5 359.6 370.8 357 371.3 355.3 369.2 354.7 369.6 352.8 368.5 351.7 368.7 347.7 368.1 345.9 369.1 342.1 368 341.3 366.9 339.8 368.4 340.3 369.9 339.3 370.7 337.6 368.5 336.3 369.7 334.8 370 334.4 369.3 334.8 368 333.4 368.3 330.5 367.1 328.3 369.1 327.2 368.1 326.3 368.8 326.6 370.5 325.4 370.7 325.2 372 324.2 372.8 324.1 374.7 321.5 376.7 321.4 378.9 322 379.8 321.2 382 322.3 384.3 320.5 384.7 321.3 387.8 319.4 389 321.2 391.4 320.4 392.3 319.1 392.3 318.9 393 320.6 393.4 321.4 394.5 321.2 399.2 323.1 398.7 323.6 399.1 323.1 401.6 324.4 402 324.6 402.8 323.9 403.4 321.8 403 322.6 405 324.2 405.5 324.4 406.2 324 407.6 322.2 408.2 320.4 407.5Z"/><path class="docg" d="M403.3 375.5 407.1 379.8 408.1 382.4 410.7 384.6 410.7 389.4 412.1 389.2 413.7 391.3 417.9 386.4 418.5 383.6 425 379.7 427.2 379.1 429.6 379.8 433.4 379.9 435.1 381.4 437 381.9 439 381.5 445.2 377.5 445 375.7 446.6 373.7 446.7 372.1 445.6 369 444.7 368.1 444.5 364.8 442.8 361.7 444.3 360.6 445.1 355.7 446 354.2 448.6 352.8 448.6 351.9 453.2 349.9 446.3 347 443.8 349.6 440.4 347.7 437.3 353.2 431.4 348 428.9 344.5 424.4 347.5 423.6 347.1 421.7 348.4 420.9 348.1 420 349.2 417 350.9 416.2 354 413.7 355 412.8 359.3 413.1 361.9 411.2 363.7 410.9 365.3 406.7 367.9 404.2 368.3Z"/><path class="docg" d="M137.4 330.8 139.3 348.2 139.4 366.6 141 366.6 144.4 368.1 146.6 368 150.6 370.1 158.7 371.3 161.4 366.4 159.1 362.4 160.3 360.7 160.3 354.8 164.7 351.6 163.8 349.8 163.7 346.4 163 345 162.9 343 166.8 342 170.4 342.7 173 338.1 171.9 335.9 173 333.3 170.4 333.1 168.4 333.8 167.1 332.5 166.6 329.7 164.7 330 163.6 329.3 164.5 326.4 162.5 326.2 158.6 327.4 146.9 328.3Z"/><rect class="inset" x="258.9" y="183.6" width="110" height="126.7"/><rect class="inset" x="314" y="361.9" width="64.4" height="57.2"/><rect class="inset" x="135.5" y="323.8" width="39.4" height="48.6"/></g><g class="m-l"><text class="lb lb-app lb-top" x="355.3" y="234.8" text-anchor="middle" data-k="cc">키안티 클라시코</text><text class="lb lb-app lb-top" x="285.3" y="395.2" text-anchor="middle" data-k="brunello">브루넬로 디 몬탈치노</text><text class="lb lb-app lb-top" x="444.1" y="349" text-anchor="middle" data-k="nobile">비노 노빌레 디 몬테풀치아노</text><text class="lb lb-app lb-top" x="197.1" y="346.8" text-anchor="middle" data-k="bolgheri">볼게리</text><text class="lb lb-app lb-top" x="223.7" y="250.1" text-anchor="middle" data-k="vernaccia">베르나차 디 산 지미냐노</text><text class="lb lb-app lb-top" x="356.6" y="503.9" text-anchor="middle" data-k="morellino">모렐리노 디 스칸사노</text><text class="lb lb-app lb-top" x="224" y="141.2" text-anchor="middle" data-k="carmignano">카르미냐노</text><text class="lb lb-app lb-top" x="376.6" y="147" text-anchor="middle" data-k="rufina">키안티 루피나</text><text class="lb lb-water" x="186.7" y="189.5" text-anchor="middle">아르노강</text><text class="lb lb-water" x="75.3" y="400.3" text-anchor="middle">티레니아해</text></g><g class="m-p"><g class="pin pin-town" data-k="firenze" tabindex="0" data-tip="피렌체"><circle class="pd" cx="297.3" cy="168.7" r="3"/><text class="pl" x="291.3" y="172.2" text-anchor="end">피렌체</text></g><g class="pin pin-town" data-k="siena" tabindex="0" data-tip="시에나"><circle class="pd" cx="314" cy="305.1" r="3"/><text class="pl" x="308" y="308.6" text-anchor="end">시에나</text></g><g class="pin pin-town" data-k="pisa" tabindex="0" data-tip="피사"><circle class="pd" cx="110.7" cy="184.2" r="3"/><text class="pl" x="116.7" y="187.7" text-anchor="start">피사</text></g></g><g class="m-sc"><g class="sc"><path d="M14 601V605H68.4V601"/><text x="73.4" y="606">20 km</text></g><g class="na"><path d="M542 10l5 13-5-3.4-5 3.4z"/><text x="542" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--t-r3)"></i>핵심 DOCG·DOC</span><span><i style="background:var(--t-r2)"></i>일부가 키안티 클라시코 · 비노 노빌레</span><span><i style="background:var(--t-r1)"></i>그 밖의 레드 산지</span><span><i style="background:var(--t-g2)"></i>화이트(베르나차)</span><span><i class="dash"></i>DOCG 경계</span><span><i style="background:transparent;border:1.2px dashed var(--ink)"></i>상세 지도 범위</span></div>
+    </div>
+    <div class="mapinfo" id="tus-info" aria-live="polite"></div>
+  </div>
+</div>
+
+<h2>키안티와 키안티 클라시코</h2>
+<p>‘키안티’는 원래 피렌체와 시에나 사이의 작은 언덕 지대를 가리켰습니다. 1716년 메디치가의 코시모 3세가 이 지역의 경계를 법으로 정했는데, 와인 산지의 경계를 정한 가장 이른 사례 가운데 하나로 꼽힙니다. 그런데 키안티의 인기가 높아지면서 이름을 쓰는 지역이 토스카나 곳곳으로 넓어졌고, 원래의 땅은 ‘클라시코’라는 말을 붙여 자신을 구분하게 됩니다. 1996년부터 키안티 클라시코는 키안티와 완전히 다른 별도의 DOCG입니다. 검은 수탉(갈로 네로) 표시가 키안티 클라시코의 상징입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 200" role="img" aria-label="키안티 클라시코의 역사 연표">
+      <g id="cc-time"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 9-2.</b> 키안티 클라시코 연표. 리카솔리 남작의 ‘공식’은 산지오베제에 카나이올로와 청포도 말바지아를 섞는 방식이었다. 청포도는 2006년 빈티지부터 키안티 클라시코에서 금지됐다. 점 사이 간격은 시간에 비례하지 않는다.</figcaption>
+</figure>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th>등급</th><th>산지오베제</th><th>최소 숙성</th><th>비고</th></tr></thead>
+  <tbody>
+    <tr><td><b>키안티 클라시코(안나타)</b></td><td>80% 이상</td><td>수확 이듬해 10월 1일까지</td><td>나머지 20%는 카나이올로·콜로리노 같은 토착 품종이나 카베르네·메를로</td></tr>
+    <tr><td><b>키안티 클라시코 리제르바</b></td><td>80% 이상</td><td>24개월(병 3개월 포함)</td><td>생산자가 좋은 포도를 골라 만든다</td></tr>
+    <tr><td><b>그란 셀레치오네</b></td><td>90% 이상</td><td>30개월(병 3개월 포함)</td><td>2014년 도입. 자기 밭 포도만 쓴다. 2021년 개정으로 산지오베제 90% 이상, 나머지는 토착 품종만 허용. 라벨에 UGA를 적을 수 있다</td></tr>
+    <tr><td><b>키안티 DOCG</b></td><td>70% 이상</td><td>수확 이듬해 3월 1일부터 출시</td><td>클라시코 바깥의 넓은 지역. 루피나·콜리 세네지 등 7개 하위 지역</td></tr>
+  </tbody>
+</table></div>
+
+<h2>키안티 클라시코 지도: UGA와 생산자</h2>
+<p>2021년 키안티 클라시코는 지역을 11개의 UGA(Unità Geografiche Aggiuntive, 추가 지리 단위)로 나눴고, 그란 셀레치오네부터 라벨에 마을 이름을 적을 수 있게 됐습니다. UGA는 대체로 마을 단위로, 해발고도와 토양에 따라 성격이 꽤 다릅니다. 금색 점은 UGA의 중심 마을, 검은 점은 주요 생산자입니다(위치는 대략적).</p>
+<div class="box note"><span class="box-t">키안티의 세 가지 흙</span>
+<p><b>갈레스트로</b>는 잘게 부서지는 편암 같은 이회토로 향기롭고 구조 있는 와인을, <b>알베레세</b>는 단단한 석회암으로 힘과 긴장감을, <b>마치뇨</b>는 사암으로 가볍고 향기로운 와인을 만든다고 흔히 설명합니다. 남쪽 카스텔누오보 베라르덴가 쪽에는 바다에서 쌓인 점토와 모래가 많아 와인이 더 풍만해집니다.</p></div>
+
+<div class="mapwrap wide" id="cc">
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-cc" viewBox="0 0 520 600" role="group" aria-label="키안티 클라시코 코무네와 11개 UGA"><g class="m-bg"><path class="b" d="M313.7 -5 313.7 2.3 311.1 5.8 304.9 11.8 289.7 42.7 283.5 45.2 277.5 49.7 257.8 68.1 254.7 73.6 252.2 76.6 246.4 75 239.9 65.8 239 63.1 239.5 55.3 239.2 53.1 238.6 52.8 234.2 53 236.6 47.2 236.4 33.4 234.9 28.8 234.3 28.2 230.1 27.3 226.9 30.7 225.1 33.6 221.2 31.6 211.5 21.9 211.4 14.3 210 8 197.7 2.7 192.3 -5ZM-5 177.1 3.9 178.8 13.7 173.8 36.8 176.3 44.6 181.2 49.7 181 53.5 179.7 57.9 176.2 59.9 176.4 70.7 196.2 69.1 197.7 67.5 202.8 67 209.2 68 211.8 74.4 217.6 77.1 222.9 71.8 227.4 58.3 246 57.5 255.2 62.4 257 63.6 260 56.8 269.3 52.3 271.5 45.3 273.3 41.5 277.7 40 281.4 32.2 286 13 291.3 9.4 289.5 6.2 292.4 3.9 288 -3.4 277.1 -5 277.1ZM175.2 -5 168.1 -2.3 163.9 -5 151 -5 151.3 -3.9 148.6 -2.5 140 -1.5 138.1 -5ZM192.3 -5 197.7 2.7 210 8 211.4 14.3 211.5 21.9 221.2 31.6 225.1 33.6 226.9 30.7 230.1 27.3 234.3 28.2 234.9 28.8 236.4 33.4 236.6 47.2 234.2 53 220.7 51.5 213.3 53.4 197.1 90.9 189.1 94.3 185.1 93.9 184.2 92.8 176.7 95.1 171.2 94.3 167.5 92.7 163 84.1 154.7 84.7 142.3 82.3 140.7 80.2 140.8 75.6 136.4 65 139.9 34.7 130.1 29.5 120.8 28 114.4 23.6 116 17.9 126 1.1 130.3 -5 138.1 -5 139.5 -1.7 140.8 -1.3 148.6 -2.5 151.3 -3.9 151 -5 163.9 -5 168.1 -2.3 175.2 -5ZM34.5 -5 30.6 4.3 26.7 9.5 24.8 10.4 19.1 15.9 10.4 30.6 -5 24.8 -5 -5ZM-5 24.8 10.4 30.6 25.5 41.8 43.5 52 52.8 58.6 54.6 62 62.2 83.7 65.4 89.2 68.4 92.3 84.2 105.3 80.7 109.9 67 111.5 55.6 111.1 55 121.8 60 130.9 65.7 137.5 63.1 141.4 60.4 144.2 60.1 149.8 63.9 153.6 71.1 156.3 80.3 162 90.2 171.6 82.8 179.3 71.7 185.2 70.7 188.6 70.2 193.8 70.7 196.2 59.9 176.4 57.9 176.2 53.5 179.7 49.7 181 44.6 181.2 36.8 176.3 13.7 173.8 3.9 178.8 -5 177.1ZM505.2 -5 507.7 1.2 514.6 9.3 521.1 9.5 523.5 10.8 525 12.4 525 55.2 506.7 68.2 490 76.7 469.9 87.9 469.5 88.9 470.8 97.2 472.1 100.8 476.4 106.3 477.3 106.5 477.9 109.3 471.4 113.1 459.1 114.9 451.1 115.3 448 114.8 438.5 117.4 421.1 132.3 418 135.6 414.3 137.7 410.5 135.9 400.9 132.8 389 120.4 384.1 113.1 383.5 111.7 383.3 108.2 384.9 99.5 379.6 87 379.1 82.4 384.1 67.7 385.5 55.9 385.8 48.4 383.9 35.7 382.2 29 381.6 16.3 381.5 6.9 382 6.3 384 4.6 394.3 -0.5 395.8 -5ZM289.7 42.7 304.9 11.8 311.1 5.8 313.7 2.3 313.7 -5 395.8 -5 394.3 -0.5 384 4.6 381.5 6.9 382.2 29 383.9 35.7 385.8 48.4 381.3 44.7 378.3 43.3 364.7 42.5 354.1 37.5 350.1 38.6 341.8 42.4 338.7 47.5 337.9 50.7 336.4 52.2 334.8 52.9 332.4 53 326.3 51.2 318.8 51.5 313.9 54.2 311.1 51.6 303.7 52.7 299.4 51.8 297.8 49.3 298.3 45.7 297.4 41.4 294.4 41ZM130.3 -5 126 1.1 116 17.9 114.4 23.6 108.4 25.8 104.3 24.9 95.6 27.7 89.5 33.3 83 36.4 70.9 39.9 59.3 50.9 53 54 48.1 55.5 43.5 52 25.5 41.8 10.4 30.6 19.1 15.9 23.5 11.4 26.7 9.5 29.2 6.4 31.2 3.3 34.5 -5ZM337.9 229.3 335 227.2 332.7 219.6 333.4 197.4 336.7 182.2 332.2 174.5 330 173.7 328.5 174.5 317.4 171.5 303.8 161.5 301.6 159.6 300.5 157.5 299.6 152.8 300.6 151.1 306.1 147.1 304.7 135.6 300.4 127.7 309.6 108.5 318.2 105.9 320.4 107 323.5 103.7 325.6 97.4 325.7 94.7 321.6 82.5 320.6 74.8 316.4 59.6 313.9 54.2 318.8 51.5 326.3 51.2 332.4 53 335.7 52.7 337.9 50.7 338.7 47.5 341.8 42.4 350 38.6 354.1 37.5 364.7 42.5 378.3 43.3 381.3 44.7 385.8 48.4 385.5 55.9 384.1 67.7 379.1 82.4 379.6 87 384.9 99.5 383.3 108.2 383.5 111.7 384.1 113.1 389 120.4 400.9 132.8 410.5 135.9 421.5 140.8 424.7 141.7 426.6 144.8 432.8 161.1 438.5 168.6 440.8 170.1 446.9 178.6 447.5 182.1 444.2 187.3 448.8 195.5 452.6 200.4 450.9 202.1 447.5 204.2 442.7 205.5 438.2 203.4 437.1 201.8 435.6 201.5 431.3 202.5 419.5 202 413.9 198.2 400.4 194.3 395.5 196.5 381.9 206.2 382 212.1 378.2 217.9 375.6 221.2 369.4 225.2 358.6 228.2 348.9 230ZM525 517.9 523.2 516.8 520.5 512.4 512.2 506.7 502.5 504.5 497.4 494.9 490.4 486.7 480.9 484.1 464.1 463.8 462.7 461.1 463 454.1 467.6 442.5 467.8 437.6 470.2 432.7 473.2 429.3 474.8 429 476.6 427.1 478.2 423.3 478.9 416.4 476.2 408.4 474.3 393.6 483 369.9 487.7 365.6 488.1 360.6 487.6 356 489.8 349.2 496.1 335.9 510.9 332.1 520.1 321.2 525 317.4ZM327.4 246.8 334.5 239.7 337.6 233.3 337.9 229.3 348.9 230 358.6 228.2 369.4 225.2 375.6 221.2 378.2 217.9 382 212.1 381.9 206.2 395.5 196.5 400.4 194.3 413.9 198.2 419.5 202 431.3 202.5 435.6 201.5 437.1 201.8 438.2 203.4 435.4 204.8 433.5 206.6 427.9 219.1 428.4 229.9 429.7 240 428.5 244.4 429.5 246.9 438.1 258.7 445.8 264.2 447.4 269.2 446.2 270.4 445.5 272.3 445.9 278.5 446.8 281 447.9 281.9 450.3 288.5 448.8 300.6 444.8 303.2 438.2 311.6 430.1 326.6 422.5 329.9 411.4 342.7 410.3 342.6 403.9 335.3 391 314.1 390.6 299.2 386.7 296.8 383.6 296 366.4 297.8 360 280.6 355.4 272.5 353.6 271.9 344.5 265.1 340 259 338.5 253.5 336.7 250.4 333 246.6ZM525 182.6 518.9 179.4 503.2 163.3 502.6 160.8 502.4 159.3 510.3 153.6 520 144.9 525 144ZM525 -5 525 12.4 522.5 10 520 9.3 514.6 9.3 507.7 1.2 505.2 -5ZM525 317.4 520.1 321.2 510.9 332.1 496.1 335.9 488.4 352.4 487.6 356 488.1 360.6 487.7 365.6 483 369.9 474.5 372.5 460.5 373.7 457.2 366.8 450.5 359.1 445 357.3 441.7 358.2 436.8 362.5 435.1 366.6 432.3 367.1 427 359.3 423.5 350 420.7 346 411.4 342.7 422.5 329.9 430.1 326.6 438.2 311.6 444.8 303.2 448.8 300.6 450.3 288.5 447.9 281.9 451.5 278.7 462.5 273 470.4 267.7 480.6 253.8 487.7 245.8 498 255.7 525 277.1ZM438.2 203.4 442.7 205.5 447.5 204.2 450.9 202.1 452.6 200.4 448.8 195.5 444.2 187.3 447.5 182.1 450.5 183.6 455.2 184 463 186.4 466.7 188.3 466.7 195 465.2 200 465.8 203.4 475.5 209.1 477 213.4 475.8 218.5 474.8 233.4 475.5 234.8 487.7 245.8 480.6 253.8 475.3 261 470.4 267.7 462.5 273 451.5 278.7 447.9 281.9 446.8 281 445.8 278 445.4 273.1 446.2 270.4 447.4 269.2 445.8 264.2 438.1 258.7 429.5 246.9 428.5 244.4 429.7 240 428.4 229.9 427.9 219.1 433.5 206.6 435.4 204.8ZM525 277.1 498 255.7 475.5 234.8 474.8 233.4 475.8 218.5 477 213.4 475.5 209.1 465.8 203.4 465.2 200 466.7 195 466.7 188.3 469.1 184.9 469.4 180 474.9 165 483.3 160.9 486.8 159.9 497.1 159.3 504 158.1 502.4 159.3 503.2 163.3 518.9 179.4 525 182.6ZM414.3 137.7 418 135.6 421.1 132.3 438.5 117.4 448 114.8 451.1 115.3 459.1 114.9 471.4 113.1 477.9 109.3 477.3 106.5 476.4 106.3 472.1 100.8 470.8 97.2 469.5 88.9 469.9 87.9 490 76.7 506.7 68.2 525 55.2 525 144 520 144.9 510.3 153.6 504 158.1 497.1 159.3 486.8 159.9 483.3 160.9 474.9 165 469.4 180 469.1 184.9 466.7 188.3 463 186.4 455.2 184 450.5 183.6 447.5 182.1 447.4 179.7 446.3 177.7 440.8 170.1 438.5 168.6 432.8 161.1 426.6 144.8 424.7 141.7ZM501.8 564.1 505.9 567.4 510.9 574.3 512.1 580.2 512.3 592.3 509.1 600.1 510.9 605 330 605 333.6 600 348.1 594.5 354.9 590.4 373.9 584 377.5 583.1 396.5 580.7 404.3 580.6 413.6 581 428.2 582.7 437.7 581.7 445.7 574.9 456.1 568.1 464.5 568.4 474.1 564.7 484.4 559.1 492.2 559.5ZM-5 605 -5 509.2 1.7 520.4 4.9 521 7.9 520.7 16.7 523.3 11.2 532.3 4 548.4 4.7 551.3 27.8 557.8 39.4 558.7 47.6 554.3 58.5 545.6 60 526 79.2 524.1 90.6 518.5 92.5 518.5 95.8 519.7 99.8 523 105 525.5 122.4 531.2 127.5 539.1 124.2 547.6 122.6 555.2 125.2 557.5 110.6 567.4 104.4 569.8 96.4 569.6 77.8 593.4 72.6 601.7 73.4 605ZM-5 412.2 8.5 404.4 12.7 396.4 14 392.7 12.8 388.7 11.1 386.8 14 380.8 21.9 386.7 24.9 387.9 27.2 386 28.2 382 32.7 386.7 39.1 395.5 56.1 402.7 54.9 408.4 57.2 411.9 65.4 411 66.6 409.6 86.2 412.4 88.3 413.7 91.2 417.2 91.2 417.9 89.9 426.8 88.1 431.6 88.9 433.1 96 440 101.4 447.4 102.4 450 96.3 454.8 94.8 457.6 89.4 463.6 83.8 465.8 77.3 467.1 71.8 467 70.1 467.7 62.5 473.2 60.2 477.5 59.4 486.9 54.6 495.7 49.7 502.3 48.7 506.4 50.4 512.5 59.9 526.4 58.5 545.6 47.6 554.3 39.4 558.7 27.8 557.8 4.7 551.3 4 548.4 11.2 532.3 16.7 523.3 7.9 520.7 4.9 521 1.7 520.4 -5 509.2ZM125.2 557.5 122.6 555.2 124.2 547.6 127.5 539.1 122.4 531.2 105 525.5 99.8 523 95.8 519.7 91.8 518.4 90.6 518.5 79.2 524.1 60 526 59.9 526.4 50.4 512.5 48.7 506.4 49.7 502.3 54.6 495.7 59.4 486.9 60.2 477.5 62.5 473.2 70.1 467.7 71.8 467 77.3 467.1 83.8 465.8 89.4 463.6 94.8 457.6 96.3 454.8 102.4 450 105.6 451.6 124.3 448.3 129.5 445.9 135.4 439.3 136.5 434.3 136 432.7 135.3 432.2 137.5 429.9 141.6 429 142.3 429.6 142.2 440.3 141.4 447.5 144.6 457.2 148.9 461.1 154.7 460.6 157.3 461 165.5 462.7 172.5 465.3 172.9 466.8 175.1 468.9 179.4 470.5 181.3 467.7 184.5 454.6 186.6 449.9 196.4 448.2 207.5 448.9 210.5 452.3 212.9 456.3 215.9 454.2 220.4 446.6 229.1 440.1 233.9 440.7 235.5 447.5 234.9 454.8 236.3 461.5 239.6 468 239.2 480.8 241.7 488.2 242.5 497.3 241.8 504.4 243.1 509.6 244.4 512.3 244.3 514.4 241.9 523.8 235.4 532.8 219.4 531.5 208.9 529.6 204.8 525.4 198.3 521 194.1 520 194.6 526.7 189.8 549.9 190.2 551.4 189.1 557.2 188 559.8 178.9 566.7 169.7 567.7 167.6 562.5 164 562.3 159.5 564.6 158 563.9 151.5 564.4 149.1 565.1 144.4 567.7 143.2 567.5 139.6 566.5ZM525 605 510.9 605 509.1 600.1 512.3 592.3 512.1 580.2 510.9 574.3 505.9 567.4 501.8 564.1 501.7 562.5 501.8 561 503 558.6 507 552.4 525 535.7ZM-5 277.1 -3.4 277.1 3.9 288 7.3 294.2 19.9 304.4 36.8 316.3 39.2 319.6 36.6 325.3 28.4 339.8 29.1 346.1 33.5 359.6 36.6 362.7 37.4 364.4 36.8 366.4 32 371.5 18.1 379.4 14 380.8 11.1 386.8 12.8 388.7 14 392.7 12.7 396.4 8.5 404.4 -5 412.2ZM333.6 600 330 605 185.4 605 174.7 600.3 162.6 588.6 158.4 580.9 158.7 573.6 161.2 568.6 159.5 564.6 164 562.3 167.6 562.5 169.7 567.7 178.9 566.7 188 559.8 189.5 555.6 190.2 551.4 189.8 549.9 194.6 526.7 194.1 520 198.3 521 204.8 525.4 208.9 529.6 219.4 531.5 235.4 532.8 241.9 523.8 244 515.5 244.3 512 257.3 505.1 263.7 503.8 265.3 506.7 278.2 517.3 291 524.5 297.5 526.9 311.5 526 316 525.3 339.2 526.2 343.4 525.3 347.8 522.3 352.4 524.6 357.9 540.5 354.1 554.6 351.7 566.8 347.4 578.3 345.5 591 337 596.6ZM73.4 605 72.6 601.7 77.8 593.4 96.4 569.6 104.4 569.8 110.6 567.4 125.2 557.5 133.9 563.2 141.3 567.1 144.4 567.7 149.1 565.1 152.2 564.3 158 563.9 159.5 564.6 161.2 568.6 158.7 573.6 158.4 580.9 162.6 588.6 174.7 600.3 185.4 605Z"/></g><g class="m-u"><path class="u t-r3" data-k="cc" data-n="Greve in Chianti" d="M234.2 53 239.2 53.1 239.6 56.6 239 63.1 239.9 65.8 246.4 75 252.2 76.6 254.7 73.6 257.8 68.1 277.5 49.7 283.5 45.2 289.7 42.7 294.4 41 297.4 41.4 298.3 45.7 297.8 49.3 299.4 51.8 303.7 52.7 311.1 51.6 313.9 54.2 316.4 59.6 320.6 74.8 321.6 82.5 325.7 94.7 325.6 97.4 323.5 103.7 320.4 107 318.2 105.9 309.6 108.5 300.4 127.7 304.7 135.6 306.1 147.1 300.6 151.1 299.6 152.8 300.5 157.5 301.6 159.6 303.8 161.5 317.4 171.5 328.5 174.5 330 173.7 332.2 174.5 336.7 182.2 333.4 197.4 332.7 219.6 335 227.2 337.9 229.3 337.9 231 337.1 234.7 334.5 239.7 332.5 242.1 327.4 246.8 315.6 248.2 312.1 254.7 311.2 257.5 311.6 258.9 310.1 268.8 296.7 275.8 281.9 276 273 275 260.4 277.4 241.3 285.6 236.1 289 232.4 287.1 226.8 287.5 222 279.6 219.1 268.5 216.7 266.4 211.6 263.9 206.9 259.1 205 256 203.9 252 200.7 250.6 189.2 250.7 184.1 246.8 190.5 224.1 196.9 222.4 199 218.2 201.5 205.5 201.3 203.5 195.5 191.6 193.6 190.8 188.7 185.5 187.3 182.9 187.7 181.5 195.7 174.5 203.3 169.9 208.1 164.3 213.1 150.9 213.2 144.8 212.1 142.1 210.8 141.5 203.4 133.8 195.1 123.1 192.4 117.3 185.7 107.5 184.2 103.4 183.7 95.3 184.2 92.8 186 94.2 189.1 94.3 197.1 90.9 213.3 53.4 220.7 51.5Z"/><path class="u t-r2" data-k="cc-part" data-n="San Casciano in Val di Pesa" d="M184.2 92.8 183.7 95.3 184.2 103.4 185.7 107.5 192.4 117.3 195.1 123.1 203.4 133.8 210.8 141.5 212.1 142.1 213.2 144.8 213.1 150.9 208.1 164.3 203.3 169.9 195.7 174.5 187.7 181.5 187.3 182.9 179.8 187.2 167.4 196.6 138.9 197.3 129.9 188.8 120 168.3 117.9 167.6 108.7 173.8 104.9 175.4 98.7 176.4 94.3 176.2 80.3 162 71.1 156.3 63.9 153.6 60.1 149.8 60.4 144.2 63.1 141.4 65.7 137.5 60 130.9 55 121.8 55.6 111.1 67 111.5 81.3 109.6 84.2 105.3 74.3 97.1 68.4 92.3 65.4 89.2 62.2 83.7 54 60.7 52.8 58.6 48.1 55.5 53 54 59.3 50.9 70.9 39.9 83 36.4 89.5 33.3 95.6 27.7 104.3 24.9 108.4 25.8 114.4 23.6 120.8 28 130.1 29.5 139.9 34.7 136.4 65 140.8 75.6 140.7 80.2 142.3 82.3 154.7 84.7 163 84.1 167.5 92.7 171.2 94.3 176.7 95.1Z"/><path class="u t-r2" data-k="cc-part" data-n="Barberino Tavarnelle" d="M6.2 292.4 9.4 289.5 13 291.3 30.9 286.4 37.8 282.9 40 281.4 41.5 277.7 45.3 273.3 52.3 271.5 56.8 269.3 63.6 260 62.4 257 57.5 255.2 58.3 246 71.8 227.4 77.1 222.9 74.4 217.6 68 211.8 67 209.2 67.5 202.8 69.1 197.7 70.7 196.2 70.2 193.8 70.7 188.6 71.7 185.2 82.8 179.3 90.2 171.6 94.3 176.2 98.7 176.4 104.9 175.4 108.7 173.8 117.9 167.6 120 168.3 129.9 188.8 138.9 197.3 167.4 196.6 179.8 187.2 187.3 182.9 188.7 185.5 193.6 190.8 195.5 191.6 201.5 204.6 199.2 217 196.9 222.4 190.5 224.1 184.1 246.8 189.2 250.7 197.9 250.5 196.8 252.9 196.6 255 198.1 262.5 199.8 265.9 200.8 271.9 197.1 280.6 181.7 301.5 175.1 304.2 174.3 310 176.3 313.5 173.3 317 161.3 325.5 147.5 331.3 140.7 336.9 139.7 338.1 138.9 340.8 135.9 342 133.2 341.7 131.8 340.8 129.1 338.9 126.2 334.2 123.2 331.4 117.5 328.5 112.9 327.8 109.4 328.4 103.1 330.9 101.7 328.9 105.3 322 108.8 317.4 111 316 121.9 293.7 121.1 289.7 110.3 283.7 86.7 304.7 81.2 314 80 317.7 77.5 332.3 74.7 335.5 69.6 340.9 62.9 346.5 51.4 348.7 47.3 345.3 46.3 342.7 46.5 334.9 42.6 325.7 37.7 317.3 12.7 298.9 7.3 294.2Z"/><path class="u t-r3" data-k="cc" data-n="Castellina in Chianti" d="M197.9 250.5 200.7 250.6 203.9 252 205 256 206.9 259.1 211.6 263.9 216.7 266.4 219.1 268.5 222 279.6 226.8 287.5 232.4 287.1 236.1 289 234.9 291.2 234.4 300.4 236.8 305.5 244.3 317.3 242 321.5 235.9 329.8 236.5 341 235.1 342 236.1 344.9 239.5 351.1 241.6 353.8 244.7 355.3 245.8 356.8 246.3 359.5 246 361.2 242.7 364.8 237.6 369 231.7 372.6 228.9 376.2 234.6 378.9 238.1 381.5 248.8 392.6 253.3 408.2 253.6 417.1 253.2 418.1 250.5 419.7 247 426.3 233.9 440.7 229.1 440.1 220.4 446.6 215.9 454.2 212.9 456.3 210.5 452.3 207.5 448.9 196.4 448.2 186.6 449.9 184.5 454.6 181.1 468.3 180.2 469.9 178.8 470.5 175.1 468.9 172.9 466.8 172.5 465.3 165.5 462.7 157.3 461 154.7 460.6 148.9 461.1 144.6 457.2 141.4 447.5 142.2 440.3 142.2 429.1 140.3 429.5 137.5 425.8 135.1 418.1 140.7 410.4 149.8 393 148.2 386.2 140 380.7 137.3 378.1 139.7 373.9 142.8 370.7 147.7 363.7 145.8 350.3 143.7 343.8 138.9 340.8 138.9 340.3 140.7 336.9 147.5 331.3 161.3 325.5 173.3 317 176.3 313.5 174.3 310 175.1 304.2 181.7 301.5 197.1 280.6 200.8 271.9 199.8 265.9 198.1 262.5 196.6 255 196.8 252.9Z"/><path class="u t-r2" data-k="cc-part" data-n="Castelnuovo Berardenga" d="M467.6 442.5 463 454.1 462.7 461.1 464.1 463.8 480.9 484.1 490.4 486.7 497.4 494.9 502.5 504.5 512.2 506.7 520.5 512.4 523.2 516.8 525 517.9 525 535.7 507 552.4 501.8 561 501.8 564.1 492.2 559.5 484.4 559.1 474.1 564.7 464.5 568.4 456.1 568.1 445.7 574.9 437.7 581.7 428.2 582.7 413.6 581 396.5 580.7 377.5 583.1 354.9 590.4 348.1 594.5 333.6 600 337 596.6 345.5 591 347.4 578.3 351.7 566.8 354.1 554.6 357.9 540.5 352.4 524.6 347.8 522.3 343.4 525.3 339.2 526.2 316 525.3 311.5 526 297.5 526.9 291 524.5 278.2 517.3 265.3 506.7 263.7 503.8 257.3 505.1 244.3 512 243.1 509.6 241.8 504.4 242.5 497.3 241.7 488.2 239.2 480.8 239.6 468 236.3 461.5 234.9 454.8 235.5 447.5 233.9 440.7 247 426.3 250.5 419.7 253.2 418.1 257.1 419.8 263.7 419.7 264.6 419.3 264.1 417.7 266.9 415.7 273.5 414.4 284.3 413.7 292.5 414.2 296.9 413.5 303.1 419.2 312.3 430 314.1 434 313.8 438.2 313.2 439.7 315.9 442.7 317.8 443.5 323.2 443.9 325.8 442.5 327.7 440 329.9 439.4 333 440.8 335.7 461.2 338 462.3 340.7 466.2 342.3 471.5 342.2 478.9 340.7 482.2 345.8 499.8 346.2 512.2 347.5 514.4 352.2 516.1 353.5 515.6 360.5 508.2 376.9 469.2 380.1 464 382.8 463.4 387.4 460.7 411 440.2 420.7 432.4 423.4 430.9 435.6 427.3 448.9 431.9 457.4 435.9 464.9 440.3Z"/><path class="u t-r3" data-k="cc" data-n="Gaiole in Chianti" d="M483 369.9 474.3 393.6 476.2 408.4 478.9 416.4 478.5 421.7 476 427.9 472.3 430.2 469.5 433.8 467.8 437.6 467.6 442.5 464.9 440.3 457.4 435.9 448.9 431.9 435.6 427.3 423.4 430.9 420.7 432.4 411 440.2 387.4 460.7 382.8 463.4 380.1 464 376.9 469.2 360.5 508.2 353 516 347.5 514.4 346.2 512.2 345.8 499.8 340.7 482.2 342.2 478.9 342.3 471.5 340.7 466.2 338 462.3 335.7 461.2 333 440.8 329.9 439.4 327.7 440 325.4 442.8 322.8 443.9 316.4 443 313.7 440.6 313.2 439.2 313.8 438.2 314.1 434 312.3 430 303.1 419.2 296.9 413.5 297.1 410.6 286.5 395.2 284.2 375.4 287.2 365.7 287.6 364.8 292.3 361.8 294.5 361.6 305.1 355.3 318.9 345.9 340 333.5 354.8 323.2 363.4 321.7 375 324 377.3 323.2 378.3 321.9 379.2 314.9 378.1 314 375.5 313.1 368.5 303 366.4 297.8 383.6 296 386.7 296.8 390.6 299.2 391 314.1 396.1 323 403.9 335.3 410.3 342.6 420.7 346 423.5 350 427 359.3 432.3 367.1 435.1 366.6 436.8 362.5 441.7 358.2 445 357.3 450.5 359.1 457.2 366.8 460.5 373.7 474.5 372.5Z"/><path class="u t-r2" data-k="cc-part" data-n="Poggibonsi" d="M39.2 319.6 42.6 325.7 46.5 334.9 46.3 342.7 47.3 345.3 51.4 348.7 62.9 346.5 69.6 340.9 77.5 332.3 80 317.7 81.2 314 86.7 304.7 110.3 283.7 121.1 289.7 121.9 293.7 111 316 108.8 317.4 105.3 322 101.7 328.9 103.1 330.9 109.4 328.4 112.9 327.8 117.5 328.5 123.2 331.4 126.2 334.2 129.1 338.9 133.2 341.7 135.9 342 138.9 340.8 143.7 343.8 145.8 350.3 147.6 364.2 142.8 370.7 139.7 373.9 137.3 378.1 140 380.7 148.2 386.2 149.8 393 140.7 410.4 135.1 418.1 137.5 425.8 140.3 429.5 137.5 429.9 135.3 432.2 136 432.7 136.5 434.3 135.4 439.3 129.5 445.9 124.3 448.3 105.6 451.6 102.4 450 101.4 447.4 96.4 440.4 93.9 438.5 88.9 433.1 88.2 431.7 89.9 426.8 91.2 417.7 87.6 413.1 86.2 412.4 81.5 411.6 66.6 409.6 65.4 411 57.2 411.9 54.9 408.4 56.1 402.7 39.1 395.5 32.7 386.7 28.2 382 27.2 386 24.9 387.9 21.9 386.7 14 380.8 18.1 379.4 32 371.5 36.8 366.4 37.5 364.1 33.5 359.6 29.1 346.1 28.4 339.8 36.6 325.3Z"/><path class="u t-r3" data-k="cc" data-n="Radda in Chianti" d="M236.1 289 241.3 285.6 260.4 277.4 273 275 281.9 276 296.7 275.8 310.1 268.8 311.6 258.9 311.2 257.5 313.4 252.1 315.6 248.2 322 247.2 333 246.6 336.7 250.4 338.5 253.5 340 259 344.5 265.1 353.6 271.9 355.4 272.5 357.9 276.4 360 280.6 368.5 303 375.5 313.1 378.1 314 379.2 314.9 378.4 321.3 377.7 322.8 376.3 323.9 375 324 363.4 321.7 357.7 322.4 354.2 323.5 340 333.5 318.9 345.9 305.1 355.3 294.5 361.6 292.3 361.8 287.6 364.8 284.2 375.4 286.5 395.2 297.1 410.6 296.9 413.5 292.5 414.2 284.3 413.7 273.5 414.4 266.9 415.7 264.1 417.7 264.6 419.3 263.7 419.7 257.1 419.8 253.2 418.1 253.6 417.1 253.3 408.2 248.8 392.6 238.1 381.5 234.6 378.9 228.9 376.2 231.7 372.6 237.6 369 242.7 364.8 246 361.2 246.3 359.5 245.8 356.8 244.7 355.3 241.6 353.8 239.5 351.1 236.1 344.9 235.1 342 236.5 341 235.9 329.8 242 321.5 244.3 317.3 236.8 305.5 234.4 300.4 234.9 291.2Z"/></g><g class="m-r"><path class="rv rv-big" data-n="Arno" d="M538.9 272.2 499.2 236.7 446.2 176.5 401.5 106.6 382.3 47.3 383.4 2.1 387.9 -34.1 381.5 -60.9"/></g><g class="m-o"><path class="docg" d="M114.8 24 114.4 23.6 108.4 25.8 101.7 23.7 96.3 24.9 94.2 30.9 91.2 32.5 90.2 34.1 87.1 31.5 84.1 36.1 78.7 37.3 75.7 39.1 74 38.8 72.2 39.9 69.8 39.7 69.1 41.1 68.7 40.1 65.6 43.5 65.1 44.9 63.8 44.9 63 48.6 62 48.5 58.9 51.1 56.1 51.7 52.5 54.7 48.1 55.5 52.8 58.6 54.1 60.9 58.5 72.2 58.9 75.9 61.2 79.9 62.2 83.7 65.2 89 72 95.5 78.6 100.3 81.7 103.6 89.6 109.4 90.9 113.9 95.4 120.5 97 124.2 102.7 128 104.9 130.2 106.8 139.3 110.2 142.5 112.7 148.4 113.1 154.7 120.1 162.2 120.1 169.7 122.1 177 123.1 178 125.7 178.5 126.8 179.8 127.7 185 130.6 190 134.1 199.3 135 201 140.3 206.3 145.4 220.6 137.7 228.6 133.8 226.6 131.1 228.1 133 228.7 135.4 232.3 136.8 240 135.7 241.2 133.1 242.2 133.8 246.2 133.6 249.2 129.8 254.5 127.4 259.4 125.5 260.9 125.9 262.1 125.2 264.7 125.8 266.3 125 269.8 123.6 272 124.1 272.1 121.8 274.7 119.1 275.8 115.5 279.2 114 283.1 112.6 284.1 110.8 283 104.8 292.6 102.8 293.9 102.6 292.3 101.4 293.7 99.7 293.5 97.5 294.9 95.3 297.6 93.4 298.8 92.6 302.3 93.8 304.4 93.4 306.9 93.8 308 96.1 308.9 100.5 313.3 99.3 316.9 99.6 319 99 320.9 94.9 328.3 95.3 329.4 101.6 326.8 102.2 327.3 101.7 328.9 102.9 331 109.4 328.4 112.9 327.8 116.5 328.2 120.7 331.6 123.1 330.5 123.3 331.8 127.2 334.9 129.1 338.9 133.2 341.7 135.9 342 138.9 340.8 139.7 342.1 141.9 343.4 147.5 343.8 149 345.3 148.4 347.7 143 352.7 140.8 357.3 143 358.6 144.1 358.2 145.4 356.3 147 357.4 147.6 364.2 146 366.5 144.4 367.3 142.6 371.6 141.3 372.3 140.8 373.9 138.8 374.4 138.7 376.6 137.3 378.1 140.1 379.6 140 382 143.1 381.3 144.7 382.8 143.5 385.8 143.7 386.6 146.7 387.1 149 386.2 151.5 387.8 151.6 388.6 150.2 392.4 140.4 411 133.1 420.7 134.6 423 140.8 428.8 138.6 430.5 136.5 428.6 135.5 428.5 134.8 430.6 139.8 431.1 142.3 430 141 434.3 143.8 434.5 144.1 435 143.2 435.6 143.7 436.9 142.1 438.2 142.6 442 141.3 443.3 142.5 446.4 141.4 448.1 142.2 450.7 144.4 453.7 144 454.8 144.7 455.9 144.8 457.7 147.8 461.5 150.5 460.1 153.2 461.6 154.6 460.9 155.1 459.8 161 462.3 162.1 463.5 163.5 462.7 164.5 463.2 166.8 462.7 171.3 464.1 174.8 469 175.8 468.8 179.4 470.5 181.3 467.7 180.9 466.3 181.5 463.9 182.6 463.1 184.1 460.5 184.3 455.4 186.5 449.9 196.4 448.2 202.2 449.5 207.5 448.2 208 450 210.8 452.8 213.4 457.5 216 454.7 216.4 451.3 221.1 448.2 220.2 446.2 221.5 444.1 228.7 438.8 229.2 440.5 232.2 441.2 233.9 440.7 235.5 447.5 234.8 455.5 235.8 457.6 233.8 459.1 233.6 460 237.2 462.3 239.6 466.4 239.6 468.1 237.8 471.5 240.8 475.7 239.1 481.3 240.3 486.1 242.1 488.8 242.6 499.9 242.1 504.1 241.3 505.8 244.3 512 245.7 510.8 249.7 509.6 250 510.5 250.8 508.9 256.8 504.7 258.8 506.6 258.6 505.3 260.1 504.2 260.2 502.1 262.5 501 264.7 506 268.6 510.1 271.4 511 273.8 512.6 274.6 515 276.7 517.3 280.3 517.7 282.5 520 284 520.4 286.5 522.1 288.9 522.7 289.8 524.1 297.6 527 300.6 525.8 307.1 527 311.6 524.3 312.2 524.4 312.1 525 311.4 526.3 312.3 527.1 315.7 525.6 317.5 522.1 319.2 524.5 321.6 525.5 324.6 523.2 329 523.2 330.7 527.2 332 525.7 331.7 523.7 332.3 523.2 332.8 524.6 334.7 524.9 335.4 525.7 339.2 526.2 343.4 525.3 347.4 523.2 347.8 521.8 349.8 521.8 351.8 522.5 354.9 531.9 356.6 535.9 358.3 537.5 362.1 536.3 367 530.8 377.8 535.6 378.6 537 379.1 541.7 380 542.6 380.8 542.8 381.8 539.7 386.4 538.1 391 538.9 392.9 541.2 397.3 541.7 399 542.6 401 541.4 401.2 540.1 403.4 538.9 404.6 539.1 408.5 535.2 412.1 530.5 412.9 528.1 416.3 527.5 419.6 524.1 421.8 523.9 422.8 521 424.7 519 427.5 519 433.2 516.2 434.9 514.7 435.7 514.6 435.5 515.7 438.4 518.3 442.7 516.6 443.5 517.3 453.4 515 453.9 514.2 453.1 513.6 453 512.3 453.9 511.7 456.5 506 458.9 503.4 460.6 498.7 463 496.3 468.5 494.1 471.4 491.7 471.9 490.2 474.6 488.3 475 482.8 471.7 477.4 467.4 474.1 465.6 470 465.5 467.4 462.7 461.1 463.1 458 462.2 455.1 464.9 452.4 465.3 451 464.7 448.5 467.5 443.9 467.6 440.2 466.8 438.5 469.7 435.9 469.5 433.8 472.3 430.2 476 427.9 478.2 423.3 478.9 416.4 476.8 409.6 474.7 406.8 475.4 397.9 474.3 393.6 472.2 390 473.2 388.4 479.4 385.8 480.9 376 483 371.5 483 369.9 480.1 370.2 477.6 371.8 470.4 373.3 460.5 373.7 458.8 369.7 457.7 368.7 456.6 365.4 453.3 363.7 450.5 359.1 449.4 358.6 448.5 359 447.6 358 445 357.3 441.7 358.2 438.2 362 436.2 363 434.8 367.8 433.4 368.5 427 359.3 424.1 350.7 420 344.8 417.2 344.9 416 345.9 415.1 344.1 410.3 342.6 403.9 335.3 395.4 322.3 397.2 314.6 394.2 313.6 390.4 314.1 388.7 309.7 389.5 307.7 389.3 304.5 391.6 299.5 388.5 298.6 386.7 296.8 383.6 296 377.3 298.3 373.5 298 369.1 296.5 366.4 297.8 364.5 292.4 364.4 289.8 362 286.8 359.9 285.7 359.8 282.8 360.5 281.3 359.1 279.2 358.6 277.2 355.4 272.5 351.8 271.1 347.4 266.5 344.7 265.4 340 259 338.7 253.7 336.7 250.4 333.6 247.9 332.9 246.4 330.4 246.8 327.5 248.7 327.4 246.8 328.5 243.9 331.7 242.7 334.1 240.5 337.8 232.2 337.9 229.3 335 227.2 334.3 223.5 332.7 219.6 334 210.9 334.2 203.7 333 196.2 337.5 180.6 334.4 180.1 333.4 178.3 333.2 175.8 331.1 173.9 329.2 173.8 324.9 178 323.9 178 319.6 174.1 315.6 168.5 313.6 166.6 314 165.3 311.5 164.3 307.7 164.2 304.6 162.4 302.8 159.9 301.6 159.6 300.5 157.5 299.8 152 307.1 146.4 310.2 141.4 306.8 136.5 305.2 135.6 303.5 135.5 297.4 129.5 300.3 128.1 301 126.6 302.9 125.2 304.3 122.2 305.2 116.4 308 112.6 310.5 107.3 315.7 102.9 316.5 101.4 317.7 103 318.3 106 320.4 107 321.5 104.8 323.7 103.2 322.9 100.3 323.3 98.1 326.8 97.2 327.1 96.5 326.4 95.1 324.1 93.7 323.4 90.2 321.1 88.4 320.9 84.5 322.1 79.9 321.6 76.2 318.9 71.9 317.4 68.1 317.8 65.1 317.4 61.7 314 55.2 313.6 51.4 311.8 51.3 308.9 53 308 52.8 306.8 50.9 305.8 52 302.4 53.1 301 51.4 298.6 52 297.6 49.8 298.5 48.1 297.7 47 298.3 45.7 297.4 41.4 294.4 41 291.3 43.2 289.7 42.7 284.2 44.9 276.5 50.5 275.1 53.2 272.6 55.5 269.8 56.5 265.9 59.4 263.7 63.2 258.2 67.2 256.8 70.1 255.3 71.7 255.1 73.2 252.2 76.6 246.4 75 239.9 65.8 239 63.1 239.6 56.6 239.2 53.1 231.4 52.8 225.6 51.2 224.1 51.9 224.5 54 220.7 51.5 217.6 52.1 215.8 53.3 213.3 53.4 213 56.6 210.8 58.7 211 59.7 209.1 64.1 208.2 71.1 206.5 73.1 202.9 75.1 201.7 78.3 202.6 80.8 201.2 81.8 199.5 85.2 197.5 87.6 197.1 90.9 189.1 94.3 186 94.2 184.2 92.8 176.7 95.1 172.9 93.1 170.8 94.5 167.3 94.6 167.9 89.8 164.6 83.6 160.7 85.5 159.3 85 156.6 85.5 154.9 85.1 153.1 82.2 149.9 83.2 148.6 84.3 146.4 83.6 145 82.1 141 82 140.6 80.9 141.5 77.8 140.6 72.6 142.7 70.7 142.6 70.1 140.6 69.2 137.9 69.7 135.2 67 139.3 61.5 139.8 59.8 139 57.3 138.2 48.2 138.1 44.8 138.8 43.1 136.7 41.3 136.1 39.7 141 33.6 141.7 31.3 138.3 30.4 135.6 30.5 133.3 28 131.9 29.3 129.3 29.6 128.1 30.4 124.3 30.3 121.5 28.1 118.5 27 116.3 24Z"/><text class="docg-l" x="56.6" y="91.3" text-anchor="middle">키안티 클라시코 DOCG 경계</text></g><g class="m-l"><text class="lb lb-town" x="177.7" y="21.3" text-anchor="middle">피렌체 ↑</text><text class="lb lb-town" x="260.9" y="568.4" text-anchor="middle">시에나</text></g><g class="m-p"><g class="pin pin-uga" data-k="uga-sancasciano" tabindex="0" data-tip="UGA 산 카시아노"><circle class="pd" cx="112.2" cy="95.4" r="3.0"/><text class="pl" x="118.2" y="98.9" text-anchor="start">산 카시아노</text></g><g class="pin pin-uga" data-k="uga-greve" tabindex="0" data-tip="UGA 그레베"><circle class="pd" cx="245.8" cy="195.7" r="3.0"/><text class="pl" x="251.8" y="199.2" text-anchor="start">그레베</text></g><g class="pin pin-uga" data-k="uga-montefioralle" tabindex="0" data-tip="UGA 몬테피오랄레"><circle class="pd" cx="228.6" cy="194.4" r="3.0"/><text class="pl" x="222.6" y="197.9" text-anchor="end">몬테피오랄레</text></g><g class="pin pin-uga" data-k="uga-lamole" tabindex="0" data-tip="UGA 라몰레"><circle class="pd" cx="281.3" cy="241.7" r="3.0"/><text class="pl" x="287.3" y="245.2" text-anchor="start">라몰레</text></g><g class="pin pin-uga" data-k="uga-panzano" tabindex="0" data-tip="UGA 판차노"><circle class="pd" cx="243.9" cy="251.6" r="3.0"/><text class="pl" x="237.9" y="255.1" text-anchor="end">판차노</text></g><g class="pin pin-uga" data-k="uga-sandonato" tabindex="0" data-tip="UGA 산 도나토 인 포조"><circle class="pd" cx="160.9" cy="268.5" r="3.0"/><text class="pl" x="154.9" y="272" text-anchor="end">산 도나토 인 포조</text></g><g class="pin pin-uga" data-k="uga-castellina" tabindex="0" data-tip="UGA 카스텔리나"><circle class="pd" cx="215.8" cy="354.9" r="3.0"/><text class="pl" x="221.8" y="358.4" text-anchor="start">카스텔리나</text></g><g class="pin pin-uga" data-k="uga-radda" tabindex="0" data-tip="UGA 라다"><circle class="pd" cx="302.8" cy="333.8" r="3.0"/><text class="pl" x="308.8" y="337.3" text-anchor="start">라다</text></g><g class="pin pin-uga" data-k="uga-gaiole" tabindex="0" data-tip="UGA 가이올레"><circle class="pd" cx="365.7" cy="360" r="3.0"/><text class="pl" x="371.7" y="363.5" text-anchor="start">가이올레</text></g><g class="pin pin-uga" data-k="uga-vagliagli" tabindex="0" data-tip="UGA 발랄리"><circle class="pd" cx="302.2" cy="456.6" r="3.0"/><text class="pl" x="308.2" y="460.1" text-anchor="start">발랄리</text></g><g class="pin pin-uga" data-k="uga-castelnuovo" tabindex="0" data-tip="UGA 카스텔누오보 베라르덴가"><circle class="pd" cx="434.4" cy="528.7" r="3.0"/><text class="pl" x="428.4" y="532.2" text-anchor="end">카스텔누오보 베라르덴가</text></g><g class="pin pin-ch pin-prod" data-k="p-tignanello" tabindex="0" data-tip="안티노리 티냐넬로"><circle class="pd" cx="171.9" cy="149.8" r="3.2"/><text class="pl" x="165.9" y="153.3" text-anchor="end">안티노리 티냐넬로</text></g><g class="pin pin-ch pin-prod" data-k="p-fontodi" tabindex="0" data-tip="폰토디"><circle class="pd" cx="251.5" cy="249.4" r="3.2"/><text class="pl" x="251.5" y="242.4" text-anchor="middle">폰토디</text></g><g class="pin pin-ch pin-prod" data-k="p-rampolla" tabindex="0" data-tip="카스텔로 데이 람폴라"><circle class="pd" cx="228.7" cy="267" r="3.2"/><text class="pl" x="234.7" y="270.5" text-anchor="start">카스텔로 데이 람폴라</text></g><g class="pin pin-ch pin-prod" data-k="p-querciabella" tabindex="0" data-tip="퀘르치아벨라"><circle class="pd" cx="267.1" cy="222.2" r="3.2"/><text class="pl" x="273.1" y="225.7" text-anchor="start">퀘르치아벨라</text></g><g class="pin pin-ch pin-prod" data-k="p-isole" tabindex="0" data-tip="이솔레 에 올레나"><circle class="pd" cx="170.1" cy="285.9" r="3.2"/><text class="pl" x="164.1" y="289.4" text-anchor="end">이솔레 에 올레나</text></g><g class="pin pin-ch pin-prod" data-k="p-montevertine" tabindex="0" data-tip="몬테베르티네"><circle class="pd" cx="287.6" cy="321.2" r="3.2"/><text class="pl" x="281.6" y="324.7" text-anchor="end">몬테베르티네</text></g><g class="pin pin-ch pin-prod" data-k="p-volpaia" tabindex="0" data-tip="카스텔로 디 볼파이아"><circle class="pd" cx="323" cy="296" r="3.2"/><text class="pl" x="329" y="299.5" text-anchor="start">카스텔로 디 볼파이아</text></g><g class="pin pin-ch pin-prod" data-k="p-coltibuono" tabindex="0" data-tip="바디아 아 콜티부오노"><circle class="pd" cx="390.9" cy="329.2" r="3.2"/><text class="pl" x="396.9" y="332.7" text-anchor="start">바디아 아 콜티부오노</text></g><g class="pin pin-ch pin-prod" data-k="p-ama" tabindex="0" data-tip="카스텔로 디 아마"><circle class="pd" cx="356.9" cy="428.5" r="3.2"/><text class="pl" x="350.9" y="432" text-anchor="end">카스텔로 디 아마</text></g><g class="pin pin-ch pin-prod" data-k="p-brolio" tabindex="0" data-tip="브롤리오(리카솔리)"><circle class="pd" cx="390.4" cy="431.1" r="3.2"/><text class="pl" x="396.4" y="434.6" text-anchor="start">브롤리오(리카솔리)</text></g><g class="pin pin-ch pin-prod" data-k="p-rentennano" tabindex="0" data-tip="산 주스토 아 렌텐나노"><circle class="pd" cx="398" cy="447.7" r="3.2"/><text class="pl" x="404" y="451.2" text-anchor="start">산 주스토 아 렌텐나노</text></g><g class="pin pin-ch pin-prod" data-k="p-felsina" tabindex="0" data-tip="펠시나"><circle class="pd" cx="437.5" cy="523.1" r="3.2"/><text class="pl" x="443.5" y="526.6" text-anchor="start">펠시나</text></g></g><g class="m-sc"><g class="sc"><path d="M12 582V586H74.8V582"/><text x="79.8" y="587">5 km</text></g><g class="na"><path d="M502 10l5 13-5-3.4-5 3.4z"/><text x="502" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--t-r3)"></i>전체가 키안티 클라시코인 코무네</span><span><i style="background:var(--t-r2)"></i>일부가 키안티 클라시코</span><span><i class="dot" style="background:var(--t-g3)"></i>UGA 중심 마을</span><span><i class="dot"></i>생산자(대략적 위치)</span><span><i class="dash"></i>DOCG 경계</span></div>
+    </div>
+    <div class="mapinfo" id="cc-info" aria-live="polite"></div>
+  </div>
+</div>
+<div class="try"><b>해볼 것</b><ul>
+  <li>북쪽 끝의 ‘산 카시아노’와 남쪽 끝의 ‘카스텔누오보 베라르덴가’를 차례로 눌러 보세요. 같은 키안티 클라시코라도 해발고도와 토양이 다르면 와인의 무게가 달라집니다.</li>
+  <li>‘몬테베르티네’를 누르면 키안티 클라시코 규정에서 스스로 나온 생산자의 이야기가 나옵니다. 슈퍼 투스칸이 왜 생겼는지 짐작할 수 있습니다.</li>
+</ul></div>
+
+<h2>슈퍼 투스칸과 볼게리</h2>
+<p>1970년대까지 키안티 규정은 청포도를 섞도록 강제했고, 카베르네 소비뇽 같은 국제 품종은 허용하지 않았습니다. 규정을 따르면 좋은 와인을 만들 수 없다고 생각한 생산자들은 가장 낮은 등급인 ‘비노 다 타볼라(테이블 와인)’를 감수하고 자기 방식대로 와인을 만들었습니다. 이것이 ‘슈퍼 투스칸’입니다. 출발점은 해안의 볼게리였습니다. 마리오 인치사 델라 로케타 후작이 1940년대에 심은 카베르네 소비뇽으로 만든 사시카이아가 1968년 빈티지부터 시장에 나왔고, 1978년 런던에서 열린 카베르네 블라인드 시음에서 1972년 빈티지가 세계의 카베르네를 제치면서 이름이 알려졌습니다. 키안티에서는 안티노리가 1971년 빈티지 티냐넬로를 청포도 없이 만들어 바리크에서 숙성했고, 1975년 빈티지부터는 카베르네를 섞었습니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 190" role="img" aria-label="슈퍼 투스칸 연표">
+      <g id="st-time"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 9-3.</b> 슈퍼 투스칸 연표. 규정 밖에서 시작한 와인들이 나중에 새 규정(IGT 토스카나, 볼게리 DOC, 볼게리 사시카이아 DOC)을 만들어 냈다. 점 사이 간격은 시간에 비례하지 않는다.</figcaption>
+</figure>
+
+<p>볼게리는 티레니아해에서 내륙 구릉까지 몇 킬로미터밖에 되지 않는 좁은 띠입니다. 바다의 바람이 더위를 식히고, 해안 평지의 모래·자갈 충적토에서 구릉 아래의 점토·석회까지 토양이 다양합니다. 와이너리 대부분이 볼게리 마을과 카스타녜토 카르두치 마을을 잇는 구릉 아래 길을 따라 늘어서 있습니다.</p>
+
+<div class="mapwrap wide" id="bo">
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-bo" viewBox="0 0 480 418" role="group" aria-label="볼게리 와이너리 지도"><g class="m-bg"><rect class="w" x="0" y="0" width="480" height="418"/><path class="b" d="M393 45.4 382.9 46.3 378.8 56.3 384 67.5 387.6 79.4 388.5 84.5 385.1 93.6 382.6 96.4 373.2 100.2 370.8 100.5 370.9 97.6 368.9 83.9 366.8 82 356.9 82.1 354.7 83.3 343.3 84.6 329.3 79.5 324 73.9 323.5 72.5 325.4 70.6 328.8 70.9 333.2 69.4 335.7 67.1 343.9 45 322.1 43.6 304.6 50.8 270.7 56.4 225.6 60 156.4 67.9 99.7 76.4 51.8 92 40.4 95 35.3 67.4 30.7 48.8 24.3 25.8 13.8 -5 381 -5 381.6 17.3 388.5 37ZM292.6 423 295.7 411.8 294.6 397.7 298.4 369.2 311.4 349.1 336 338.6 343.9 331 346.5 324.6 347.3 320.1 346.5 318.4 339.5 311.5 335.8 302.3 335.9 298.4 354.1 293.6 359.9 292.9 367.5 293.6 370.2 295.3 374.4 344.8 367.5 364.4 363.9 370.3 363.9 371.9 369.4 385.4 372.9 388.5 377.4 390.9 394.9 396 398.2 396.2 400.9 395.5 416 394.6 432.9 395.9 441.6 423ZM393 45.4 388.5 37 381.6 17.3 381 -5 485 -5 485 62.8 427.7 46.6ZM370.8 100.5 373.2 100.2 383.9 95.5 388.3 85.5 387.6 79.4 384 67.5 378.8 56.3 382.9 46.3 393 45.4 427.7 46.6 485 62.8 485 423 441.6 423 432.9 395.9 416 394.6 400.9 395.5 398.2 396.2 394.9 396 377.4 390.9 372.9 388.5 370.3 386.3 368.8 384.3 363.9 371.9 363.9 370.3 367.5 364.4 374.4 344.8 370.2 295.3 367.5 293.6 359.9 292.9 354.1 293.6 335.9 298.4 334 294.9 331.6 261.2 325.6 249.1 321.6 233.5 323 230.6 325.3 229.3 349.3 222.4 367.8 218.4 383.3 220.8 399.1 224.9 415 214.6 430.7 192.8 437.6 175.1 437.6 171.4 431 138.3 435.3 131.1 438 123.9 438.2 123 437.5 122.1 412.3 120.5 404 123.3 399.6 126.2 390.7 129.4 389.2 129.3 387.3 128.4 372 114 369.4 109.8 368.5 105 368.9 102.7Z"/></g><g class="m-u"><path class="u t-r1" data-k="bolgheri" data-n="Castagneto Carducci (Bolgheri DOC)" d="M40.4 95 51.8 92 99.7 76.4 156.4 67.9 225.6 60 270.7 56.4 304.6 50.8 322.1 43.6 343.9 45 335.7 67.1 334 68.9 331.4 70.3 328.8 70.9 325.4 70.6 323.5 72.5 324 73.9 329.3 79.5 343.3 84.6 354.7 83.3 356.9 82.1 365.2 81.7 368.2 82.8 368.9 83.9 370.9 97.6 370.8 100.5 368.4 104 369.4 109.8 373.2 115.4 387.3 128.4 389.2 129.3 390.7 129.4 399.6 126.2 404 123.3 412.3 120.5 437.5 122.1 438.2 123 438 123.9 435.3 131.1 431 138.3 437.6 171.4 437.6 175.1 430.7 192.8 415 214.6 399.1 224.9 383.3 220.8 367.8 218.4 349.3 222.4 325.3 229.3 323 230.6 321.6 233.5 325.6 249.1 331.6 261.2 334 294.9 335.9 298.4 335.8 302.3 339.5 311.5 346.5 318.4 347.3 320.1 347.3 321.5 343.9 331 337.5 337.4 323 344.5 311.4 349.1 298.4 369.2 294.6 397.7 295.7 411.8 292.6 423 66.7 423 66.4 363.4 64.6 311.5 62 273.5 54.3 193.9 46.6 134Z"/></g><g class="m-o"><path class="cypress" d="M115 53.7L249.2 99.6"/></g><g class="m-l"><text class="lb lb-note" x="182.1" y="71.6" text-anchor="middle" transform="rotate(18.9 182.1 76.6)">사이프러스 길</text><text class="lb lb-water" x="55.8" y="302.1" text-anchor="middle">티레니아해</text><text class="lb lb-bank lb-note" x="177.9" y="383.6" text-anchor="middle">카스타녜토 카르두치 코무네</text><text class="lb lb-bank lb-note" x="399.8" y="152.9" text-anchor="middle">구릉 →</text></g><g class="m-p"><g class="pin pin-town" data-k="t-bolgheri" tabindex="0" data-tip="볼게리 마을"><circle class="pd" cx="249.2" cy="99.6" r="2.8"/><text class="pl" x="255.2" y="103.1" text-anchor="start">볼게리 마을</text></g><g class="pin pin-town" data-k="t-castagneto" tabindex="0" data-tip="카스타녜토 카르두치"><circle class="pd" cx="238" cy="334.2" r="2.8"/><text class="pl" x="244" y="337.7" text-anchor="start">카스타녜토 카르두치</text></g><g class="pin pin-town" data-k="t-donoratico" tabindex="0" data-tip="도노라티코"><circle class="pd" cx="146.4" cy="322.9" r="2.8"/><text class="pl" x="140.4" y="326.4" text-anchor="end">도노라티코</text></g><g class="pin pin-town" data-k="t-sanguido" tabindex="0" data-tip="산 귀도"><circle class="pd" cx="115" cy="53.7" r="2.8"/><text class="pl" x="109" y="57.2" text-anchor="end">산 귀도</text></g><g class="pin pin-ch pin-prod" data-k="b-sanguido" tabindex="0" data-tip="테누타 산 귀도(사시카이아)"><circle class="pd" cx="184.6" cy="91.1" r="3.4"/><text class="pl" x="178.6" y="94.6" text-anchor="end">테누타 산 귀도(사시카이아)</text></g><g class="pin pin-ch pin-prod" data-k="b-guado" tabindex="0" data-tip="과도 알 타소(안티노리)"><circle class="pd" cx="179.2" cy="175.1" r="3.4"/><text class="pl" x="173.2" y="178.6" text-anchor="end">과도 알 타소(안티노리)</text></g><g class="pin pin-ch pin-prod" data-k="b-macchiole" tabindex="0" data-tip="레 마키올레"><circle class="pd" cx="238" cy="168.8" r="3.4"/><text class="pl" x="244" y="172.3" text-anchor="start">레 마키올레</text></g><g class="pin pin-ch pin-prod" data-k="b-ornellaia" tabindex="0" data-tip="오르넬라이아"><circle class="pd" cx="226.8" cy="199" r="3.4"/><text class="pl" x="220.8" y="202.5" text-anchor="end">오르넬라이아</text></g><g class="pin pin-ch pin-prod" data-k="b-masseto" tabindex="0" data-tip="마세토"><circle class="pd" cx="246.3" cy="214.2" r="3.4"/><text class="pl" x="252.3" y="217.7" text-anchor="start">마세토</text></g><g class="pin pin-ch pin-prod" data-k="b-grattamacco" tabindex="0" data-tip="그라타마코"><circle class="pd" cx="308.7" cy="243.1" r="3.4"/><text class="pl" x="314.7" y="246.6" text-anchor="start">그라타마코</text></g><g class="pin pin-ch pin-prod" data-k="b-satta" tabindex="0" data-tip="미켈레 사타"><circle class="pd" cx="217.8" cy="269.5" r="3.4"/><text class="pl" x="211.8" y="273" text-anchor="end">미켈레 사타</text></g><g class="pin pin-ch pin-prod" data-k="b-camarcanda" tabindex="0" data-tip="카 마르칸다(가야)"><circle class="pd" cx="198" cy="309.7" r="3.4"/><text class="pl" x="192" y="313.2" text-anchor="end">카 마르칸다(가야)</text></g></g><g class="m-sc"><g class="sc"><path d="M12 400V404H72.5V400"/><text x="77.5" y="405">2 km</text></g><g class="na"><path d="M462 10l5 13-5-3.4-5 3.4z"/><text x="462" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--t-r1)"></i>카스타녜토 카르두치 코무네(볼게리 DOC 지역)</span><span><i class="dot"></i>와이너리(대략적 위치, ±1 km)</span><span><i class="dot" style="background:var(--muted)"></i>마을</span><span><i class="dash" style="border-color:var(--good)"></i>사이프러스 길</span></div>
+    </div>
+    <div class="mapinfo" id="bo-info" aria-live="polite"></div>
+  </div>
+</div>
+
+<h2>브루넬로 디 몬탈치노</h2>
+<p>몬탈치노는 해발 560 m 남짓한 언덕 위의 중세 마을입니다. 19세기 말 비온디산티 가문의 페루초 비온디산티가 이 지역의 산지오베제 가운데 알이 굵은 계통(브루넬로)을 골라 오래 숙성하는 와인을 만들었고, 이것이 브루넬로 디 몬탈치노의 시작이 됐습니다. 1980년 이탈리아에서 처음으로 DOCG 지위를 받은 와인 가운데 하나입니다.</p>
+<ul>
+  <li><b>규정</b>: 산지오베제 100%. 수확 후 5년째 1월 1일부터 출시하며 오크통 숙성 2년 이상, 리제르바는 6년째 1월 1일부터. 같은 밭에서 일찍 내놓는 ‘로소 디 몬탈치노’도 있다.</li>
+  <li><b>북쪽</b>: 서늘하고 갈레스트로가 많아 향기롭고 산도가 높은, 우아한 스타일. 몬토솔리 언덕이 유명하다.</li>
+  <li><b>남쪽</b>: 해안에서 올라오는 따뜻한 바람을 받아 더 잘 익고 풍만하다. 카스텔누오보 델라바테와 산탄젤로 인 콜레가 중심이다. 남동쪽의 아미아타산이 폭풍과 우박을 막아 준다.</li>
+</ul>
+
+<div class="mapwrap wide" id="mo">
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-mo" viewBox="0 0 600 540" role="group" aria-label="몬탈치노 지도"><g class="m-bg"><path class="b" d="M389.7 -5 392.1 -0.6 396 20.3 402.3 39.5 403.4 41.4 403.4 48.4 398.6 57.5 373.8 73.9 359.4 71.8 327 65.3 303 73.3 289.4 71.7 264.2 65.2 257.6 56.9 256.7 54.8 255.6 54.6 252.3 56.4 242.6 66.2 241.9 68.3 243.5 73.7 248.1 81 248.1 82.9 246.1 85.2 239.4 89.8 236.8 90.1 235.6 89.7 220.2 70.6 209.2 80.4 194.8 82.7 192.9 82.3 192 81.1 191.5 78.3 192.2 73.6 193.4 70.7 188.3 66.4 157.2 56.2 153.8 57 151.2 59.7 149.9 33.4 152.4 26.3 153.3 25.1 175.6 8.3 178.6 3.3 181.4 -5ZM605 545 593 545 588.1 534.9 580.2 512.4 573.3 499.7 571.2 499 566.8 499.2 562.2 500 558.8 501.4 553.2 502.1 545 501.3 529 481.3 521 468.3 495 448.1 489 447.7 428.6 466.8 424.8 466.1 413.2 462.3 405.8 458.8 403.9 455.5 408.6 439 413.3 440.4 431.8 439.8 440.1 437.2 447.1 431.1 457.9 411.7 462.4 402.2 461.3 390.1 459.2 381 457 375.8 454.8 367 455.7 357 462.7 345 456.2 312.9 455.3 289.6 456 281.6 464.3 258 469.5 247.5 470.9 246.4 482.6 248 483.2 249.3 485.5 250.4 501.5 256.1 510.7 256.8 514.1 256 532.4 265.1 536.4 276.6 546.8 296.9 553.1 302.5 566.2 309.7 569.7 310.1 571.9 309.5 579 305.3 600.7 290.4 605 285.7ZM-5 85.9 0 99.7 11.2 97.4 23.5 96.6 27.2 99.4 27.6 110.3 26.6 114.2 23.5 119.5 11.2 114.9 -5 125.1ZM181.4 -5 178.6 3.3 175.6 8.3 153.3 25.1 152.4 26.3 149.9 33.4 151.2 59.7 150 62.6 147.8 65.8 136.8 74.9 135.2 75.5 133.1 75.2 131.3 74.2 129.4 70.4 119.6 76.8 109 96.1 100.1 119.6 95.9 128 74.8 143.7 73.3 140.9 69.8 137.9 60.9 140.2 59.1 141.8 58.4 143.5 44.6 140.1 26.2 127.6 23.5 119.5 26.2 115.6 27.6 110.3 27.2 99.4 23.5 96.6 11.2 97.4 0 99.7 -5 85.9 -5 -5ZM605 112.2 599.9 109.2 587.4 113.1 583.9 115.2 582.9 117.2 572.9 119 557.3 109.5 537.5 84.6 535.5 80.4 533 78.1 525.6 78.7 524.6 79.2 516 76.4 509.1 63.9 520.7 43.2 545 40.2 562.3 40.6 581.4 36.8 595.7 22.8 605 10.9 605 4.4 602.4 -2.2 605 -4ZM605 285.7 600.7 290.4 579 305.3 571.9 309.5 569.7 310.1 566.2 309.7 553.1 302.5 546.8 296.9 536.4 276.6 532.4 265.1 514.1 256 510.7 256.8 501.5 256.1 483.2 249.3 481.5 238.4 473.2 227 460.7 225.4 455.7 215.5 454.9 212.7 456.1 205.6 459.6 194.8 469.3 167.4 474.3 159.5 505.2 140.8 511.5 140.8 516.7 145 521.8 144.9 529.3 131.9 530.4 128 530.1 124.6 527.9 115.8 526.5 113.6 525.3 112.5 517 110.4 510.7 112.1 502.2 108 503 104 506.8 101.5 524.3 94 528.9 94.2 528.5 84.8 525.1 79.2 525.6 78.7 533 78.1 535.5 80.4 537.5 84.6 557.3 109.5 572.9 119 582.9 117.2 583.9 115.2 587.4 113.1 599.9 109.2 605 112.2ZM605 -5 605 -4 602.4 -2.2 605 4.4 605 10.9 595.7 22.8 581.4 36.8 562.3 40.6 545 40.2 520.7 43.2 509.1 63.9 516 76.4 520.7 78.3 525.1 79.2 528.5 84.8 528.9 94.2 524.3 94 506.8 101.5 503 104 502.2 108 510.7 112.1 517 110.4 525.3 112.5 526.5 113.6 527.9 115.8 530.1 124.6 530.4 128 529.3 131.9 521.8 144.9 516.7 145 511.5 140.8 505.2 140.8 474.3 159.5 469.3 167.4 456.1 205.6 454.9 212.7 455.7 215.5 460.7 225.4 473.2 227 481.5 238.4 482.6 248 470.9 246.4 469.5 247.5 464.3 258 456 281.6 455.3 289.6 456.2 312.9 462.7 345 456 356 454.9 362.5 454.8 367 457 375.8 459.2 381 461.3 390.1 462.4 402.2 457.9 411.7 447.1 431.1 440.1 437.2 431.8 439.8 413.3 440.4 410.7 440 408.6 439 407.7 435.8 405.8 433.5 389.4 419.3 386.4 418.4 381.1 418.5 366 423.5 345.4 434.2 338.2 442.9 336.2 451.6 333.6 457.7 328.8 463.1 324.7 466 321.7 467.2 304.4 470.1 258.1 482 254.1 476.1 248.1 473.9 244.6 473.5 228.8 480.5 220.8 480.9 203 480.2 194.2 479 179.5 478.1 124.6 468 100 460.4 72.8 457.9 63.9 457.7 60 456.5 53.5 452.8 48.4 445.2 55.2 437.5 71.2 427.5 73.3 428.5 81.2 431.7 86 430.8 97.6 427 99.5 425.1 103.1 411.3 102.4 407.9 100.8 406.5 97.2 405.8 92.6 405.8 87 403.4 85.1 402 81.6 397.4 80.8 395.4 78.1 386.4 78.3 382.8 79.6 381.7 82.9 381 93.4 387.8 96.5 387.9 103 385.8 108.2 380.9 109.1 378.5 106.2 372.7 82.1 349.9 78.9 351 75.2 351.4 73.4 351 71.3 348.6 69.7 340.2 71.3 324.7 74.2 309.3 60.9 295.5 57.5 286.5 69.7 272 59 260 61.2 253.7 74 235.4 77.5 218.1 78.6 199.5 75.7 179.3 75.5 154.3 74.8 143.7 95.9 128 100.1 119.6 109 96.1 119.6 76.8 129.4 70.4 131.3 74.2 133.1 75.2 135.2 75.5 136.8 74.9 147.8 65.8 150 62.6 151.2 59.7 153.8 57 157.2 56.2 188.3 66.4 193.4 70.7 192.2 73.6 191.5 78.3 192 81.1 192.9 82.3 194.8 82.7 209.2 80.4 220.2 70.6 234.7 89 238.1 90.2 239.4 89.8 247.1 84.4 248.1 82.9 248.1 81 244.8 76 242.4 70.7 241.9 68.3 242.6 66.2 252.3 56.4 255.6 54.6 256.7 54.8 257.6 56.9 264.2 65.2 289.4 71.7 303 73.3 327 65.3 359.4 71.8 373.8 73.9 398.6 57.5 403.4 48.4 403.4 41.4 402.3 39.5 396 20.3 392.1 -0.6 389.7 -5ZM226.4 545 226.9 544.2 218 532 203.7 518.3 197.8 515.2 192.1 501.1 194.2 479 203 480.2 220.8 480.9 228.8 480.5 244.6 473.5 248.1 473.9 254.1 476.1 258.1 482 304.4 470.1 323.5 466.6 326.5 465 331.9 459.9 334.6 455.8 336.5 450.4 338.2 442.9 345.4 434.2 366 423.5 381.1 418.5 386.4 418.4 389.4 419.3 400.6 428.7 407.7 435.8 408.6 439 403.9 455.5 405.4 463.1 394.5 502.7 392.5 534.6 390.2 540.7 390 545ZM48.4 445.2 53.5 452.8 60 456.5 63.9 457.7 72.8 457.9 100 460.4 124.6 468 179.5 478.1 194.2 479 192.1 501.1 197.8 515.2 203.7 518.3 218 532 226.9 544.2 226.4 545 -0.6 545 20.1 536.5 36.9 526.7 48.8 506.8 49.6 503.8 41.1 487.2 32.6 477.2 31.2 473 31.9 467.1 34.3 458.6 37.9 452.3 41.3 448.7ZM-5 545 -5 125.1 11.2 114.9 23.5 119.5 26.2 127.6 44.6 140.1 58.4 143.5 59.1 141.8 60.9 140.2 69.8 137.9 73.3 140.9 74.8 143.7 75.5 154.3 75.7 179.3 78.6 199.5 77.5 218.1 74 235.4 61.2 253.7 59 260 69.7 272 57.5 286.5 60.9 295.5 74.2 309.3 71.3 324.7 69.7 340.2 71.3 348.6 73.4 351 75.2 351.4 78.9 351 82.1 349.9 106.2 372.7 109.1 378.5 108.2 380.9 103 385.8 96.5 387.9 93.4 387.8 82.9 381 78.9 382.1 77.9 383.8 78.1 386.4 81.6 397.4 85.1 402 87 403.4 92.6 405.8 100.1 406.3 102.4 407.9 103.1 411.3 99 425.9 97.6 427 89.7 429.7 81.2 431.7 71.2 427.5 55.2 437.5 48.4 445.2 41.3 448.7 37.2 453.2 34.3 458.6 31.9 467.1 31.3 471.9 31.6 474.9 34.5 479.9 39.4 484.6 42.1 488.7 49.6 503.8 48.8 506.8 36.9 526.7 20.1 536.5 -0.6 545ZM390 545 390.2 540.7 392.5 534.6 394.5 502.7 405.4 463.1 403.9 455.5 405.8 458.8 413.2 462.3 424.8 466.1 428.6 466.8 490.5 447.5 495 448.1 521 468.3 529 481.3 545 501.3 553.2 502.1 558.8 501.4 562.2 500 566.8 499.2 571.2 499 573.3 499.7 580.2 512.4 588.1 534.9 593 545Z"/></g><g class="m-u"><path class="u t-r1" data-k="brunello" data-n="Brunello di Montalcino DOCG" d="M48.4 445.3 53.5 452.8 63.7 457.7 93.6 455.7 113.5 468.6 140.2 466.9 171.5 478.3 194.1 479 209.9 478.1 226.5 482.4 245.5 474 264.1 485 277.7 480.1 292.9 465.3 295.3 465.5 304.3 470.1 321.7 467.2 333.6 457.7 338.3 443.1 346 433.8 348.1 433 357.9 433 360.8 426.5 362.6 424.4 380.3 418.8 391.1 420.8 408.6 439 437.3 438.9 448.5 429.9 451 418.1 462.1 401.6 455.4 366.4 459.2 348.4 467.6 336.8 464.2 329.7 459.5 327.9 458.2 326.6 454.8 313.9 455.1 309.5 460.3 300.8 455.3 292.5 456.2 276.9 458.9 272.2 465.9 270.6 464.6 258.1 469.4 248.5 471.7 247.6 483 248 480.3 233.1 482.5 220.1 480.6 218 474.7 225.2 472.6 226.5 465.9 224.8 463.6 225.2 462.2 224.6 460.2 221.5 456.7 208 456.7 204.4 461.4 193.3 469.2 185.9 473.7 162.9 475.4 159.7 486.1 156.3 490.9 148.8 493 147 500.9 148.5 506.4 141 508.6 140 511.9 140 513.3 140.6 524.9 153.6 522.6 139 523.6 136.2 529.6 126.4 527.4 116 505.7 109 503.7 107.5 502.6 104.6 502.6 91.6 496.6 79.2 489.9 81.7 489.2 84.7 487.9 86.3 481.9 89.1 480.7 91.1 478.4 92.2 472.2 90.7 462.9 82.4 447.5 87.5 445.3 86.1 442.5 80.8 434.6 77.9 428.7 80.9 425 88.2 423 90.2 399.5 94.3 396.9 92.8 383.8 75.5 380.6 78.4 378.4 78.9 372 76.1 363.2 73.3 361.4 71.1 360.8 68.5 350.6 71 349.2 70.3 347.5 67.8 342.6 69.2 337.2 66 329.6 68.5 328.2 68 325.2 65 314.4 65.3 309.6 69.8 302.9 68.8 302.7 71 301.3 73.5 299.5 74.6 297.7 74.7 262.6 64.7 255.6 54.7 241.9 68.4 246.2 78.8 246.2 82.1 244.1 85.5 237.8 89 236.1 88.6 234.8 87.3 222.1 69.2 210 80.1 196.2 82.4 193.5 80.5 192.5 76.5 196.4 64.4 183.4 66.8 157.2 56.3 151 59.9 136.7 74.6 133.1 74.5 131.5 73.8 126.7 65.5 118.8 71.4 121.6 83.8 121.2 87 120.2 88.7 118 89.9 109.9 88.8 109.3 97.6 108.6 100.5 99.6 108.6 99.8 122 98.8 125.8 96.9 127.5 91.4 128.3 74.8 143.8 73.9 163.7 78.5 167.9 79.3 171.8 72.2 192.5 80.9 209 81.6 213.3 80.5 216.2 78.3 217.7 65.5 217.2 65.5 223.2 73.6 236.2 73.8 239.4 72.6 245.5 70.2 250.5 69 251.7 55.2 256.5 71.3 273.4 72.3 276.3 72.2 278.5 70.9 281.3 64.3 286 53.2 286.8 51.1 293.2 66 296.6 73.5 306.7 73.7 309.9 69.2 338.7 71.8 349.4 78.8 351.1 89.4 344.6 92.5 345.6 94.2 348.1 95.6 355.2 95.4 358.6 88.9 371.8 96.7 374.6 98.9 374.2 101.1 374.9 103 378.2 102.7 382.3 101 384.5 96.4 387.4 94.7 387.1 82.8 381.1 77.9 383.8 85 402 99.2 407 101.3 410.1 101.4 413.4 99.4 423.6 97.3 426.3 81.4 431.5 65 425.4Z"/></g><g class="m-o"><path class="docg" d="M48.4 445.3 53.5 452.8 63.7 457.7 93.6 455.7 113.5 468.6 140.2 466.9 171.5 478.3 194.1 479 209.9 478.1 226.5 482.4 245.5 474 264.1 485 277.7 480.1 292.9 465.3 295.3 465.5 304.3 470.1 321.7 467.2 333.6 457.7 338.3 443.1 346 433.8 348.1 433 357.9 433 360.8 426.5 362.6 424.4 380.3 418.8 391.1 420.8 408.6 439 437.3 438.9 448.5 429.9 451 418.1 462.1 401.6 455.4 366.4 459.2 348.4 467.6 336.8 464.2 329.7 459.5 327.9 458.2 326.6 454.8 313.9 455.1 309.5 460.3 300.8 455.3 292.5 456.2 276.9 458.9 272.2 465.9 270.6 464.6 258.1 469.4 248.5 471.7 247.6 483 248 480.3 233.1 482.5 220.1 480.6 218 474.7 225.2 472.6 226.5 465.9 224.8 463.6 225.2 462.2 224.6 460.2 221.5 456.7 208 456.7 204.4 461.4 193.3 469.2 185.9 473.7 162.9 475.4 159.7 486.1 156.3 490.9 148.8 493 147 500.9 148.5 506.4 141 508.6 140 511.9 140 513.3 140.6 524.9 153.6 522.6 139 523.6 136.2 529.6 126.4 527.4 116 505.7 109 503.7 107.5 502.6 104.6 502.6 91.6 496.6 79.2 489.9 81.7 489.2 84.7 487.9 86.3 481.9 89.1 480.7 91.1 478.4 92.2 472.2 90.7 462.9 82.4 447.5 87.5 445.3 86.1 442.5 80.8 434.6 77.9 428.7 80.9 425 88.2 423 90.2 399.5 94.3 396.9 92.8 383.8 75.5 380.6 78.4 378.4 78.9 372 76.1 363.2 73.3 361.4 71.1 360.8 68.5 350.6 71 349.2 70.3 347.5 67.8 342.6 69.2 337.2 66 329.6 68.5 328.2 68 325.2 65 314.4 65.3 309.6 69.8 302.9 68.8 302.7 71 301.3 73.5 299.5 74.6 297.7 74.7 262.6 64.7 255.6 54.7 241.9 68.4 246.2 78.8 246.2 82.1 244.1 85.5 237.8 89 236.1 88.6 234.8 87.3 222.1 69.2 210 80.1 196.2 82.4 193.5 80.5 192.5 76.5 196.4 64.4 183.4 66.8 157.2 56.3 151 59.9 136.7 74.6 133.1 74.5 131.5 73.8 126.7 65.5 118.8 71.4 121.6 83.8 121.2 87 120.2 88.7 118 89.9 109.9 88.8 109.3 97.6 108.6 100.5 99.6 108.6 99.8 122 98.8 125.8 96.9 127.5 91.4 128.3 74.8 143.8 73.9 163.7 78.5 167.9 79.3 171.8 72.2 192.5 80.9 209 81.6 213.3 80.5 216.2 78.3 217.7 65.5 217.2 65.5 223.2 73.6 236.2 73.8 239.4 72.6 245.5 70.2 250.5 69 251.7 55.2 256.5 71.3 273.4 72.3 276.3 72.2 278.5 70.9 281.3 64.3 286 53.2 286.8 51.1 293.2 66 296.6 73.5 306.7 73.7 309.9 69.2 338.7 71.8 349.4 78.8 351.1 89.4 344.6 92.5 345.6 94.2 348.1 95.6 355.2 95.4 358.6 88.9 371.8 96.7 374.6 98.9 374.2 101.1 374.9 103 378.2 102.7 382.3 101 384.5 96.4 387.4 94.7 387.1 82.8 381.1 77.9 383.8 85 402 99.2 407 101.3 410.1 101.4 413.4 99.4 423.6 97.3 426.3 81.4 431.5 65 425.4Z"/><text class="docg-l" x="96.8" y="30.7" text-anchor="middle">브루넬로 DOCG 경계</text></g><g class="m-l"><text class="lb lb-bank lb-note" x="157.5" y="96.8" text-anchor="middle">북쪽: 서늘하고 우아</text><text class="lb lb-bank lb-note" x="286.2" y="444.4" text-anchor="middle">남쪽: 따뜻하고 풍만</text><text class="lb lb-bank lb-note" x="492.7" y="509.6" text-anchor="middle">아미아타산 방향 ↘</text></g><g class="m-p"><g class="pin pin-town" data-k="h-montalcino" tabindex="0" data-tip="몬탈치노"><circle class="pd" cx="327.5" cy="206.6" r="2.6"/><text class="pl" x="327.5" y="199.6" text-anchor="middle">몬탈치노</text></g><g class="pin pin-town" data-k="h-torrenieri" tabindex="0" data-tip="토레니에리"><circle class="pd" cx="442.2" cy="125.9" r="2.6"/><text class="pl" x="448.2" y="129.4" text-anchor="start">토레니에리</text></g><g class="pin pin-town" data-k="h-castelnuovo" tabindex="0" data-tip="카스텔누오보 델라바테"><circle class="pd" cx="431.4" cy="382.9" r="2.6"/><text class="pl" x="425.4" y="386.4" text-anchor="end">카스텔누오보 델라바테</text></g><g class="pin pin-town" data-k="h-santangelo" tabindex="0" data-tip="산탄젤로 인 콜레"><circle class="pd" cx="191.1" cy="419.9" r="2.6"/><text class="pl" x="185.1" y="423.4" text-anchor="end">산탄젤로 인 콜레</text></g><g class="pin pin-town" data-k="h-camigliano" tabindex="0" data-tip="카밀리아노"><circle class="pd" cx="128.1" cy="334.5" r="2.6"/><text class="pl" x="122.1" y="338" text-anchor="end">카밀리아노</text></g><g class="pin pin-town" data-k="h-montosoli" tabindex="0" data-tip="몬토솔리"><circle class="pd" cx="335.2" cy="112.6" r="2.6"/><text class="pl" x="329.2" y="116.1" text-anchor="end">몬토솔리</text></g><g class="pin pin-town" data-k="h-santantimo" tabindex="0" data-tip="산탄티모 수도원"><circle class="pd" cx="378.8" cy="372.1" r="2.6"/><text class="pl" x="378.8" y="365.1" text-anchor="middle">산탄티모 수도원</text></g><g class="pin pin-ch pin-prod" data-k="p-biondisanti" tabindex="0" data-tip="비온디산티 일 그레포"><circle class="pd" cx="343.9" cy="250.7" r="3.2"/><text class="pl" x="349.9" y="254.2" text-anchor="start">비온디산티 일 그레포</text></g><g class="pin pin-ch pin-prod" data-k="p-soldera" tabindex="0" data-tip="카제 바세(솔데라)"><circle class="pd" cx="204.7" cy="276.2" r="3.2"/><text class="pl" x="198.7" y="279.7" text-anchor="end">카제 바세(솔데라)</text></g><g class="pin pin-ch pin-prod" data-k="p-poggiodisotto" tabindex="0" data-tip="포조 디 소토"><circle class="pd" cx="441.5" cy="377.3" r="3.2"/><text class="pl" x="447.5" y="380.8" text-anchor="start">포조 디 소토</text></g><g class="pin pin-ch pin-prod" data-k="p-cerbaiona" tabindex="0" data-tip="체르바이오나"><circle class="pd" cx="373.9" cy="202.2" r="3.2"/><text class="pl" x="373.9" y="195.2" text-anchor="middle">체르바이오나</text></g><g class="pin pin-ch pin-prod" data-k="p-marroneto" tabindex="0" data-tip="일 마로네토"><circle class="pd" cx="323.3" cy="176.2" r="3.2"/><text class="pl" x="317.3" y="179.7" text-anchor="end">일 마로네토</text></g><g class="pin pin-ch pin-prod" data-k="p-salvioni" tabindex="0" data-tip="살비오니"><circle class="pd" cx="329.6" cy="212.1" r="3.2"/><text class="pl" x="329.6" y="225.1" text-anchor="middle">살비오니</text></g><g class="pin pin-ch pin-prod" data-k="p-altesino" tabindex="0" data-tip="알테지노"><circle class="pd" cx="333" cy="79.5" r="3.2"/><text class="pl" x="339" y="83" text-anchor="start">알테지노</text></g><g class="pin pin-ch pin-prod" data-k="p-casanova" tabindex="0" data-tip="카사노바 디 네리"><circle class="pd" cx="416" cy="137.1" r="3.2"/><text class="pl" x="410" y="140.6" text-anchor="end">카사노바 디 네리</text></g><g class="pin pin-ch pin-prod" data-k="p-banfi" tabindex="0" data-tip="카스텔로 반피"><circle class="pd" cx="254.8" cy="476.4" r="3.2"/><text class="pl" x="260.8" y="479.9" text-anchor="start">카스텔로 반피</text></g><g class="pin pin-ch pin-prod" data-k="p-colorcia" tabindex="0" data-tip="콜 도르차"><circle class="pd" cx="207.2" cy="414.3" r="3.2"/><text class="pl" x="213.2" y="417.8" text-anchor="start">콜 도르차</text></g><g class="pin pin-ch pin-prod" data-k="p-fuligni" tabindex="0" data-tip="풀리니"><circle class="pd" cx="367.9" cy="209.1" r="3.2"/><text class="pl" x="367.9" y="222.1" text-anchor="middle">풀리니</text></g><g class="pin pin-ch pin-prod" data-k="p-campalto" tabindex="0" data-tip="스텔라 디 캄팔토"><circle class="pd" cx="459.5" cy="399.6" r="3.2"/><text class="pl" x="465.5" y="403.1" text-anchor="start">스텔라 디 캄팔토</text></g></g><g class="m-sc"><g class="sc"><path d="M12 522V526H61.7V522"/><text x="66.7" y="527">2 km</text></g><g class="na"><path d="M582 10l5 13-5-3.4-5 3.4z"/><text x="582" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--t-r1)"></i>브루넬로 디 몬탈치노 DOCG</span><span><i class="dot"></i>생산자(대략적 위치)</span><span><i class="dot" style="background:var(--muted)"></i>마을·명소</span></div>
+    </div>
+    <div class="mapinfo" id="mo-info" aria-live="polite"></div>
+  </div>
+</div>
+
+<h2>비노 노빌레와 그 밖의 토스카나</h2>
+<div class="tablewrap wide"><table>
+  <thead><tr><th>와인</th><th>품종</th><th>특징</th><th>대표 생산자</th></tr></thead>
+  <tbody>
+    <tr><td><b>비노 노빌레 디 몬테풀치아노</b></td><td>산지오베제(프루뇰로 젠틸레) 70% 이상</td><td>몬테풀치아노 마을 주변. 브루넬로보다 부드럽고 일찍 열린다. 아브루초의 몬테풀치아노 품종과는 관계가 없다</td><td>아비뇨네지, 폴리치아노, 보스카렐리</td></tr>
+    <tr><td><b>키안티 루피나</b></td><td>산지오베제</td><td>피렌체 북동쪽의 가장 서늘한 키안티. 산도가 높고 오래 간다</td><td>셀바피아나, 프레스코발디 니포차노</td></tr>
+    <tr><td><b>카르미냐노</b></td><td>산지오베제 + 카베르네 10~20%</td><td>메디치 시대부터 카베르네(‘프랑스 포도’)를 섞어 온 곳. 1716년 경계 지정 대상</td><td>카파차나</td></tr>
+    <tr><td><b>모렐리노 디 스칸사노</b></td><td>산지오베제 85% 이상</td><td>남쪽 마렘마의 따뜻한 해안 구릉. 잘 익은 과일의 부드러운 레드</td><td>—</td></tr>
+    <tr><td><b>베르나차 디 산 지미냐노</b></td><td>베르나차(화이트)</td><td>탑의 도시 산 지미냐노. 1966년 이탈리아 최초의 DOC</td><td>—</td></tr>
+    <tr><td><b>빈 산토</b></td><td>트레비아노·말바지아(로제는 산지오베제)</td><td>송이를 말려 작은 통(카라텔로)에서 수년간 숙성한 스위트 와인</td><td>—</td></tr>
+  </tbody>
+</table></div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>산지오베제는 산도와 탄닌이 높고 신 체리·제비꽃·허브 향을 낸다. 몬탈치노에서는 브루넬로, 몬테풀치아노에서는 프루뇰로 젠틸레라 부른다.</li>
+  <li>키안티 클라시코는 1716년 경계가 정해진 원래의 키안티 지역이며 1996년부터 별도의 DOCG다. 등급은 안나타·리제르바·그란 셀레치오네.</li>
+  <li>2021년 키안티 클라시코는 11개 UGA로 나뉘었다. 북쪽의 낮은 산 카시아노부터 높은 라다·라몰레, 따뜻한 카스텔누오보 베라르덴가까지 성격이 다르다.</li>
+  <li>브루넬로 디 몬탈치노는 산지오베제 100%, 수확 5년째 1월부터 출시한다. 북쪽은 우아하고 남쪽은 풍만하다.</li>
+  <li>슈퍼 투스칸은 규정 밖에서 카베르네·메를로를 쓴 와인에서 시작했다. 사시카이아는 카베르네 중심, 티냐넬로는 산지오베제 중심, 마세토는 메를로 100%다.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="2"><p class="q">키안티 클라시코 그란 셀레치오네에 대한 설명으로 맞는 것은?</p>
+    <ol class="opts"><li>산지오베제 70% 이상이면 된다</li><li>산지오베제 90% 이상, 최소 30개월 숙성, 자기 밭 포도만 쓴다</li><li>청포도를 반드시 섞어야 한다</li><li>키안티 DOCG의 하위 등급이다</li></ol>
+    <div class="why">그란 셀레치오네는 2014년 도입된 키안티 클라시코의 최상위 등급이다. 2021년부터 산지오베제 90% 이상에 나머지는 토착 품종만 허용한다.</div></div>
+  <div class="quiz" data-a="4"><p class="q">비노 노빌레 디 몬테풀치아노의 주 품종은?</p>
+    <ol class="opts"><li>몬테풀치아노</li><li>카베르네 소비뇽</li><li>네비올로</li><li>산지오베제(프루뇰로 젠틸레)</li></ol>
+    <div class="why">몬테풀치아노는 토스카나의 마을 이름이다. 아브루초 등에서 재배하는 몬테풀치아노 품종과는 다르다.</div></div>
+  <div class="quiz" data-a="1"><p class="q">메를로 100%로 만드는 볼게리의 와인은?</p>
+    <ol class="opts"><li>마세토</li><li>사시카이아</li><li>티냐넬로</li><li>레 페르골레 토르테</li></ol>
+    <div class="why">마세토는 청색 점토 언덕의 메를로로 만든다. 사시카이아는 카베르네 중심, 티냐넬로는 산지오베제 중심, 레 페르골레 토르테는 산지오베제 100%다.</div></div>
+  <div class="quiz" data-a="3"><p class="q">브루넬로 디 몬탈치노(리제르바 아님)를 출시할 수 있는 가장 이른 때는?</p>
+    <ol class="opts"><li>수확 이듬해 10월</li><li>수확 3년째 1월</li><li>수확 5년째 1월 1일</li><li>수확 10년 뒤</li></ol>
+    <div class="why">브루넬로는 수확 후 5년째 1월 1일부터 출시하고, 그중 2년 이상을 오크통에서 숙성한다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">‘슈퍼 투스칸’이 처음에 테이블 와인 등급으로 나온 이유는?</p>
+    <ol class="opts"><li>품질이 낮아서</li><li>당시 규정이 국제 품종을 막고 청포도 블렌딩을 강제해서</li><li>세금을 피하려고</li><li>병 모양이 규정과 달라서</li></ol>
+    <div class="why">규정을 따르지 않은 블렌드라 DOC를 받을 수 없었다. 1992년 IGT 등급이 생기고(토스카나 IGT는 1995년) 이 와인들의 자리가 만들어졌다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>키안티 클라시코의 등급 규정, 그란 셀레치오네(2014)와 UGA(2021): 키안티 클라시코 협회(<a href="https://www.chianticlassico.com/" rel="noopener">chianticlassico.com</a>).</li>
+  <li>브루넬로 디 몬탈치노 규정: 브루넬로 협회(<a href="https://www.consorziobrunellodimontalcino.it/" rel="noopener">consorziobrunellodimontalcino.it</a>).</li>
+  <li>볼게리와 사시카이아의 역사, 볼게리 사시카이아 DOC: 테누타 산 귀도와 볼게리 협회 공개 자료.</li>
+  <li>지도: 코무네 경계 openpolis geojson-italy(ISTAT), DOCG 경계 WineRegions(CC0), 아르노강 Natural Earth. 생산자 위치는 대략적인 표시.</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="piedmont.html"><small>← 이전</small>08장 · 피에몬테</a><a class="next" href="veneto.html"><small>다음 →</small>10장 · 베네토와 남부 이탈리아</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, $$ = WB.$$, esc = WB.esc;
+  function card(t, sub, body, extra) {
+    return '<h4>' + esc(t) + '</h4>' + (sub ? '<div class="sub">' + sub + '</div>' : '') + '<p>' + esc(body) + '</p>' + (extra || '');
+  }
+  function kv(rows) { return '<dl class="kv">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>'; }
+
+  /* ---------- blend composition chart ---------- */
+  var G = [['산지오베제', 'var(--st-r)'], ['카베르네 소비뇽', 'var(--st-s)'], ['메를로', 'var(--st-g)'], ['카베르네 프랑·기타', 'var(--st-p)']];
+  var W = [
+    ['키안티 클라시코(규정)', [80, 0, 0, 20], '산지오베제 80% 이상'],
+    ['브루넬로 디 몬탈치노', [100, 0, 0, 0], '산지오베제 100%'],
+    ['레 페르골레 토르테', [100, 0, 0, 0], '몬테베르티네 · 산지오베제 100%'],
+    ['티냐넬로', [80, 15, 0, 5], '안티노리'],
+    ['솔라이아', [20, 75, 0, 5], '안티노리'],
+    ['사시카이아', [0, 85, 0, 15], '테누타 산 귀도'],
+    ['오르넬라이아', [0, 50, 25, 25], '빈티지마다 달라진다'],
+    ['마세토', [0, 0, 100, 0], '메를로 100%']
+  ];
+  var X0 = 190, BW = 470, o = '';
+  [0, 25, 50, 75, 100].forEach(function (v) { var x = X0 + BW * v / 100; o += '<line class="grid" x1="' + x + '" y1="14" x2="' + x + '" y2="352"/><text x="' + x + '" y="370" text-anchor="middle">' + v + '%</text>'; });
+  W.forEach(function (w, i) {
+    var y = 20 + i * 41, acc = 0;
+    o += '<text x="' + (X0 - 12) + '" y="' + (y + 15) + '" text-anchor="end" style="fill:var(--ink);font-size:12.5px;font-weight:600">' + esc(w[0]) + '</text>';
+    w[1].forEach(function (v, j) {
+      if (!v) return;
+      var x = X0 + BW * acc / 100, wd = BW * v / 100;
+      o += '<rect x="' + (x + (acc ? 1 : 0)) + '" y="' + y + '" width="' + Math.max(0, wd - (acc ? 2 : 0) - (acc + v < 100 ? 1 : 0)) + '" height="22" rx="4" style="fill:' + G[j][1] + '" data-tip="' + esc(w[0] + ' · ' + G[j][0] + ' ' + v + '%') + '"/>';
+      acc += v;
+    });
+    o += '<text x="' + (X0 + BW + 12) + '" y="' + (y + 15) + '" style="fill:var(--ink-2);font-size:11.5px">' + esc(w[2]) + '</text>';
+  });
+  $('#blend-bars').innerHTML = o;
+  $('#blend-legend').innerHTML = G.map(function (g) { return '<span><i style="background:' + g[1] + ';border:0"></i>' + g[0] + '</span>'; }).join('');
+
+  /* ---------- timelines ---------- */
+  function timeline(el, items, y0) {
+    var x0 = 80, x1 = 820, s = '';
+    function X(i) { return x0 + (x1 - x0) * i / (items.length - 1); }
+    s += '<line x1="' + (x0 - 30) + '" y1="' + y0 + '" x2="' + (x1 + 30) + '" y2="' + y0 + '" class="ln2"/>';
+    items.forEach(function (it, i) {
+      var x = X(i), up = i % 2 === 0, ty = up ? y0 - 18 : y0 + 26;
+      s += '<circle cx="' + x + '" cy="' + y0 + '" r="5" class="red"/>';
+      s += '<line x1="' + x + '" y1="' + (y0 + (up ? -6 : 6)) + '" x2="' + x + '" y2="' + (up ? y0 - 12 : y0 + 12) + '" class="ln"/>';
+      s += '<text x="' + x + '" y="' + ty + '" text-anchor="middle" class="t-b">' + it[0] + '</text>';
+      s += '<text x="' + x + '" y="' + (ty + (up ? -16 : 16)) + '" text-anchor="middle" class="t-s t-2">' + esc(it[1]) + '</text>';
+      if (it[2]) s += '<text x="' + x + '" y="' + (ty + (up ? -30 : 30)) + '" text-anchor="middle" class="t-s t-mut">' + esc(it[2]) + '</text>';
+    });
+    $(el).innerHTML = s;
+  }
+  timeline('#cc-time', [[1716, '코시모 3세의 경계 지정', ''], [1872, '리카솔리의 블렌드 공식', '산지오베제+카나이올로+말바지아'], [1924, '협회 결성', '검은 수탉 상징'], [1967, 'DOC', ''], [1984, 'DOCG', ''], [1996, '키안티와 분리', '별도의 DOCG'], [2006, '청포도 금지', ''], [2014, '그란 셀레치오네', ''], [2021, '11개 UGA', '']], 100);
+  timeline('#st-time', [[1944, '볼게리에 카베르네 식재', '마리오 인치사 델라 로케타'], [1968, '사시카이아 첫 출시 빈티지', ''], [1971, '티냐넬로', '청포도 없이, 바리크 숙성'], [1978, '사시카이아 1972, 런던 시음 1위', ''], [1985, '오르넬라이아 첫 빈티지', ''], [1992, 'IGT 토스카나 신설', ''], [1994, '볼게리 DOC 레드', '사시카이아는 하위 지역'], [2013, '볼게리 사시카이아 DOC', '단일 영지 DOC']], 96);
+
+  /* ---------- Tuscany overview ---------- */
+  var Z = {
+    cc: ['키안티 클라시코', 'Chianti Classico DOCG', '피렌체와 시에나 사이의 원래 키안티. 해발 250~600 m의 숲 많은 구릉이며 넓은 지역 가운데 포도밭은 일부다. 산지오베제 80% 이상, 그란 셀레치오네는 90% 이상.'],
+    'cc-part': ['키안티 클라시코(일부)', '바르베리노 타바르넬레 · 산 카시아노 · 카스텔누오보 베라르덴가 · 포조본시', '코무네의 일부만 키안티 클라시코에 들어가고, 나머지는 키안티 콜리 피오렌티니나 콜리 세네지 같은 키안티 DOCG다.'],
+    brunello: ['브루넬로 디 몬탈치노', 'Brunello di Montalcino DOCG', '산지오베제 100%, 수확 5년째 1월부터 출시. 언덕 위 마을 몬탈치노를 중심으로 북쪽은 우아하고 남쪽은 풍만하다. 아래 상세 지도에서 생산자를 볼 수 있다.'],
+    nobile: ['비노 노빌레 디 몬테풀치아노', 'Vino Nobile di Montepulciano DOCG', '르네상스 도시 몬테풀치아노 주변. 산지오베제(프루뇰로 젠틸레) 70% 이상으로 브루넬로보다 부드럽다. 품종 몬테풀치아노와는 관계없다.'],
+    bolgheri: ['볼게리', 'Bolgheri DOC', '티레니아해 가까운 카스타녜토 카르두치 코무네. 카베르네 소비뇽·메를로·카베르네 프랑 중심의 슈퍼 투스칸의 고향. 사시카이아는 따로 단일 영지 DOC를 가진다.'],
+    vernaccia: ['베르나차 디 산 지미냐노', 'Vernaccia di San Gimignano DOCG', '중세 탑이 늘어선 산 지미냐노의 화이트. 1966년 이탈리아 최초의 DOC였다. 쌉쌀한 아몬드 끝맛.'],
+    morellino: ['모렐리노 디 스칸사노', 'Morellino di Scansano DOCG', '남쪽 마렘마의 따뜻한 구릉. 산지오베제(모렐리노) 85% 이상, 잘 익은 과일의 부드러운 레드.'],
+    carmignano: ['카르미냐노', 'Carmignano DOCG', '피렌체 서쪽. 메디치 시대부터 카베르네를 섞어 온 곳으로, 지금도 카베르네 10~20%를 쓴다.'],
+    rufina: ['키안티 루피나', 'Chianti Rufina DOCG', '피렌체 북동쪽 시에베강 계곡. 키안티 하위 지역 가운데 가장 서늘하고 오래 가는 와인을 만든다.'],
+    firenze: ['피렌체', '', '토스카나의 주도. 안티노리·프레스코발디 같은 오래된 와인 가문이 이곳에서 출발했다.'],
+    siena: ['시에나', '', '키안티 클라시코 남쪽 끝의 도시.'],
+    pisa: ['피사', '', '아르노강 하구의 도시.']
+  };
+  WB.mapExplorer($('#tus svg'), { info: $('#tus-info'), empty: '<p class="hint">산지를 누르면 개요가 나타납니다.</p>', render: function (k) {
+    var z = Z[k]; return z ? card(z[0], z[1] ? '<span class="it">' + esc(z[1]) + '</span>' : '', z[2]) : '<p class="hint">설명이 없습니다.</p>';
+  } });
+
+  /* ---------- Chianti Classico ---------- */
+  var U = {
+    'uga-sancasciano': ['산 카시아노', '북쪽 끝, 피렌체에 가장 가까운 낮은 구릉. 바다에서 쌓인 모래·점토와 강자갈이 섞인다.', '둥글고 부드러운 과일, 일찍 열리는 편'],
+    'uga-greve': ['그레베', '키안티 클라시코의 북부 중심 마을. 갈레스트로와 알베레세가 섞인 다양한 땅.', '균형 잡힌 고전 스타일'],
+    'uga-montefioralle': ['몬테피오랄레', '그레베 옆 언덕 위 작은 마을의 작은 UGA. 높은 곳의 알베레세와 갈레스트로.', '선명한 산도와 향'],
+    'uga-lamole': ['라몰레', '해발 400~600 m가 넘는 높은 계단식 밭. 마치뇨 사암이 많다.', '서늘하고 향기로우며 가벼운 우아함'],
+    'uga-panzano': ['판차노', '남향 원형극장 ‘콘카 도로(황금 분지)’로 유명하다. 갈레스트로가 많고 유기농 생산자가 모여 있다.', '잘 익은 과일과 단단한 구조'],
+    'uga-sandonato': ['산 도나토 인 포조', '서쪽 능선. 알베레세와 갈레스트로, 중간 높이.', '산도와 과일의 균형'],
+    'uga-castellina': ['카스텔리나', '서남쪽의 넓은 UGA. 토양과 고도가 다양하다.', '잘 익은 과일, 풍성한 편'],
+    'uga-radda': ['라다', '해발이 높고(500~650 m) 서늘한 중앙부. 알베레세와 갈레스트로.', '높은 산도와 꽃향, 우아함'],
+    'uga-gaiole': ['가이올레', '동쪽의 높은 숲 지대. 마치뇨 사암과 알베레세.', '단단한 구조와 긴 숙성력'],
+    'uga-vagliagli': ['발랄리', '중남부, 카스텔누오보 베라르덴가의 북쪽 고지대.', '구조와 과일의 균형'],
+    'uga-castelnuovo': ['카스텔누오보 베라르덴가', '남쪽 끝, 시에나 쪽으로 가장 따뜻하고 낮은 지역. 바다에서 쌓인 점토와 모래가 많다.', '가장 풍만하고 진한 스타일']
+  };
+  var CP = {
+    'p-tignanello': ['안티노리 · 티냐넬로 영지', '산 카시아노(메르카탈레)', '1971년 빈티지 티냐넬로로 슈퍼 투스칸 시대를 연 영지. 1975년 빈티지부터 카베르네를 섞었고, 같은 언덕에서 카베르네 중심의 솔라이아(1978년 첫 빈티지)도 나온다.'],
+    'p-fontodi': ['폰토디', '판차노', '콘카 도로의 유기농 영지. 산지오베제 100%의 ‘플라차넬로 델라 피에베’가 대표작.'],
+    'p-rampolla': ['카스텔로 데이 람폴라', '판차노', '바이오다이내믹 농법. 카베르네 중심의 ‘삼마르코’와 ‘달체오’로 알려졌다.'],
+    'p-querciabella': ['퀘르치아벨라', '그레베(루폴리)', '바이오다이내믹 농법과 동물성 재료를 쓰지 않는 양조. ‘카마르티나’와 화이트 ‘바타르’.'],
+    'p-isole': ['이솔레 에 올레나', '바르베리노 타바르넬레', '파올로 데 마르키가 키운 영지. 산지오베제 100%의 ‘체파렐로’가 대표작.'],
+    'p-montevertine': ['몬테베르티네', '라다', '1980년대 초 키안티 클라시코 규정을 떠나 IGT로 남은 생산자. 산지오베제 100%의 ‘레 페르골레 토르테’.'],
+    'p-volpaia': ['카스텔로 디 볼파이아', '라다', '높은 고도의 중세 마을 전체가 와이너리다. ‘콜타살라’, ‘발리피코’.'],
+    'p-coltibuono': ['바디아 아 콜티부오노', '가이올레', '11세기 수도원에서 이어진 영지. 고전적인 키안티 클라시코.'],
+    'p-ama': ['카스텔로 디 아마', '가이올레', '그란 셀레치오네 ‘산 로렌초’와 메를로 ‘라파리타’로 유명하다. 현대 미술 작품이 영지 곳곳에 있다.'],
+    'p-brolio': ['바로네 리카솔리(브롤리오 성)', '가이올레', '키안티의 블렌드 공식을 만든 베티노 리카솔리 남작의 성. 이탈리아에서 가장 오래된 와이너리 가운데 하나.'],
+    'p-rentennano': ['산 주스토 아 렌텐나노', '가이올레(몬티)', '남쪽 끝의 작은 가족 영지. 산지오베제 ‘페르카를로’와 메를로 ‘라 리콜마’.'],
+    'p-felsina': ['펠시나', '카스텔누오보 베라르덴가', '남쪽 끝의 대표 생산자. ‘란차’, ‘폰탈로로’.']
+  };
+  WB.mapExplorer($('#cc svg'), { info: $('#cc-info'), empty: '<p class="hint">금색 점(UGA)이나 검은 점(생산자)을 누르면 설명이 나타납니다.</p>', render: function (k) {
+    if (U[k]) return card(U[k][0], 'UGA · 추가 지리 단위', U[k][1], kv([['스타일', U[k][2]]]));
+    if (CP[k]) return card(CP[k][0], esc(CP[k][1]), CP[k][2]);
+    if (k === 'cc' || k === 'cc-part') return card(Z[k][0], '', Z[k][2]);
+    return '<p class="hint">설명이 없습니다.</p>';
+  } });
+
+  /* ---------- Bolgheri ---------- */
+  var B = {
+    'b-sanguido': ['테누타 산 귀도', '사시카이아', '인치사 델라 로케타 가문. 사시카이아는 카베르네 소비뇽 약 85%, 카베르네 프랑 약 15%. 2013년부터 이탈리아에서 드문 단일 영지 DOC(볼게리 사시카이아)다. 세컨드 와인 ‘과이달베르토’.'],
+    'b-guado': ['과도 알 타소', '안티노리', '바다에서 구릉까지 걸친 넓은 영지. 카베르네·메를로 블렌드 ‘과도 알 타소’, 카베르네 프랑 ‘마타로키오’.'],
+    'b-macchiole': ['레 마키올레', '캄폴미 가문', '카베르네 프랑 100%의 ‘팔레오’, 메를로 ‘메소리오’, 시라 ‘스크리오’ 같은 단일 품종 와인으로 유명하다.'],
+    'b-ornellaia': ['오르넬라이아', '프레스코발디', '1981년 로도비코 안티노리가 세우고 1985년 첫 빈티지를 냈다. 카베르네 소비뇽·메를로·카베르네 프랑·프티 베르도 블렌드. 세컨드 ‘레 세레 누오베’.'],
+    'b-masseto': ['마세토', '프레스코발디', '청색 점토 언덕의 메를로 100%. 이탈리아에서 가장 비싼 와인 가운데 하나이며 2019년부터 별도 셀러에서 만든다.'],
+    'b-grattamacco': ['그라타마코', '', '1977년에 시작한 볼게리 초기 개척자. 카베르네·메를로에 산지오베제를 섞는다.'],
+    'b-satta': ['미켈레 사타', '', '1980년대부터 볼게리를 일군 개척자. 산지오베제와 국제 품종을 함께 쓴다.'],
+    'b-camarcanda': ['카 마르칸다', '가야', '피에몬테의 안젤로 가야가 1996년 세운 영지. ‘카마르칸다’, ‘마가리’, ‘프로미스’.'],
+    't-bolgheri': ['볼게리 마을', '', '성문과 사이프러스 길 끝에 있는 작은 마을. 이 지역 와인의 이름이 됐다.'],
+    't-castagneto': ['카스타녜토 카르두치', '', '볼게리 DOC가 속한 코무네의 중심 마을. 시인 조수에 카르두치가 어린 시절을 보냈다.'],
+    't-donoratico': ['도노라티코', '', '해안 평지 쪽 마을.'],
+    't-sanguido': ['산 귀도', '', '해안 도로 옆 작은 예배당. 여기서 볼게리 마을까지 약 5 km의 사이프러스 길이 이어진다.'],
+    bolgheri: ['카스타녜토 카르두치 코무네', '', '볼게리 DOC는 이 코무네 안에 있다. 해안 평지의 모래·자갈부터 구릉 아래의 점토·석회까지 토양이 다양하다.']
+  };
+  WB.mapExplorer($('#bo svg'), { info: $('#bo-info'), empty: '<p class="hint">와이너리를 누르면 대표 와인과 이야기가 나타납니다.</p>', render: function (k) {
+    var b = B[k]; return b ? card(b[0], b[1] ? esc(b[1]) : '', b[2]) : '<p class="hint">설명이 없습니다.</p>';
+  } });
+
+  /* ---------- Montalcino ---------- */
+  var MO = {
+    'p-biondisanti': ['비온디산티 · 테누타 일 그레포', '브루넬로를 만든 가문. 19세기 말 페루초 비온디산티가 시작했다. 산도가 높고 수십 년을 가는 고전 스타일의 리제르바로 유명하다.'],
+    'p-soldera': ['카제 바세(솔데라)', '잔프랑코 솔데라의 영지. 아주 긴 대형 오크통 숙성. 2012년 누군가 통을 열어 여러 빈티지의 와인을 쏟아 버린 사건 뒤 협회를 떠나 IGT로 출시한다.'],
+    'p-poggiodisotto': ['포조 디 소토', '남동쪽 카스텔누오보 델라바테의 고전 생산자. 섬세하고 투명한 스타일.'],
+    'p-cerbaiona': ['체르바이오나', '몬탈치노 마을 동쪽 고지대의 작은 영지. 깊고 구조적인 브루넬로.'],
+    'p-marroneto': ['일 마로네토', '마을 북쪽 성벽 아래. 우아하고 향기로운 ‘마돈나 델레 그라치에’.'],
+    'p-salvioni': ['살비오니(라 체르바이올라)', '마을 바로 옆의 아주 작은 가족 생산자. 집중력 있고 정교한 브루넬로.'],
+    'p-altesino': ['알테지노', '북쪽 몬토솔리 언덕. 1975년 몬토솔리로 브루넬로 최초의 단일 밭 와인을 냈다.'],
+    'p-casanova': ['카사노바 디 네리', '북동쪽 토레니에리 근처. ‘테누타 누오바’와 ‘체레탈토’. 진하고 현대적인 스타일.'],
+    'p-banfi': ['카스텔로 반피', '1978년 미국의 마리아니 가문이 세운 대형 영지. 산지오베제 클론 연구로도 알려졌다.'],
+    'p-colorcia': ['콜 도르차', '남서쪽 산탄젤로 인 콜레. 리제르바 ‘포조 알 벤토’.'],
+    'p-fuligni': ['풀리니', '마을 동쪽 코티멜리의 밭. 고전적이고 우아한 브루넬로.'],
+    'p-campalto': ['스텔라 디 캄팔토', '남동쪽 끝의 바이오다이내믹 영지. 섬세하고 향기로운 스타일.'],
+    'h-montalcino': ['몬탈치노', '해발 560 m 남짓한 언덕 위 중세 마을. 지역 전체가 브루넬로 DOCG다.'],
+    'h-torrenieri': ['토레니에리', '북동쪽의 낮은 마을. 점토가 많고 와인이 진한 편.'],
+    'h-castelnuovo': ['카스텔누오보 델라바테', '남동쪽. 따뜻하고 잘 익은, 그러면서도 구조가 좋은 와인으로 유명하다.'],
+    'h-santangelo': ['산탄젤로 인 콜레', '남서쪽 언덕. 바다 쪽에서 따뜻한 바람이 올라온다.'],
+    'h-camigliano': ['카밀리아노', '서쪽 마을.'],
+    'h-montosoli': ['몬토솔리', '북쪽의 이름난 언덕. 서늘하고 우아한 브루넬로.'],
+    'h-santantimo': ['산탄티모 수도원', '12세기 로마네스크 수도원. 카스텔누오보 델라바테 바로 아래.'],
+    brunello: ['브루넬로 디 몬탈치노 DOCG', '옛 몬탈치노 코무네의 경계가 곧 DOCG 경계다. 2017년 합병된 산 조반니 다소 지역은 들어가지 않는다.']
+  };
+  WB.mapExplorer($('#mo svg'), { info: $('#mo-info'), empty: '<p class="hint">생산자나 마을을 누르면 설명이 나타납니다.</p>', render: function (k) {
+    var m = MO[k]; return m ? card(m[0], '', m[1]) : '<p class="hint">설명이 없습니다.</p>';
+  } });
+})();
+</script></body></html>

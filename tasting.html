@@ -1,0 +1,1728 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>노즈와 팔레트: 테이스팅 표현법 · WineBook</title><meta name="description" content="외관·노즈·팔레트·결론의 네 단계로 와인을 말로 옮기는 법. 색과 나이, 1차·2차·3차 향의 아로마 휠, 구조 척도, 평론가 노트 읽기, 노트 만들기 실험, 서빙 온도와 결함까지."><meta property="og:title" content="노즈와 팔레트: 테이스팅 표현법 · WineBook"><meta property="og:description" content="외관·노즈·팔레트·결론의 네 단계로 와인을 말로 옮기는 법. 색과 나이, 1차·2차·3차 향의 아로마 휠, 구조 척도, 평론가 노트 읽기, 노트 만들기 실험, 서빙 온도와 결함까지."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="tasting"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">14장 · 노즈와 팔레트</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html" aria-current="page"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 14</span><span>테이스팅 표현법</span></div><h1>노즈와 팔레트: 테이스팅 표현법</h1><p class="ch-lede">와인을 말로 옮기기 어려운 것은 단어가 모자라서가 아니라 무엇부터 볼지 정해져 있지 않아서입니다. 보고(외관), 맡고(노즈), 맛보고(팔레트), 판단하는(결론) 네 단계와 각 단계의 척도를 익히면 어떤 와인이든 같은 틀로 기록할 수 있고, 평론가의 노트도 문장 단위로 읽힙니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>외관·노즈·팔레트·결론의 네 단계와 척도로 테이스팅 노트를 쓸 수 있다.</li><li>색의 농도와 색조로 와인의 종류와 숙성 정도를 짐작할 수 있다.</li><li>1차·2차·3차 향을 구별하고 주요 품종의 대표 향을 말할 수 있다.</li><li>당도·산도·탄닌·알코올·바디·피니시를 척도로 표현하고, 평론가 노트와 흔한 결함을 읽어 낼 수 있다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>테이스팅은 순서다</h2>
+<p>전문 교육 과정은 감각을 네 단계로 나눠 차례로 기록합니다. 영국의 와인 교육 기관 WSET가 만든 ‘체계적 테이스팅 접근법(SAT)’이 대표적이며, 이 장의 척도도 그 틀을 우리말로 옮긴 것입니다. 순서가 정해져 있으면 빠뜨리는 항목이 줄고, 서로 다른 와인을 같은 기준으로 비교할 수 있습니다.</p>
+
+<figure class="fig wide">
+  <ol class="steps4">
+    <li><div class="st-h"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M2 14 Q14 3 26 14 Q14 25 2 14 Z"/><circle cx="14" cy="14" r="4.5"/></svg><b>1 외관<small>Appearance</small></b></div>
+      <dl><dt>맑기</dt><dd>맑음 / 탁함</dd><dt>농도</dt><dd>옅음 → 진함 (3단계)</dd><dt>색</dt><dd>화이트는 레몬-그린 → 브라운, 레드는 퍼플 → 브라운</dd><dt>기타</dt><dd>눈물(레그), 침전물, 기포</dd></dl></li>
+    <li><div class="st-h"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 11 H21 Q21 21 14 22 Q7 21 7 11 Z"/><path d="M14 22 V26 M10 26 H18" fill="none"/><path d="M10.5 8 Q12 5.5 10.5 3 M14.5 8 Q16 5.5 14.5 3 M18.5 8 Q20 5.5 18.5 3" fill="none"/></svg><b>2 노즈<small>Nose</small></b></div>
+      <dl><dt>상태</dt><dd>깨끗함 / 결함</dd><dt>강도</dt><dd>약함 → 강함 (5단계)</dd><dt>향의 특징</dt><dd>1차, 2차, 3차 향</dd><dt>숙성 단계</dt><dd>어림 → 지남 (4단계)</dd></dl></li>
+    <li><div class="st-h"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 14 Q8 7.5 14 10.5 Q20 7.5 25 14 Q20 21.5 14 21.5 Q8 21.5 3 14 Z"/><path d="M3 14 Q14 16.5 25 14" fill="none"/></svg><b>3 팔레트<small>Palate</small></b></div>
+      <dl><dt>당도</dt><dd>드라이 → 루셔스 (6단계)</dd><dt>산도, 탄닌</dt><dd>낮음 → 높음 (5단계)</dd><dt>알코올</dt><dd>낮음 → 높음 (3단계)</dd><dt>바디</dt><dd>가벼움 → 풀 (5단계)</dd><dt>무스</dt><dd>스파클링의 기포: 섬세함 → 거침</dd><dt>풍미</dt><dd>강도와 특징, 노즈와 같은 틀</dd><dt>피니시</dt><dd>짧음 → 김 (5단계)</dd></dl></li>
+    <li><div class="st-h"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="5" y="3" width="18" height="22" rx="3"/><path d="M9 11 L12 14 L18.5 7.5 M9 19 H19" fill="none"/></svg><b>4 결론<small>Conclusions</small></b></div>
+      <dl><dt>품질</dt><dd>결함 → 뛰어남 (6단계)</dd><dt>판단 근거</dt><dd>균형, 여운의 길이, 강도, 복합성</dd><dt>시음 적기</dt><dd>너무 어림 → 너무 늙음 (4단계)</dd></dl></li>
+  </ol>
+  <figcaption><b>그림 14-1.</b> 체계적 테이스팅의 네 단계. WSET 3단계 과정의 SAT를 바탕으로 정리했다. 모든 항목을 매번 쓸 필요는 없지만, 순서를 지키면 빠뜨리는 것이 줄고 다른 와인과 비교하기 쉬워진다.</figcaption>
+</figure>
+
+<div class="box key"><span class="box-t">척도 읽는 법</span>
+<p>대부분의 항목은 낮음, 중간(−), 중간, 중간(+), 높음의 다섯 단계로 적습니다. ‘중간(+)’는 중간보다 한 단계 높다는 뜻입니다. 당도만 드라이부터 루셔스(아주 달콤함)까지 여섯 단계, 알코올은 세 단계입니다. 숫자 대신 정해진 단어를 쓰는 이유는 다른 사람의 노트와 바로 비교하기 위해서입니다.</p></div>
+
+<h2>외관: 색이 말해 주는 것</h2>
+<p>잔을 45도쯤 기울여 흰 종이 위에서 봅니다. 먼저 맑은지, 다음으로 색이 얼마나 진한지(잔 중심부의 농도), 마지막으로 어떤 색조인지를 봅니다. 화이트는 나이가 들수록 진해지고(레몬 → 골드 → 앰버), 레드는 반대로 옅어지며 갈색을 띱니다(퍼플 → 루비 → 가넷 → 토니). 레드의 색소는 시간이 지나며 탄닌과 엉겨 가라앉고, 화이트는 천천히 산화하기 때문입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><div class="swatches" id="swatches"></div></div>
+  <figcaption><b>그림 14-2.</b> WSET 척도의 색 이름과 농도. 칸에 마우스를 올리거나 탭으로 이동하면 그 색을 흔히 보이는 와인이 나온다. 화면의 색은 대략의 근사치다.</figcaption>
+</figure>
+
+<section class="sim wide" id="age" data-title="색으로 나이 짐작하기"><div class="sim-head"><span class="sim-n">실험 14-1</span><h3>색으로 나이 짐작하기</h3></div>
+  <div class="sim-body">
+    <div class="sim-ctrl">
+      <div class="ctl">종류<div class="seg" id="age-type"><button data-v="white">화이트</button><button data-v="rose">로제</button><button data-v="red" aria-pressed="true">레드</button></div></div>
+      <div class="ctl">농도<div class="seg" id="age-dep"><button data-v="0">옅음</button><button data-v="1" aria-pressed="true">중간</button><button data-v="2">진함</button></div></div>
+      <label class="ctl">병입 후 햇수 <output id="o-age">3년</output><input type="range" id="r-age" min="0" max="30" value="3" step="1"></label>
+      <p class="small" style="margin:0">숙성 잠재력이 있는 와인을 좋은 셀러에 둔 경우의 대략적인 흐름입니다. 잔은 흰 종이 위에서 기울여 본 모습입니다.</p>
+    </div>
+    <div class="sim-out">
+      <svg id="age-glass" viewBox="0 0 400 230" role="img" aria-label="기울인 잔 속 와인의 색">
+        <defs><radialGradient id="ag-g" cx="0.6" cy="0.5" r="0.62" fx="0.62" fy="0.5"><stop offset="0" id="ag-s0"/><stop offset="0.5" id="ag-s1"/><stop offset="0.82" id="ag-s2"/><stop offset="1" id="ag-s3"/></radialGradient></defs>
+        <rect x="0.5" y="0.5" width="399" height="229" rx="10" fill="#FFFFFF" stroke="#D5D8D0"/>
+        <g transform="rotate(-14 200 112)">
+          <ellipse cx="200" cy="112" rx="150" ry="70" fill="#F6F6F3" stroke="#C3C7CE" stroke-width="1.6"/>
+          <ellipse cx="214" cy="114" rx="122" ry="54" fill="url(#ag-g)"/>
+        </g>
+        <path d="M104 166 L66 196" stroke="#6A6E76" stroke-width="1" fill="none"/>
+        <text x="62" y="210" text-anchor="middle" fill="#3D4148" font-size="12" font-family="IBM Plex Sans KR, sans-serif">가장자리(림)</text>
+        <path d="M262 92 L318 40" stroke="#6A6E76" stroke-width="1" fill="none"/>
+        <text x="322" y="34" text-anchor="middle" fill="#3D4148" font-size="12" font-family="IBM Plex Sans KR, sans-serif">중심(코어)</text>
+      </svg>
+      <div class="agestrip" id="age-strip"><i id="age-mk"></i></div>
+      <div class="agescale" id="age-scale"></div>
+      <div class="readouts" id="age-read"></div>
+    </div>
+  </div>
+  <p class="sim-note">색만으로 나이를 단정할 수는 없습니다. 네비올로와 피노 누아는 어려도 색이 옅고 가넷빛이 돌며, 오크통에서 숙성한 화이트와 귀부 스위트 와인은 처음부터 금빛입니다. 같은 와인이라도 보관 온도가 높으면 색이 훨씬 빨리 변합니다.</p>
+</section>
+
+<p>잔 가장자리(림)는 중심보다 먼저 나이를 드러냅니다. 어린 레드는 가장자리까지 보랏빛이 돌고, 숙성된 레드는 벽돌빛·오렌지빛 테두리가 점점 넓어집니다. 색 외에 눈여겨볼 것은 아래와 같습니다.</p>
+
+<div class="grid-cards">
+  <div class="card"><h4>눈물(레그)</h4><p class="meta">잔을 돌린 뒤 벽을 타고 흐르는 줄기</p><p>알코올과 당이 많을수록 굵고 느리게 흐른다. 품질과는 상관이 없다.</p></div>
+  <div class="card"><h4>침전물</h4><p class="meta">오래된 레드, 빈티지 포트</p><p>색소와 탄닌이 엉겨 가라앉은 것으로 결함이 아니다. 병을 세워 두었다가 디캔팅해 거른다.</p></div>
+  <div class="card"><h4>기포</h4><p class="meta">스파클링의 무스</p><p>기포가 가늘고 오래 이어질수록 섬세하다고 말한다. 스틸 와인에 기포가 있으면 병 속 재발효를 의심한다.</p></div>
+  <div class="card"><h4>탁함</h4><p class="meta">맑음 / 탁함</p><p>여과하지 않은 와인은 살짝 뿌열 수 있다. 원래 맑던 와인이 탁해졌다면 결함의 신호일 수 있다.</p></div>
+</div>
+
+<h2>노즈: 향은 세 곳에서 온다</h2>
+<p>향은 생겨난 곳에 따라 셋으로 나눕니다. <b>1차 향</b>은 포도 품종과 알코올 발효에서 나오는 과일·꽃·허브·향신료 향, <b>2차 향</b>은 발효 이후의 양조 과정(효모 앙금, 젖산 발효, 오크통)에서 생기는 빵·버터·바닐라 향, <b>3차 향</b>은 오랜 숙성에서 생기는 가죽·버섯·꿀·견과 향입니다. 어린 와인은 1차 향이 주인공이고, 숙성될수록 3차 향의 비중이 커집니다.</p>
+
+<div class="box note"><span class="box-t">냄새 맡는 법</span>
+<p>잔을 돌리기 전에 한 번, 돌린 뒤에 짧게 여러 번 맡습니다. 처음에는 과일인지 꽃인지 같은 큰 갈래를 정하고, 다음에 붉은 과일인지 검은 과일인지, 마지막으로 체리인지 라즈베리인지로 좁혀 가세요. 안쪽에서 바깥쪽으로 갈수록 구체적인 아래 휠의 구조가 바로 그 순서입니다.</p></div>
+
+<section class="sim wide" id="aroma" data-title="아로마 휠"><div class="sim-head"><span class="sim-n">실험 14-2</span><h3>아로마 휠</h3></div>
+  <div class="sim-body wheel-body">
+    <div class="wheel-wrap"><svg class="wheel" id="wheel" viewBox="-288 -288 576 576" role="group" aria-label="아로마 휠: 1차·2차·3차 향의 갈래와 표현"></svg></div>
+    <div class="mapinfo" id="wheel-side">
+      <p class="sub" style="margin:0 0 0.5em">품종이나 스타일을 고르면 대표 향이 휠에 표시됩니다.</p>
+      <div class="chips" id="wheel-grapes"></div>
+      <div id="wheel-info"></div>
+      <b class="pick-h">내가 고른 향</b>
+      <div id="wheel-picked"></div>
+    </div>
+  </div>
+  <p class="sim-note">바깥 칸을 누르면 그 향이 ‘내가 고른 향’에 담기고, 아래 ‘테이스팅 노트 만들기’ 실험에 그대로 쓰입니다. 갈래와 표현은 WSET 와인 렉시콘의 분류를 참고해 우리말로 정리했습니다. 품종별 대표 향은 전형적인 예일 뿐, 산지와 양조에 따라 달라집니다.</p>
+</section>
+
+<div class="try"><b>해볼 것</b><ul>
+  <li>‘카베르네 소비뇽’과 ‘피노 누아’를 차례로 눌러 보세요. 둘 다 레드지만 휠에서 겹치는 칸이 거의 없습니다. 검은 과일과 피망·삼나무 대 붉은 과일과 버섯·숲 바닥의 차이입니다.</li>
+  <li>과일 가게에서 블랙베리, 라즈베리, 자두를 차례로 맡아 보세요. 와인의 ‘검은 과일’과 ‘붉은 과일’을 구분하기가 훨씬 쉬워집니다.</li>
+</ul></div>
+
+<h2>품종별 대표 표현</h2>
+<p>향은 품종을 알아보는 가장 빠른 단서입니다. 블라인드 테이스팅에서 소비뇽 블랑의 풀 향이나 게뷔르츠트라미너의 리치 향은 거의 명함처럼 쓰입니다. 아래 표는 각 장에서 다룬 주요 품종의 전형적인 표현을 모은 것입니다.</p>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th>품종</th><th>대표 향</th><th>구조의 특징</th><th>더 보기</th></tr></thead>
+  <tbody>
+    <tr><td><span class="tag r">레드</span> 카베르네 소비뇽</td><td>블랙커런트, 블랙체리, 피망·민트, 오크의 삼나무·바닐라</td><td>탄닌·산도 높음, 풀바디</td><td><a href="bordeaux.html">3장 보르도</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 메를로</td><td>자두, 블랙체리, 초콜릿</td><td>탄닌 중간, 부드럽고 둥근 질감</td><td><a href="bordeaux.html">3장 보르도</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 피노 누아</td><td>딸기, 라즈베리, 붉은 체리. 숙성하면 버섯·숲 바닥</td><td>색이 옅고 탄닌 낮음~중간, 산도 높음</td><td><a href="burgundy.html">4장 부르고뉴</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 시라</td><td>블랙베리, 블루베리, 제비꽃, 검은 후추, 훈제 고기</td><td>탄닌 중간(+)~높음, 색이 진함</td><td><a href="rhone.html">6장 론</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 그르나슈</td><td>딸기·라즈베리 잼, 흰 후추, 가리그(남프랑스 덤불 허브)</td><td>알코올 높음, 산도·탄닌 중간</td><td><a href="rhone.html">6장 론</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 네비올로</td><td>장미, 붉은 체리, 타르, 감초</td><td>탄닌·산도 모두 높음, 색은 옅은 가넷</td><td><a href="piedmont.html">8장 피에몬테</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 산지오베제</td><td>신 체리, 토마토 잎, 말린 허브</td><td>산도 높음, 탄닌 중간(+)</td><td><a href="tuscany.html">9장 토스카나</a></td></tr>
+    <tr><td><span class="tag r">레드</span> 코르비나(아마로네)</td><td>체리, 말린 자두, 건포도, 초콜릿</td><td>알코올 높음, 풀바디</td><td><a href="veneto.html">10장 베네토</a></td></tr>
+    <tr><td><span class="tag g">화이트</span> 샤르도네</td><td>서늘한 곳은 풋사과·레몬·부싯돌, 따뜻한 곳과 오크 숙성은 복숭아·버터·토스트·헤이즐넛</td><td>산지와 양조에 따라 가장 폭넓게 변함</td><td><a href="burgundy.html">4장 부르고뉴</a></td></tr>
+    <tr><td><span class="tag g">화이트</span> 소비뇽 블랑</td><td>자몽, 구스베리, 패션프루트, 풀, 아스파라거스</td><td>산도 높음, 주로 오크 없이 신선하게</td><td><a href="rhone.html">6장 루아르</a></td></tr>
+    <tr><td><span class="tag g">화이트</span> 리슬링</td><td>라임, 풋사과, 복숭아, 꽃. 숙성하면 꿀·페트롤</td><td>산도 매우 높음, 드라이부터 스위트까지</td><td><a href="rhone.html">6장 알자스</a></td></tr>
+    <tr><td><span class="tag g">화이트</span> 게뷔르츠트라미너</td><td>리치, 장미, 생강</td><td>산도 낮음, 향이 매우 강함</td><td><a href="rhone.html">6장 알자스</a></td></tr>
+    <tr><td><span class="tag g">화이트</span> 비오니에</td><td>살구, 복숭아, 인동꽃</td><td>산도 낮음, 기름진 질감</td><td><a href="rhone.html">6장 론</a></td></tr>
+    <tr><td><span class="tag s">스파클링</span> 샴페인</td><td>레몬, 사과. 앙금 숙성의 빵·브리오슈, 숙성하면 견과·꿀</td><td>산도 높음, 섬세한 기포</td><td><a href="champagne.html">5장 샹파뉴</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2>팔레트: 구조를 재는 자</h2>
+<p>입에 머금으면 향과 함께 와인의 구조를 잽니다. 구조는 맛이라기보다 촉감에 가깝습니다. 단맛은 혀로, 산도는 침이 고이는 정도로, 탄닌은 잇몸과 볼 안쪽이 마르는 느낌으로, 알코올은 목과 가슴의 열감으로, 바디는 입 안을 채우는 무게로 느낍니다. 입 안의 ‘풍미’는 사실 대부분 향입니다. 머금은 와인의 향이 목 뒤쪽을 거쳐 코로 올라가기 때문에, 코를 막으면 맛이 밋밋해집니다.</p>
+<p>혀의 부위마다 다른 맛을 느낀다는 ‘혀 지도’는 잘못 알려진 이야기입니다. 단맛·짠맛·신맛·쓴맛·감칠맛의 수용체는 혀 전체에 퍼져 있습니다. 다만 감각이 나타나는 <b>시간</b>은 서로 다릅니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><div class="sip" id="sip"></div></div>
+  <figcaption><b>그림 14-3.</b> 한 모금의 시간표. 단맛은 가장 먼저 느껴지고 금세 사라지며, 탄닌의 떫은 느낌은 천천히 쌓여 삼킨 뒤에도 남는다. 알코올의 열감은 삼킨 직후 목에서 올라온다. 삼킨 뒤 향과 맛이 남는 시간이 피니시(여운)다. 감각의 흐름을 단순화한 개념도다.</figcaption>
+</figure>
+
+<div class="grid-cards">
+  <div class="card"><h4>산도</h4><p class="meta">침이 고이는 정도</p><p>화이트와 스파클링의 뼈대다. 높으면 생기 있고 개운하며, 지나치게 낮으면 맥이 빠지고 밋밋하다.</p></div>
+  <div class="card"><h4>탄닌</h4><p class="meta">양과 질감을 함께 본다</p><p>얼마나 마르는지(양)와 어떤 느낌인지(질감)를 따로 적는다. 실크 같은, 입자가 고운, 단단한, 거친, 덜 익은 등.</p></div>
+  <div class="card"><h4>바디</h4><p class="meta">입 안의 무게</p><p>탈지유, 우유, 크림의 차이와 비슷하다. 알코올, 당, 추출물이 많을수록 무겁다.</p></div>
+  <div class="card"><h4>피니시</h4><p class="meta">삼킨 뒤의 여운</p><p>기분 좋은 향과 맛이 남는 시간이다. 프랑스에서는 1초를 1 코달리(caudalie)라고 세기도 한다. 쓴맛이나 알코올의 열감만 남는 것은 치지 않는다.</p></div>
+</div>
+
+<section class="sim wide" id="prof" data-title="구조 프로필 비교"><div class="sim-head"><span class="sim-n">실험 14-3</span><h3>구조 프로필 비교</h3></div>
+  <div class="sim-body">
+    <div class="sim-ctrl">
+      <label class="ctl">와인 A<select id="pa"></select></label>
+      <label class="ctl">와인 B<select id="pb"></select></label>
+      <p class="small" style="margin:0">각 스타일의 전형적인 수준입니다. 생산자와 빈티지에 따라 한두 단계씩 달라집니다.</p>
+    </div>
+    <div class="sim-out">
+      <div class="prof-legend" id="prof-legend"></div>
+      <div class="prof" id="prof-rows"></div>
+      <p id="prof-diff" style="margin:12px 0 0"></p>
+    </div>
+  </div>
+</section>
+
+<div class="try"><b>해볼 것</b><ul>
+  <li>물 한 컵에 레몬즙 몇 방울을 떨어뜨려 맛보세요. 혀 옆쪽이 찌릿하고 침이 고이는 그 느낌이 산도입니다.</li>
+  <li>진하게 우린 홍차를 식혀 한 모금 머금어 보세요. 잇몸과 볼 안쪽이 마르는 느낌이 탄닌입니다.</li>
+  <li>탈지유, 일반 우유, 생크림을 차례로 맛보면 가벼움, 중간, 풀바디의 무게 차이를 몸으로 익힐 수 있습니다.</li>
+  <li>와인을 삼킨 뒤 기분 좋은 향이 몇 초 남는지 세어 보세요. 그 시간이 피니시입니다.</li>
+</ul></div>
+
+<h2>표현의 사전</h2>
+<p>척도 단어만으로는 와인의 성격이 다 전해지지 않습니다. 평론가와 소믈리에가 자주 쓰는 질감과 인상의 표현을 우리말과 영어로 짝지어 두면 노트를 쓰고 읽기가 쉬워집니다.</p>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th>항목</th><th>이렇게 말한다</th><th>영어 노트에서는</th><th>뜻</th></tr></thead>
+  <tbody>
+    <tr><td>산도</td><td>생기 있는, 상쾌한, 날카로운 / 부드러운, 밋밋한</td><td>fresh, crisp, zesty, racy / soft, flabby</td><td>높으면 침이 고이고 입이 개운하다. 지나치게 낮으면 맥이 빠진다.</td></tr>
+    <tr><td>탄닌의 질감</td><td>실크 같은, 벨벳 같은, 입자가 고운, 단단한, 거친, 덜 익은</td><td>silky, velvety, fine-grained, firm, coarse, green</td><td>잘 익은 포도와 숙성은 탄닌을 부드럽게 만든다. 덜 익은 탄닌은 쓰고 풋내가 난다.</td></tr>
+    <tr><td>바디</td><td>가벼운, 미디엄, 풀바디</td><td>light, medium, full-bodied</td><td>입 안을 채우는 무게. 알코올과 추출물이 많을수록 무겁다.</td></tr>
+    <tr><td>과일의 상태</td><td>덜 익은, 신선한, 잘 익은, 잼 같은, 익힌</td><td>under-ripe, fresh, ripe, jammy, baked</td><td>기후와 수확 시기를 알려 준다. 서늘한 해는 신선하게, 더운 해는 잼처럼.</td></tr>
+    <tr><td>질감</td><td>크리미한, 기름진, 둥근, 각진</td><td>creamy, oily, round, angular</td><td>효모 앙금과 젖산 발효는 둥글게, 높은 산도는 각지게 만든다.</td></tr>
+    <tr><td>균형</td><td>균형 잡힌, 따로 노는</td><td>balanced, disjointed</td><td>과일, 산도, 탄닌, 알코올 가운데 어느 하나도 튀지 않는 상태.</td></tr>
+    <tr><td>복합성</td><td>단순한, 복합적인, 층이 있는</td><td>simple, complex, layered</td><td>서로 다른 갈래의 향이 여러 겹으로 나타나는 정도.</td></tr>
+    <tr><td>미네랄리티</td><td>젖은 돌, 부싯돌, 짭짤한</td><td>mineral, flinty, saline</td><td>땅속 광물이 그대로 옮겨 온다는 뜻은 아니다. 높은 산도나 환원 향과 관련된 인상을 묘사하는 말이다.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="box key"><span class="box-t">품질을 판단하는 네 기준</span>
+<p>WSET는 품질을 균형(Balance), 여운의 길이(Length), 강도(Intensity), 복합성(Complexity)으로 판단하며 앞 글자를 따 BLIC라고 부릅니다. 네 가지가 모두 높을수록 ‘뛰어남’에 가깝고, 하나라도 크게 모자라면 ‘좋음’에 머뭅니다. 점수(<a href="critics.html">11장</a>)는 이 판단을 숫자로 옮긴 것입니다.</p></div>
+
+<h2>평론가 노트 읽기</h2>
+<p>평론가의 노트도 같은 순서로 쓰여 있습니다. 아래는 이해를 돕기 위해 만든 예시 노트입니다. 단계 버튼을 누르면 해당 부분만 강조됩니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <div class="map-tools"><div class="seg" id="cn-seg"><button data-v="all" aria-pressed="true">전체</button><button data-v="a">외관</button><button data-v="n">노즈</button><button data-v="p">팔레트</button><button data-v="c">결론</button></div></div>
+    <div class="cols cnotes" id="cnotes">
+      <div><span class="cnote-h">한국어 예시: 2016 바롤로</span><p class="cnote">
+        <span class="nt a"><i>외관</i>중간 농도의 가넷색, 가장자리는 벽돌빛.</span>
+        <span class="nt n"><i>노즈</i>말린 장미와 신 체리, 타르와 감초 향이 먼저 오르고, 잔을 돌리면 가죽과 숲 바닥 같은 숙성 향이 이어진다.</span>
+        <span class="nt p"><i>팔레트</i>드라이하고 산도가 높다. 탄닌은 단단하지만 입자가 곱고, 풀바디에 알코올의 열감을 과일이 받쳐 준다. 짭짤한 여운이 길다.</span>
+        <span class="nt c"><i>결론</i>지금도 열려 있지만 절정은 2030년 이후. 시음 적기 2028–2045. 96점.</span></p></div>
+      <div lang="en"><span class="cnote-h">같은 노트를 영어로</span><p class="cnote">
+        <span class="nt a"><i>외관</i>Medium garnet with a brick rim.</span>
+        <span class="nt n"><i>노즈</i>Dried roses, sour cherry, tar and liquorice, opening to leather and forest floor.</span>
+        <span class="nt p"><i>팔레트</i>Dry and high in acid, with firm yet fine-grained tannins; full-bodied, the alcohol carried by fruit. Long, savoury finish.</span>
+        <span class="nt c"><i>결론</i>Approachable now, best from 2030. Drink 2028–2045. 96 points.</span></p></div>
+    </div>
+  </div>
+  <figcaption><b>그림 14-4.</b> 평론가 노트의 구조. 문장마다 외관, 노즈, 팔레트, 결론 중 하나를 맡는다. 점수와 시음 적기는 결론의 일부다.</figcaption>
+</figure>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th>노트에 자주 나오는 말</th><th>뜻</th></tr></thead>
+  <tbody>
+    <tr><td>approachable, accessible</td><td>지금 마셔도 즐겁다</td></tr>
+    <tr><td>backward, closed, tight</td><td>아직 향이 닫혀 있다. 숙성이 더 필요하다</td></tr>
+    <tr><td>grippy, firm</td><td>탄닌이 입 안을 꽉 쥐는 느낌</td></tr>
+    <tr><td>plush, opulent</td><td>풍만하고 부드럽다. 따뜻한 해의 와인에 자주 쓴다</td></tr>
+    <tr><td>lifted, energetic</td><td>향과 산도가 위로 솟는 듯 생기 있다</td></tr>
+    <tr><td>precise, chiselled</td><td>윤곽이 또렷하고 군더더기가 없다</td></tr>
+    <tr><td>drink 2028–2045, hold</td><td>시음 적기의 시작과 끝 / 더 두라(<a href="vintages.html">12장</a>)</td></tr>
+  </tbody>
+</table></div>
+
+<section class="sim wide" id="nb" data-title="테이스팅 노트 만들기"><div class="sim-head"><span class="sim-n">실험 14-4</span><h3>테이스팅 노트 만들기</h3></div>
+  <div class="sim-body stack">
+    <div class="nb-grid">
+      <div class="ctl">종류<div class="seg" id="nb-type"><button data-v="white">화이트</button><button data-v="rose">로제</button><button data-v="red" aria-pressed="true">레드</button></div></div>
+      <label class="ctl">색<select id="nb-col"></select></label>
+      <div class="ctl">농도<div class="seg" id="nb-dep"><button data-v="0">옅음</button><button data-v="1" aria-pressed="true">중간</button><button data-v="2">진함</button></div></div>
+      <label class="ctl">노즈 강도 <output id="o-ni"></output><input type="range" id="nb-ni" min="0" max="4" value="3"></label>
+      <label class="ctl">당도 <output id="o-sw"></output><input type="range" id="nb-sw" min="0" max="5" value="0"></label>
+      <label class="ctl">산도 <output id="o-ac"></output><input type="range" id="nb-ac" min="0" max="4" value="3"></label>
+      <label class="ctl" id="nb-ta-l">탄닌 <output id="o-ta"></output><input type="range" id="nb-ta" min="0" max="4" value="3"></label>
+      <label class="ctl">알코올 <output id="o-al"></output><input type="range" id="nb-al" min="0" max="2" value="1"></label>
+      <label class="ctl">바디 <output id="o-bo"></output><input type="range" id="nb-bo" min="0" max="4" value="3"></label>
+      <label class="ctl">풍미 강도 <output id="o-fl"></output><input type="range" id="nb-fl" min="0" max="4" value="3"></label>
+      <label class="ctl">피니시 <output id="o-fi"></output><input type="range" id="nb-fi" min="0" max="4" value="3"></label>
+      <div class="ctl">숙성 단계<div class="seg" id="nb-dev"><button data-v="0">어림</button><button data-v="1" aria-pressed="true">숙성 중</button><button data-v="2">절정</button><button data-v="3">지남</button></div></div>
+      <div class="ctl">품질<div class="seg" id="nb-q"><button data-v="0">보통</button><button data-v="1">좋음</button><button data-v="2" aria-pressed="true">매우 좋음</button><button data-v="3">뛰어남</button></div></div>
+      <div class="ctl">시음 적기<div class="seg" id="nb-rd"><button data-v="0">너무 어림</button><button data-v="1" aria-pressed="true">지금도 나중도</button><button data-v="2">지금 마실 것</button><button data-v="3">너무 늙음</button></div></div>
+    </div>
+    <p class="small" id="nb-src" style="margin:0"></p>
+    <div class="nb-tools"><div class="seg" id="nb-view"><button data-v="sat" aria-pressed="true">구조 노트</button><button data-v="prose">풀어 쓴 노트</button><button data-v="en">English</button></div><button class="btn alt" id="nb-copy" type="button">노트 복사</button></div>
+    <div class="nb-out" id="nb-out" aria-live="polite"></div>
+  </div>
+  <p class="sim-note">향은 위의 아로마 휠에서 고른 것이 들어갑니다. 아무것도 고르지 않았다면 종류에 맞는 예시 향을 넣습니다. ‘구조 노트’는 WSET 형식, ‘English’는 영어 시험과 해외 평론에서 쓰는 표현입니다.</p>
+</section>
+
+<h2>서빙 온도와 잔</h2>
+<p>온도는 향과 구조의 균형을 바꿉니다. 너무 차가우면 향이 닫히고 탄닌과 쓴맛이 도드라지며, 너무 따뜻하면 알코올이 튀고 맥이 빠집니다. 레드는 실내 온도보다 조금 차게, 화이트는 냉장고 온도보다 조금 덜 차게가 기본입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><div class="trange" id="temp"></div></div>
+  <figcaption><b>그림 14-5.</b> 스타일별 서빙 온도(WSET 기준). 빗금은 보통의 실내 온도, 점선은 가정용 냉장고(약 4°C). 냉장고에서 꺼낸 화이트는 잔에 따르기 전에 잠시 두고, 실온의 레드는 냉장고에 15~20분쯤 넣었다 꺼내면 맞추기 쉽다.</figcaption>
+</figure>
+
+<figure class="fig wide">
+  <div class="fig-box"><div class="glasses" id="glasses"></div></div>
+  <figcaption><b>그림 14-6.</b> 잔의 모양. 입구가 좁아지는 볼은 향을 모아 준다. 넓은 볼은 섬세한 향의 피노 누아와 네비올로를, 높고 큰 볼은 탄닌이 많은 보르도 품종을 위한 것이다. 전문 테이스팅에서는 조건을 같게 하려고 작은 ISO 표준잔을 쓴다.</figcaption>
+</figure>
+
+<h2>결함 알아채기</h2>
+<p>결함은 대부분 노즈에서 드러납니다. 과일 향이 죽고 낯선 냄새가 앞선다면 아래를 떠올려 보세요. 레스토랑에서 주문한 와인을 먼저 맛보게 하는 것도 취향을 묻는 것이 아니라 이런 결함이 없는지 확인하라는 뜻입니다.</p>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th>결함</th><th>냄새·맛</th><th>원인</th><th>되돌릴 수 있나</th></tr></thead>
+  <tbody>
+    <tr><td>코르크 오염(TCA)</td><td>젖은 골판지, 곰팡내 나는 지하실. 과일 향이 죽는다</td><td>코르크·오크통·셀러 자재에서 생긴 2,4,6-트리클로로아니솔. 리터당 몇 나노그램만 있어도 느껴진다</td><td>아니요. 같은 와인의 다른 병은 멀쩡할 수 있다</td></tr>
+    <tr><td>산화</td><td>멍든 사과, 셰리 같은 견과 향, 갈색빛, 납작해진 과일</td><td>코르크 불량이나 오래 열어 둔 병으로 산소가 지나치게 닿음</td><td>아니요. 셰리·토니 포트처럼 일부러 산화시킨 스타일은 결함이 아니다</td></tr>
+    <tr><td>환원</td><td>썩은 달걀, 삶은 양배추, 고무</td><td>산소가 부족한 상태에서 생긴 황화합물</td><td>가벼우면 잔을 돌리거나 디캔팅하면 줄어든다</td></tr>
+    <tr><td>브렛</td><td>외양간, 반창고, 땀에 젖은 안장, 정향·훈제 베이컨</td><td>브레타노미세스 효모가 만드는 4-에틸페놀·4-에틸과이어콜 등</td><td>아니요. 아주 약하면 복합미로 즐기는 사람도 있다</td></tr>
+    <tr><td>휘발산(VA)</td><td>식초, 매니큐어 리무버</td><td>초산균 등이 만든 아세트산과 에틸 아세테이트</td><td>아니요. 아주 약하면 향을 들어 올려 주기도 한다</td></tr>
+    <tr><td>열 손상</td><td>익힌 과일, 잼, 단조로운 맛. 코르크가 밀려 나오거나 샌 자국</td><td>운송·보관 중의 높은 온도</td><td>아니요</td></tr>
+    <tr><td>빛 손상</td><td>삶은 양배추, 젖은 양털</td><td>투명하거나 옅은 색 병의 화이트·스파클링이 빛을 받아 황 냄새가 생김</td><td>아니요</td></tr>
+    <tr><td>의도치 않은 기포</td><td>스틸 와인에서 따끔한 기포</td><td>병 속에 남은 당과 효모의 재발효</td><td>아니요</td></tr>
+  </tbody>
+</table></div>
+
+<div class="box note"><span class="box-t">결함이 아닌 것</span>
+<p>코르크나 병 바닥에 붙은 투명한 결정(주석산 결정, ‘와인 다이아몬드’)은 차가운 곳에서 생기는 무해한 천연 결정입니다. 오래된 레드의 침전물도 정상이며, 코르크 부스러기는 건져 내면 그만입니다.</p></div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>테이스팅은 외관 → 노즈 → 팔레트 → 결론 순서로, 정해진 척도의 단어로 적는다.</li>
+  <li>화이트는 나이 들수록 진해지고(레몬 → 골드 → 앰버), 레드는 옅어지며 갈색을 띤다(퍼플 → 루비 → 가넷 → 토니). 가장자리가 먼저 변한다.</li>
+  <li>향은 1차(포도·발효), 2차(효모 앙금·젖산 발효·오크), 3차(숙성)로 나누고, 큰 갈래에서 구체적인 이름으로 좁혀 간다.</li>
+  <li>팔레트에서는 당도·산도·탄닌·알코올·바디·피니시를 재고, 품질은 균형·길이·강도·복합성(BLIC)으로 판단한다.</li>
+  <li>스파클링과 스위트는 6~10°C, 화이트는 7~13°C, 레드는 13~18°C. 결함은 대부분 노즈에서 드러난다.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="1"><p class="q">레드 와인이 숙성되면 색은 대체로 어떻게 변하나?</p>
+    <ol class="opts"><li>퍼플 → 루비 → 가넷 → 토니</li><li>토니 → 가넷 → 루비 → 퍼플</li><li>레몬 → 골드 → 앰버</li><li>거의 변하지 않는다</li></ol>
+    <div class="why">레드는 색소가 탄닌과 엉겨 가라앉으며 옅어지고 갈색을 띤다. 레몬 → 골드 → 앰버는 화이트의 변화다.</div></div>
+  <div class="quiz" data-a="3"><p class="q">다음 중 2차 향은?</p>
+    <ol class="opts"><li>블랙커런트</li><li>버섯</li><li>버터</li><li>제비꽃</li></ol>
+    <div class="why">버터 향은 젖산 발효에서 생기는 2차 향이다. 블랙커런트와 제비꽃은 1차, 버섯은 3차 향이다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">잇몸과 볼 안쪽이 마르고 거칠어지는 느낌을 주는 것은?</p>
+    <ol class="opts"><li>산도</li><li>탄닌</li><li>알코올</li><li>당도</li></ol>
+    <div class="why">탄닌은 침 속 단백질과 결합해 입 안을 마르게 한다. 산도는 반대로 침을 고이게 한다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">코르크 오염(TCA)의 대표적인 냄새는?</p>
+    <ol class="opts"><li>식초</li><li>젖은 골판지와 곰팡내</li><li>썩은 달걀</li><li>반창고</li></ol>
+    <div class="why">식초는 휘발산, 썩은 달걀은 환원, 반창고는 브렛의 신호다.</div></div>
+  <div class="quiz" data-a="3"><p class="q">WSET가 권하는 중간·풀바디 레드의 서빙 온도는?</p>
+    <ol class="opts"><li>6~8°C</li><li>10~13°C</li><li>15~18°C</li><li>20~24°C</li></ol>
+    <div class="why">레드는 실내 온도보다 조금 낮은 15~18°C가 기본이다. 10~13°C는 풀바디·오크 숙성 화이트의 온도다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>WSET, <a href="https://www.wsetglobal.com/media/11766/wset_l3wines_sat_en_may2022_issue2.pdf">Level 3 Award in Wines: Systematic Approach to Tasting Wine</a>, Issue 2 (2022). 단계·척도·색 이름·품질과 시음 적기의 구분.</li>
+  <li>서빙 온도의 네 구분(잘 차갑게, 차갑게, 살짝 차갑게, 실온)과 온도 범위: WSET 기준 요약, <a href="https://www.winewithseth.com/winewiki/wine-service-temperature/">Wine with Seth, Wine service temperature</a>.</li>
+  <li>아로마 휠의 원형: A. C. Noble 외, “Modification of a Standardized System of Wine Aroma Terminology”, American Journal of Enology and Viticulture 38(2), 1987, 143–146.</li>
+  <li>혀 지도 반박: J. Chandrashekar 외, “The receptors and cells for mammalian taste”, Nature 444, 2006, 288–294.</li>
+  <li>결함: <a href="https://www.decanterchina.com/en/knowledge/trivia/glossary-common-wine-flaws-and-wine-faults-a-guide">Decanter, Common wine flaws and wine faults: a guide</a>; Luke Holcombe, <a href="https://aggie-horticulture.tamu.edu/wp-content/uploads/sites/13/2018/03/Wine-Faults.pdf">Wine Faults</a>, Texas A&amp;M AgriLife (2018).</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="winemaking.html"><small>← 이전</small>13장 · 양조</a><a class="next" href="review.html"><small>다음 →</small>15장 · 용어집과 종합 퀴즈</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, $$ = WB.$$, esc = WB.esc;
+  function jo(w, a, b) {
+    var s = String(w).replace(/\s*\([^)]*\)\s*$/, '');
+    var c = s.charCodeAt(s.length - 1);
+    if (!(c >= 0xAC00 && c <= 0xD7A3)) return w + b;
+    return w + ((c - 0xAC00) % 28 ? a : b);
+  }
+  function hx(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
+  function mix(a, b, t) {
+    var A = hx(a), B = hx(b);
+    return '#' + [0, 1, 2].map(function (i) { var v = Math.round(A[i] + (B[i] - A[i]) * t); return ('0' + v.toString(16)).slice(-2); }).join('');
+  }
+
+  /* ---------- colour scale ---------- */
+  var COL = {
+    white: { ko: '화이트', names: ['레몬-그린', '레몬', '골드', '앰버', '브라운'], en: ['lemon-green', 'lemon', 'gold', 'amber', 'brown'],
+      word: ['초록빛 도는 레몬색', '레몬색', '금색', '호박색', '갈색'],
+      hex: [['#F6F5D8', '#ECEDB0', '#DEE08A'], ['#FAF3CC', '#F6E79A', '#EED66A'], ['#F5E0A0', '#EAC560', '#D9A93A'], ['#EBC27E', '#D99E48', '#BD7C2A'], ['#CFA374', '#A9733F', '#7E4F26']],
+      ex: ['아주 어린 화이트. 뮈스카데, 어린 소비뇽 블랑·리슬링', '대부분의 어린 드라이 화이트', '오크 숙성 샤르도네, 숙성된 화이트, 귀부 스위트 와인', '오래 숙성된 스위트 와인', '지나치게 늙은 화이트, 또는 일부러 산화시킨 와인'],
+      stops: [0, 2, 8, 18, 30], max: 30 },
+    rose: { ko: '로제', names: ['핑크', '살몬', '오렌지'], en: ['pink', 'salmon', 'orange'],
+      word: ['분홍색', '연어색', '주황빛'],
+      hex: [['#FADCE2', '#F4B5C2', '#E88A9F'], ['#FCDCCB', '#F6B79C', '#EC9677'], ['#F9D0AA', '#F1AE73', '#E38E4A']],
+      ex: ['대부분의 어린 로제. 진한 핑크는 침용 시간이 긴 로제', '프로방스 스타일의 옅은 로제', '숙성된 로제, 일부 그르나슈 로제'],
+      stops: [0, 2, 6], max: 10 },
+    red: { ko: '레드', names: ['퍼플', '루비', '가넷', '토니', '브라운'], en: ['purple', 'ruby', 'garnet', 'tawny', 'brown'],
+      word: ['보랏빛', '루비색', '가넷색', '황갈색', '갈색'],
+      hex: [['#A44D86', '#6E1F58', '#430C38'], ['#C93F58', '#9A1B37', '#650F24'], ['#B95447', '#8C2D2A', '#5E1E1B'], ['#C98652', '#A9622F', '#7E431E'], ['#A47A52', '#80552F', '#5A3719']],
+      ex: ['아주 어린 레드. 시라, 말벡처럼 껍질이 두꺼운 품종', '어린~중간 숙성 레드', '숙성 중인 레드. 네비올로는 어릴 때부터 가넷빛', '오래 숙성된 레드, 토니 포트', '지나치게 늙은 레드'],
+      stops: [0, 2, 8, 18, 30], max: 30 }
+  };
+  var DEPTH = ['옅음', '중간', '진함'], DEPW = ['옅은', '중간 농도의', '진한'], DEPEN = ['pale', 'medium', 'deep'];
+
+  var sw = '';
+  ['white', 'rose', 'red'].forEach(function (t) {
+    var c = COL[t];
+    var g = '<div class="sw-group"><h4>' + c.ko + '</h4><div class="sw-grid" style="--cols:' + c.names.length + '"><span></span>';
+    c.names.forEach(function (nm) { g += '<b>' + nm + '</b>'; });
+    DEPTH.forEach(function (d, k) {
+      g += '<span>' + d + '</span>';
+      c.names.forEach(function (nm, i) {
+        g += '<i tabindex="0" role="img" aria-label="' + esc(d + ' ' + nm) + '" style="background:' + c.hex[i][k] + '" data-tip="' + esc(d + ' ' + nm + ' (' + DEPEN[k] + ' ' + c.en[i] + '). ' + c.ex[i]) + '"></i>';
+      });
+    });
+    sw += g + '</div></div>';
+  });
+  $('#swatches').innerHTML = sw;
+
+  /* ---------- colour and age ---------- */
+  function colAt(t, age, k) {
+    var c = COL[t], s = c.stops, n = s.length;
+    if (age >= s[n - 1]) return { hex: c.hex[n - 1][k], i: n - 1 };
+    for (var i = 0; i < n - 1; i++) {
+      if (age <= s[i + 1]) {
+        var u = (age - s[i]) / (s[i + 1] - s[i]);
+        return { hex: mix(c.hex[i][k], c.hex[i + 1][k], u), i: u < 0.5 ? i : i + 1 };
+      }
+    }
+  }
+  var DEVT = { white: [3, 8, 20], rose: [2, 4, 6], red: [4, 12, 25] };
+  var DEVN = ['어림', '숙성 중', '완전히 숙성됨', '절정을 지남'];
+  function devOf(t, a) { var d = DEVT[t]; return a < d[0] ? 0 : a < d[1] ? 1 : a < d[2] ? 2 : 3; }
+  function rimOf(t, a, k) {
+    if (t === 'red') return mix(colAt('red', Math.min(30, a * 1.5 + 3), 0).hex, '#FFFFFF', 0.3);
+    return mix(colAt(t, a, k).hex, '#FFFFFF', t === 'white' ? 0.72 : 0.5);
+  }
+  function rimWord(t, a) {
+    if (t === 'white') return '물처럼 투명한 테두리';
+    if (t === 'rose') return a < 4 ? '옅은 분홍 테두리' : '주황빛 테두리';
+    return a < 3 ? '보랏빛 테두리' : a < 10 ? '옅은 루비빛 테두리' : a < 20 ? '벽돌빛 테두리' : '넓은 오렌지·갈색 테두리';
+  }
+  var AG = { t: 'red', k: 1, a: 3 };
+  var rAge = $('#r-age');
+  function drawAge() {
+    var t = AG.t, k = AG.k, a = AG.a, c = COL[t];
+    var core = colAt(t, a, k), rim = rimOf(t, a, k);
+    $('#ag-s0').setAttribute('stop-color', core.hex);
+    $('#ag-s1').setAttribute('stop-color', core.hex);
+    $('#ag-s2').setAttribute('stop-color', mix(core.hex, rim, 0.75));
+    $('#ag-s3').setAttribute('stop-color', rim);
+    $('#o-age').textContent = a + '년';
+    var steps = [], n = 24;
+    for (var i = 0; i <= n; i++) steps.push(colAt(t, c.max * i / n, k).hex + ' ' + (100 * i / n).toFixed(1) + '%');
+    $('#age-strip').style.background = 'linear-gradient(90deg,' + steps.join(',') + ')';
+    $('#age-mk').style.left = (100 * a / c.max) + '%';
+    var sc = '';
+    var lastP = -99, row = 0;
+    c.stops.forEach(function (s, i) {
+      if (s > c.max) return;
+      var p = 100 * s / c.max;
+      row = p - lastP < 12 ? 1 - row : 0;
+      lastP = p;
+      sc += '<span style="left:' + p + '%;top:' + (row * 17) + 'px">' + c.names[i] + '</span>';
+    });
+    $('#age-scale').innerHTML = sc;
+    var dv = devOf(t, a);
+    $('#age-read').innerHTML =
+      '<div class="readout"><span>색</span><b>' + c.names[core.i] + '</b></div>' +
+      '<div class="readout"><span>테두리</span><b>' + rimWord(t, a) + '</b></div>' +
+      '<div class="readout"><span>숙성 단계</span><b>' + DEVN[dv] + '</b></div>' +
+      '<div class="readout"><span>노트로 쓰면</span><b style="font-size:var(--fs-1)">' + DEPW[k] + ' ' + c.word[core.i] + ', ' + rimWord(t, a) + '</b></div>';
+  }
+  WB.seg($('#age-type'), function (v) {
+    AG.t = v; rAge.max = COL[v].max;
+    if (AG.a > COL[v].max) { AG.a = COL[v].max; rAge.value = AG.a; }
+    drawAge();
+  });
+  WB.seg($('#age-dep'), function (v) { AG.k = +v; drawAge(); });
+  rAge.addEventListener('input', function () { AG.a = +rAge.value; drawAge(); });
+  drawAge();
+
+  /* ---------- aroma wheel ---------- */
+  var W = [
+    { c: '1차 향', sub: '포도·발효', o: 0.1, fams: [
+      { n: '꽃', col: '#B05FA8', d: [['아카시아', 'acacia'], ['인동', 'honeysuckle'], ['엘더플라워', 'elderflower'], ['제비꽃', 'violet'], ['장미', 'rose']] },
+      { n: '초록 과일', col: '#7FA83A', d: [['풋사과', 'green apple'], ['배', 'pear'], ['구스베리', 'gooseberry'], ['청포도', 'grape']] },
+      { n: '시트러스', col: '#D9B70A', d: [['레몬', 'lemon'], ['라임', 'lime'], ['자몽', 'grapefruit'], ['오렌지 껍질', 'orange peel']] },
+      { n: '핵과', col: '#EE9046', d: [['복숭아', 'peach'], ['살구', 'apricot'], ['천도복숭아', 'nectarine']] },
+      { n: '열대 과일', col: '#E8B23A', d: [['파인애플', 'pineapple'], ['망고', 'mango'], ['패션프루트', 'passion fruit'], ['리치', 'lychee'], ['바나나', 'banana']] },
+      { n: '붉은 과일', col: '#D42F45', d: [['딸기', 'strawberry'], ['라즈베리', 'raspberry'], ['붉은 체리', 'red cherry'], ['크랜베리', 'cranberry'], ['레드커런트', 'redcurrant']] },
+      { n: '검은 과일', col: '#5E2B70', d: [['블랙베리', 'blackberry'], ['블랙커런트', 'blackcurrant'], ['블랙체리', 'black cherry'], ['자두', 'plum'], ['블루베리', 'blueberry']] },
+      { n: '말린 과일', col: '#8E3B2E', d: [['무화과', 'fig'], ['건포도', 'raisin'], ['말린 자두', 'prune'], ['잼 같은 과일', 'jammy fruit']] },
+      { n: '풀·채소', col: '#3E8E41', d: [['풀', 'cut grass'], ['피망', 'green bell pepper'], ['토마토 잎', 'tomato leaf'], ['아스파라거스', 'asparagus'], ['블랙커런트 잎', 'blackcurrant leaf']] },
+      { n: '허브', col: '#2E8B7A', d: [['민트', 'mint'], ['유칼립투스', 'eucalyptus'], ['펜넬', 'fennel'], ['타임', 'thyme'], ['가리그', 'garrigue']] },
+      { n: '향신료', col: '#7A4E2D', d: [['검은 후추', 'black pepper'], ['흰 후추', 'white pepper'], ['감초', 'liquorice']] },
+      { n: '미네랄', col: '#7D8590', d: [['부싯돌', 'flint'], ['젖은 돌', 'wet stones'], ['짭짤함', 'saline']] }
+    ] },
+    { c: '2차 향', sub: '양조', o: 0.18, fams: [
+      { n: '효모·앙금', col: '#C9A46A', d: [['빵', 'bread'], ['비스킷', 'biscuit'], ['브리오슈', 'brioche'], ['빵 반죽', 'bread dough']] },
+      { n: '젖산 발효', col: '#D9C068', d: [['버터', 'butter'], ['크림', 'cream'], ['치즈', 'cheese']] },
+      { n: '오크', col: '#9C6B3C', d: [['바닐라', 'vanilla'], ['토스트', 'toast'], ['삼나무', 'cedar'], ['정향', 'clove'], ['코코넛', 'coconut'], ['연기', 'smoke']] }
+    ] },
+    { c: '3차 향', sub: '숙성', o: 0.28, fams: [
+      { n: '레드 숙성', col: '#6B4A3A', d: [['가죽', 'leather'], ['흙', 'earth'], ['버섯', 'mushroom'], ['숲 바닥', 'forest floor'], ['담배', 'tobacco'], ['육향', 'meaty'], ['타르', 'tar']] },
+      { n: '화이트 숙성', col: '#C99A2E', d: [['꿀', 'honey'], ['페트롤', 'petrol'], ['말린 살구', 'dried apricot'], ['마멀레이드', 'marmalade']] },
+      { n: '산화 숙성', col: '#A0663A', d: [['아몬드', 'almond'], ['헤이즐넛', 'hazelnut'], ['호두', 'walnut'], ['캐러멜', 'caramel'], ['커피', 'coffee'], ['초콜릿', 'chocolate']] }
+    ] }
+  ];
+  var IDX = {}, N = 0;
+  W.forEach(function (tier, ti) { tier.fams.forEach(function (f) { f.d.forEach(function (d) { IDX[d[0]] = { en: d[1], fam: f.n, col: f.col, tier: ti }; N++; }); }); });
+  var U = 2 * Math.PI / N, A0 = -Math.PI / 2, R0 = 62, R1 = 112, R2 = 185, R3 = 282;
+  function pt(r, a) { return (r * Math.cos(a)).toFixed(1) + ' ' + (r * Math.sin(a)).toFixed(1); }
+  function sector(r0, r1, a, b) {
+    var la = b - a > Math.PI ? 1 : 0;
+    return 'M' + pt(r1, a) + 'A' + r1 + ' ' + r1 + ' 0 ' + la + ' 1 ' + pt(r1, b) + 'L' + pt(r0, b) + 'A' + r0 + ' ' + r0 + ' 0 ' + la + ' 0 ' + pt(r0, a) + 'Z';
+  }
+  function rtext(r, a, txt, cls, mid) {
+    var deg = a * 180 / Math.PI, right = Math.cos(a) >= -1e-6;
+    var tr = right ? 'rotate(' + deg.toFixed(2) + ') translate(' + r + ' 0)' : 'rotate(' + (deg + 180).toFixed(2) + ') translate(' + (-r) + ' 0)';
+    return '<text transform="' + tr + '" text-anchor="' + (mid ? 'middle' : right ? 'start' : 'end') + '" dy="0.35em"' + (cls ? ' class="' + cls + '"' : '') + '>' + esc(txt) + '</text>';
+  }
+  var wo = '<circle r="' + R0 + '" class="ctr"/><text y="-3" text-anchor="middle" class="w1t">아로마 휠</text><text y="15" text-anchor="middle" class="wsub">바깥 칸을 눌러 고르기</text>';
+  var kk = 0;
+  W.forEach(function (tier) {
+    var t0 = kk;
+    tier.fams.forEach(function (f) {
+      var f0 = kk;
+      f.d.forEach(function (d) {
+        var a = A0 + kk * U, b = a + U;
+        wo += '<g class="wd" data-d="' + esc(d[0]) + '" tabindex="0" role="button" aria-pressed="false" aria-label="' + esc(d[0]) + '" data-tip="' + esc(d[0] + ' · ' + d[1] + ' (' + f.n + ', ' + tier.c + ')') + '">' +
+          '<path class="seg3" d="' + sector(R2, R3, a, b) + '" style="fill:' + f.col + '"/>' + rtext(R2 + 8, a + U / 2, d[0]) + '</g>';
+        kk++;
+      });
+      var fa = A0 + f0 * U, fb = A0 + kk * U;
+      wo += '<g data-tip="' + esc(f.n + ' (' + tier.c + ')') + '"><path class="seg2" d="' + sector(R1, R2, fa, fb) + '" style="fill:' + f.col + '"/>' + rtext((R1 + R2) / 2, (fa + fb) / 2, f.n, 'w2t', true) + '</g>';
+    });
+    var ta = A0 + t0 * U, tb = A0 + kk * U, tm = (ta + tb) / 2, rr = (R0 + R1) / 2;
+    var x = (rr * Math.cos(tm)).toFixed(1), y = rr * Math.sin(tm);
+    wo += '<path class="seg1" d="' + sector(R0, R1, ta, tb) + '" style="fill:var(--accent);fill-opacity:' + tier.o + '"/>' +
+      '<text x="' + x + '" y="' + (y - 2).toFixed(1) + '" text-anchor="middle" class="w1t">' + tier.c + '</text>' +
+      '<text x="' + x + '" y="' + (y + 13).toFixed(1) + '" text-anchor="middle" class="wsub">' + tier.sub + '</text>';
+  });
+  var wheel = $('#wheel');
+  wheel.innerHTML = wo;
+  var ww = wheel.parentNode;
+  if (ww.scrollWidth > ww.clientWidth) ww.scrollLeft = (ww.scrollWidth - ww.clientWidth) / 2;
+
+  var GR = [
+    { n: '카베르네 소비뇽', t: 'red', ch: ['bordeaux', '3장 보르도'], d: ['블랙커런트', '블랙체리', '피망', '민트', '삼나무', '바닐라', '담배', '가죽'], s: '탄닌과 산도가 높은 풀바디. 덜 익으면 피망 향이 두드러지고, 오크의 삼나무·바닐라와 잘 어울린다.' },
+    { n: '메를로', t: 'red', ch: ['bordeaux', '3장 보르도'], d: ['자두', '블랙체리', '붉은 체리', '초콜릿', '바닐라', '정향', '숲 바닥'], s: '카베르네보다 탄닌이 부드럽고 과일이 둥글다. 우안 생테밀리옹·포므롤의 주인공.' },
+    { n: '피노 누아', t: 'red', ch: ['burgundy', '4장 부르고뉴'], d: ['딸기', '라즈베리', '붉은 체리', '제비꽃', '정향', '버섯', '숲 바닥', '흙'], s: '색이 옅고 탄닌이 적으며 산도가 높다. 숙성하면 버섯과 숲 바닥 같은 향이 피어난다.' },
+    { n: '시라', t: 'red', ch: ['rhone', '6장 론'], d: ['블랙베리', '블루베리', '자두', '제비꽃', '검은 후추', '육향', '연기', '가죽'], s: '북부 론의 품종. 검은 과일과 검은 후추, 훈제 고기 향이 특징이다.' },
+    { n: '그르나슈', t: 'red', ch: ['rhone', '6장 론'], d: ['딸기', '라즈베리', '잼 같은 과일', '흰 후추', '가리그', '감초', '가죽'], s: '알코올이 높고 잘 익은 붉은 과일 향. 남부 론과 샤토뇌프뒤파프의 중심 품종.' },
+    { n: '네비올로', t: 'red', ch: ['piedmont', '8장 피에몬테'], d: ['붉은 체리', '라즈베리', '장미', '제비꽃', '감초', '타르', '가죽', '흙'], s: '색은 옅지만 탄닌과 산도가 모두 높다. ‘장미와 타르’라는 표현이 유명하다.' },
+    { n: '산지오베제', t: 'red', ch: ['tuscany', '9장 토스카나'], d: ['붉은 체리', '자두', '토마토 잎', '타임', '흙', '가죽', '담배'], s: '신 체리와 말린 허브, 높은 산도. 키안티와 브루넬로의 품종.' },
+    { n: '아마로네', t: 'red', ch: ['veneto', '10장 베네토'], d: ['블랙체리', '붉은 체리', '건포도', '말린 자두', '무화과', '초콜릿', '감초'], s: '말린 포도로 만들어 말린 과일 향이 짙고 알코올이 높다.' },
+    { n: '샤블리', t: 'white', ch: ['burgundy', '4장 부르고뉴'], d: ['풋사과', '레몬', '부싯돌', '젖은 돌', '짭짤함', '크림'], s: '서늘한 기후의 샤르도네. 오크를 거의 쓰지 않아 산도와 미네랄 인상이 앞선다.' },
+    { n: '오크 숙성 샤르도네', t: 'white', ch: ['burgundy', '4장 부르고뉴'], d: ['레몬', '복숭아', '버터', '크림', '바닐라', '토스트', '헤이즐넛'], s: '뫼르소 같은 오크 발효·숙성 샤르도네. 젖산 발효의 버터와 오크의 토스트 향이 겹친다.' },
+    { n: '소비뇽 블랑', t: 'white', ch: ['rhone', '6장 루아르'], d: ['자몽', '라임', '구스베리', '패션프루트', '풀', '아스파라거스', '블랙커런트 잎', '부싯돌'], s: '풀과 시트러스, 높은 산도. 상세르와 푸이퓌메의 품종.' },
+    { n: '리슬링', t: 'white', ch: ['rhone', '6장 알자스'], d: ['라임', '레몬', '풋사과', '복숭아', '살구', '아카시아', '젖은 돌', '꿀', '페트롤'], s: '산도가 매우 높고 드라이부터 스위트까지 만든다. 숙성하면 꿀과 페트롤 향이 생긴다.' },
+    { n: '게뷔르츠트라미너', t: 'white', ch: ['rhone', '6장 알자스'], d: ['리치', '장미', '복숭아', '인동', '꿀'], s: '리치와 장미 향이 강렬하고 산도는 낮다. 생강 같은 향신료 향도 흔하다.' },
+    { n: '비오니에', t: 'white', ch: ['rhone', '6장 론'], d: ['살구', '복숭아', '천도복숭아', '인동', '아카시아'], s: '살구와 꽃 향, 낮은 산도와 기름진 질감. 북부 론 콩드리외의 품종.' },
+    { n: '숙성 샴페인', t: 'sp', ch: ['champagne', '5장 샹파뉴'], d: ['레몬', '풋사과', '빵', '비스킷', '브리오슈', '아몬드', '헤이즐넛', '꿀'], s: '효모 앙금과 오래 숙성해 빵·브리오슈 향이 짙고, 병 숙성이 길면 견과와 꿀 향이 더해진다.' },
+    { n: '소테른', t: 'sw', ch: ['bordeaux', '3장 보르도'], d: ['살구', '복숭아', '파인애플', '마멀레이드', '꿀', '말린 살구', '바닐라'], s: '귀부 포도로 만든 스위트 와인. 꿀과 마멀레이드, 오크의 바닐라.' },
+    { n: '토니 포트', t: 'sw', ch: null, d: ['건포도', '말린 자두', '호두', '아몬드', '캐러멜', '커피'], s: '나무통에서 오래 산화 숙성한 주정 강화 와인. 견과와 캐러멜 같은 산화 숙성 향이 대표적이다.' }
+  ];
+  var TCOL = { red: 'var(--st-r)', white: 'var(--st-g)', sp: 'var(--st-s)', sw: 'var(--st-g)' };
+  var TKO = { red: '레드', white: '화이트', sp: '스파클링', sw: '스위트·주정 강화' };
+  var gChips = $('#wheel-grapes');
+  gChips.innerHTML = GR.map(function (g, i) { return '<button class="chip" data-g="' + i + '" aria-pressed="false"><i style="background:' + TCOL[g.t] + '"></i>' + esc(g.n) + '</button>'; }).join('');
+  var SEL = [], curG = null;
+  function tierLists(list) {
+    var o = [[], [], []];
+    list.forEach(function (d) { if (IDX[d]) o[IDX[d].tier].push(d); });
+    return o;
+  }
+  function showGrape(i) {
+    curG = i;
+    $$('.chip', gChips).forEach(function (c) { c.setAttribute('aria-pressed', String(+c.dataset.g === i)); });
+    var set = {};
+    if (i != null) GR[i].d.forEach(function (d) { set[d] = 1; });
+    $$('.wd', wheel).forEach(function (g) { g.classList.toggle('hl', !!set[g.dataset.d]); });
+    wheel.classList.toggle('focus', i != null);
+    var box = $('#wheel-info');
+    if (i == null) { box.innerHTML = ''; return; }
+    var g = GR[i], tl = tierLists(g.d), lab = ['1차', '2차', '3차'];
+    var h = '<h4 style="margin-top:0.6em">' + esc(g.n) + '</h4><div class="sub">' + TKO[g.t] + (g.ch ? ' · <a href="' + g.ch[0] + '.html">' + g.ch[1] + '</a>' : '') + '</div><p style="margin:0 0 0.4em">' + esc(g.s) + '</p><dl class="kv">';
+    tl.forEach(function (l, j) { if (l.length) h += '<dt>' + lab[j] + ' 향</dt><dd>' + l.map(esc).join(', ') + '</dd>'; });
+    h += '</dl><button class="linkbtn" id="wheel-take">이 향들을 노트에 담기</button>';
+    box.innerHTML = h;
+  }
+  gChips.addEventListener('click', function (e) {
+    var c = e.target.closest('.chip');
+    if (!c) return;
+    var i = +c.dataset.g;
+    showGrape(curG === i ? null : i);
+  });
+  function syncSel() {
+    $$('.wd', wheel).forEach(function (g) {
+      var on = SEL.indexOf(g.dataset.d) >= 0;
+      g.classList.toggle('on', on);
+      g.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var p = $('#wheel-picked');
+    if (!SEL.length) p.innerHTML = '<p class="hint" style="margin:0.2em 0 0">아직 고른 향이 없습니다. 휠의 바깥 칸을 눌러 보세요.</p>';
+    else p.innerHTML = '<div class="chips">' + SEL.map(function (d) {
+      return '<button class="chip" data-x="' + esc(d) + '" aria-label="' + esc(d) + ' 빼기"><i style="background:' + IDX[d].col + '"></i>' + esc(d) + '<span class="x" aria-hidden="true">×</span></button>';
+    }).join('') + '</div><button class="linkbtn" id="wheel-clear">모두 지우기</button>';
+    renderNote();
+  }
+  function toggleD(d) { var i = SEL.indexOf(d); if (i >= 0) SEL.splice(i, 1); else SEL.push(d); syncSel(); }
+  wheel.addEventListener('click', function (e) { var g = e.target.closest('.wd'); if (g) toggleD(g.dataset.d); });
+  wheel.addEventListener('keydown', function (e) {
+    var g = e.target.closest && e.target.closest('.wd');
+    if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); toggleD(g.dataset.d); }
+  });
+  $('#wheel-side').addEventListener('click', function (e) {
+    var x = e.target.closest('[data-x]');
+    if (x) { toggleD(x.dataset.x); return; }
+    if (e.target.id === 'wheel-clear') { SEL = []; syncSel(); return; }
+    if (e.target.id === 'wheel-take' && curG != null) { SEL = GR[curG].d.slice(); syncSel(); }
+  });
+
+  /* ---------- sip timeline ---------- */
+  function ram(t, k) { return 1 - Math.exp(-t / k); }
+  var SIP = [
+    ['단맛', '첫인상', function (t) { var x = t / 1.5; return 0.95 * x * Math.exp(1 - x); }],
+    ['산도', '침이 고인다', function (t) { return t <= 8 ? 0.85 * ram(t, 1.2) : 0.85 * ram(8, 1.2) * Math.exp(-(t - 8) / 7); }],
+    ['탄닌', '잇몸이 마른다', function (t) { return t <= 8 ? 0.8 * ram(t, 4) : 0.8 * ram(8, 4) * Math.exp(-(t - 8) / 22); }],
+    ['알코올', '목의 열감', function (t) { if (t <= 8) return 0.18 * ram(t, 3); var x = (t - 8) / 2.2; return 0.18 * ram(8, 3) * Math.exp(-(t - 8) / 10) + 0.72 * x * Math.exp(1 - x); }],
+    ['풍미', '코 뒤로 오르는 향', function (t) { return t <= 8 ? 0.9 * ram(t, 2) : 0.9 * ram(8, 2) * Math.exp(-(t - 8) / 14); }]
+  ];
+  var TMAX = 40, so = '';
+  SIP.forEach(function (r) {
+    var pts = [];
+    for (var i = 0; i <= 200; i++) { var t = TMAX * i / 200; pts.push((t * 10).toFixed(1) + ' ' + (39 - 35 * r[2](t)).toFixed(2)); }
+    so += '<div class="sip-row"><div class="sl">' + r[0] + '<small>' + r[1] + '</small></div><svg viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">' +
+      '<rect class="fz" x="80" y="0" width="320" height="40"/><path class="ar" d="M0 39 L' + pts.join(' L') + ' L400 39 Z"/><path class="cv" d="M' + pts.join(' L') + '"/>' +
+      '<line class="bs" x1="0" y1="39.5" x2="400" y2="39.5"/><line class="mk" x1="80" y1="0" x2="80" y2="40"/></svg></div>';
+  });
+  so += '<div class="sip-row"><div></div><div class="sip-axis">' +
+    [0, 10, 20, 30, 40].map(function (s) { return '<span class="' + (s === 0 ? 'l0' : s === 40 ? 'r0' : '') + '" style="left:' + (100 * s / TMAX) + '%">' + s + '초</span>'; }).join('') +
+    '<span class="ev l0" style="left:0">머금기</span><span class="ev" style="left:20%">삼킴</span><span class="ev" style="left:62%">피니시(여운)</span></div></div>';
+  $('#sip').innerHTML = so;
+
+  /* ---------- structure profiles ---------- */
+  var L5 = ['낮음', '중간(−)', '중간', '중간(+)', '높음'];
+  var DIM = [
+    ['sw', '당도', ['드라이', '오프드라이', '미디엄 드라이', '미디엄 스위트', '스위트', '루셔스']],
+    ['ac', '산도', L5], ['ta', '탄닌', L5], ['al', '알코올', ['낮음', '중간', '높음']],
+    ['bo', '바디', ['가벼움', '중간(−)', '중간', '중간(+)', '풀']],
+    ['fl', '풍미 강도', ['약함', '중간(−)', '중간', '중간(+)', '강함']],
+    ['fi', '피니시', ['짧음', '중간(−)', '중간', '중간(+)', '김']]
+  ];
+  var WN = [
+    ['바롤로', '네비올로', [0, 4, 4, 2, 4, 4, 4]],
+    ['부르고뉴 레드', '피노 누아', [0, 3, 1, 1, 2, 3, 3]],
+    ['포이악(보르도 좌안)', '카베르네 소비뇽 블렌드', [0, 3, 4, 1, 4, 4, 4]],
+    ['보졸레', '가메', [0, 3, 0, 1, 0, 2, 1]],
+    ['샤토뇌프뒤파프', '그르나슈 블렌드', [0, 2, 3, 2, 4, 4, 4]],
+    ['키안티 클라시코', '산지오베제', [0, 4, 3, 1, 2, 3, 3]],
+    ['아마로네', '코르비나 블렌드', [0, 3, 3, 2, 4, 4, 4]],
+    ['샤블리', '샤르도네, 오크 없이', [0, 4, null, 1, 1, 2, 2]],
+    ['뫼르소', '샤르도네, 오크 숙성', [0, 3, null, 1, 3, 4, 4]],
+    ['상세르', '소비뇽 블랑', [0, 4, null, 1, 1, 3, 2]],
+    ['모젤 리슬링 카비네트', '리슬링', [3, 4, null, 0, 0, 3, 3]],
+    ['소테른', '세미용 블렌드', [5, 3, null, 1, 4, 4, 4]],
+    ['샴페인 브뤼 NV', '샤르도네·피노 누아·뫼니에', [0, 4, null, 1, 1, 2, 2]],
+    ['프로세코 엑스트라 드라이', '글레라', [1, 2, null, 1, 0, 2, 1]],
+    ['프로방스 로제', '그르나슈·생소', [0, 2, 0, 1, 1, 1, 1]]
+  ];
+  var opts = WN.map(function (w, i) { return '<option value="' + i + '">' + esc(w[0] + ' (' + w[1] + ')') + '</option>'; }).join('');
+  var pa = $('#pa'), pb = $('#pb');
+  pa.innerHTML = opts; pb.innerHTML = opts; pa.value = '0'; pb.value = '1';
+  function drawProf() {
+    var A = WN[+pa.value], B = WN[+pb.value];
+    $('#prof-legend').innerHTML = '<span><i class="da"></i>A ' + esc(A[0]) + '</span><span><i class="db"></i>B ' + esc(B[0]) + '</span>';
+    var h = '', hi = [], lo = [], same = [];
+    DIM.forEach(function (d, j) {
+      var n = d[2].length, a = A[2][j], b = B[2][j];
+      var tr = '<div class="track">';
+      for (var i = 0; i < n; i++) tr += '<i class="tk" style="left:' + (100 * i / (n - 1)) + '%"></i>';
+      if (a == null && b == null) tr += '<div class="na"><span>둘 다 따지지 않음</span></div>';
+      if (b != null) tr += '<b class="db" style="left:' + (100 * b / (n - 1)) + '%"></b>';
+      if (a != null) tr += '<b class="da" style="left:' + (100 * a / (n - 1)) + '%"></b>';
+      tr += '</div>';
+      h += '<div class="prof-row"><span class="pl">' + d[1] + '</span>' + tr + '<span class="pv">A ' + (a == null ? '—' : d[2][a]) + '<br>B ' + (b == null ? '—' : d[2][b]) + '</span></div>';
+      if (a == null || b == null) return;
+      if (a > b) hi.push(jo(d[1], '이', '가') + ' ' + (a - b) + '단계');
+      else if (a < b) lo.push(jo(d[1], '이', '가') + ' ' + (b - a) + '단계');
+      else same.push(d[1]);
+    });
+    $('#prof-rows').innerHTML = h;
+    var s = '';
+    if (+pa.value === +pb.value) s = '같은 와인을 골랐습니다.';
+    else {
+      var parts = [];
+      if (hi.length) parts.push(hi.join(', ') + ' 높' + (lo.length ? '고' : '습니다'));
+      if (lo.length) parts.push(lo.join(', ') + ' 낮습니다');
+      s = parts.length ? jo(A[0], '은', '는') + ' ' + B[0] + '보다 ' + parts.join(', ') + '.' : '척도로는 차이가 없습니다.';
+      if (same.length && parts.length) s += ' ' + jo(same.join('·'), '은', '는') + ' 같은 수준입니다.';
+    }
+    $('#prof-diff').textContent = s;
+  }
+  pa.addEventListener('change', drawProf); pb.addEventListener('change', drawProf);
+  drawProf();
+
+  /* ---------- critic note ---------- */
+  WB.seg($('#cn-seg'), function (v) {
+    var box = $('#cnotes');
+    box.classList.toggle('focus', v !== 'all');
+    $$('.nt', box).forEach(function (s) { s.classList.toggle('on', s.classList.contains(v)); });
+  });
+
+  /* ---------- note builder ---------- */
+  var NB = { t: 'red', col: 1, dep: 1, dev: 1, q: 2, rd: 1, view: 'sat' };
+  var NBR = ['ni', 'sw', 'ac', 'ta', 'al', 'bo', 'fl', 'fi'];
+  var NBL = { ni: ['약함', '중간(−)', '중간', '중간(+)', '강함'], sw: DIM[0][2], ac: L5, ta: L5, al: DIM[3][2], bo: DIM[4][2], fl: DIM[5][2], fi: DIM[6][2] };
+  var EN5 = ['low', 'medium(-)', 'medium', 'medium(+)', 'high'];
+  var NBE = {
+    ni: ['light', 'medium(-)', 'medium', 'medium(+)', 'pronounced'], sw: ['Dry', 'Off-dry', 'Medium-dry', 'Medium-sweet', 'Sweet', 'Luscious'], ac: EN5, ta: EN5,
+    al: ['low', 'medium', 'high'], bo: ['light', 'medium(-)', 'medium', 'medium(+)', 'full'], fl: ['light', 'medium(-)', 'medium', 'medium(+)', 'pronounced'], fi: ['short', 'medium(-)', 'medium', 'medium(+)', 'long']
+  };
+  var DEFA = { red: ['붉은 체리', '라즈베리', '제비꽃', '바닐라', '정향'], white: ['레몬', '풋사과', '복숭아', '버터', '토스트'], rose: ['딸기', '레드커런트', '자몽', '장미'] };
+  var DEVK = ['어림', '숙성 중', '완전히 숙성됨', '절정을 지남'], DEVE = ['Youthful', 'Developing', 'Fully developed', 'Tired'];
+  var QK = ['보통', '좋음', '매우 좋음', '뛰어남'], QE = ['Acceptable', 'Good', 'Very good', 'Outstanding'];
+  var RDK = ['아직 너무 어리다. 몇 년 더 두자.', '지금 마셔도 좋지만 더 숙성할 수 있다.', '지금 마실 때다. 더 둘 필요는 없다.', '이미 절정을 지났다.'];
+  var RDE = ['Too young.', 'Can drink now, but has potential for ageing.', 'Drink now: not suitable for ageing or further ageing.', 'Too old.'];
+  var NADV = ['은은하게', '조금 약하게', '적당히', '또렷하게', '강렬하게'];
+  var SWP = ['드라이하고', '살짝 단맛이 돌고', '단맛이 조금 느껴지고', '단맛이 분명하고', '달콤하고', '아주 달고 진하며'];
+  var ACP = ['산도가 낮아 부드럽다', '산도가 다소 낮다', '산도는 적당하다', '산도가 생기 있다', '산도가 높아 침이 고인다'];
+  var TAP = ['탄닌은 거의 느껴지지 않는다', '탄닌은 가볍다', '탄닌은 적당하다', '탄닌이 단단한 편이다', '탄닌이 강하고 촘촘하다'];
+  var BOP = ['가볍다', '가벼운 편이다', '중간이다', '중간보다 묵직하다', '묵직한 풀바디다'];
+  var ALP = ['알코올은 낮은 편이다. ', '', '알코올의 열감이 느껴진다. '];
+  var FLP = ['풍미는 은은하고', '풍미는 조금 약하고', '풍미는 적당하고', '풍미가 진하고', '풍미가 아주 진하고'];
+  var FIP = ['여운은 짧다', '여운이 조금 짧다', '여운은 중간 정도다', '여운이 긴 편이다', '여운이 길다'];
+  function rv(k) { return +$('#nb-' + k).value; }
+  function fillCol() {
+    var c = COL[NB.t];
+    $('#nb-col').innerHTML = c.names.map(function (n, i) { return '<option value="' + i + '">' + esc(n + ' (' + c.en[i] + ')') + '</option>'; }).join('');
+    $('#nb-col').value = String(NB.col);
+  }
+  function aromas() {
+    var list = SEL.length ? SEL : DEFA[NB.t];
+    return tierLists(list);
+  }
+  var lastText = '';
+  function renderNote() {
+    NBR.forEach(function (k) { $('#o-' + k).textContent = NBL[k][rv(k)]; });
+    var white = NB.t === 'white';
+    $('#nb-ta-l').hidden = white;
+    var c = COL[NB.t], ar = aromas(), v = {};
+    NBR.forEach(function (k) { v[k] = rv(k); });
+    $('#nb-src').textContent = SEL.length ? '아로마 휠에서 고른 향 ' + SEL.length + '개를 넣었습니다.' : '아로마 휠에서 고른 향이 없어 ' + c.ko + ' 예시 향을 넣었습니다. 위 휠에서 향을 고르면 바로 바뀝니다.';
+    var ap = DEPW[NB.dep] + ' ' + c.word[NB.col];
+    var html = '', text = '';
+    if (NB.view === 'sat') {
+      var nose = '깨끗함, 강도 ' + NBL.ni[v.ni];
+      var lab = ['1차', '2차', '3차'], nl = [];
+      ar.forEach(function (l, j) { if (l.length) nl.push(lab[j] + ': ' + l.join(', ')); });
+      var pal = [DIM[0][2][v.sw], '산도 ' + L5[v.ac]];
+      if (!white) pal.push('탄닌 ' + L5[v.ta]);
+      pal.push('알코올 ' + NBL.al[v.al], '바디 ' + NBL.bo[v.bo], '풍미 강도 ' + NBL.fl[v.fl], '피니시 ' + NBL.fi[v.fi]);
+      var rows = [['외관', '맑음, ' + ap], ['노즈', nose + (nl.length ? '<br>' + nl.map(esc).join('<br>') : '') + '<br>숙성 단계: ' + DEVK[NB.dev]], ['팔레트', pal.join(', ')], ['결론', '품질 ' + QK[NB.q] + '. ' + RDK[NB.rd]]];
+      html = '<dl class="nb-dl">' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>';
+      text = rows.map(function (r) { return r[0] + ': ' + r[1].replace(/<br>/g, ' / '); }).join('\n');
+    } else if (NB.view === 'prose') {
+      var s = [ap + '.'];
+      if (ar[0].length) s.push(ar[0].join('·') + ' 향이 ' + NADV[v.ni] + ' 피어오른다.');
+      if (ar[1].length) s.push(ar[1].join('·') + ' 같은 양조의 향이 겹친다.');
+      if (ar[2].length) s.push(ar[2].join('·') + ' 같은 숙성 향도 비친다.');
+      s.push(SWP[v.sw] + ' ' + ACP[v.ac] + '.');
+      if (!white) s.push(TAP[v.ta] + '.');
+      s.push('바디는 ' + BOP[v.bo] + '. ' + ALP[v.al] + FLP[v.fl] + ' ' + FIP[v.fi] + '.');
+      s.push(QK[NB.q] === '보통' ? '무난한 와인이다.' : (['', '좋은', '매우 좋은', '뛰어난'][NB.q] + ' 와인이다.'));
+      s.push(RDK[NB.rd]);
+      text = s.join(' ');
+      html = '<p>' + esc(text) + '</p>';
+    } else {
+      var arE = ar.map(function (l) { return l.map(function (d) { return IDX[d].en; }); });
+      var nose2 = arE.filter(function (l) { return l.length; }).map(function (l) { return l.join(', '); }).join('; ');
+      var palE = [NBE.sw[v.sw], NBE.ac[v.ac] + ' acidity'];
+      if (!white) palE.push(NBE.ta[v.ta] + ' tannin');
+      palE.push(NBE.al[v.al] + ' alcohol', NBE.bo[v.bo] + ' body', NBE.fl[v.fl] + ' flavour intensity', NBE.fi[v.fi] + ' finish');
+      var sE = ['Clear; ' + DEPEN[NB.dep] + ' ' + c.en[NB.col] + '.', 'Clean, ' + NBE.ni[v.ni] + ' intensity' + (nose2 ? ': ' + nose2 : '') + '. ' + DEVE[NB.dev] + '.', palE.join(', ') + '.', QE[NB.q] + ' quality. ' + RDE[NB.rd]];
+      text = sE.join(' ');
+      html = '<p lang="en">' + esc(text) + '</p>';
+    }
+    lastText = text;
+    $('#nb-out').innerHTML = html;
+  }
+  WB.seg($('#nb-type'), function (v) {
+    NB.t = v; NB.col = v === 'white' ? 1 : v === 'rose' ? 0 : 1;
+    $('#nb-ta').value = v === 'red' ? 3 : 0;
+    fillCol(); renderNote();
+  });
+  WB.seg($('#nb-dep'), function (v) { NB.dep = +v; renderNote(); });
+  WB.seg($('#nb-dev'), function (v) { NB.dev = +v; renderNote(); });
+  WB.seg($('#nb-q'), function (v) { NB.q = +v; renderNote(); });
+  WB.seg($('#nb-rd'), function (v) { NB.rd = +v; renderNote(); });
+  WB.seg($('#nb-view'), function (v) { NB.view = v; renderNote(); });
+  $('#nb-col').addEventListener('change', function () { NB.col = +this.value; renderNote(); });
+  NBR.forEach(function (k) { $('#nb-' + k).addEventListener('input', renderNote); });
+  var cp = $('#nb-copy');
+  cp.addEventListener('click', function () {
+    function done(ok) { cp.textContent = ok ? '복사했습니다' : '복사하지 못했습니다'; setTimeout(function () { cp.textContent = '노트 복사'; }, 1600); }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(lastText).then(function () { done(true); }, function () { done(false); });
+      else done(false);
+    } catch (e) { done(false); }
+  });
+  fillCol();
+  syncSel();
+
+  /* ---------- serving temperature ---------- */
+  var TEMP = [
+    ['스파클링', '샴페인, 프로세코, 크레망', 6, 10, 'var(--st-s)', '6~10°C'],
+    ['스위트 와인', '소테른, 귀부·아이스 와인', 6, 8, 'var(--st-g)', '6~8°C'],
+    ['가볍거나 중간 바디 화이트', '소비뇽 블랑, 리슬링, 샤블리', 7, 10, 'var(--st-g)', '7~10°C'],
+    ['드라이 로제', '프로방스 로제', 7, 10, 'var(--st-p)', '7~10°C'],
+    ['풀바디·오크 숙성 화이트', '뫼르소, 오크 숙성 샤르도네', 10, 13, 'var(--st-g)', '10~13°C'],
+    ['가벼운 레드', '보졸레, 가벼운 발폴리첼라', 12.5, 13.5, 'var(--st-r)', '약 13°C'],
+    ['중간·풀바디 레드', '보르도, 바롤로, 리오하', 15, 18, 'var(--st-r)', '15~18°C']
+  ];
+  var TM = 26;
+  function tp(v) { return (100 * v / TM).toFixed(2) + '%'; }
+  var th = '';
+  TEMP.forEach(function (r) {
+    th += '<div class="tr-row"><div class="tl">' + r[0] + '<small>' + r[1] + '</small></div><div class="tr-track">' +
+      '<div class="band" style="left:' + tp(20) + ';width:' + tp(TM - 20) + '"></div><div class="fr" style="left:' + tp(4) + '"></div>' +
+      '<div class="bar" style="left:' + tp(r[2]) + ';width:' + tp(r[3] - r[2]) + ';background:' + r[4] + '" data-tip="' + esc(r[0] + ': ' + r[5]) + '"><span>' + r[5] + '</span></div></div></div>';
+  });
+  th += '<div class="tr-row ax"><div></div><div class="tr-axis">' + [0, 4, 8, 12, 16, 20, 24].map(function (v) { return '<span style="left:' + tp(v) + '">' + v + '°</span>'; }).join('') +
+    '<span class="ev" style="left:' + tp(4) + '">냉장고</span><span class="ev" style="left:' + tp(23) + '">실내</span></div></div>';
+  $('#temp').innerHTML = th;
+
+  /* ---------- glasses ---------- */
+  var GL = [
+    ['플루트', '스파클링', 13, 17, 34, 100, 0.22, 'var(--t-g2)', true],
+    ['화이트 와인 잔', '화이트, 로제', 20, 30, 64, 72, 0.5, 'var(--t-g2)', false],
+    ['보르도 잔', '카베르네, 메를로', 22, 38, 34, 102, 0.55, 'var(--st-r)', false],
+    ['부르고뉴 잔', '피노 누아, 네비올로', 24, 54, 50, 90, 0.58, 'var(--st-r)', false],
+    ['ISO 테이스팅 잔', '전문 테이스팅 표준', 15, 27, 84, 64, 0.55, 'var(--st-r)', false]
+  ];
+  $('#glasses').innerHTML = GL.map(function (g, i) {
+    var cx = 60, rw = g[2], mw = g[3], y0 = g[4], h = g[5], yb = y0 + h, base = 192;
+    var bowl = 'M' + (cx - rw) + ' ' + y0 + ' C' + (cx - mw) + ' ' + (y0 + h * 0.42) + ' ' + (cx - mw * 0.72) + ' ' + (yb - 1) + ' ' + cx + ' ' + yb +
+      ' C' + (cx + mw * 0.72) + ' ' + (yb - 1) + ' ' + (cx + mw) + ' ' + (y0 + h * 0.42) + ' ' + (cx + rw) + ' ' + y0;
+    var lvl = y0 + h * g[6], id = 'glc' + i;
+    var bub = '';
+    if (g[8]) [[57, 0.42], [63, 0.55], [59, 0.7], [62, 0.84]].forEach(function (b) { bub += '<circle class="bub" cx="' + b[0] + '" cy="' + (y0 + h * b[1]).toFixed(1) + '" r="1.6"/>'; });
+    return '<div><svg viewBox="0 0 120 200" role="img" aria-label="' + g[0] + '"><defs><clipPath id="' + id + '"><path d="' + bowl + ' Z"/></clipPath></defs>' +
+      '<rect x="0" y="' + lvl.toFixed(1) + '" width="120" height="' + (yb - lvl + 2).toFixed(1) + '" clip-path="url(#' + id + ')" style="fill:' + g[7] + ';opacity:.85"/>' + bub +
+      '<path class="go" d="' + bowl + '"/><path class="go" d="M' + cx + ' ' + yb + ' V' + (base - 3) + '"/><path class="go" d="M' + (cx - 26) + ' ' + base + ' Q' + cx + ' ' + (base - 7) + ' ' + (cx + 26) + ' ' + base + ' Z"/></svg>' +
+      '<b>' + g[0] + '</b><small>' + g[1] + '</small></div>';
+  }).join('');
+})();
+</script></body></html>

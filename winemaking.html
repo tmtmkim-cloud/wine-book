@@ -1,0 +1,1184 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>양조: 레드·화이트·로제·샴페인 · WineBook</title><meta name="description" content="레드·화이트·로제·전통 방식 스파클링·탱크 방식·스위트·주정 강화 와인의 양조 과정을 단계별 그림으로 비교하고, 껍질 접촉 시간 실험으로 색과 탄닌의 차이를 보는 장."><meta property="og:title" content="양조: 레드·화이트·로제·샴페인 · WineBook"><meta property="og:description" content="레드·화이트·로제·전통 방식 스파클링·탱크 방식·스위트·주정 강화 와인의 양조 과정을 단계별 그림으로 비교하고, 껍질 접촉 시간 실험으로 색과 탄닌의 차이를 보는 장."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="winemaking"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">13장 · 양조</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html" aria-current="page"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 13</span><span>레드·화이트·로제·샴페인</span></div><h1>양조: 레드·화이트·로제·샴페인</h1><p class="ch-lede">와인 양조의 핵심은 단 한 줄입니다. 효모가 포도의 당을 먹고 알코올과 이산화탄소를 만든다. 그 위에 껍질을 얼마나 오래 담가 두는지, 몇 도에서 발효하는지, 어떤 통에서 얼마나 숙성하는지, 거품을 어떻게 가두는지가 더해져 레드·화이트·로제·스파클링·스위트 와인이 갈라집니다. 이 장은 그 갈림길을 그림으로 따라갑니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>알코올 발효의 원리와 레드·화이트 양조의 결정적 차이(껍질 접촉)를 설명할 수 있다.</li><li>로제를 만드는 세 가지 방법을 구별할 수 있다.</li><li>전통 방식(샴페인)과 탱크 방식(프로세코)의 2차 발효를 비교할 수 있다.</li><li>귀부·아이스·말린 포도·주정 강화 같은 스위트 와인 제조법과 젖산 발효·오크 숙성의 효과를 안다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>모든 와인의 출발점: 알코올 발효</h2>
+<p>포도즙 속 당(포도당과 과당)을 효모가 먹으면 알코올과 이산화탄소, 열이 나옵니다. 당 약 17~18 g/L가 알코올 1%가 되므로, 당도 높은 포도일수록 알코올이 높은 와인이 됩니다. 발효를 끝까지 하면 드라이 와인, 중간에 멈추면 단맛이 남은 와인, 이산화탄소를 가두면 스파클링 와인이 됩니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 170" role="img" aria-label="알코올 발효 반응식">
+      <g id="ferm"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 13-1.</b> 알코올 발효. 레드와 화이트를 가르는 것은 포도 색이 아니라 껍질이다. 거의 모든 포도의 과즙은 투명해서, 적포도도 껍질 없이 즙만 발효하면 화이트(블랑 드 누아)가 된다.</figcaption>
+</figure>
+
+<section class="sim wide" id="skin" data-title="껍질 접촉 시간 실험"><div class="sim-head"><span class="sim-n">실험 13-1</span><h3>껍질 접촉 시간 실험</h3></div>
+  <div class="sim-body">
+    <div class="sim-ctrl">
+      <label class="ctl">껍질과 함께 둔 시간 <output id="o-skin">7일</output><input type="range" id="r-skin" min="0" max="100" value="70"></label>
+      <div class="seg" id="skin-pre"><button data-v="0">즙만</button><button data-v="30">로제</button><button data-v="70" aria-pressed="true">레드</button><button data-v="100">장기 침용</button></div>
+      <p class="small" style="margin:0">적포도를 쓴다고 가정합니다. 색은 몇 시간 만에 빠르게, 탄닌은 며칠에 걸쳐 천천히 우러납니다.</p>
+    </div>
+    <div class="sim-out">
+      <svg class="chart" id="skin-chart" viewBox="0 0 640 220" role="img" aria-label="껍질 접촉 시간에 따른 색과 탄닌"></svg>
+      <div class="readouts" id="skin-read"></div>
+    </div>
+  </div>
+  <p class="sim-note">색과 탄닌 곡선은 일반적인 경향을 단순화한 모형입니다. 실제로는 품종의 껍질 두께, 온도, 펌핑오버 같은 추출 방법에 따라 달라집니다.</p>
+</section>
+
+<h2>레드와 화이트</h2>
+<p>레드 와인은 으깬 포도를 껍질·씨와 함께 발효해 색과 탄닌, 향을 우려냅니다. 화이트 와인은 먼저 포도를 짜서 껍질을 걸러 낸 즙만 서늘하게 발효해 신선한 과일 향을 지킵니다. 아래 그림은 두 과정을 단계별로 나란히 놓은 것입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><svg class="dg" viewBox="0 0 900 292" role="img" aria-label="레드 와인 양조 과정"><g id="flow-red"></g></svg></div>
+  <figcaption><b>그림 13-2.</b> 레드 와인 양조. 발효 중 떠오르는 껍질 층(캡)을 눌러 주거나(펀치다운) 아래 즙을 퍼 올려 끼얹어(펌핑오버) 추출을 조절한다.</figcaption>
+</figure>
+<figure class="fig wide">
+  <div class="fig-box"><svg class="dg" viewBox="0 0 900 292" role="img" aria-label="화이트 와인 양조 과정"><g id="flow-white"></g></svg></div>
+  <figcaption><b>그림 13-3.</b> 화이트 와인 양조. 부르고뉴의 샤르도네처럼 오크통에서 발효하고 효모 앙금을 저어 주면(바토나주) 풍성하고 고소한 질감이 생긴다.</figcaption>
+</figure>
+
+<div class="grid-cards">
+  <div class="card"><h4>젖산 발효(MLF)</h4><p class="meta">알코올 발효 다음</p><p>박테리아가 날카로운 사과산을 부드러운 젖산으로 바꾼다. 거의 모든 레드와 일부 화이트(샤르도네)에 쓰며, 버터 향(디아세틸)이 생기기도 한다.</p></div>
+  <div class="card"><h4>오크 숙성</h4><p class="meta">225 L 바리크부터 큰 통까지</p><p>새 오크는 바닐라·토스트·향신료 향과 탄닌을 더하고, 오래된 통은 향보다 미세한 산소 접촉을 준다. 미국 오크는 코코넛·바닐라 향이 더 강하다.</p></div>
+  <div class="card"><h4>효모 앙금 숙성(쉬르 리)</h4><p class="meta">화이트·스파클링</p><p>발효를 마친 효모와 함께 두면 빵·견과 향과 둥근 질감이 생긴다. 뮈스카데와 샴페인이 대표적이다.</p></div>
+  <div class="card"><h4>청징·여과</h4><p class="meta">병입 전</p><p>단백질·효모 찌꺼기를 걸러 맑게 한다. 일부 생산자는 풍미를 지키려고 하지 않는다(무청징·무여과).</p></div>
+</div>
+
+<h2>로제를 만드는 세 가지 방법</h2>
+<figure class="fig wide">
+  <div class="fig-box"><svg class="dg" viewBox="0 0 900 300" role="img" aria-label="로제 양조의 세 가지 방법"><g id="rose"></g></svg></div>
+  <figcaption><b>그림 13-4.</b> 로제 양조법. 레드와 화이트를 섞어 로제를 만드는 방법은 유럽연합에서 대부분 금지되어 있고, 샹파뉴가 대표적인 예외다.</figcaption>
+</figure>
+
+<h2>거품 만들기: 전통 방식과 탱크 방식</h2>
+<p>샴페인·크레망·카바·프란차코르타는 병 속에서 2차 발효하는 전통 방식으로, 프로세코는 큰 압력 탱크에서 2차 발효하는 탱크 방식으로 만듭니다. 병 속 발효로 생긴 이산화탄소는 빠져나가지 못하고 와인에 녹아 병 안의 압력이 5~6기압까지 올라갑니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box"><svg class="dg" viewBox="0 0 900 292" role="img" aria-label="전통 방식 스파클링 양조 과정"><g id="flow-trad"></g></svg></div>
+  <figcaption><b>그림 13-5.</b> 전통 방식(샹파뉴 방식). 앙금 숙성 기간이 길수록 빵·브리오슈·견과 향이 깊어진다. 리들링은 지금은 대부분 기계(지로팔레트)로 한다.</figcaption>
+</figure>
+
+<div class="tablewrap wide"><table>
+  <thead><tr><th></th><th>전통 방식</th><th>탱크 방식(샤르마·마르티노티)</th></tr></thead>
+  <tbody>
+    <tr><td><b>2차 발효</b></td><td>각 병 안에서</td><td>큰 밀폐 압력 탱크에서</td></tr>
+    <tr><td><b>앙금 숙성</b></td><td>수개월~수년, 병 속에서</td><td>짧거나 거의 없음</td></tr>
+    <tr><td><b>향</b></td><td>빵·브리오슈·견과(자가분해 향)</td><td>배·사과·흰 꽃 같은 신선한 품종 향</td></tr>
+    <tr><td><b>예</b></td><td>샴페인, 크레망, 카바, 프란차코르타, 트렌토</td><td>프로세코, 아스티(1차 발효만으로 거품을 가둠)</td></tr>
+  </tbody>
+</table></div>
+
+<h2>단맛과 힘: 스위트·주정 강화 와인</h2>
+<p>스위트 와인은 포도의 당을 높이 농축하거나 발효를 중간에 멈춰 만듭니다. 주정 강화 와인은 포도 증류주를 더해 알코올을 높입니다.</p>
+<div class="tablewrap wide"><table>
+  <thead><tr><th>방법</th><th>원리</th><th>대표 와인</th></tr></thead>
+  <tbody>
+    <tr><td><b>귀부(보트리티스)</b></td><td>안개와 햇볕이 번갈아 오는 가을, 보트리티스 곰팡이가 껍질에 구멍을 내 수분이 날아가고 당과 산이 농축된다. 알을 하나씩 골라 여러 번 수확한다</td><td>소테른, 토카이 아수, 독일 TBA</td></tr>
+    <tr><td><b>늦은 수확</b></td><td>나무에 오래 매달아 당을 높인다</td><td>알자스 방당주 타르디브, 독일 슈패트레제</td></tr>
+    <tr><td><b>아이스 와인</b></td><td>나무에서 언 포도를 언 채로 짜서 농축된 즙만 얻는다(독일은 −7°C 이하)</td><td>아이스바인, 캐나다 아이스와인</td></tr>
+    <tr><td><b>말린 포도</b></td><td>수확 뒤 포도를 말려 당을 농축한다</td><td>레초토, 빈 산토, 아마로네(드라이)</td></tr>
+    <tr><td><b>발효 중 주정 강화</b></td><td>발효 도중 증류주를 넣어 효모를 멈추고 단맛을 남긴다</td><td>포트, 바뉠스·모리(뱅 두 나튀렐)</td></tr>
+    <tr><td><b>발효 후 주정 강화</b></td><td>드라이 와인에 증류주를 더한 뒤 숙성(셰리는 효모 막 플로르 아래에서 숙성하기도 한다)</td><td>셰리(피노·올로로소), 마데이라</td></tr>
+  </tbody>
+</table></div>
+
+<h2>특별한 방법들</h2>
+<div class="grid-cards">
+  <div class="card"><h4>탄산 침용</h4><p class="meta">보졸레</p><p>포도를 으깨지 않고 송이째 이산화탄소로 채운 통에 넣으면 알 속에서 발효가 시작된다. 탄닌은 적고 바나나·풍선껌·체리 향이 화사해진다.</p></div>
+  <div class="card"><h4>송이째 발효</h4><p class="meta">부르고뉴 · 북부 론</p><p>줄기를 떼지 않고 함께 발효해 향신료·허브 향과 신선한 구조를 더한다.</p></div>
+  <div class="card"><h4>오렌지 와인</h4><p class="meta">프리울리 · 조지아</p><p>청포도를 레드처럼 껍질과 함께 오래 발효해 호박색과 탄닌을 얻는다. 조지아에서는 땅에 묻은 항아리(크베브리)를 쓴다.</p></div>
+  <div class="card"><h4>내추럴 와인</h4><p class="meta">개입 최소화</p><p>야생 효모로 발효하고 첨가물(특히 아황산)을 최소화한다. 법적 정의는 나라마다 다르다.</p></div>
+</div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>효모가 당을 알코올과 이산화탄소로 바꾼다. 당 17~18 g/L가 알코올 약 1%가 된다.</li>
+  <li>레드는 껍질과 함께 발효해 색·탄닌을 우리고, 화이트는 먼저 짜서 즙만 서늘하게 발효한다.</li>
+  <li>로제는 직접 압착, 짧은 침용, 세녜로 만든다. 레드와 화이트를 섞는 방식은 샹파뉴 같은 예외에서만 허용된다.</li>
+  <li>전통 방식은 병 속 2차 발효와 앙금 숙성, 리들링·데고르주망·도자주를 거친다. 탱크 방식은 신선한 과일 향을 살린다.</li>
+  <li>스위트 와인은 귀부·늦은 수확·아이스·말린 포도·주정 강화로 만든다.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="3"><p class="q">레드 와인의 색은 어디에서 오나?</p>
+    <ol class="opts"><li>포도 과즙</li><li>오크통</li><li>껍질</li><li>씨</li></ol>
+    <div class="why">대부분의 포도는 과즙이 투명하다. 색과 탄닌은 껍질에서 우러난다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">병 속 2차 발효 뒤 병목에 모은 효모 앙금을 얼려 빼내는 과정은?</p>
+    <ol class="opts"><li>르뮈아주</li><li>데고르주망</li><li>티라주</li><li>바토나주</li></ol>
+    <div class="why">르뮈아주(리들링)는 앙금을 병목으로 모으는 과정, 데고르주망은 그것을 빼내는 과정이다.</div></div>
+  <div class="quiz" data-a="1"><p class="q">소테른의 단맛을 만드는 것은?</p>
+    <ol class="opts"><li>보트리티스 곰팡이(귀부)</li><li>발효 중 증류주 첨가</li><li>언 포도 압착</li><li>설탕 첨가</li></ol>
+    <div class="why">귀부 곰팡이가 수분을 빼 당과 산을 농축한다. 포트는 발효 중 주정 강화, 아이스바인은 언 포도로 만든다.</div></div>
+  <div class="quiz" data-a="4"><p class="q">보졸레에서 쓰는, 포도를 송이째 이산화탄소 속에 두는 방법은?</p>
+    <ol class="opts"><li>세녜</li><li>바토나주</li><li>아파시멘토</li><li>탄산 침용</li></ol>
+    <div class="why">알 속에서 발효가 시작되어 탄닌이 적고 과일 향이 화사한 와인이 된다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>양조 과정과 용어: 샹파뉴 위원회(champagne.fr)의 양조 설명, 각 산지 협회의 생산 규정.</li>
+  <li>독일 아이스바인 수확 온도(−7°C 이하): 독일 와인법 규정 요약.</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="vintages.html"><small>← 이전</small>12장 · 빈티지와 시음 적기</a><a class="next" href="tasting.html"><small>다음 →</small>14장 · 노즈와 팔레트</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, esc = WB.esc;
+  var AH = '<defs><marker id="wm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink-2)"/></marker></defs>';
+  /* fermentation equation */
+  var f = AH;
+  f += '<rect x="40" y="40" width="200" height="80" rx="10" class="box2"/><text x="140" y="74" text-anchor="middle" class="t-l t-b">당</text><text x="140" y="96" text-anchor="middle" class="t-s t-mut">포도당 · 과당</text>';
+  f += '<circle cx="300" cy="80" r="26" style="fill:var(--t-g1);stroke:var(--st-g)"/><text x="300" y="84" text-anchor="middle" class="t-s t-b">효모</text>';
+  f += '<path d="M244 80 H270" stroke="var(--ink-2)" stroke-width="1.4"/><path d="M330 80 H400" stroke="var(--ink-2)" stroke-width="1.4" marker-end="url(#wm-ah)"/>';
+  [['알코올', '에탄올', 'var(--t-r1)'], ['이산화탄소', '가두면 거품', 'var(--t-s1)'], ['열', '온도 관리가 중요', 'var(--surface-2)']].forEach(function (p, i) {
+    var x = 410 + i * 160;
+    f += '<rect x="' + x + '" y="40" width="140" height="80" rx="10" style="fill:' + p[2] + '"/><text x="' + (x + 70) + '" y="74" text-anchor="middle" class="t-l t-b">' + p[0] + '</text><text x="' + (x + 70) + '" y="96" text-anchor="middle" class="t-s t-2">' + p[1] + '</text>';
+    if (i < 2) f += '<text x="' + (x + 150) + '" y="86" text-anchor="middle" class="t-l">+</text>';
+  });
+  f += '<text x="450" y="152" text-anchor="middle" class="t-s t-mut">C₆H₁₂O₆ → 2 C₂H₅OH + 2 CO₂ + 열</text>';
+  $('#ferm').innerHTML = f;
+
+  /* small pictograms (28x28) for process steps */
+  var BOT = '<path d="M12 2 H16 V8 Q20 10 20 14 V26 H8 V14 Q8 10 12 8 Z"/>';
+  var IC = {
+    grape: '<path d="M14 1 V5" fill="none"/><circle cx="10" cy="8" r="3.2"/><circle cx="17" cy="8" r="3.2"/><circle cx="7" cy="14" r="3.2"/><circle cx="13.5" cy="14" r="3.2"/><circle cx="20" cy="14" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="17" cy="20" r="3.2"/><circle cx="13.5" cy="25" r="2.8"/>',
+    crush: '<circle cx="8.5" cy="18" r="6"/><circle cx="19.5" cy="18" r="6"/><path d="M14 2 V9 M10.5 6 L14 9.5 L17.5 6" fill="none"/>',
+    tank: '<rect x="6" y="2" width="16" height="24" rx="4"/><circle cx="12" cy="17" r="1.6" fill="none"/><circle cx="16.5" cy="12" r="1.3" fill="none"/><circle cx="14" cy="21.5" r="1.1" fill="none"/>',
+    cap: '<rect x="6" y="4" width="16" height="22" rx="4"/><path d="M7 11 H21" fill="none"/><path d="M14 0 V9" fill="none"/>',
+    press: '<rect x="5" y="10" width="18" height="13" rx="2"/><path d="M7 10 V7 H21 V10 M14 7 V1" fill="none"/><path d="M14 23 V27" fill="none"/>',
+    mlf: '<rect x="3" y="7" width="13" height="6" rx="3"/><rect x="12" y="16" width="13" height="6" rx="3"/>',
+    barrel: '<path d="M3 8 Q14 3 25 8 V20 Q14 25 3 20 Z"/><path d="M8.5 6.3 V21.7 M19.5 6.3 V21.7" fill="none"/>',
+    blend: '<path d="M4 4 Q14 4 14 15 M24 4 Q14 4 14 15 M14 15 V25" fill="none"/><path d="M10.5 22 L14 26 L17.5 22" fill="none"/>',
+    filter: '<path d="M3 4 H25 L16.5 14 V23 L11.5 26 V14 Z"/>',
+    bottle: BOT,
+    cold: '<path d="M14 2 V26 M3.6 8 L24.4 20 M3.6 20 L24.4 8" fill="none"/><circle cx="14" cy="14" r="2.5"/>',
+    stir: '<path d="M3 11 Q14 6 25 11 V22 Q14 27 3 22 Z"/><path d="M19 1 L12 19" fill="none"/>',
+    settle: '<rect x="6" y="2" width="16" height="24" rx="4"/><path d="M7 19 H21" fill="none"/><path d="M8 22.5 H20" fill="none" stroke-dasharray="1.6 1.6"/>',
+    glass: '<path d="M8 2 H20 Q20 13 14 14 Q8 13 8 2 Z"/><path d="M14 14 V23 M9 25 H19" fill="none"/>',
+    tirage: BOT + '<path d="M23 3 V9 M20 6 H26" fill="none"/>',
+    bubbles: BOT + '<circle cx="12" cy="19" r="1.2" fill="none"/><circle cx="16" cy="16" r="1" fill="none"/><circle cx="14" cy="22" r="1.4" fill="none"/>',
+    riddle: '<g transform="rotate(-140 14 14)">' + BOT + '</g>',
+    disgorge: '<g transform="rotate(180 14 14)">' + BOT + '</g><path d="M9 25 L19 25" fill="none" stroke-dasharray="2 1.5"/>',
+    dose: '<path d="M14 2 Q22 13 20.5 18.5 A6.5 6.5 0 0 1 7.5 18.5 Q6 13 14 2 Z"/>',
+    cork: '<rect x="9.5" y="2" width="9" height="11" rx="2"/><path d="M8 13 H20 V19 H8 Z"/><path d="M8 17 L4 26 M20 17 L24 26 M4 26 H24" fill="none"/>',
+    clock: '<circle cx="14" cy="14" r="11"/><path d="M14 7 V14 L19 17" fill="none"/>'
+  };
+  /* generic flow: steps in rows, each with a pictogram */
+  function flow(el, color, light, steps, perRow) {
+    var o = AH, per = perRow || steps.length, bw = Math.min(150, (860 - (per - 1) * 22) / per), bh = 104;
+    steps.forEach(function (s, i) {
+      var row = Math.floor(i / per), col = i % per;
+      if (row % 2 === 1) col = per - 1 - col;
+      var x = 20 + col * (bw + 22), y = 20 + row * (bh + 44);
+      o += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="10" class="box2"/>';
+      o += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="6" rx="3" style="fill:' + color + '"/>';
+      o += '<text x="' + (x + 12) + '" y="' + (y + 24) + '" class="t-s t-mut">' + (i + 1) + '</text>';
+      if (s[2] && IC[s[2]]) o += '<g transform="translate(' + (x + bw / 2 - 14) + ',' + (y + 12) + ')" style="fill:' + light + ';stroke:var(--ink-2);stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round">' + IC[s[2]] + '</g>';
+      o += '<text x="' + (x + bw / 2) + '" y="' + (y + 60) + '" text-anchor="middle" class="t-b">' + esc(s[0]) + '</text>';
+      (s[1] || '').split('|').forEach(function (ln, j) { if (ln) o += '<text x="' + (x + bw / 2) + '" y="' + (y + 77 + j * 14) + '" text-anchor="middle" class="t-s t-mut">' + esc(ln) + '</text>'; });
+      if (i < steps.length - 1) {
+        var nrow = Math.floor((i + 1) / per);
+        if (nrow === row) {
+          var dir = row % 2 === 1 ? -1 : 1;
+          var x1 = dir > 0 ? x + bw + 2 : x - 2, x2 = dir > 0 ? x + bw + 20 : x - 20;
+          o += '<path d="M' + x1 + ' ' + (y + bh / 2) + ' H' + x2 + '" stroke="var(--ink-2)" stroke-width="1.4" marker-end="url(#wm-ah)"/>';
+        } else {
+          o += '<path d="M' + (x + bw / 2) + ' ' + (y + bh + 2) + ' V' + (y + bh + 42) + '" stroke="var(--ink-2)" stroke-width="1.4" marker-end="url(#wm-ah)"/>';
+        }
+      }
+    });
+    $(el).innerHTML = o;
+  }
+  flow('#flow-red', 'var(--st-r)', 'var(--t-r1)', [
+    ['수확·선별', '잘 익은 송이를 골라', 'grape'], ['줄기 제거·파쇄', '알을 터뜨린다', 'crush'], ['발효(껍질과 함께)', '25~30°C|5~10일', 'tank'], ['침용', '색·탄닌을 더 우린다|며칠~몇 주', 'cap'], ['압착', '껍질을 짜내고|와인만 분리', 'press'],
+    ['젖산 발효', '사과산 → 젖산|산도가 부드러워진다', 'mlf'], ['숙성', '오크통·탱크|몇 달~몇 년', 'barrel'], ['블렌딩', '통·품종·밭을 섞는다', 'blend'], ['청징·여과', '맑게', 'filter'], ['병입', '병 속 숙성으로', 'bottle']
+  ], 5);
+  flow('#flow-white', 'var(--st-g)', 'var(--t-g1)', [
+    ['수확', '서늘한 아침에', 'grape'], ['압착', '껍질을 바로 분리|송이째 압착하기도', 'press'], ['침전', '즙을 가라앉혀|맑은 부분만', 'settle'], ['발효(즙만)', '12~18°C|스테인리스·오크', 'tank'], ['젖산 발효(선택)', '샤르도네 등|버터 향', 'mlf'],
+    ['앙금 숙성·바토나주', '효모 앙금을 저어|질감을 더한다', 'stir'], ['숙성', '탱크 또는 오크통', 'barrel'], ['안정화', '냉각해 주석산|결정을 없앤다', 'cold'], ['청징·여과', '맑게', 'filter'], ['병입', '신선할 때 마시거나|숙성', 'bottle']
+  ], 5);
+  /* rose methods */
+  var r = AH, lanes = [
+    ['직접 압착', '적포도를 바로 짜서 연한 색의 즙만 발효', '가장 연한 색 · 프로방스', 'var(--t-p)'],
+    ['짧은 침용', '껍질과 2~20시간 담갔다가 즙을 빼서 발효', '색과 과일 향이 더 진함 · 타벨 등', 'var(--st-p)'],
+    ['세녜(즙 빼기)', '레드를 만들던 탱크에서 즙 일부를 미리 빼내 로제로 발효', '남은 레드는 더 진해진다', 'var(--t-r2)']
+  ];
+  lanes.forEach(function (l, i) {
+    var y = 20 + i * 92;
+    r += '<rect x="20" y="' + y + '" width="190" height="72" rx="10" class="box2"/><text x="115" y="' + (y + 32) + '" text-anchor="middle" class="t-l t-b">' + l[0] + '</text><text x="115" y="' + (y + 52) + '" text-anchor="middle" class="t-s t-mut">' + ['바로 압착', '몇 시간 담금', '레드 탱크에서'][i] + '</text>';
+    r += '<path d="M214 ' + (y + 36) + ' H262" stroke="var(--ink-2)" stroke-width="1.4" marker-end="url(#wm-ah)"/>';
+    r += '<text x="276" y="' + (y + 32) + '" class="t-s">' + l[1] + '</text><text x="276" y="' + (y + 52) + '" class="t-s t-mut">' + l[2] + '</text>';
+    r += '<path d="M752 ' + (y + 10) + ' h56 c0 34 -10 52 -28 52 c-18 0 -28 -18 -28 -52z" style="fill:' + l[3] + ';stroke:var(--ink-2);stroke-width:1"/>';
+  });
+  $('#rose').innerHTML = r;
+
+  /* traditional method */
+  flow('#flow-trad', 'var(--st-s)', 'var(--t-s1)', [
+    ['베이스 와인', '산도 높은 드라이 와인|1차 발효', 'glass'], ['아상블라주', '여러 밭·품종·해의|와인을 섞는다', 'blend'], ['티라주', '당과 효모를 넣고|왕관 마개로 병입', 'tirage'], ['병 속 2차 발효', '거품 생성|약 5~6기압', 'bubbles'], ['앙금·병 숙성', '앙금 위 12개월 이상|NV 15개월·빈티지 3년', 'clock'],
+    ['르뮈아주(리들링)', '병을 돌리며 기울여|앙금을 병목으로', 'riddle'], ['데고르주망', '병목을 얼려|앙금 덩어리를 빼낸다', 'disgorge'], ['도자주', '당이 든 와인으로|당도 조절', 'dose'], ['코르크·철사 고정', '뮈즐레', 'cork'], ['출하 전 휴지', '도자주가|어우러지도록', 'clock']
+  ], 5);
+
+  /* skin contact sim */
+  function hours(v) { return v <= 0 ? 0 : Math.round(Math.pow(10, v / 100 * Math.log10(24 * 40)) * 10) / 10; }
+  function draw() {
+    var v = +$('#r-skin').value, h = hours(v);
+    var lab = h === 0 ? '즙만(0시간)' : h < 48 ? Math.round(h) + '시간' : Math.round(h / 24) + '일';
+    $('#o-skin').textContent = lab;
+    var color = 1 - Math.exp(-h / 10), tannin = 1 - Math.exp(-h / 200);
+    var style = h === 0 ? '화이트(블랑 드 누아)' : h < 30 ? '로제' : h < 24 * 4 ? '가벼운 레드' : h < 24 * 21 ? '레드' : '장기 침용 레드';
+    var c = color, rr = Math.round(250 - 140 * c), gg = Math.round(232 - 200 * c), bb = Math.round(200 - 140 * c);
+    var o = '';
+    o += '<path d="M40 30 h120 c0 92 -22 140 -60 140 c-38 0 -60 -48 -60 -140z" style="fill:none;stroke:var(--ink-2);stroke-width:1.4"/>';
+    o += '<path d="M42 78 h116 c-3 56 -24 90 -58 90 c-34 0 -55 -34 -58 -90z" style="fill:rgb(' + rr + ',' + gg + ',' + bb + ')"/>';
+    o += '<path d="M100 170 v32 M70 204 h60" style="stroke:var(--ink-2);stroke-width:1.4;fill:none"/>';
+    [['색', color], ['탄닌', tannin]].forEach(function (m, i) {
+      var y = 60 + i * 70;
+      o += '<text x="220" y="' + y + '" style="fill:var(--ink);font-size:13px;font-weight:600">' + m[0] + '</text>';
+      o += '<rect x="220" y="' + (y + 10) + '" width="380" height="14" rx="4" style="fill:var(--surface-2)"/>';
+      o += '<rect x="220" y="' + (y + 10) + '" width="' + Math.max(4, 380 * m[1]) + '" height="14" rx="4" style="fill:var(--st-r)"/>';
+    });
+    o += '<text x="220" y="210" style="fill:var(--muted)">0시간 → 몇 시간(로제) → 며칠(레드) → 몇 주(장기 침용)</text>';
+    $('#skin-chart').innerHTML = o;
+    $('#skin-read').innerHTML = '<div class="readout"><span>스타일</span><b>' + style + '</b></div><div class="readout"><span>색 추출</span><b>' + Math.round(color * 100) + '%</b></div><div class="readout"><span>탄닌 추출</span><b>' + Math.round(tannin * 100) + '%</b></div>';
+  }
+  $('#r-skin').addEventListener('input', draw);
+  WB.seg($('#skin-pre'), function (v) { $('#r-skin').value = v; draw(); });
+  draw();
+})();
+</script></body></html>

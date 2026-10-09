@@ -1,0 +1,1172 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>프랑스 와인 지도 · WineBook</title><meta name="description" content="프랑스 15개 와인 산지를 지도 위에서 품종·스타일·기후로 비교하고, AOC 체계와 라벨 읽는 법을 익히는 장."><meta property="og:title" content="프랑스 와인 지도 · WineBook"><meta property="og:description" content="프랑스 15개 와인 산지를 지도 위에서 품종·스타일·기후로 비교하고, AOC 체계와 라벨 읽는 법을 익히는 장."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="france"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">02장 · 프랑스 와인 지도</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html" aria-current="page"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 02</span><span>지역별·품종별 한눈에</span></div><h1>프랑스 와인 지도</h1><p class="ch-lede">프랑스는 와인의 ‘문법’을 만든 나라입니다. 어디에서 어떤 품종으로 어떻게 만들어야 그 이름을 쓸 수 있는지를 법으로 정한 원산지 통제 명칭(AOC)이 여기서 시작됐고, 세계의 많은 와인 산지가 이 문법을 빌려 썼습니다. 이 장에서는 지도 위에서 15개 산지의 품종과 스타일을 비교하고, 기후가 품종을 고르는 방식과 라벨 읽는 법을 정리합니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>AOC(AOP)·IGP·뱅 드 프랑스로 이어지는 프랑스 와인 등급 구조를 설명할 수 있다.</li><li>프랑스 주요 산지의 위치와 대표 품종을 지도에서 찾을 수 있다.</li><li>해양성·대륙성·지중해성 기후가 산지별 품종 선택에 어떻게 이어지는지 이해한다.</li><li>보르도와 부르고뉴 라벨에서 산지·등급·생산자 정보를 읽을 수 있다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>프랑스 와인의 뼈대: AOC</h2>
+<p>20세기 초 프랑스 와인은 위조와 혼합으로 몸살을 앓았습니다. 필록세라로 포도밭이 무너진 뒤 다른 지역의 와인을 섞어 유명 산지 이름을 붙이는 일이 흔했기 때문입니다. 1935년 프랑스는 원산지 통제 명칭(Appellation d’Origine Contrôlée, AOC) 제도를 만들고 이를 관리하는 국립 기관(지금의 INAO)을 세웠습니다. AOC는 산지의 경계뿐 아니라 허용 품종, 최대 수확량, 최소 알코올, 재배와 양조 방법까지 정합니다. 오늘날 유럽연합 표기로는 AOP(원산지 보호 명칭)라고 하며, 와인 AOC는 360개가 넘습니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 300" role="img" aria-label="프랑스 와인 등급 피라미드">
+      <g id="fr-pyr"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 2-1.</b> 프랑스 와인의 등급 구조. 위로 갈수록 지정 범위가 좁고 규정이 엄격하다. 오른쪽은 AOC 안에서 다시 나뉘는 단계를 부르고뉴의 예로 보인 것이다. 보르도는 밭 대신 샤토에 등급을 매기기 때문에 이 계단과 다른 방식을 쓴다(3장).</figcaption>
+</figure>
+
+<h2>지역과 품종 지도</h2>
+<p>아래 지도는 데파르트망(도) 단위로 칠한 프랑스의 주요 와인 산지입니다. 색은 그 지역을 대표하는 스타일입니다. 진한 붉은색은 레드, 금색은 화이트, 파란색은 스파클링, 분홍색은 로제가 중심인 지역입니다. 산지를 누르면 품종과 특징이 나오고, 품종 버튼을 누르면 그 품종을 주로 쓰는 산지가 강조됩니다.</p>
+
+<div class="mapwrap wide" id="frx">
+  <div class="map-tools">
+    <div id="grape-chips"></div>
+  </div>
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-fr" viewBox="0 0 640 582" role="group" aria-label="프랑스 와인 산지 지도"><g class="m-bg"><path class="b" data-c="01" d="M420.7 299.2 426.1 280.3 428.7 280.4 430.8 281.8 435.2 280 436.3 280.3 436.9 282.5 440.6 283.6 440.2 285.5 443.2 287.2 443.2 288.7 445.2 289.4 445.7 290.7 446.8 290.2 447.2 293.5 449.8 293.1 453.8 289.1 456.3 290.7 456.9 293.3 461.6 293.1 463.9 291.7 469.5 284.1 470.8 284.5 473.7 286.6 471.3 291.4 472.2 293.2 466.7 295.4 466.2 296.5 467.3 297 466 300.1 463.6 301 463.3 302.8 461.3 301.8 460.6 303.3 461.7 311.1 460.3 321.9 459.3 324 457.2 323.9 456.8 327.4 454.3 329.5 451.4 325.9 452.3 325.2 446.1 319 445.7 316.5 443.2 314.8 438.4 321.4 433.7 319.1 426.6 319.6 425 314.7 423.7 313.8 422.1 314.8 422 313.4 419 311.9 420 310.6 419.6 304 421.5 300.3Z"/><path class="b" data-c="03" d="M353.2 265.9 353.8 268 359.5 272.3 362.2 270.2 365.2 272 366.7 270.3 368.5 270.4 369.4 273.7 372 271.8 372.8 272.3 372.9 270.2 374.8 269.7 373.9 268.3 375.9 268.3 376.3 270.6 380 276.3 380.4 279.9 382.7 280.9 383.9 280.3 385 282.5 388.7 282.5 390.3 283.8 390 292 388.6 291.9 386.7 294.4 381.6 296.6 383.2 300.9 382.5 301.2 383.8 304.9 384 310.5 379.6 311.4 379 313.8 375.4 309.1 370.2 308.7 369.7 306.5 368.3 305.9 366.3 307 358.6 306.5 357.1 306.2 355.6 303.8 352.8 304.5 348.7 300.3 349.7 296.7 347.9 296.1 345.9 296.2 344.8 299.3 341.8 297.8 341.7 299.3 339.7 300.6 338.3 303.6 335.4 302.2 332.1 294.6 329.8 294.4 328.7 291.8 327.9 292.8 325.3 290.5 326.1 289.8 324.6 288.7 324.7 285 327.2 281.7 332.2 280.6 334.3 281.3 337.1 279.6 335.6 273.5 337.6 273.7 341.1 268.8 342.8 270.3 350.4 265.5Z"/><path class="b" data-c="05" d="M480.3 355.4 481.9 356.4 483.1 355.8 484.4 356.5 484.6 358.4 488 359.3 489.4 359 489.1 357 490.2 356 494.3 355.1 496.8 360.5 499.6 360.7 500.2 366.8 504.8 369.6 506.8 369.8 507.5 368.8 510.5 369.9 510.4 372.7 513.8 378.6 510.1 378.4 508.8 380.3 507.4 380.1 501.8 384.5 500.7 386.4 498.5 387.2 496.9 392.5 490.4 392.6 488 391.6 485.7 388.9 484.5 392.2 483.3 391.3 481.1 392.5 482.3 395.2 481 396.9 477.9 392.6 474.8 392 474.6 393.3 470 396.7 467.9 401 469.1 401.5 468.8 404.9 466.1 402.1 465.3 404.2 468.8 408.1 464.2 407 459.4 408.4 459.3 403.8 457.5 403.3 456.8 400.7 453.6 400.7 453 399.9 451.9 400.6 449.5 398.9 448.7 395.8 451 396 451.9 395 450.5 394.5 451 392.1 456 393.3 456.9 391.3 458.3 391.2 455.6 389 457.3 385.2 457.1 382.9 460.5 383.5 461.5 382.1 463 382.6 464.3 380.7 463.3 379.6 464.3 377.7 470.2 375.2 468.9 373.9 470 373.1 472 371.9 473.1 373.1 475.8 370.4 480.7 370.7 482.6 369.5 484.8 370.3 484.7 365.6 483.5 365.3 483.1 362.4 478.4 361.9 478.9 358.9 479.8 358.7 479.2 356.5Z"/><path class="b" data-c="08" d="M395.3 89.4 397.9 88.6 402.9 90.3 405.2 89.7 407.4 87.8 411 86.8 411.2 82.8 413.9 78.9 416.1 77.5 418.1 78 418.7 78.9 417.2 80.8 415.2 88.2 418.8 91.4 417.6 94.2 417.8 98 423 97.5 426.3 99.3 429.2 103.2 432.8 102.9 435.2 105.1 434.6 107.5 437.5 107.2 432.9 111.5 431.8 110 429.3 110.4 427.6 108.8 425.8 114.1 427.4 118.2 427 121.3 425.9 121.2 424.7 123.2 425.7 126 422.2 128.8 420.6 127.4 417.7 129 412.5 128 410.7 129.4 408.5 125.9 402.8 126.7 401.2 124.9 398.6 124.4 396.5 121.4 389.2 120.2 388.8 114.5 390.1 113.6 390 111 388.4 108.6 389.5 107.3 390.7 107.8 391.7 105 396 100.6 394.5 99.2 396.1 92.4 394.7 91.8Z"/><path class="b" data-c="09" d="M299.7 461.7 301.1 464.5 300.7 466.6 307.5 469.2 308.1 470.6 309 469.6 310.2 470.4 309.9 474.1 311.7 475.3 311.6 478.9 309.5 480.5 311.4 481 311.7 484.3 307.1 485.3 306.8 487.4 310.2 491.8 315.6 491 318.7 493.8 318.9 495.9 312 496 311 498.4 303.9 500.9 300.8 499.8 301.3 498.7 296 497.7 293.6 496.1 290.8 496.3 290.6 498.3 289.1 498.9 285.8 492.6 282.6 492.7 280.5 491.9 277.8 492.8 275.6 489.3 270.6 488.4 269.6 487.3 268.1 488.1 265.5 486.1 264.3 481.1 266.8 480 266.4 478.8 270.6 477.9 272.2 476 271 475 271.2 471.3 273.2 471 274.1 468.7 277 468.2 280.1 470.1 280.7 471.9 282.3 471.6 283.5 469.8 280.4 467.6 281.6 466.2 284.7 466.2 287.3 464.1 284.3 462 283.7 460.7 285 459.5 286 459.2 288.5 461.8 288.7 464.1 289.9 465 292.2 464.5 292 460.6 292.8 461.9 297.7 462.7Z"/><path class="b" data-c="14" d="M201.8 120.3 203.4 118.6 208.5 118.4 212.5 120.7 227.3 122.5 234.1 125.8 238.8 125 242.3 123.6 247.2 119.5 253.3 118.2 254 125.6 256.1 126.4 256.1 127.5 253.9 128.3 256.5 130.6 256.1 133.6 257.6 134 255.6 139.4 258.1 141.4 257.4 144.1 256.8 144.9 255.5 143.7 253.8 145.3 251.7 144 247.3 146.1 246.3 144.5 244.2 145.6 243.6 147.2 236.1 150.8 229.5 149.2 228.8 151.2 225.8 148.2 218.5 150.5 216.1 149.3 216.5 150.7 211.3 154.3 206.5 152.1 204.2 153 201.4 152.3 201 150.4 199.2 149.1 202.3 147.4 210.4 138.6 209.6 138.3 210 134 208 131.4 209.6 129.5 208.7 128.1 206.6 129.7 203 127.1 200.9 123.5Z"/><path class="b" data-c="15" d="M333.1 339.2 339.7 341.4 341.2 344.6 347.9 344.5 350.4 348.6 353.1 349.8 356.4 346.1 357 350 360.7 350.1 361.8 353.7 363.1 354.1 362.6 356.2 363.7 359 365.5 359.5 364.2 363.9 365.7 364.3 366.7 367.3 363.7 369.8 362.1 369.4 361.8 372 359.7 373.3 358 371.1 356.6 372.1 356.4 375 355.3 375 354.4 376.7 351.8 385.6 349.6 381 349.9 378.1 347.7 376.8 346.9 372.8 345.1 373.1 343.5 373.9 342.9 369.6 339.9 371 336.8 374.6 335.1 381.2 332.8 383.1 332.1 385.3 327.4 385.8 325.9 384.2 322 385 321.2 387.2 319.7 385.9 320.1 383.9 318.8 381.3 319.6 376.3 316.7 372.8 317.3 370.7 315.6 367.1 318.3 366.6 316.9 362.7 318.6 361 319.9 361.3 320.3 358.4 321.3 357.8 320.6 354.4 323.8 349.7 326.9 347.6 327.1 343.5 328 342.8 330.7 344.5 333.7 344.4 332.3 342.6Z"/><path class="b" data-c="16" d="M232.2 310.1 234.7 308.9 235.1 305.4 237.1 305.6 239.3 303.4 244.9 303.6 247.2 305.5 251.5 305.3 252.3 306.3 254.5 305.7 254.8 304.5 253.5 303.4 255.5 301.6 257.2 303.9 259.8 304.9 262.9 303.9 263.9 302.1 268.2 302.3 267.9 306.8 272 308.9 272.6 311.9 269.4 314 267.9 313.2 268.1 316 265.8 321.2 263.7 320.1 263.6 322.5 261.1 323.7 257.4 329.6 255 330.4 255.2 333.9 249.2 338.7 247.3 338.9 246.1 340.7 244.9 343.8 245.5 347.5 243.6 348.3 239.9 352.7 236.9 351.6 235 353.5 235.1 351.9 233.3 350.4 230.6 350.3 230.7 347.9 226 346.4 224.3 347 223.8 345.5 225.4 343.9 223 342.9 225.4 341.1 225 334.6 223 334 223.9 332.4 220.5 328.8 218.8 328.8 220.8 326.9 219.3 324.1 219.7 322.3 217.9 322.4 220.4 319.9 223.4 320.1 224.7 318.9 226.7 319.2 227.3 320.7 229.9 319.6 231.3 316.7 230.3 312.4 232.3 312Z"/><path class="b" data-c="17" d="M179.7 294.5 181.9 293.5 181.7 294.8 186.9 296.2 187.4 298.3 186.3 298.5 180.4 294.9 177.7 294.8 176.7 292.8 179.5 292 180 293.2 178.5 293.7ZM193.5 289.6 199.9 286.8 201.2 286.8 199.9 289.1 201 289.8 205.8 288.6 208 290.6 207.8 293.8 210.1 295.4 212.6 300 215.5 299.8 220.9 303.3 225.5 303.7 225.8 305 228.8 305.8 229 306.8 230.1 306.4 230.9 309.5 232.2 310.1 232.3 312 230.3 312.4 231.3 316.7 229.9 319.6 227.3 320.7 226.7 319.2 224.7 318.9 223.4 320.1 220.4 319.9 217.9 322.4 219.7 322.3 219.3 324.1 220.8 326.9 218.8 328.8 220.5 328.8 223.9 332.4 223 334 225 334.6 225.4 341.1 223 342.9 225.4 343.9 225.3 344.8 224.2 344.4 223.8 345.5 224.3 347 226 346.4 230.7 347.9 230.6 350.3 233.3 350.4 235.1 351.9 234.1 354.7 234.9 355.6 233.2 356.4 233 358.4 231.2 357.3 228.6 359 227.2 358.6 221.5 354.4 219.8 355 218.3 352 218.7 348.6 212.7 346.7 212.8 344.9 206.9 344.9 205.7 340.5 202.3 335.1 196.9 330.5 196.3 328.6 187.7 322.9 187.7 318.7 192 317.6 191.4 314.4 193.4 314 195 309.7 193.8 307.4 195.7 306.3 193 299.7 189.5 297.4 190.5 294.8 194.1 292.3ZM187.6 315.1 187.1 313.3 182.5 308.7 181.8 303.7 185.8 307 188.1 307.1 188.4 310.7 190.1 313 189.7 316.1 188.2 317.6Z"/><path class="b" data-c="19" d="M309.5 326.9 314.8 323.8 317.8 325.5 319.7 324.9 321.3 325.8 320.9 326.9 323.9 327.3 324 328.9 325.9 328.6 327.1 326.3 330.3 326.9 332.5 324.8 333.8 329.3 332.2 330.3 331.4 332.7 333.4 335 332.3 342.6 333.8 343.9 332.2 344.7 328 342.8 327.1 343.5 326.9 347.6 323.8 349.7 320.6 354.4 321.3 357.8 320.3 358.4 319.9 361.3 318.6 361 316.9 362.7 318.3 366.6 310.7 368.2 309.5 366.9 308.6 368.2 304.2 369.9 298.4 363.7 295.5 364 295.1 363 291.4 364.4 289.5 362 289.1 359.7 290.1 358.5 283.9 356.5 285.4 355 283.1 354.4 284.8 351.1 283 350.2 283.3 347.5 284.8 347.1 286.8 344.3 284.4 343.2 285.5 341.7 284.1 340.7 284.8 338.8 288 339.3 293.1 334 297.2 334.6 301.9 330.2 304.7 329 305.1 327.7 308.5 328.7Z"/><path class="b" data-c="22" d="M106.8 153.2 109.7 152.8 109.8 150.2 111.2 148.5 110.4 146.2 112.6 144.1 115.8 146.2 119.9 144.2 122.1 144.5 123.8 142.9 124.3 144.7 128.4 143.2 128.6 145.4 131.1 145.9 131.3 147.1 129.8 147.7 134 149.9 133.3 151.7 137.3 155.9 137.4 159.1 140.9 161.4 141.5 164.3 142.2 162.9 144.1 163.3 149.3 159 150.5 156.8 152.5 157.4 156.2 155.8 156.9 156.7 155.2 158.8 156.1 159.3 158 157.6 159.9 161.4 163 160.1 164 162 165.7 162.5 165.6 163.6 167.1 162.5 168.3 164.3 170.1 163.8 169.8 168.5 168.7 170.2 169.3 174.8 167.9 175 168.2 176.5 165.9 178.4 164.5 177.3 162.3 179.7 159.4 179.9 159.4 181.7 155.3 185.9 152.2 186.3 151 183.7 149.5 183.3 146.3 184 146.8 185.7 145.4 188.5 142.3 190.6 140.8 189.6 141.2 185 137.8 186 136 183.9 131.3 182.2 129.5 182.7 127.7 180.2 124.4 180.2 123.9 182.1 121 182.8 118.9 183.1 116.3 181.2 113.7 182.3 112.9 181.7 113.5 180.9 108.2 179.7 110.4 174.5 109.4 169.1 107.6 168.4 107.9 166.5 109.4 165.6 108.1 162.4 110.1 160.6 108.8 159.2 109 157.6 107.2 156.7Z"/><path class="b" data-c="23" d="M320.1 286.6 324.5 286.8 326.1 291.9 327.9 292.8 328.7 291.8 329.8 294.4 332.1 294.6 333.9 299.8 335.2 300.6 334.9 305.6 336.8 308.3 337.1 311.8 335.5 312.5 332.5 317.8 331.7 317.3 328.5 319.8 332.5 324.8 330.3 326.9 327.1 326.3 325.9 328.6 324 328.9 323.9 327.3 320.9 326.9 321.3 325.8 319.7 324.9 317.8 325.5 314.8 323.8 309.5 326.9 308.6 324.9 309.3 323.5 308.8 321.3 304 318.1 300.9 319.2 298.1 317.9 298.1 316 299.5 315.6 298.6 313.8 296 314.6 295.3 313.7 297.1 311 295.7 310.1 295.9 305.7 294.5 305 294.5 302.8 292.6 299.8 291.1 300 289.6 297.9 291.2 296.5 290.7 295.4 292.3 292.9 291.2 290.6 295.4 286.2 296.3 288.1 298.9 287.4 300.1 288.5 301.6 286.7 303.2 288.4 304.5 286.3 304 285 306 284.8 306.8 286.1 312.9 285.7 317.1 287.4Z"/><path class="b" data-c="25" d="M494.6 219.1 495 219.9 498.3 219.7 499.9 221.7 498.5 222.7 500 227.5 497.9 230.3 502.8 229.2 504.8 230.7 502.4 233.5 500.5 234.1 501.1 236.5 497.7 241.1 493.4 244.5 491.7 246.9 492 248.4 489.7 250.8 484.5 252.4 482.2 255 483.5 257.1 482.7 262.1 483.6 262.8 471.5 274.4 471.7 276.4 468.4 273.5 470.5 271.1 469 268.9 474.1 264.5 472.8 262.6 466.2 258.9 464.5 252.9 458.7 251.2 458.3 249.5 456.1 251.2 457.4 249.1 456.7 247.2 458.5 244.1 454.6 240 453.6 237.6 459 235.4 462.1 232.8 464.1 233.7 467.8 232 472.2 227.6 474.3 227.8 477 223.1 480.1 222.1 485.2 223.5 486.3 222.4 486.1 220.6 487.3 221.3 489.4 219.6 492 219.5 493.1 220.5Z"/><path class="b" data-c="27" d="M253.3 118.2 260.4 115.4 263.5 118.1 265.5 118.2 266.6 120.1 271.6 119.4 272.4 120.6 275.7 121.2 275.8 123.8 273.8 123.6 273.6 124.4 274.7 125.8 276.3 124.8 279 128.7 280.5 127.8 280.4 126.2 283.5 125.6 284.5 123.8 288.5 123.6 290 119 292.5 117.5 299.6 118.6 302.6 120.9 304.6 120.3 306.2 122.6 307.2 129.4 304.4 128.4 300.6 138.7 296 140.1 295.2 139.5 295.7 144.2 296.4 144.2 296.5 146.3 294.6 147.2 295.4 148.7 294.8 150.2 291.4 152.2 291.9 154.5 289.7 156.2 283.9 155.6 282.5 154.5 282.3 156.5 273.4 158.4 272.8 160 269.9 161.1 268.5 158.3 269.7 157.1 269.2 155.4 263.7 151.7 262.7 148.3 261.8 149.3 258.1 148.9 255.7 147.2 258.1 141.4 255.6 139.4 257.6 134 256.1 133.6 256.5 130.6 253.9 128.3 256.1 127.5 256.1 126.4 254 125.6Z"/><path class="b" data-c="28" d="M271.1 160.9 273.4 158.4 282.3 156.5 282.5 154.5 283.9 155.6 289.7 156.2 291.9 154.5 291.4 152.2 294.8 150.2 295.1 146.5 296.5 146.3 297.9 147.4 298.1 150.1 299.4 151.1 299.1 154.7 301 157.1 299.2 159.7 300.4 160.4 300.1 161.9 302.3 164.6 304.1 164.6 303.9 166.6 306.8 168 307.3 172.5 309.8 174.4 311.7 173.4 311.8 175.9 313.7 176.6 313 181.7 314.3 182.9 312.6 188.3 310.8 190.3 311.5 190.7 309.4 194.2 304.9 195.1 301.6 194.5 299.3 197 297.5 196.2 296.3 197.1 296.5 199.7 293.5 198 293.4 199.9 291.5 199.7 290.9 201.2 286.3 199.7 284.9 200.3 283.4 196.9 281.8 196.4 281.1 193.9 276.9 192.9 279 191.8 278.7 191.1 275.4 192.8 275.2 192.1 271.4 192.5 271.8 190.8 274.1 190.8 274 190 269.9 187.4 271.1 186.3 269 180.3 273.2 178.4 275.7 175.9 275.3 171.8 276.5 169.2 272.3 165.7Z"/><path class="b" data-c="29" d="M52.8 160.8 52.9 158.8 54.4 158.5 55.2 159.4ZM106.8 153.2 107.2 156.7 109 157.6 108.8 159.2 110.1 160.6 108.1 162.4 109.4 165.6 107.9 166.5 107.6 168.4 109.4 169.1 110.4 174.5 108.7 177.3 109.3 178.6 102.5 181.7 101.7 183.2 104.6 190.6 107.8 190.4 111 193.2 113 191.9 113.7 194.7 112.8 197.9 111.1 198 109.5 200 108.3 198.5 107.4 203.2 102.1 202 100.2 200.3 99.2 201 95.9 200.5 91.6 194 91.4 196.9 86 195.8 84.5 196.5 84.2 195 83.3 195.8 84.6 197.5 83.5 199.2 76.8 198.9 76.3 197.3 77.5 197 77.6 195.5 75.4 189.4 71.3 186.2 70.3 186.9 68 185 65.5 184.9 65 182.9 77.9 181.4 80.3 182.8 81.2 182 81.9 179.3 81 176.9 75.3 174 73.8 174.3 71.6 177.6 72.3 173.6 70.1 172.3 71.7 171 71.4 169.1 72.5 168.1 72.9 171.2 77 171.2 78.4 172.2 81.3 171.2 82.9 172.4 84.4 171.6 80.6 170.2 81.2 169.1 79.3 168.5 79 169.4 76.5 169.2 78.3 165.8 77.5 165.3 70.4 168 67.9 166.8 66.7 168 64.3 167.9 65 165.5 64 163.2 65.6 160.1 65.8 156.8 68.1 154.9 71.6 154.8 75.2 151.8 75.8 152.6 78.4 152.1 81.6 150.1 86.1 152 87.6 150 92.4 150.3 95.3 148.5 96.2 152.6 97.9 152.1 99.9 154.4 99.8 151.1 101.1 150.3 107 151.2Z"/><path class="b" data-c="35" d="M163 160.1 162.4 158.6 163.5 158.2 164.9 158.3 166.3 160 167.1 162.5 165.6 163.6 165.7 162.5 164 162ZM169.2 164.1 166.7 157.7 168.9 155.9 171.8 155.4 173.8 156.5 172.4 158.3 173.2 160.1 175.8 160.9 183.3 160 185.9 167.8 188.1 169.4 191.2 169 194.1 165.7 196.5 165.4 201.4 167.5 200.8 171.7 201.9 177.6 199.6 181.2 202 192 201.9 196.1 196.9 197.5 193 207.9 185 204.3 184.8 205.8 180 207.3 178.3 209 177.5 210.8 169.7 210.5 166.2 212.3 165.7 211.3 160.7 214.2 159.7 209.1 162.5 208.4 161.6 207 160 206.9 163.7 203.2 163.2 201.7 161.6 202.5 160.8 200.3 162.3 198.3 160.1 194.6 155 193.8 156.7 190.5 159.4 190.1 158.9 189.1 156.3 189.8 156.4 187.3 155.3 185.9 159.4 181.7 159.4 179.9 162.3 179.7 164.5 177.3 165.9 178.4 168.2 176.5 167.9 175 169.3 174.8 168.7 170.2 170.5 165.4 170.1 163.8Z"/><path class="b" data-c="38" d="M454.3 329.5 459.2 339.1 460.9 338.8 466 341.4 466 336.6 467.9 335.6 471.3 338.5 474.6 338.6 476.4 340.8 476.9 345 474.9 346.7 474.8 349.2 476.2 351.4 475.7 354.1 477.5 353.5 480.5 354.7 479.2 356.5 479.8 358.7 478.9 358.9 478.4 361.9 483.1 362.4 483.5 365.3 484.7 365.6 484.8 370.3 482.6 369.5 480.7 370.7 475.8 370.4 473.1 373.1 472 371.9 468.9 373.9 470.2 375.2 467.9 376.8 465 377 463.3 379.6 461.6 380.3 457.2 378.9 454.5 376 449.8 375.3 450.3 368.1 449.9 359.1 446.3 361.9 439.9 359.7 436.8 360 438.3 357.4 438.2 354.6 437.3 353.1 437.6 350.4 435.4 350.4 436 347.8 433.6 348.6 432.7 346.6 430.1 345.3 425.9 348 422.8 348 421.6 347.1 420.4 341.3 420.9 339.3 425.1 335.4 422.7 332.8 423.4 331.9 431.6 330.2 432.3 327.3 436.1 324.8 433.5 323.2 432.1 320.3 433.3 320.7 433.7 319.1 438.4 321.4 443.2 314.8 445.7 316.5 446.1 319 452.3 325.2 451.4 325.9Z"/><path class="b" data-c="42" d="M386.7 294.4 386.4 297.9 389.5 298.5 389.9 299.9 391.8 300.3 394.6 298.6 397.9 299.8 398.6 298.7 401.5 300.8 405.5 297.2 406.9 298.1 405.9 298.9 407.5 300 406.5 301.8 405.3 301.1 403.1 302.3 402.7 305.1 400.6 306.6 402.9 309.2 400.4 309.8 404.2 313.5 403.4 314.8 404.2 316.3 406.3 317.2 405.6 321.6 404.6 322.2 406.5 323.2 405.3 327.7 411.5 333.1 413.3 332.4 415.6 333.2 416.1 334.5 417.4 333 417.1 337.7 418.6 338.1 419.4 337.2 420.9 339.3 421 344.3 418 345.5 415.5 347.6 415.8 348.6 414.6 349.7 415.1 350.8 410.5 351.8 407.9 349.7 406 350.6 405.8 348.3 404.5 347.4 405.8 346.3 405 344.9 402 345.1 400.2 343.5 397.3 343.8 397.4 345 396.2 344.7 393.9 346.4 393.1 345.5 392.1 347.1 390.9 344.7 389 344.7 388.2 346.5 387.4 345.6 387.4 342.6 389.8 340.7 390.7 337.9 388.7 333.3 384.3 330.3 381.7 324 379 321.5 381.4 316.2 379 313.8 379.6 311.4 382.2 311.4 384.2 309.9 382.5 301.2 383.2 300.9 381.6 296.6Z"/><path class="b" data-c="43" d="M387.4 345.6 388.2 346.5 389 344.7 390.9 344.7 392.1 347.1 393.1 345.5 393.9 346.4 396.2 344.7 397.4 345 397.3 343.8 400.2 343.5 402 345.1 405 344.9 405.8 346.3 404.5 347.4 405.8 348.3 406 350.6 407.9 349.7 410.7 352.4 409.2 357.7 406.4 357 407.4 358.6 405.3 361.2 406.6 363 404.1 363.4 403.2 365.3 404.1 366.7 400.5 367.3 398.1 372.3 393.2 372.5 393.1 374.6 391.5 375.7 389.8 375.2 388.8 377.9 386.6 379.7 381.9 374.5 378.9 375.1 378.3 372.6 377.2 372.2 375.9 372.5 375.7 375.2 371.4 376.2 368.4 368.1 366.1 367.1 365.7 364.3 364.2 363.9 365.5 359.5 363.7 359 362.6 356.2 363.1 354.1 361.8 353.7 360.7 350.1 357 350 356.4 346.1 358.9 346.2 364.3 342.4 370.4 343.3 371.9 341.8 376.5 346.8 378.9 344.2 382.5 346.1 383.8 343.7Z"/><path class="b" data-c="45" d="M349.2 189.8 352.7 191.5 356.4 200.5 351.9 204.7 352.5 210.8 346.3 212.2 346 214.2 350 218.6 349.5 221 350.8 222.9 346.4 223.8 347 225.6 345.2 226.9 343 225.4 341.3 225.6 341.1 227.4 338.9 227.4 336.6 223.6 334.7 222.6 332.9 223 330.7 220.7 328.2 222 325.1 219.6 323.2 220 321.8 216.8 314.5 216.8 312.1 217.8 311.8 216.7 308.4 216.3 308.4 217.9 306.1 218.1 304.5 217.6 303.5 213.7 300.3 212 299.6 213.5 297.4 211.5 298.2 210 296.9 207.6 298.9 205.6 296.6 202.6 298.2 199.3 296.5 199.7 296.3 197.1 297.5 196.2 299.3 197 301.6 194.5 304.9 195.1 309.4 194.2 314.3 182.9 320.3 182 322 179.7 325.4 181.8 326.6 180.4 327.9 181.7 329.4 181.1 330.2 184.5 331.9 184.7 333.9 188.1 333.2 190.3 332.4 189.8 331.5 191.3 332.6 191.9 335.6 191.1 340.7 192 342.5 190.8 342 190.1 344.1 189.6 344.9 191.7Z"/><path class="b" data-c="48" d="M366.7 367.3 368.4 368.1 371.4 376.2 375.7 375.2 375.9 372.5 377.2 372.2 378.3 372.6 378.9 375.1 381.9 374.5 385.8 378.4 388 386.7 391.5 392.3 392.2 395.4 390.2 398.8 387.9 399.5 390.3 403.3 389.4 404.1 389.9 405.7 391.5 407 390.4 407.5 390.7 411.5 387.5 413.9 384.5 414 380 411.1 378.9 411.6 378.1 411.4 378 414.5 377 414.8 370.3 414.1 366.9 410.3 360.9 410.8 361.6 408.6 359.1 407.7 358.8 406.2 357.6 406.9 358.8 404.2 357.4 401.2 358 396.1 355.3 393.4 355.6 389.5 351.8 385.6 354.4 376.7 355.3 375 356.4 375 356.6 372.1 358 371.1 359.7 373.3 361.8 372 362.1 369.4 363.7 369.8Z"/><path class="b" data-c="50" d="M201.8 120.3 200.9 123.5 203 127.1 206.6 129.7 208.7 128.1 209.6 129.5 208 131.4 210 134 209.6 138.3 210.4 138.6 199.2 149.9 201 150.4 202.5 152.8 206.5 152.1 210.5 154.3 210.1 155.5 214.2 158.3 212.7 159.7 213.4 162.9 209.1 168.3 205.6 167.3 203.8 168.7 196.5 165.4 194.1 165.7 193.7 167.1 189.8 169.8 185.9 167.8 183.3 160 186.8 160.7 189.9 159 185.8 156.6 184.1 154 183.8 149.2 182.7 148.2 185.2 143.2 183.3 134.8 184.5 126.3 182.9 127.3 180.3 120.9 177 118.1 174.7 108.6 176.4 107 176.4 104.3 175.9 102.6 172.9 101 173.2 98.2 184.4 103.2 188.2 102.8 190.1 100.7 191.9 100.4 197.4 101.2 198.6 106.1 196.1 107.4 195.6 109.8 200.2 117.3 199.8 119Z"/><path class="b" data-c="52" d="M413 168.4 417.8 168.3 416.6 165.1 419.5 163.6 419.5 162.2 416.6 161.3 416.9 160.6 424.5 159.5 425.5 163.6 426.8 162.4 427.6 164.4 436.4 168.5 442.7 173.6 440.5 175.8 441.7 175.9 440.9 178.2 443.3 177.2 444.8 178 447.3 181.4 448.2 180.6 449.8 181.8 449.4 183.3 451.1 183.7 452.8 186.1 451 186.9 449.3 192.1 454.9 194.8 455.4 199.2 457.8 198.5 459.4 201.4 457.9 201.7 456.4 205 454.7 204.4 454.2 206.4 452.5 206.5 451.8 209.5 452.8 209.5 453 210.8 452.4 214.2 448.9 215.1 447.8 213.3 446.4 215.1 441.8 215.3 440 219.9 439.5 218.9 438 219.2 436.2 220.8 435.7 218.7 433.1 216.7 433.3 215.1 431.4 217 428.2 215.5 427.7 213.7 426.3 214.9 425.1 214.5 425.4 212.6 423.4 210.1 426.1 207.6 422.5 202.1 420.9 203.5 419.8 202.5 421.2 201.1 418.1 199.6 418.2 197.4 415 196.8 415 192.3 415.8 191.3 419.8 191.7 420.6 186.6 420 181.3 418.6 179.8 419.6 178.9 416.4 177.5 416.5 176.3 414.3 175.9 413.2 173.2 411.8 172.6Z"/><path class="b" data-c="53" d="M201.4 167.5 203.8 168.7 205.6 167.3 209.1 168.3 212.8 172 214.4 171.4 213.9 170.1 216.3 169.4 216.7 171.8 222.2 168.6 224.5 168.2 227.3 169.5 229.1 167.9 230.9 168.8 232 167.2 231.3 166.6 233.3 165.8 235.6 167.8 234.7 168.5 235.5 171.9 238.8 172.1 238.6 176.1 236.5 176.4 234.8 178.3 234.9 185.8 230.9 188.3 232.1 190.8 231.5 193.8 230 193.4 227.3 196.3 229.3 199.3 225 201 224.6 202.8 225.7 203.1 225.7 204.7 222.9 206.1 223.4 207.4 225.1 207.7 225.2 210.2 222.5 210.3 220.5 208.6 219.6 210.5 211.7 210.9 203.7 207.3 203.8 208.9 202.9 209.2 196.5 208 193.4 206 196.9 197.5 201.9 196.1 202 192 199.6 181.2 201.9 177.6 200.8 171.7Z"/><path class="b" data-c="54" d="M440.5 113.7 447.4 110.4 448.8 111.1 451.4 109.6 453.7 110.7 453.7 112 457.5 114.3 457.7 116.8 456.7 118.1 458.4 120.6 458 122.1 460.3 123.5 461.3 126.8 459.8 130.3 461.4 131.4 459.8 132.6 460.8 134.3 458.1 134.7 457.9 135.6 459 137.7 462.5 139.8 462.5 141.8 465.2 142.2 465.8 144 470.9 143.9 473 145.4 471.8 148.9 473.7 149.3 474.9 152 477.2 151.6 478 152.9 482.1 153.6 483.5 155.4 493.5 160.2 495.9 159.2 499.9 162.1 501.8 165.7 503.4 165.6 498.3 167.8 495.2 171.3 494.2 170.7 492.4 172.6 488.1 172 486.1 171 485.1 168.8 483.2 170.9 483.8 172 481.9 171.3 480.7 172.3 474.5 173.2 473.3 171.8 470.9 173.6 467.7 173.5 466.7 176.4 466 175.4 460.9 176.8 459.9 173.9 457.1 173.3 458.5 171.6 457.9 168.9 456.7 168.3 454.2 169.7 453.4 169 453.7 166.5 451.5 165.5 451.5 163.8 453.4 162.1 452.3 160.3 452.9 157.6 451 155.3 452 154.8 453.2 150.1 452.6 148 453.5 147.3 451.8 145.7 455.4 143.5 453.7 141.7 455.4 138.5 453.7 136.7 454 134.7 452.3 135.1 451.3 134.1 451.9 130 450.4 130.2 450.1 127.3 451.7 124.1 450.4 123.7 450.5 121.4 448.7 118 446.6 116.8 440.5 119.4 442 117.9 441 117.7Z"/><path class="b" data-c="55" d="M422.2 128.8 425.7 126 424.7 123.2 427.5 120.2 425.8 114.1 427.6 108.8 429.3 110.4 431.8 110 432.9 111.5 437.5 107.2 440.2 111.4 439.7 112.6 441 117.7 442 117.9 440.5 119.4 446.6 116.8 448.7 118 450.5 121.4 450.4 123.7 451.7 124.1 450.1 127.3 450.4 130.2 451.9 130 451.3 134.1 452.3 135.1 454 134.7 453.7 136.7 455.4 138.5 453.7 141.7 455.4 143.5 451.8 145.7 453.5 147.3 452.6 148 453.2 150.1 452 154.8 451 155.3 452.9 157.6 452.3 160.3 453.4 162.1 451.5 163.8 451.5 165.5 453.7 166.5 453.4 169 451.6 171.1 450.3 170.5 444.2 173.7 441.8 173.4 436.4 168.5 427.6 164.4 426.8 162.4 426.2 163.5 424.8 163 425.1 156.3 420.6 153.3 422.3 150.9 421.4 147.6 425.8 143.4 424.6 142.9 425.6 140.6 423.2 140.7 424.5 138.6 421.8 131.7 423.8 130.3Z"/><path class="b" data-c="56" d="M111.1 211.5 108 210.1 108.5 209.4 110.9 210.2ZM118.6 226.2 123.5 229.6 122 231.1 119.3 229.9 117.3 230.1 116.3 228.8 116.1 225.7ZM108.3 198.5 109.5 200 111.1 198 112.8 197.9 113.7 192.9 113 191.9 110.3 192.9 107.8 190.4 104.6 190.6 101.7 183.2 103.3 181.3 108.2 179.7 111.4 179.9 113.5 180.9 112.9 181.7 113.7 182.3 116.3 181.2 118.9 183.1 123.9 182.1 124.4 180.2 127.7 180.2 129.5 182.7 131.3 182.2 136 183.9 137.8 186 141.2 185 140.8 189.6 142.3 190.6 145.4 188.5 146.8 185.7 146.3 184 149.5 183.3 151 183.7 152.2 186.3 155.3 185.9 156.4 187.3 156.3 189.8 158.9 189.1 159.4 190.1 156.7 190.5 155 193.8 160.1 194.6 161.3 196 162.3 198.3 160.8 200.3 161.6 202.5 163.2 201.7 163.7 203.2 160 206.9 161.6 207 162.5 208.4 159.7 209.1 161.1 214.8 160.3 219.6 158.2 220.2 158.1 221.6 157 221.8 156.8 220.6 154.7 221.5 154.2 220.4 152.7 221 152.1 223 148.8 223.3 148 222 145.7 223.8 145.1 221.2 147.4 220.9 144.6 219.1 141.4 219.4 139.6 218 138.4 220.4 132.1 219.8 130.1 216.2 135.5 217.9 137.4 215.8 136.1 212.4 132.5 213.1 130.7 215 129.2 214.1 126.5 215.6 125.8 214.6 122.1 215.1 121.6 217.2 122.8 220 121.5 220.4 120.8 218.7 121.5 214.5 119.1 210.9 120 208.7 122.6 206.6 120.8 205.8 119 210.7 114.3 205.7 112.8 207 110.3 207.2 108 203.6Z"/><path class="b" data-c="57" d="M455.8 113.1 458.7 113.3 459.1 115.6 464.2 114.1 465.3 112.4 468.9 111.8 472.9 114.5 474.9 113.5 476.7 114.1 481.2 118.2 480.6 120.5 485.6 127.4 486.5 127.1 487.3 130.2 490.8 130.7 491.7 129.2 490.7 127.4 494.3 126.6 498 128.2 499 132.5 500.6 130.8 507.3 131.7 510.1 130 510.1 128.5 512.9 127.6 513.4 128.6 514.8 128.3 516.3 132.3 520.1 133.6 518.6 139.9 517 141.4 513.9 139.6 509.4 141.3 508.1 139.8 502.1 138.3 500.9 134.5 499.6 135 498.6 141.2 497.1 141.1 496 143.2 499.6 146.5 500.7 146.2 501 147.1 499.7 147.3 499.9 149.1 501.2 150.2 503.3 148.5 503.3 147.1 505 147.3 509.3 151 507.2 155.4 508.1 157 509.6 157.1 508 161.1 505 164.7 501.7 164.4 495.9 159.2 493.5 160.2 483.5 155.4 482.1 153.6 478 152.9 477.2 151.6 474.9 152 473.7 149.3 471.8 148.9 473 145.4 470.9 143.9 465.8 144 465.2 142.2 462.5 141.8 462.5 139.8 459 137.7 457.9 135.6 458.1 134.7 460.8 134.3 459.8 132.6 461.4 131.4 459.8 130.3 461.3 126.8 460.3 123.5 458 122.1 458.4 120.6 456.7 118.1 457.7 116.8 457.5 114.3Z"/><path class="b" data-c="59" d="M352.4 78.7 353.2 77.9 354.3 78.5 353.6 80.2 351 80.9 351.1 79.2ZM318 31.4 334.8 26.9 335.8 31.7 337.9 34.9 336.4 36.4 337.9 42.3 340.9 42.3 344.2 47.6 345.5 47.3 347.2 48.9 348.6 46.2 351.6 44.5 353.9 44.4 354.7 43.3 356.2 43.9 358.3 47.8 360 48.4 359.4 50.8 361 58.1 364.2 60.1 367.7 57.7 369.3 58.3 368.5 59.6 372.4 59.7 374.5 62.1 374.3 66.7 376.2 70.4 377.5 67.7 381.3 67.7 383.3 68.9 387.5 67.2 390.9 70.5 391 71.8 394 71.8 394.5 72.7 391.3 79.6 393.8 79.5 394.9 82.6 391.7 85.9 392.5 87.7 390 88.8 386.1 87 386.4 84.9 383.4 86.2 376.6 83.5 373 86 370.4 84.4 368.6 86.4 363.7 85.5 363.1 86.5 359.3 85.7 357.2 86.9 355.2 86 354.2 84.6 355.1 82.4 354.3 80.8 356.6 77.3 356.1 75.3 357.7 74.8 355.7 72.7 351.6 72.8 351.5 71.8 353.9 70.2 350.6 65.5 353.6 63 351.5 62.6 351.5 60.5 349.6 59 347.3 59.6 346.7 57.7 343.9 57.8 343.4 55.1 346.2 52.4 344.1 50.3 342.7 50.6 342.3 53.1 341.2 53.4 340.7 52.4 337.8 53.2 336.2 52 333 52.4 329 50.1 327.6 46.3 330.1 44.9 324.5 43.6 320.4 33.8Z"/><path class="b" data-c="60" d="M307.3 100.9 309.2 102 309.3 103.7 311.3 104.3 312.7 103.1 319.5 104.9 320.7 104.2 326.5 104.9 328.4 106.7 331.1 106.9 332.3 108.7 333.3 107.9 335.7 110.1 337.6 109.3 338.5 111.5 339.9 108.5 343.9 108.9 343.9 106.5 345.5 106.6 348.1 104.1 349.3 104.8 350.7 103.8 352.1 105.4 353.4 103.6 355.4 103.9 354.5 108.6 356.2 111.1 355.6 114.2 354.7 114.4 355.6 115.8 355.1 117.2 357.1 118.7 354.8 118.8 353.9 123.8 349.9 125.3 350.5 126.7 352.5 127.3 352.7 130.5 349.7 130.7 350.1 132.6 351.4 132.8 351.3 131.4 353.1 131.6 355.5 132.7 355.7 134.2 356.4 134.7 354.7 135.3 353.1 138.5 346 139.4 343.7 138.3 342.3 139.9 337.9 137.3 336.4 138.9 332.7 137.4 332 135.8 326.2 132.9 324.1 134.8 322.8 133.2 318.4 132.7 317.6 131.6 314.9 133.4 310.7 134.1 305.5 133.1 304.4 128.4 307.2 129.4 307.7 128 304.6 120.3 307.4 115.1 304.9 114.8 305.9 113.2 304.6 107.1 306.1 105.2 305.5 104.2 304.4 105.2 303.9 104.4 305.8 101.3Z"/><path class="b" data-c="61" d="M210.5 154.3 215.3 151.9 216.5 150.7 216.1 149.3 218.5 150.5 225.8 148.2 228.8 151.2 229.5 149.2 236.1 150.8 243.6 147.2 244.2 145.6 246.3 144.5 247.3 146.1 251.7 144 253.8 145.3 255.5 143.7 256.8 144.9 255.7 147.2 256.9 148.4 261.8 149.3 262.7 148.3 263.7 151.7 269.2 155.4 269.2 160.6 271.1 160.9 272.3 165.7 276.5 169.2 275.3 171.8 275.7 175.9 273.2 178.4 269.6 179.2 269.6 183.6 271.1 186.3 268.6 188.1 264.6 183.4 263.5 184.4 260.2 184.1 258.5 180.8 255.5 180.3 254.7 179.2 254.8 174.1 251.9 171 247.1 171.7 243.2 174.8 242.9 176.1 240.8 175.3 239 176.2 238.8 172.1 235.5 171.9 234.7 168.5 235.6 167.8 232.3 165.8 230.9 168.8 229.1 167.9 227.3 169.5 224.5 168.2 222.2 168.6 216.7 171.8 216.3 169.4 213.9 170.1 214.4 171.4 212.8 172 209.1 168.3 212.5 165 213.4 162.9 212.7 159.7 214.2 158.3 210.1 155.5Z"/><path class="b" data-c="62" d="M318 31.4 320.4 33.8 324.5 43.6 330.1 44.9 327.6 46.3 329 50.1 333 52.4 336.2 52 337.8 53.2 340.7 52.4 341.2 53.4 342.3 53.1 342.7 50.6 344.1 50.3 346.2 52.4 343.4 55.1 343.9 57.8 346.7 57.7 347.3 59.6 349.6 59 351.5 60.5 351.5 62.6 353.6 63 350.6 65.5 353.9 70.2 351.5 71.8 351.6 72.8 355.7 72.7 357.7 74.8 355.7 76.4 356.6 77.3 354.3 80.8 355.1 82.4 354.2 84.6 349 84.6 348.1 85.6 346.6 85.2 345.9 83.3 342.5 85.4 341.8 84.9 343.2 82.5 341.3 80.6 340 82.5 335.9 81.3 335.2 79.7 334.3 81.2 333.7 79.8 332.5 79.9 330.6 82.7 328.7 81.5 329.2 78.9 333 76.8 331.4 75 329.8 74.6 328.5 75.9 327.5 74.8 326.1 75.7 324.9 74.8 321 76.7 318.4 76.3 317.3 73.3 313.1 70.7 313.9 70.1 313.2 69.1 312.4 70.1 307.5 67.3 303.6 69 299.6 65.2 300.8 57.4 302 57.6 300.5 55.5 300 48.4 301.6 44.9 300.9 38.8 303 38.4 307.9 34.2ZM352.4 78.7 351.1 79.2 351 80.9 352.3 80.3 353.6 80.2 354.3 78.5 353.2 77.9Z"/><path class="b" data-c="63" d="M335.4 302.2 338.3 303.6 339.7 300.6 341.7 299.3 341.8 297.8 344.8 299.3 345.9 296.2 347.9 296.1 349.7 296.7 348.7 300.3 352.8 304.5 355.6 303.8 357.1 306.2 358.6 306.5 366.3 307 368.3 305.9 369.7 306.5 370.8 309.3 375.4 309.1 381.4 316.2 379 321.5 381.7 324 384.3 330.3 388.7 333.3 390.7 337.9 389.8 340.7 387.4 342.6 387.4 345.6 385 344.5 383.8 343.7 382.5 346.1 378.9 344.2 376.5 346.8 371.9 341.8 370.4 343.3 364.3 342.4 358.9 346.2 356.4 346.1 353.1 349.8 350.4 348.6 347.9 344.5 341.2 344.6 339.7 341.4 333.1 339.2 333.4 335 331.4 332.7 332.2 330.3 333.5 330.3 333.6 326.5 328.5 319.8 331.7 317.3 332.5 317.8 335.5 312.5 337.1 311.8 336.8 308.3 334.9 305.6Z"/><path class="b" data-c="70" d="M459.1 200.5 460.9 197.5 461.7 199.8 464.8 195.9 468.1 194.7 469.6 198.6 472.3 199.6 477 197.7 479.5 198.6 481.3 201.5 483.7 200.7 486 198.3 494.4 205.1 492.2 208.9 494.1 215 493.4 215.7 494.2 219.8 493.1 220.5 492 219.5 489.4 219.6 487.3 221.3 486.1 220.6 486.3 222.4 485.2 223.5 480.1 222.1 477 223.1 474.3 227.8 473.2 228 472.2 227.6 470.7 230 469.2 229.7 466 233 464.1 233.7 462.1 232.8 454.9 237.6 452.8 237 449 238.3 445 235 445.8 230.9 444.1 231.3 443.3 228.3 441.1 226.9 441.9 225 443.7 225.1 445.4 221.8 444.6 218.8 442.6 217.5 441.7 219.5 440.7 219.1 441.8 215.3 446.4 215.1 447.8 213.3 448.9 215.1 452.4 214.2 453 210.8 451.8 207.5 454.2 206.4 454.7 204.4 456.4 205Z"/><path class="b" data-c="72" d="M238.6 176.1 240.8 175.3 242.9 176.1 243.2 174.8 247.1 171.7 251.9 171 254.8 174.1 254.7 179.2 255.5 180.3 258.5 180.8 260.2 184.1 263.5 184.4 264.6 183.4 267.1 187.1 268.6 188.1 269.9 187.4 274 190 274.1 190.8 271.8 190.8 271.4 194.2 269.8 194.2 269.7 196.1 271.2 197.1 270.4 198.8 271.3 201.5 268 204.2 268.5 207.1 261.1 214 262.4 215.7 256.4 218 256.1 219 254.1 217.8 252.9 218.6 254.3 221.3 253.3 221.8 248.9 219.2 246.2 219 244.4 220.3 241.1 219.3 239.1 216.9 236.6 216.3 234.2 217.5 232 216.7 231.1 214.3 232.6 213.1 231.9 212.4 230.4 213.5 225.4 211.4 225.1 207.7 223.4 207.4 222.9 206.1 225.7 204.7 225.7 203.1 224.6 202.8 225 201 229.3 199.3 227.3 196.3 230 193.4 231.5 193.8 232.1 190.8 230.9 188.3 234.9 185.8 234.8 178.3 236.5 176.4Z"/><path class="b" data-c="75" d="M330 151.7 331.7 152.1 331.7 153.4 324.9 152.6 322.9 151.4 323.2 150.6 326.5 148.8 328.8 148.7Z"/><path class="b" data-c="76" d="M293.1 83.6 295.9 83.8 295.6 85.1 304.8 93.6 307.3 100.9 305.8 101.3 303.9 104.4 304.4 105.2 305.5 104.2 306.1 105.2 304.6 107.1 305.9 113.2 304.9 114.8 307.4 115.1 304.6 120.3 302.6 120.9 299.6 118.6 291.3 118 290 119 288.5 123.6 284.5 123.8 283.5 125.6 280.4 126.2 280.9 127.1 279 128.7 276.3 124.8 274.7 125.8 273.8 123.6 275.8 123.8 275.7 121.2 272.4 120.6 271.6 119.4 266.6 120.1 265.5 118.2 263.5 118.1 260.4 115.4 255.9 117.4 249.6 116.8 245.9 115 245.5 112 250 102.6 263.9 95 283.1 90.6Z"/><path class="b" data-c="77" d="M335.7 160.4 337 155.9 335.5 150.8 336 143.8 334.8 142 336.4 138.9 337.9 137.3 342.3 139.9 343.7 138.3 346 139.4 347.7 138.5 350.4 139.1 353.1 138.5 353.9 136.7 356.2 137.3 357.9 139.8 357.5 142.3 360.5 144.7 361.1 146.6 362.5 146 363.4 148.3 364.7 147.5 365.3 150.1 368.2 152.1 369.1 151.4 369.1 152.9 367.2 153.6 367.6 155 366.4 155.2 365.9 156.6 368.6 157.7 368.7 160.6 367.6 161.9 371.9 164.2 368.6 167 368.4 169.3 366.4 169.4 367.5 171.1 365.8 172.1 366.8 177.1 365.1 176.9 365 178.1 353.3 178.9 352.1 181.8 353.1 183.8 351.7 187.4 350.6 187.5 349.2 189.8 344.9 191.7 344.1 189.6 342 190.1 342.5 190.8 340.7 192 335.6 191.1 332.6 191.9 331.5 191.3 332.4 189.8 333.2 190.3 333.9 188.1 331.9 184.7 330.2 184.5 329.4 181.1 330.4 178.8 334 175.8 333 169.7 334.6 165.4 334.3 162.4 336.2 161.1Z"/><path class="b" data-c="78" d="M322.1 148.3 320.9 149.1 320.1 152.4 323 155.7 318.3 158 317.7 160.8 316.3 160.6 315.3 163.1 316.8 164.5 315.3 167.8 312.3 167.5 313.4 169.2 311.1 174.4 307.3 172.5 306.8 168 303.9 166.6 304.1 164.6 302.3 164.6 299.2 159.7 301 157.1 299.1 154.7 299.4 151.1 295.7 144.2 295.2 139.5 296 140.1 300.3 138.4 302.9 138.8 304.7 140.6 308.6 139 309.9 140 310 142.2 311.6 140.9 315.6 143.3 319.4 142.7 319.2 143.6 322.3 146.1Z"/><path class="b" data-c="79" d="M204.2 253 208.3 251.5 210.9 252.8 212.5 251.9 214.7 252.5 216.7 251.1 217 248.7 219.5 247.7 223.1 248.5 224.7 247.3 231.3 246.7 232.5 247.2 231.5 248.9 234.3 249.2 235.6 253.2 236.6 253.5 237.6 258.1 236.8 259.6 238.8 261.2 238.4 262.2 237.5 261.4 236.1 262.2 237.1 266.5 239.1 267.9 234.9 273.3 238.3 274.4 235.5 282.4 236.5 282.1 236.4 285.7 238.3 287.8 237.5 288.7 238.1 290.4 239.8 291.7 242.2 289.3 243.6 290.3 242.7 291.9 243.4 293.3 241.7 293.9 242.2 295.9 240.8 298.3 243.7 300.5 245 300 243.3 304.1 241.7 302.9 239.3 303.4 237.1 305.6 235.1 305.4 234.7 308.9 232.2 310.1 230.9 309.5 230.1 306.4 229 306.8 228.8 305.8 225.8 305 225.5 303.7 220.9 303.3 215.5 299.8 212.6 300 210.1 295.4 207.8 293.8 208 290.6 210.1 289.5 212 290 216.4 286.3 213.6 284.7 213.2 286 212.5 284.5 213.5 282 212.5 279.4 214.2 278.1 214 273.2 210 264.8 210.8 261.9 206.3 258.2 206.5 255.5 204.9 254.8Z"/><path class="b" data-c="80" d="M293.1 83.6 295.7 81.2 297.9 76.1 299.2 75.4 300.9 77 304 77.2 300.8 73.1 299.3 72.8 299.4 67.8 301.6 67.3 303.6 69 307.5 67.3 312.4 70.1 313.2 69.1 313.9 70.1 313.1 70.7 317.3 73.3 318.4 76.3 321 76.7 324.9 74.8 326.1 75.7 327.5 74.8 328.5 75.9 329.8 74.6 331.4 75 333 76.8 329.2 78.9 328.7 81.5 330.6 82.7 332.5 79.9 333.7 79.8 334.3 81.2 335.2 79.7 335.9 81.3 340 82.5 341.3 80.6 342.5 81.5 343.2 82.5 341.8 84.9 342.5 85.4 345.9 83.3 346.6 85.2 348.1 85.6 349 84.6 354.2 84.6 357.2 86.9 355.4 94 353.1 96.9 355.4 103.9 353.4 103.6 352.1 105.4 350.7 103.8 349.3 104.8 348.1 104.1 345.5 106.6 343.9 106.5 343.9 108.9 339.9 108.5 338.5 111.5 337.6 109.3 335.7 110.1 333.3 107.9 332.3 108.7 331.1 106.9 328.4 106.7 326.5 104.9 320.7 104.2 319.5 104.9 312.7 103.1 311.3 104.3 309.3 103.7 309.2 102 306.4 99.7 303.6 92 295.6 85.1 295.9 83.8Z"/><path class="b" data-c="85" d="M149.8 264.9 148.5 266 146.4 264.6 147.3 263.5ZM194.6 249.6 197.4 250.9 202.7 251.1 204.9 254.8 206.5 255.5 206.3 258.2 210.8 261.9 210 264.8 214 273.2 214.2 278.1 212.5 279.4 213.5 282 212.5 284.5 213.2 286 213.6 284.7 216.4 286.3 212 290 210.1 289.5 209.1 290.7 204.7 288.4 204.2 289.7 201 289.8 199.9 289.1 201.2 286.8 193.5 289.6 190.7 289.1 190.4 291.9 187.6 289.3 184.5 287 180.7 287.1 179.4 284 175.3 282.9 167.8 277.9 166.5 271.6 163.6 266.8 156.4 259.3 156.1 255.3 157.3 255.3 161.2 249 163.1 247.9 165.4 251.1 168.5 252.4 168.5 253.6 171.5 253.9 172.6 256.5 179 258.2 180.9 257 179.2 249.6 181.4 248.3 182.2 249 182.6 254.7 185.9 253.5 185.9 249.1 189.1 248.7 190.3 246.3ZM154.6 251.8 152.2 251.1 150.9 249.4 151.9 247.3 154.1 248.5 153.7 250.3 156.2 251.9 156.4 254 155.6 254.2Z"/><path class="b" data-c="86" d="M234.3 249.2 235 247.2 236.6 247.7 239.1 243.2 241.2 246.2 244.2 247.4 245.2 246.8 245.9 248.1 244.8 249.2 246.1 250.3 247.5 249.3 248.5 250.7 249.5 250.3 250.3 257.2 251.9 256.2 254.6 257.4 257.1 255.9 260.8 255.9 259.6 253.5 261.6 253.2 264.3 255.1 264.7 259.1 268.6 263.4 268.6 265.2 272.9 270.9 271.6 274.7 272.3 276.3 276.1 278 276.3 279.7 279.6 280.1 281.2 281.8 281.2 284.7 283.5 285.9 280 290.3 277.2 289.4 274.8 294 271.4 293.5 269.3 296.7 267.8 296.7 267.3 297.7 268.7 300.2 268.2 302.3 263.9 302.1 262.9 303.9 259.8 304.9 257.2 303.9 255.5 301.6 253.5 303.4 254.8 304.5 253.5 306.2 247.2 305.5 244 303.5 245 300 243.7 300.5 240.8 298.3 242.2 295.9 241.7 293.9 243.4 293.3 242.7 291.9 243.6 290.3 242.2 289.3 239.8 291.7 238.1 290.4 237.5 288.7 238.3 287.8 236.4 285.7 236.5 282.1 235.5 282.4 238.3 274.4 234.9 273.3 239.1 267.9 237.1 266.5 236.1 262.2 237.5 261.4 238.4 262.2 238.8 261.2 236.8 259.6 237.6 258.1 236.6 253.5 235.6 253.2Z"/><path class="b" data-c="87" d="M268.2 302.3 268.7 300.2 267.3 297.7 269.3 296.7 271.4 293.5 274.8 294 277.2 289.4 280 290.3 281.4 288.1 283.2 288.2 283.7 289.4 286.9 289.2 289 287.6 292.3 292.9 290.7 295.4 291.2 296.5 289.6 297.9 291.1 300 292.6 299.8 294.5 302.8 294.5 305 295.9 305.7 295.7 310.1 297.1 311 295.3 313.7 296 314.6 298.6 313.8 299.5 315.6 298.1 316 298.1 317.9 300.9 319.2 304 318.1 308.8 321.3 308.6 324.9 309.7 328 306.6 328.7 305.1 327.7 304.7 329 301.9 330.2 297.2 334.6 293.1 334 288 339.3 284.8 338.8 284.1 340.7 279.6 339.1 279 338.2 280.9 336.1 278.7 335 277.5 335.6 275.4 331.3 270.5 331.8 269.6 330.5 268.3 332.7 265.9 332.1 264.8 330.6 265.8 327.9 264.5 326.6 261.1 326.6 260.2 325.1 263.6 322.5 263.7 320.1 265.8 321.2 268.1 316 267.9 313.2 269.4 314 272.6 311.9 272 308.9 267.9 306.8Z"/><path class="b" data-c="88" d="M442.7 173.6 448 172.3 450.3 170.5 451.6 171.1 453.4 169 454.2 169.7 456.7 168.3 458.5 169.7 457.1 173.3 459.9 173.9 460.9 176.8 466 175.4 466.7 176.4 467.7 173.5 470.9 173.6 473.3 171.8 474.5 173.2 480.7 172.3 481.9 171.3 483.8 172 483.2 170.9 485.1 168.8 486.1 171 488.1 172 492.4 172.6 494.2 170.7 495.2 171.3 498.3 167.8 503.4 165.6 502.5 167.1 503.3 173.2 502.2 174.7 506.2 175.3 506.8 176.7 503 184.2 502.2 186.6 503.2 187 501.3 190.3 500.4 193.1 498.3 194.6 498 199.6 497.1 200.6 497.9 202.9 494.4 205.1 486 198.3 483.7 200.7 481.3 201.5 479.5 198.6 477 197.7 472.3 199.6 469.6 198.6 468.1 194.7 464.8 195.9 461.7 199.8 460.9 197.5 459.1 200.5 457.8 198.5 455.4 199.2 454.9 194.8 449.3 192.1 451 186.9 452.8 186.1 451.1 183.7 449.4 183.3 449.8 181.8 448.2 180.6 447.3 181.4 444.8 178 443.3 177.2 440.9 178.2 441.7 175.9 440.5 175.8Z"/><path class="b" data-c="90" d="M494.4 205.1 495.2 204.5 496 206.5 502.7 209.8 503.2 212.5 501.8 215.5 502.6 217 504.9 216.8 507 219.9 506.2 222.2 501.5 222.7 502.1 224.8 500 226 498.5 222.7 499.9 221.7 498.3 219.7 495 219.9 494.6 219.1 492.2 208.9Z"/><path class="b" data-c="91" d="M323 155.7 328.3 158.9 333.2 158 336.2 161.1 334.3 162.4 334.6 165.4 333 169.7 333.8 176.4 327.9 181.7 326.6 180.4 325.4 181.8 323.3 181.3 322 179.7 320.3 182 313.6 182.9 313.7 176.6 311.8 175.9 311.4 172.5 313.4 169.2 312.3 167.5 315.3 167.8 316.8 164.5 315.3 163.1 316.3 160.6 317.7 160.8 318.3 158Z"/><path class="b" data-c="92" d="M325.4 146 327.1 147.1 326.5 148.8 322.9 151.4 326.9 153.5 326.5 157.3 326.2 158.3 323.2 156.3 320.1 152.4 320.9 149.1Z"/><path class="b" data-c="93" d="M335 142.8 336.3 145.9 335.5 150.8 336.4 154 332.4 151 330 151.7 328.8 148.7 326.5 148.8 327.1 147.1 325.4 146 325.7 145.2 331.6 145.8Z"/><path class="b" data-c="94" d="M326.9 153.5 331.7 153.4 331.7 152.1 330 151.7 332.4 151 334.3 151.9 337 155.9 335.6 159.6 335 160.7 333.2 158 328.3 158.9 326 156.9Z"/><path class="b" data-c="95" d="M336.4 138.9 335 142.8 331.6 145.8 325.7 145.2 322.1 148.3 322.3 146.1 319.2 143.6 319.4 142.7 315.6 143.3 311.6 140.9 310 142.2 309.9 140 308.6 139 304.7 140.6 302.9 138.8 300.6 138.7 304.1 130.2 306 133.4 307.4 132.8 310.7 134.1 314.9 133.4 317.6 131.6 318.4 132.7 322.8 133.2 324.1 134.8 326.2 132.9Z"/></g><g class="m-u"><path class="u st-s" data-r="champagne" data-c="02" data-n="Aisne" d="M389.2 120.2 388.8 122.8 384.7 120.2 383.8 121 382.5 120.4 381.6 120.9 382 122.7 374.6 125.6 375.4 131.4 378.6 133.1 378.5 134.3 373.9 134.6 374.6 138.5 372.7 139.8 372.8 141.2 374.9 140.7 376.1 142.1 368.2 152.1 365.3 150.1 364.7 147.5 363.4 148.3 362.5 146 361.1 146.6 360.5 144.7 357.5 142.3 357.3 137.7 353.9 136.7 356.4 134.7 355.5 132.7 351.3 131.4 351.4 132.8 350.1 132.6 349.7 130.7 352.7 130.5 352.5 127.3 350.5 126.7 349.9 125.3 353.9 123.8 354.8 118.8 357.1 118.7 355.1 117.2 355.6 115.8 354.7 114.4 355.6 114.2 356.2 111.1 354.5 108.6 355.4 103.9 353.1 96.9 355.4 94 357.2 86.9 359.3 85.7 363.1 86.5 363.7 85.5 368.6 86.4 370.4 84.4 373 86 376.6 83.5 383.4 86.2 386.4 84.9 386.1 87 387.3 88 395.3 89.4 394.7 91.8 396.1 92.4 394.5 99.2 396 100.6 391.7 105 390.7 107.8 389.5 107.3 388.4 108.6 390 111 390.1 113.6 388.8 114.5Z"/><path class="u st-p" data-r="provence" data-c="04" data-n="Alpes-de-Haute-Provence" d="M459.4 408.4 464.2 407 468.8 408.1 465.1 403.3 466.1 402.1 468.8 404.9 469.1 401.5 467.9 401 470 396.7 474.6 393.3 474.8 392 477.9 392.6 481 396.9 482.3 395.2 481.1 392.5 483.3 391.3 484.5 392.2 485.7 388.9 488 391.6 490.4 392.6 496.9 392.5 498.5 387.2 500.7 386.4 507.4 380.1 508.8 380.3 509.4 381.8 508.4 384.9 505.4 387.5 509 392.8 507.3 393.4 507.2 396.8 504.3 398.5 501.1 403.3 499.8 407.8 502.8 412.7 502.5 414.8 510.8 422.4 508.5 423 506.3 421.5 505.3 422 503.1 424.3 501.1 424.3 500 426.7 501.6 427.9 495.8 429.5 494.4 428.4 490.9 429 488.9 432.6 486.6 432.1 483.5 429.2 481.8 429.4 474.5 437 470.9 432.6 467.4 434.4 466.5 432.9 464.6 432.5 463.7 434 459.4 428.9 455 429.4 457.3 423.9 453.4 422.3 454.5 415.4 452.8 415.8 452.5 412.9 455.8 410.5 455.5 408.8 459.7 411 459.8 410 458.3 409.9Z"/><path class="u st-p" data-r="provence" data-c="06" data-n="Alpes-Maritimes" d="M507.2 396.8 511.7 401 512.4 403.4 518.6 404.8 523.6 408.1 525.9 407.7 526.8 409.2 529.5 409.1 539.6 405.3 539 407.6 541.1 410.3 540.7 412.6 539.3 413.3 539 416.4 536.8 417.6 535.5 421 533.1 423.1 534.8 427.1 530.3 430.9 528.2 431.2 525.7 433.3 523.6 433.3 522.2 435.8 520.2 435.5 519.1 439.2 519.1 440.8 518.2 440.2 512.3 442.6 511.8 445.6 509.7 444.5 510.4 439.1 505.9 437.7 504.2 435.6 503.7 431.7 499.8 431.3 498.9 429.1 501.6 427.9 500 426.7 501.1 424.3 503.1 424.3 506.3 421.5 508.5 423 510.8 422.4 502.5 414.8 502.8 412.7 499.8 407.8 501.1 403.3 504.3 398.5Z"/><path class="u st-r" data-r="rhone-n" data-c="07" data-n="Ardèche" d="M410.5 351.8 415.1 350.8 415.5 347.6 419.8 344.6 421.6 344.9 421.6 347.1 423.2 348.5 423.1 353.8 424.1 355.9 423.2 357.8 425.6 361.5 424.7 364.3 426.7 368.2 425.1 373.3 422.1 377.4 422.8 384.4 419.7 389.4 420.1 395.2 418.2 399.7 418.4 405.4 412.5 401.7 410.6 401.6 410.3 404.1 408.4 404.6 407.8 401.4 403.9 403.3 402.8 406.1 397.5 402.1 394.5 403.3 395.1 398.4 392.2 395.4 390.2 389.1 389.2 389.2 388 386.7 386.6 379.7 388.8 377.9 389.8 375.2 391.5 375.7 393.1 374.6 393.2 372.5 398.1 372.3 400.5 367.3 404.1 366.7 403.5 364.2 406.6 363 405.3 361.2 407.4 358.6 406.4 357 409.2 357.7Z"/><path class="u st-s" data-r="champagne" data-c="10" data-n="Aube" d="M366.8 177.1 365.8 172.1 367.5 171.1 366.4 169.4 369.1 168.5 368.6 167 370 165.1 371.9 164.2 374.7 166.9 375.2 168.9 381.8 169.9 383.3 168.6 383.6 166.3 384.6 166.6 385.1 164.8 386.4 165 388.2 161.6 390.3 161.4 391.1 159.4 393 160.2 394.1 159.1 399.2 158.6 400.4 160.9 399.8 164 403.1 167 407.5 167.8 407.7 168.7 411.3 167.1 413 168.4 411.8 172.6 413.2 173.2 414.3 175.9 416.5 176.3 416.4 177.5 419.6 178.9 418.6 179.8 420.3 182.8 420.2 189.9 419.2 192.1 415.8 191.3 414.4 193.9 415 196.8 410.5 196.4 408.8 198 409.7 199.6 400.4 200.4 399.8 202.4 398.8 202.5 396.6 199.9 396.6 201.3 395.1 200.6 393.1 202.5 391.2 201.5 390.6 202.6 385.2 202 385.1 198.7 383.3 199.5 382.9 198.4 384 197.7 382.2 196.2 381.5 192.9 379 191.3 379 189.2 376.4 190.9 375.3 188.5 372.9 188.2 374.6 186.2 373.8 185.5 374.4 183.6 369.9 178.3 367.3 178.8Z"/><path class="u st-r" data-r="languedoc" data-c="11" data-n="Aude" d="M299.7 461.7 301.2 458.6 304.5 457.1 304.5 455.2 306.7 452.3 308.5 454.4 310.7 453.4 312 454.4 313.6 452.8 316.8 455.1 319.4 454 321.1 455.8 321.4 453.3 323.2 451.9 328.4 453.9 332.5 452.8 335.3 453.6 336.4 454.2 334.8 455.9 334.6 458.3 336.1 458.6 336.8 460.5 339.1 460.8 340.5 459.3 340.8 461.5 342.9 463 347.6 458.8 347.7 456.4 348.3 458.8 350.8 459.8 353.1 459.3 353.2 461.3 361.1 463.2 362.7 465.2 356 475 354.8 479.4 355.5 481.8 354.8 486.2 347.5 481.7 344.4 483 342.4 486.3 332.7 485.5 325.6 486.2 326.8 492.2 319.3 496.5 318.7 493.8 315.6 491 312.5 491.9 308.6 490.5 308.8 489.2 306.8 487.4 307.1 485.3 311.7 484.3 311.9 482.4 311.4 481 309.5 480.5 311.6 478.9 311.7 475.3 309.9 474.1 310.2 470.4 309 469.6 308.1 470.6 307.5 469.2 300.7 466.6 301.1 464.5Z"/><path class="u st-r" data-r="sudouest" data-c="12" data-n="Aveyron" d="M321.2 387.2 321.2 385.6 324.5 384.4 325.9 384.2 327.4 385.8 332.1 385.3 332.8 383.1 335.1 381.2 336.8 374.6 341.9 369.3 343.5 370.6 343.5 373.9 346.9 372.8 347.7 376.8 349.9 378.1 350.3 383.8 355.6 389.5 355.3 393.4 358 396.1 357.4 401.2 358.8 404.2 357.6 406.9 358.8 406.2 359.1 407.7 361.6 408.6 360.9 410.8 366.9 410.3 367.6 411.8 366.1 412.5 365.7 414.9 363.3 416.3 370.7 420.2 366.8 424.8 367.1 426.1 365.5 427.4 363.8 427 362.2 429.3 362.8 430.9 361.2 431.8 355.2 430.8 355.2 438.5 352.2 437.7 350.2 438.5 349.6 436.2 345.3 434.7 342.2 436.6 340 435.8 335.3 430.3 335.8 428.1 332.7 424.2 333.7 422.7 331.1 418.6 329.1 418.4 328.7 416.8 324.3 414.5 324.1 413.4 320.8 413.4 322.2 412.6 320.4 412.4 318.7 410.3 312.4 413.1 311.8 411.4 308.9 410.6 311.6 406 307.6 405.1 307.2 403.5 309.1 401.1 307.6 399.2 306.5 394.9 315.2 389 318.8 389.7 320.6 388.8Z"/><path class="u st-p" data-r="provence" data-c="13" data-n="Bouches-du-Rhône" d="M422.5 424.6 427.1 425.1 431.7 427.2 435.2 431.7 440.2 434.3 446.1 434.4 454.8 438.3 457.8 438.2 462.2 436.1 463.6 434.3 464.8 435.2 465.6 437.8 461.6 439 461.4 442.2 460 442.6 462.7 444.2 461.9 447.9 465.6 451.5 461.4 452.5 462.4 454.9 461.5 456.9 463.4 457 464.9 459.7 461.8 461.6 461.5 464.8 459.5 464.4 458.6 465.8 455.7 463.2 454.9 464 448 463.3 449.2 461.6 448 459.5 448.7 457.8 447 455.4 442.9 457.1 435.5 457.3 432.5 452 431 451.7 428.3 453.2 427.8 455 428.8 455.8 427.2 457.5 417.1 456.1 415.9 454.6 417.1 453.8 416.9 452.2 414.2 450.9 402.6 450.9 402.9 448.7 411.3 443.8 412.3 442.4 410.4 441.8 412.7 437.3 418.3 437.7 417.7 435.5 419.7 429 418.7 427.8ZM434.1 444.7 433.9 449.5 435.8 449.8 436.7 453.3 440.3 452.6 442.9 450.2 442.7 448.5 441.9 448.1 439.6 450 437.8 446.3 435.5 446.6Z"/><path class="u st-g" data-r="loire" data-c="18" data-n="Cher" d="M323.2 220 325.1 219.6 328.2 222 330.7 220.7 332.9 223 334.7 222.6 336.6 223.6 339.9 227.7 341.5 226.8 341.3 225.6 343 225.4 344.1 226.9 347 225.6 349.2 230 347.1 236.7 351.2 240.1 352.7 251.1 354.2 252 354.9 257 353.8 259.5 354.6 262.7 353.2 265.9 350.4 265.5 342.8 270.3 341.1 268.8 337.6 273.7 335.6 273.5 337.1 279.6 334.3 281.3 332.2 280.6 327.8 281.4 324.7 285 324.5 286.8 321.9 286.6 319.6 286 319.7 284.5 321.6 283.2 319.8 279.2 321 274.4 319.1 273 319.7 271.7 316.3 268.8 318.3 266.8 315.7 264 319.8 259.5 316.6 258.2 318.1 254.7 315.1 251.9 315.8 248.6 313.9 247.4 309.6 248.8 305.6 247.1 308.1 244.6 308 242.2 310.4 242.5 310.1 240.3 311.8 238.3 314 239.8 319.3 238.7 319.8 237.3 318 232.7 321.2 230.2 321.8 232 323.3 231.5 323.5 227.2 322.3 227 321.5 224 319.1 223.9 318.7 222.1Z"/><path class="u st-g" data-r="bourgogne" data-c="21" data-n="Côte-d&#x27;Or" d="M396.5 245.6 395.5 247.6 394.1 247.2 394 245.9ZM399.8 202.4 400.4 200.4 409.7 199.6 408.8 198 410.5 196.4 418.2 197.4 418.1 199.6 421.2 201.1 419.8 202.5 420.9 203.5 422.5 202.1 426.1 207.6 423.4 210.1 425.4 212.6 425.1 214.5 426.3 214.9 427.7 213.7 428.2 215.5 431.4 217 433.3 215.1 433.1 216.7 435.7 218.7 436.2 220.8 438 219.2 441.7 219.5 442.6 217.5 444.6 218.8 445.1 223.3 443.7 225.1 441.9 225 441.1 226.9 443.3 228.3 444.1 231.3 445.8 230.9 445 235 446.8 235.6 445.7 236.5 444.1 244.6 442.2 248.2 439.8 248.7 438.1 251.4 439.5 251.8 439.2 252.7 437.4 254 436.2 253.6 431.6 255.5 429.6 254.2 427.6 255.5 423.8 255.2 423.8 256 416 259.1 415.7 257.4 412.2 256.1 410.8 252.6 409 253 405.2 251 404.9 249.2 402.8 249.8 402.9 248.5 399.3 247.4 397.6 245.3 397.8 241.7 396.3 240.1 394.7 240.8 394.2 235.3 391.9 231.4 393.9 229.4 393.5 226 398.5 217.3 397.6 216.6 399.1 214.9 398.8 212.6 399.9 213.1 401.5 211.8 400.9 207.3 398.7 207 398.7 204.8 400.5 203.6Z"/><path class="u st-r" data-r="sudouest" data-c="24" data-n="Dordogne" d="M260.2 325.1 261.1 326.6 264.5 326.6 265.8 327.9 264.8 330.6 267.1 333 269.6 330.5 270.5 331.8 275.4 331.3 277.5 335.6 278.7 335 280.9 336.1 279 338.2 279.6 339.1 282.5 339.6 285.5 341.7 284.4 343.2 286.8 344.3 284.8 347.1 283.3 347.5 283 350.2 284.8 351.1 284.8 352.2 283.2 353 283.1 354.4 285.4 355 283.9 356.5 285.3 357.5 290.1 358.5 289.1 359.7 289.5 362 291.4 364.4 289.9 365.1 290.8 368.9 289.8 370.5 291 372.5 287.8 374.3 287.9 375.9 285.4 376.7 286 379.9 282.3 382.9 279.2 383.6 279.4 385.4 276.3 388.8 273 385.4 270.9 385.2 268.2 387.5 266.9 387.3 266.1 385.8 267.2 383.8 265.4 381.6 264.7 382.6 260 382.9 258.8 381.3 255.4 383.4 254.2 382.6 250.3 384.3 247.6 383.5 247.6 380 244.9 376.5 244.5 374.1 246.6 373.1 245.2 371.9 243.6 371.7 241.7 374.4 236 374 234.9 372.5 233.3 372.4 235.6 368.9 234.5 367.1 237.4 360.3 236.2 357.8 233 358.4 233.2 356.4 234.9 355.6 234.1 354.7 236.9 351.6 239.9 352.7 243.6 348.3 245.5 347.5 244.9 343.8 246.1 340.7 247.3 338.9 249.2 338.7 254.8 334.5 255 330.4 257.4 329.6Z"/><path class="u st-r" data-r="rhone-n" data-c="26" data-n="Drôme" d="M422.8 348 425.9 348 430.1 345.3 432.7 346.6 433.6 348.6 436 347.8 435.4 350.4 437.6 350.4 437.3 353.1 438.2 354.6 438.3 357.4 436.8 360 439.9 359.7 446.3 361.9 449.9 359.1 449.7 373.5 450.5 373.6 449.8 375.3 454.5 376 457.2 378.9 461.6 380.3 464.3 379.9 463 382.6 461.5 382.1 460.5 383.5 457.1 382.9 457.3 385.2 455.6 389 458.3 391.2 456.9 391.3 456 393.3 451 392.1 450.5 394.5 451.9 395 451 396 448.7 395.8 449.5 398.9 451.9 400.6 453 399.9 453.6 400.7 456.8 400.7 457.5 403.3 459.3 403.8 459.2 405.8 459.4 408.4 458.3 409.9 459.8 410 459.7 411 455.5 408.8 455.8 410.5 454.2 411.9 450.8 412.8 449.9 411 447.8 410.9 447.8 408.3 446.6 407.7 438.6 407 439.2 402.6 436.5 404.3 434.7 402.8 427.5 405.6 425.5 407.5 424.5 403.3 422.8 402.2 418.3 402.1 418.9 396.4 420.1 395.2 419.7 389.4 422.8 384.4 422.1 377.4 425.1 373.3 426.7 368.2 424.7 364.3 425.6 361.5 423.2 357.8 424.1 355.9ZM427.9 399.9 427.1 400.7 428.1 401.3 427.9 403.2 431.5 403.5 433.3 399.8 434.1 398.8 431.6 396.5 428.9 397.4Z"/><path class="u st-r" data-r="corse" data-c="2A" data-n="Corse-du-Sud" d="M582.5 502.4 590.9 504.9 594.6 504.4 594.6 506 596.7 508.4 602.7 510.5 608.3 520.3 610.8 519.9 611.2 525.8 612.6 526.9 612.3 529.9 615.3 530.5 617.8 528.4 619.1 528.7 619.7 537.9 618.7 538.8 618.8 541.1 615.5 542.9 615.9 544.3 616.8 543.1 618.8 543.4 615.7 547.9 616 550 613.6 552.4 614.9 554.2 613.7 556.6 612.1 556.8 611.5 555.8 608.3 555.3 608.3 552.8 607.4 552.9 603.8 550.8 599.2 550.1 594.3 545.6 594.8 543.5 597.9 542.3 599.6 539.7 593.6 539 593.5 537.3 591.4 538.5 589.9 537.2 591.6 535.5 590.6 534.3 593.1 533.5 593.1 529.4 594.1 528.9 593 527.1 586.2 528.9 585.3 526.1 588 524.5 587.5 522.8 590.9 520.8 589.4 517.8 583.6 514.9 582.6 510.4 587.8 508.6 587.8 507.7 584.9 506.1 584.4 504 582.3 505.1Z"/><path class="u st-r" data-r="corse" data-c="2B" data-n="Haute-Corse" d="M619.1 528.7 617.8 528.4 615.3 530.5 612.3 529.9 612.6 526.9 611.2 525.8 610.8 519.9 608.3 520.3 602.7 510.5 596.7 508.4 594.6 506 594.6 504.4 590.9 504.9 582.5 502.4 583.9 502 583.8 500.3 585.7 500.2 585.7 494.7 587.5 494 587.8 492.2 589.2 491.3 591.2 491.2 591.2 489.5 594.1 487.6 599.3 486.6 601.3 485 602 482.2 603.5 481.1 607.4 480.6 610.7 483.7 612.5 480.1 612 476.5 610.7 475 610.8 471.1 612.1 468.5 611.1 465.8 614 464.9 616.1 465.8 618.2 476.3 616.9 483.2 620.8 488.9 624.1 512.3 624 514.5 619.1 523.2Z"/><path class="u st-r" data-r="rhone-s" data-c="30" data-n="Gard" d="M367.6 411.8 370.3 414.1 374.5 414.9 378 414.5 378.1 411.4 380 411.1 384.5 414 387.5 413.9 390.7 411.5 390.4 407.5 391.5 407 389.9 405.7 389.4 404.1 390.3 403.3 387.9 399.5 390.2 398.8 392.2 395.4 395.1 398.4 394.5 403.3 397.5 402.1 402.8 406.1 403.9 403.3 407.8 401.4 408.4 404.6 410.3 404.1 410.6 401.6 417.9 404.7 419.6 408.6 420.7 408.4 421.4 409.9 420.9 414.6 426.3 419.4 426.5 421 425.5 420.9 425.5 422 421.9 425.6 418.7 427.8 419.7 429 417.7 435.5 418.3 437.7 412.7 437.3 410.4 441.8 412.3 442.4 411.3 443.8 402.9 448.7 402.6 450.9 400 450.3 398.4 449.3 398.8 446.9 397.3 445.7 397.2 444 400 442.6 400.8 440.9 398.9 435.7 393 431.5 391.9 432.1 391.8 430.1 389.8 428.9 389.7 427.7 385.1 427.9 386 425.3 384.1 422.9 382.1 422.7 380.1 424.1 379.7 426.1 377.8 425.8 376 429.9 374.1 429.3 373.4 427.1 370.1 428.4 369.8 426.2 367.1 426.1 366.8 424.8 370.7 420.2 363.3 416.3 365.7 414.9 366.1 412.5Z"/><path class="u st-r" data-r="sudouest" data-c="31" data-n="Haute-Garonne" d="M270.5 432.6 275.7 431.3 276.9 432.2 278.8 431.1 281.2 433.8 286.9 431.3 286.8 430.4 284.4 429.6 287 429 286.5 428.2 287.5 427.5 290.7 428.1 291.6 426.6 292.2 427.4 294.8 425.8 296.1 431.6 298.3 432.4 298.5 435.1 300.8 437.3 299 438.3 301.1 438.6 301.7 440.4 299.9 441.8 305.8 444.8 309.1 449.1 312.1 450.5 314 448.9 314.4 450 312 454.4 310.7 453.4 308.5 454.4 306.7 452.3 304.5 455.2 304.5 457.1 301.2 458.6 299.7 461.7 297.7 462.7 292.8 461.9 292 460.6 292.2 464.5 290.8 465 288.7 464.1 289.1 462.5 286 459.2 285 459.5 283.7 460.7 284.3 462 287.3 464.1 284.7 466.2 281.6 466.2 280.4 467.6 283.5 469.8 282.3 471.6 280.7 471.9 280.1 470.1 277 468.2 274.1 468.7 273.2 471 271.2 471.3 271 475 272.2 476 270.6 477.9 266.4 478.8 266.8 480 264.3 481.1 265.5 486.1 259.4 484 257.4 485.2 257.8 487.1 256.7 488.3 257.7 493.5 249.8 492.7 248.9 491.1 250 482.8 253.4 483.8 257 478.3 255.9 477.7 255.6 474.3 252.8 476 253.6 472.4 249 468.7 252.2 464.2 254.5 463.9 253.6 462.9 257.1 459.5 255.9 458.8 258.5 458.1 262.7 453.1 264.1 454.1 264.7 453.1 268.6 453.8 271 456.3 272 455.5 271.7 453.8 272.9 453.6 273.6 450.8 272.9 449.9 274.2 449.4 275 446.2 276 446.9 278.8 444.8 280.2 445 279.5 442.5 278.6 442.9 277.5 440.8 275.8 440.7 274.3 438.8 274.9 437.4Z"/><path class="u st-r" data-r="sudouest" data-c="32" data-n="Gers" d="M235.6 420.8 238.2 420.3 238.1 421.2 239.1 421.3 240.2 419.2 241.6 419 244.6 420.6 246.9 419.3 247.9 419.9 251.1 417.3 254.2 417.5 255.8 416.3 259.7 419.1 262.4 417 263.2 419 265.8 417.6 267 418.8 265.2 419.3 265.7 420.7 263 423.7 263.4 425 267.1 425 268.1 426.1 268.3 429.6 269.5 430.2 268.5 431.7 274.9 437.4 274.3 438.8 275.8 440.7 277.5 440.8 278.6 442.9 279.5 442.5 280.3 443.6 280.2 445 278.8 444.8 276 446.9 275 446.2 274.2 449.4 272.9 449.9 273.6 450.8 272.9 453.6 271.7 453.8 272 455.5 271 456.3 268.6 453.8 265.7 453.6 264.1 454.1 262.7 453.1 257.5 458.8 247.4 457.4 247.1 456.1 245.1 456.7 244.7 455.2 242.7 454.3 238.8 455 236.2 446.8 234 446.6 232.4 445.2 231.2 441.8 228.9 441.6 227.9 442.9 222.1 442.5 220.6 439.2 222.2 438.7 222.2 435.5 224.3 434.1 223.1 430.1 224.5 430.1 224.6 426.1 223 425.1 225.4 423.1 229.6 422.7 231.1 420.6 232.6 422 231.7 423.6 234.6 425.5Z"/><path class="u st-r" data-r="bordeaux" data-c="33" data-n="Gironde" d="M206.9 344.9 212.8 344.9 212.7 346.7 217.7 347.8 218.7 348.6 219.2 354.1 223.9 355.9 224.9 357.8 228.6 359 231.2 357.3 232.1 358.6 236.2 357.8 237.4 360.3 234.5 367.1 235.6 368.9 233.3 372.4 234.9 372.5 236 374 241.7 374.4 243.6 371.7 246.6 373.1 244.5 374.1 245.7 377.7 242.9 377.7 241.9 379.8 241.6 378.7 237.9 381 241 383.2 239.9 385.7 232.9 391.7 233.9 399.4 230.1 400 229.8 400.9 231.8 404.6 227.4 407 226 405 224.1 404.7 224.1 408 222.1 408.6 217.5 407.6 217.9 403.3 208.4 396.7 208.4 394.2 206.6 393.3 199.9 395.2 196.9 393.7 193.4 393.9 194.2 389.8 190.6 388.5 189.6 390.1 183.7 391.7 183.7 387.3 186.7 381.1 191 382.4 193.6 382.1 192.2 378.7 188 374.8 183.8 382.6 190.2 336.2 193 331.2 194.2 331.4 194.9 334.1 203.7 343.6 207.8 358.8 210.5 362.4 211.3 361 208.5 356.1Z"/><path class="u st-r" data-r="languedoc" data-c="34" data-n="Hérault" d="M367.1 426.1 369.8 426.2 370.1 428.4 373.4 427.1 374.1 429.3 376 429.9 377.8 425.8 379.7 426.1 380.1 424.1 382.1 422.7 384.1 422.9 386 425.3 385.1 427.9 389.7 427.7 389.8 428.9 391.8 430.1 391.9 432.1 393 431.5 398.9 435.7 400.8 440.9 400 442.6 397.2 444 397.3 445.7 392 446.6 382.3 454.5 379.7 455 373.6 461.8 368.6 461.2 362.7 465.2 361.1 463.2 358.9 463.3 353.2 461.3 353.1 459.3 350.8 459.8 348.3 458.8 347.7 456.4 347.6 458.8 344.5 460.9 343.7 462.8 340.8 461.5 340.5 459.3 339.1 460.8 336.8 460.5 336.1 458.6 334.6 458.3 334.8 455.9 336.4 454.2 335.3 453.6 339.3 451.2 337.3 443.8 338.5 440.7 341.6 441.2 342.9 443 349.1 440.7 349.6 438.9 352.2 437.7 355.2 438.5 355.2 430.8 361.2 431.8 362.8 430.9 362.2 429.3 363.8 427 365.5 427.4Z"/><path class="u st-g" data-r="loire" data-c="36" data-n="Indre" d="M288.6 243.8 293.2 241 296.1 241.7 296.7 240 298.6 240 298.7 239 301.4 240 303.3 239 305.6 241.6 308 242.2 308.1 244.6 305.6 247.1 306.2 247.7 309.6 248.8 313.9 247.4 315.8 248.6 315.1 251.9 318.1 254.7 316.6 258.2 319.8 259.5 315.7 264 318.3 266.8 316.3 268.8 319.7 271.7 319.1 273 321 274.4 319.8 279.2 321.6 283.2 319.7 284.5 320.1 286.6 317.1 287.4 312.9 285.7 309.2 286 304 285 304.5 286.3 303.2 288.4 301.6 286.7 300.1 288.5 298.9 287.4 296.3 288.1 295.4 286.2 291.2 290.6 289 287.6 286.9 289.2 283.7 289.4 283.2 288.2 282.1 288.4 283.5 285.9 281.2 284.7 281.2 281.8 278.8 279.7 276.3 279.7 276.1 278 272.3 276.3 271.6 274.7 272.9 270.9 270.7 267.9 272.9 267.4 273.7 268.6 275.1 267.1 276.2 267.4 275.3 265.2 278.4 256.4 277.9 255.1 280.2 252.4 283 251.8 285.6 252.9 288.2 248.4 290 247.4Z"/><path class="u st-g" data-r="loire" data-c="37" data-n="Indre-et-Loire" d="M262.4 215 263 214.2 271.5 216.6 271.6 220.5 273.7 218.7 276.4 219.5 276.8 221.5 278 220.2 279.5 222.7 278.4 224.2 281.5 229.1 280 230.2 281 232.8 280.4 237.4 282.5 238.9 284.8 237.8 287.4 241 290 247.4 288.2 248.4 285.6 252.9 283 251.8 279.2 252.9 275.3 265.2 276.2 267.4 275.1 267.1 273.7 268.6 272.9 267.4 270.7 267.9 268.6 265.2 268.6 263.4 266.4 261.5 264.7 259.1 264.3 255.1 261.6 253.2 259.6 253.5 260.8 255.9 257.1 255.9 254.6 257.4 251.9 256.2 250.3 257.2 249.5 250.3 248.5 250.7 247.5 249.3 246.1 250.3 244.8 249.2 245.9 248.1 245.2 246.8 244.2 247.4 241.2 246.2 240.4 243.9 241.6 237.3 245.7 232 245.1 230.6 247.3 225.3 246.7 222.9 247.8 219.4 253.3 221.8 254.3 221.3 252.9 218.6 254.1 217.8 256.1 219 256.4 218 261.2 216.4Z"/><path class="u st-g" data-r="jura" data-c="39" data-n="Jura" d="M446.8 235.6 449 238.3 452.8 237 454.6 240 458.1 242.7 458 245.8 456.7 247.2 457.4 249.1 456.1 251.2 458.3 249.5 458.7 251.2 464.5 252.9 466.2 258.9 471.2 261.3 474.1 264.5 469 268.9 470.5 271.1 468.4 273.5 472.7 276.8 469.8 281.5 469.5 284.1 463.9 291.7 461.6 293.1 456.9 293.3 456.3 290.7 453.8 289.1 449.8 293.1 447.2 293.5 446.8 290.2 445.7 290.7 445.2 289.4 443.2 288.7 443.2 287.2 440.2 285.5 441 282.7 444.5 282 442.3 279.3 442.6 276.1 443.9 275.9 445.2 272.8 443.3 270.2 443.2 267.8 441.9 267.7 443 265.6 440.6 263.2 445.6 261.5 443.2 260 443.2 258.8 440.4 258.9 439.6 256.3 437.7 255.9 437.4 254 439.5 251.8 438.1 251.4 438.4 250.2 442.2 248.2 444.1 244.6 445.7 236.5Z"/><path class="u st-r" data-r="sudouest" data-c="40" data-n="Landes" d="M222.1 442.5 218.2 444.3 215.4 443.2 213.5 444.1 213.7 441.6 207.5 444.6 204.8 442.9 202.8 444.3 200.9 442 197.2 443.9 192.4 443.9 191.6 445.7 188.4 444.8 184.7 446.2 184.7 445.2 186 445.2 184.5 443.2 179.7 445.5 176.5 445.6 174.5 445.4 172.2 442.9 170.2 443.3 173.9 436 180.3 410.4 183.7 391.7 189.6 390.1 190.6 388.5 194.2 389.8 193.4 393.9 196.9 393.7 199.9 395.2 202.5 394.7 206.6 393.3 208.4 394.2 208.4 396.7 217.9 403.3 217.5 407.6 222.1 408.6 224.1 408 224.1 404.7 226 405 227.8 408.3 227.7 411.1 238.3 413 235.1 419.8 234.6 425.5 231.7 423.6 232.6 422 231.1 420.6 229.6 422.7 225.4 423.1 223 425.1 224.6 426.1 224.5 430.1 223.1 430.1 224.3 434.1 222.2 435.5 222.2 438.7 220.6 439.2Z"/><path class="u st-g" data-r="loire" data-c="41" data-n="Loir-et-Cher" d="M271.4 192.5 275.2 192.1 275.4 192.8 278.7 191.1 279 191.8 276.9 192.9 281.1 193.9 281.8 196.4 283.4 196.9 284.9 200.3 286.3 199.7 290.9 201.2 291.5 199.7 293.4 199.9 293.5 198 296.5 199.7 298.2 199.3 296.7 201.9 298.9 205.6 296.9 207.6 298.2 210 297.4 211.5 299.6 213.5 300.3 212 303.5 213.7 304.5 217.6 308.4 217.9 308.4 216.3 311.8 216.7 312.1 217.8 316.9 216.6 322.5 217.4 323.2 220 318.7 222.1 319.1 223.9 321.5 224 322.3 227 323.5 227.2 323.3 231.5 321.8 232 321.2 230.2 318.5 231.7 319.3 238.7 315.2 239.5 311.8 238.3 310.1 240.3 310.4 242.5 309.2 243 305.6 241.6 303.3 239 301.4 240 298.7 239 298.6 240 296.7 240 296.1 241.7 293.2 241 288.6 243.8 284.8 237.8 282.5 238.9 280.4 237.4 281 232.8 280 230.2 281.5 229.1 278.4 224.2 279.5 222.7 278 220.2 276.8 221.5 276.4 219.5 273.7 218.7 271.6 220.5 271.5 216.6 263 214.2 262.4 215 261.1 214 268.5 207.1 268 204.2 271.3 201.5 270.4 198.8 271.2 197.1 269.7 196.1 269.8 194.2 271.4 194.2Z"/><path class="u st-g" data-r="loire" data-c="44" data-n="Loire-Atlantique" d="M146.5 223.6 148 222 148.8 223.3 152.1 223 152.7 221 154.2 220.4 154.7 221.5 156.8 220.6 157 221.8 158.1 221.6 158.2 220.2 160.3 219.6 160.7 214.2 163.1 212.3 165.7 211.3 166.2 212.3 169.7 210.5 177.5 210.8 179.1 207.9 184.8 205.8 185 204.3 187.7 204.7 188.8 206.5 193 207.9 192.5 210.3 194.7 211 196.6 216.8 201.4 218.7 199.7 220.1 199.8 223.3 202.7 224.1 203.1 226.3 203 230.2 202.1 230.9 194.8 230.8 188.4 233.1 188 234.1 190.4 234.6 191.3 237.2 193.4 237.1 194.5 240.9 191.6 243.6 191.3 245.4 194 246 196 247.8 195.9 249 192.7 248.9 190.3 246.3 189.1 248.7 185.9 249.1 185.9 253.5 182.6 254.7 182.2 249 181.4 248.3 179.2 249.6 180.9 257 179 258.2 174.6 257.2 172.6 256.5 171.5 253.9 168.5 253.6 168.5 252.4 165.4 251.1 160.6 244.2 154.2 241.7 154.3 240.5 156.5 239.9 156.2 233.5 151.7 235.7 149.3 233.3 146.5 234 143.9 232.5 144.5 230.1 142.5 227.4 146.8 224.8Z"/><path class="u st-r" data-r="sudouest" data-c="46" data-n="Lot" d="M291.4 364.4 295.1 363 295.5 364 298.4 363.7 304.2 369.9 306.1 369.7 309.5 366.9 310.7 368.2 314.9 366.7 317.3 370.7 316.7 372.8 319.6 376.3 318.8 381.3 320.1 383.9 319.7 385.9 321.2 387.2 320.6 388.8 318.8 389.7 315.2 389 311.2 392.5 308.5 393.2 306.5 394.9 307.6 399.2 309.1 401.1 308.1 402.4 300.8 403.8 298.5 406.2 297.5 404.7 295.7 404.4 296.3 407.4 294.5 408.5 293.3 406 291.8 405.3 287.1 409.7 286.6 408.6 284.2 408 284.8 404.6 282.4 405.7 277.8 403.3 276.3 401.2 278.4 399.1 275.6 399.8 272.6 390.5 276.1 389.3 279.4 385.4 279.2 383.6 282.3 382.9 286 379.9 285.4 376.7 287.9 375.9 287.8 374.3 291 372.5 289.8 370.5 290.8 368.9 289.9 365.1Z"/><path class="u st-r" data-r="sudouest" data-c="47" data-n="Lot-et-Garonne" d="M245.7 377.7 247.6 380 247.6 383.5 250.3 384.3 254.2 382.6 255.4 383.4 258.8 381.3 260 382.9 264.7 382.6 265.4 381.6 267.2 383.8 266.1 385.8 266.9 387.3 268.2 387.5 270.9 385.2 273 385.4 276.2 387.8 276.1 389.3 272.6 390.5 275.6 399.8 272.3 400.9 269 399.5 267.8 403.5 271 405.5 269.1 409.8 267.3 410 268.4 412.5 267.5 413.7 264.6 412.6 264.6 414.3 262.9 414.8 262.3 416.4 259.7 419.1 255.8 416.3 254.2 417.5 251.1 417.3 250.4 418.7 244.6 420.6 240.2 419.2 239.1 421.3 238.1 421.2 238.2 420.3 235.6 420.8 235.1 419.8 238.3 413 227.7 411.1 227.4 407 231.8 404.6 230.1 400 233.9 399.4 232.9 391.7 239.9 385.7 241 383.2 237.9 381 241.6 378.7 241.9 379.8 242.9 377.7Z"/><path class="u st-g" data-r="loire" data-c="49" data-n="Maine-et-Loire" d="M193 207.9 193.4 206 196.5 208 202.9 209.2 203.8 208.9 203.7 207.3 208.1 209.9 209 208.9 211.7 210.9 215 211.3 217.6 210 219.6 210.5 220.5 208.6 222.5 210.3 225.1 209.7 226.9 212.4 230.4 213.5 231.9 212.4 232.6 213.1 231.1 214.3 232 216.7 234.2 217.5 236.6 216.3 244.4 220.3 246.2 219 247.8 219.4 246.7 222.9 247.3 225.3 245.1 230.6 245.7 232 241.6 237.3 240.4 243.9 239.1 243.2 236.6 247.7 235 247.2 233.3 249.8 231.5 248.9 232.5 247.2 231.3 246.7 224.7 247.3 223.1 248.5 219.5 247.7 217 248.7 216.7 251.1 214.7 252.5 212.5 251.9 210.9 252.8 208.3 251.5 204.2 253 202.7 251.1 194.8 249.8 196 247.8 191.3 245.4 191.6 243.6 194.5 240.9 194 237.8 192.2 237.7 190.4 234.6 188 234.1 189.8 232.2 194.8 230.8 202.1 230.9 203 230.2 203.1 226.3 202.7 224.1 199.8 223.3 199.7 220.1 201.4 218.7 196.6 216.8 194.7 211 192.5 210.3Z"/><path class="u st-s" data-r="champagne" data-c="51" data-n="Marne" d="M389.2 120.2 396.5 121.4 398.6 124.4 401.2 124.9 402.8 126.7 408.5 125.9 410.7 129.4 412.5 128 417.7 129 420.6 127.4 423.8 130.3 421.8 131.7 424.5 138.6 423.2 140.7 425.6 140.6 424.6 142.9 425.8 143.4 422.2 146.4 421.4 147.6 422.3 150.9 420.6 152.3 420.6 153.3 425.1 156.3 425.3 158.3 424.5 159.5 416.9 160.6 416.6 161.3 419.5 162.2 419.5 163.6 416.6 165.1 417.8 168.3 413 168.4 411.3 167.1 407.7 168.7 407.5 167.8 403.1 167 399.8 164 400.1 159.3 396.7 159.3 394.1 159.1 393 160.2 391.1 159.4 390.3 161.4 388.2 161.6 386.4 165 385.1 164.8 384.6 166.6 383.6 166.3 383.3 168.6 381.8 169.9 374.8 168.6 374.7 166.9 371.9 164.2 367.6 161.9 368.7 160.6 368.6 157.7 365.9 156.6 366.4 155.2 367.6 155 367.2 153.6 369.1 152.9 370.7 148 372.3 147.5 373 145.3 376.1 142.1 374.9 140.7 372.8 141.2 372.7 139.8 374.6 138.5 373.9 134.6 378.5 134.3 378.6 133.1 375.4 131.4 374.6 125.6 382 122.7 381.6 120.9 382.5 120.4 383.8 121 384.7 120.2 388.8 122.8Z"/><path class="u st-g" data-r="loire" data-c="58" data-n="Nièvre" d="M347 225.6 346.4 223.8 350.8 222.9 352.4 223.5 355.5 221.8 357.9 225.7 359.4 225.4 360.6 227.3 362.5 226.4 364.5 227.9 366.7 226.1 370.1 226.9 370.2 223.2 373.6 226.7 373.6 228.5 377.3 229.5 379.7 232.2 380.9 231.7 382.6 233.1 383.8 230 385.4 231.4 384.3 232.2 384.6 233.8 387.3 233 389.5 236.7 391.2 235.2 394.2 235.3 394.7 240.8 396.3 240.1 398.3 242.9 397.6 245.3 392 247.3 391.2 249.6 392.3 250.7 391.9 253.4 389.6 254.9 390.4 255.6 391.3 254.9 391.3 258.6 393.8 261.9 392.1 262.8 392.4 265.8 383.5 270.7 382.4 270.8 381.8 268.9 380 268 373.9 268.3 374.8 269.7 372.9 270.2 372.8 272.3 372 271.8 369.4 273.7 368.5 270.4 366.7 270.3 365.2 272 363.9 271.8 363.4 270.2 360.2 272.1 358.2 271.6 353.8 268 353.2 265.9 354.6 262.7 353.8 259.5 354.7 253.5 352.7 251.1 351.2 240.1 347.1 236.7 349.2 230Z"/><path class="u st-r" data-r="sudouest" data-c="64" data-n="Pyrénées-Atlantiques" d="M222.1 442.5 227.9 442.9 230.1 446.8 230.3 449 229 449.5 228.7 451.2 229.8 452.5 230.9 450.7 231.9 451.9 231.2 454.6 232.6 456.2 229.5 458.6 230.6 460.4 228.2 462.8 228.3 465.5 226.3 465.2 225.1 468.1 223.2 469 222.7 472.8 220.3 472.9 219.1 474.7 219.2 478.7 217.3 479.6 217.7 483.4 214.4 486 212.2 486.1 209.6 484.4 207.8 487 207 486.7 205.8 483.9 202.9 480.9 201 480.4 200.1 476.1 192.1 476.5 189.8 474.4 178.7 469.9 177.7 469.4 179 466.7 176.2 468.1 175.7 471.6 172.2 470.4 171.1 468.4 174.9 462.4 175.2 459 174 457.8 167.9 456.7 167.3 458.7 166 458.6 165.6 455.9 163.8 455 161.2 455.9 160.3 453.2 159.1 452.7 159.1 451.4 166.9 448.5 170.2 443.3 172.2 442.9 174.5 445.4 176.5 445.6 179.7 445.5 184.5 443.2 186 445.2 184.7 445.2 184.7 446.2 188.4 444.8 191.6 445.7 192.4 443.9 197.2 443.9 200.9 442 202.8 444.3 204.8 442.9 207.5 444.6 213.7 441.6 213.5 444.1 215.4 443.2 218.2 444.3ZM227.2 455.3 227.8 456.7 226.7 456.8 226.9 457.9 228.3 458.2 228.9 456.1 228.1 454.7ZM227 461.8 228 460.7 226.8 458 225.6 460.1Z"/><path class="u st-r" data-r="sudouest" data-c="65" data-n="Hautes-Pyrénées" d="M227 461.8 225.6 460.1 226.8 458 228 460.7ZM227.2 455.3 228.1 454.7 228.9 456.1 228.3 458.2 226.9 457.9 226.7 456.8 227.8 456.7ZM227.9 442.9 228.9 441.6 231.2 441.8 232.4 445.2 234 446.6 236.2 446.8 238.8 455 242.7 454.3 244.7 455.2 245.1 456.7 247.1 456.1 247.4 457.4 253.5 457.8 257.1 459.5 253.6 462.9 254.5 463.9 252.2 464.2 249 468.7 253.6 472.4 252.8 476 255.6 474.3 255.9 477.7 257 478.3 253.4 483.8 250 482.8 249.3 489.4 248.9 491.1 250.1 492.2 248 493.2 245 491.3 242.2 493.9 240.9 491.6 237.5 490.3 229.8 493 226.1 490.8 223.9 486.5 223.1 487.1 217.7 483.4 217.3 479.6 219.2 478.7 219.1 474.7 220.3 472.9 222.7 472.8 223.2 469 225.1 468.1 226.3 465.2 228.3 465.5 228.2 462.8 230.6 460.4 229.5 458.6 232.6 456.2 231.2 454.6 231.9 451.9 230.9 450.7 229.8 452.5 228.7 451.2 229 449.5 230.3 449 230.1 446.8Z"/><path class="u st-r" data-r="roussillon" data-c="66" data-n="Pyrénées-Orientales" d="M318.9 495.9 319.3 496.5 326.8 492.2 325.6 486.2 332.7 485.5 342.4 486.3 344.4 483 347.5 481.7 354.8 486.2 355.2 502.2 358.8 504.1 358.6 506 360.3 508.6 356.7 509.1 354.8 506.5 351.9 506.9 351 506 350.1 507.3 347.5 507.1 345.5 508.5 344.9 509.6 339.7 510.4 339 511.3 339.7 513.9 335.8 513 334.2 514.3 331.9 514 329.9 511.2 322.6 508.5 320.3 509.7 318.4 509.3 315.4 512.6 313 513 311.4 512.6 309.4 507.5 307.3 507.7 303.9 505.5 301 505.3 302 501.3 311 498.4 312 496ZM310.4 506.6 311.3 507.9 312.5 507.8 311.5 506.3Z"/><path class="u st-g" data-r="alsace" data-c="67" data-n="Bas-Rhin" d="M520.3 134.4 523.9 134.7 526.1 133.4 528.9 135 531.2 133.5 537.2 136.9 542.4 137.8 539.3 142.2 538 146.8 533.6 150.2 533.5 152.1 529.3 156.9 528.1 160.5 528.5 163.6 526.3 170.3 526.9 174.1 521.5 186.4 519.3 186.3 519 184.8 517.6 184.7 517.5 182 511.7 180.1 509.7 176.9 502.2 174.7 503.3 173.2 503.2 167.2 502.5 167.1 503.4 165.6 501.2 165.2 505 164.7 508 161.1 509.6 157.1 508.1 157 507.2 155.4 509.3 151 505 147.3 503.3 147.1 503.3 148.5 501.2 150.2 499.9 149.1 499.7 147.3 501 147.1 500.7 146.2 499.6 146.5 496.3 144.2 497.1 141.1 498.6 141.2 499.6 135 500.9 134.5 502.1 138.3 508.1 139.8 509.4 141.3 513.9 139.6 517 141.4 518.6 139.9Z"/><path class="u st-g" data-r="alsace" data-c="68" data-n="Haut-Rhin" d="M506.8 176.7 509.7 176.9 511.7 180.1 517.5 182 517.6 184.7 519 184.8 519.3 186.3 521.5 186.4 521.6 191.4 523.6 194.6 521.5 199.8 520.9 205.1 521.7 207.6 520.6 209.8 523.6 216.6 520.8 218.6 521.6 219.9 520.3 222.1 518.3 221.3 517.9 222.1 519 222.5 517.9 224.3 514.8 224.7 511.5 226 508.6 224.9 509 222.3 506.9 221.7 507 219.9 504.9 216.8 502.6 217 501.8 215.5 503.2 212.5 502.7 209.8 495.4 205.7 495.2 204.5 497.9 202.9 497.1 200.6 498 199.6 498.3 194.6 500.4 193.1 503.2 187 502.2 186.6 503 184.2Z"/><path class="u st-r" data-r="beaujolais" data-c="69" data-n="Rhône" d="M405.5 297.2 406.1 292.9 408.1 292.8 409.9 294.5 411.9 292.9 414.3 294.5 415.6 292.3 417.7 293.3 416.7 294.8 418.9 296.1 418.8 299.2 421.5 300.3 419.6 304 419.4 312.5 422 313.4 422.1 314.8 423.7 313.8 425 314.7 426.6 319.6 433.7 319.1 433.3 320.7 432.1 320.3 432.5 321.8 436.1 324.8 432.3 327.3 431.6 330.2 429 330.4 424.4 332.4 423.4 331.9 422.7 332.8 425.1 335.4 420.9 339.3 419.4 337.2 418.6 338.1 417.1 337.7 417.4 333 416.1 334.5 415.6 333.2 413.3 332.4 411.5 333.1 405.3 327.7 406.5 323.2 404.6 322.2 405.6 321.6 406.3 317.2 404.2 316.3 403.4 314.8 404.2 313.5 400.4 309.8 402.9 309.2 400.6 306.6 402.7 305.1 403.1 302.3 405.3 301.1 406.5 301.8 407.5 300 405.9 298.9 406.9 298.1Z"/><path class="u st-g" data-r="bourgogne" data-c="71" data-n="Saône-et-Loire" d="M394.1 247.2 396.2 247.5 396.5 245.6 397.6 245.3 400 247.9 402.9 248.5 402.8 249.8 404.9 249.2 406 251.6 409 253 410.8 252.6 412.2 256.1 415.7 257.4 416 259.1 423.8 256 423.8 255.2 427.6 255.5 429.6 254.2 431.6 255.5 436.2 253.6 437.4 254 438.3 256.5 439.6 256.3 440.4 258.9 442.8 258.6 443.2 260 445.4 260.7 445.1 262.3 440.6 263.2 443 265.6 441.9 267.7 443.2 267.8 443.3 270.2 445.2 272.8 443.9 275.9 442.6 276.1 442.3 279.3 444.5 282 440.6 283.6 436.9 282.5 436.3 280.3 435.2 280 430.8 281.8 428.7 280.4 426.1 280.3 420.7 299.2 418.8 299.2 418.9 296.1 416.7 294.8 417.7 293.3 415.6 292.3 414.3 294.5 411.9 292.9 409.9 294.5 408.1 292.8 406.1 292.9 405.5 297.2 401.5 300.8 398.6 298.7 397.9 299.8 394.6 298.6 391.8 300.3 389.9 299.9 389.5 298.5 386.4 297.9 387.2 293.3 390 292 390.3 283.8 388.7 282.5 385 282.5 383.9 280.3 382.7 280.9 380.4 279.9 380 276.3 376.3 270.6 375.9 268.3 380 268 381.8 268.9 382.4 270.8 383.5 270.7 392.4 265.8 392.1 262.8 393.8 261.9 391.3 258.6 391.3 254.9 390.4 255.6 389.6 254.9 391.9 253.4 392.3 250.7 391.2 249.6 392 247.3Z"/><path class="u st-g" data-r="savoie" data-c="73" data-n="Savoie" d="M499.7 318.2 500.1 321.1 501.7 323 505.2 325.2 507.8 325.5 507 328.3 508.2 333 512.2 334.7 512.8 336.6 515.6 338 513.1 342.5 514.3 346.4 511.7 349.2 511 348.4 507.7 349.5 507.4 351.1 505.1 351.9 505.2 353.6 503.4 354.3 500.1 352.6 494.9 355.7 492.7 355.1 492 356.1 490.2 356 489.1 357 489.4 359 485.7 358.8 484.6 358.4 484.4 356.5 481.9 356.4 479.8 354.2 475.7 354.1 476.3 352.2 474.8 349.2 474.9 346.7 476.9 345 477.2 343 474.6 338.6 472.9 338.1 469.7 337.7 469.7 336.6 467.9 335.6 466 336.6 466 341.4 460.9 338.8 459.2 339.1 459 337.1 454.3 330 456.8 327.4 457.2 323.9 459.3 324 460.3 321.9 461.7 311.1 462.9 311.4 463.5 316.3 465.1 318.4 467 317.8 467.6 319.9 470.3 321.8 474.1 320.4 476.3 321.9 476.1 323.6 477.7 323.5 478.1 324.4 481.5 323.9 486.5 312.9 488.2 311.8 490.5 313.1 489.2 314 489.8 316 491.8 317.7 494.1 317.3 495.3 318.8 495.5 321.3Z"/><path class="u st-g" data-r="savoie" data-c="74" data-n="Haute-Savoie" d="M499.7 318.2 495.5 321.3 495.3 318.8 494.1 317.3 491.8 317.7 489.8 316 489.2 314 490.5 313.1 488.2 311.8 486.5 312.9 481.5 323.9 478.1 324.4 477.7 323.5 476.1 323.6 476.3 321.9 474.1 320.4 471.9 321.7 469.1 321.2 467 317.8 465.1 318.4 463.5 316.3 462.9 311.4 461.7 311.1 460.7 308.3 460.6 303.3 461.3 301.8 463.3 302.8 464.7 300.2 469.7 298.9 472.6 299.4 479.4 293.3 477.7 293.1 476.5 291.6 478.8 286.5 480.4 286.2 482.2 287.8 486.7 284 497.4 284.1 497.3 287.4 500.6 290 498.4 294.5 498.4 298.2 502.3 298.9 501.6 302.8 503.5 302 504.6 302.8 508.6 309.6 504.8 314.1 500.1 314.9Z"/><path class="u st-r" data-r="sudouest" data-c="81" data-n="Tarn" d="M312.4 413.1 318.7 410.3 320.4 412.4 322.2 412.6 320.8 413.4 324.1 413.4 324.3 414.5 328.7 416.8 329.1 418.4 331.1 418.6 333.7 422.7 332.7 424.2 335.8 428.1 335.3 430.3 340 435.8 342.2 436.6 345.3 434.7 349.6 436.2 350.2 438.5 349.1 440.7 342.9 443 341.6 441.2 338.5 440.7 337.3 445.6 339 447.8 339.3 451.2 337 453 330 452.9 328.4 453.9 323.2 451.9 321.4 453.3 321.1 455.8 319.4 454 316.8 455.1 315.3 454.5 313 452 314.4 450 314 448.9 312.1 450.5 309.1 449.1 305.8 444.8 299.9 441.8 301.7 440.4 301.1 438.6 299 438.3 300.8 437.3 298.5 435.1 298.3 432.4 296.1 431.6 294.5 426.6 295.6 425.7 295.4 424.4 294.2 424.2 295.3 423.1 297.1 423.5 300.9 418.8 299.3 417.5 299.1 414.8 303.5 415.9 305 414.3 306.4 415 306 414 307.2 413.4 309.5 413.5 308.5 412.7 309.5 412.3Z"/><path class="u st-r" data-r="sudouest" data-c="82" data-n="Tarn-et-Garonne" d="M275.6 399.8 278.4 399.1 276.3 401.2 277.8 403.3 282.4 405.7 284.8 404.6 284.2 408 286.6 408.6 287.1 409.7 291.8 405.3 293.3 406 294.5 408.5 296.3 407.4 295.7 404.4 297.5 404.7 298.5 406.2 300.8 403.8 303.1 403.2 303.8 403.9 304.5 402.8 308.1 402.4 307.6 405.1 311.6 406 308.9 410.6 311.8 411.4 312.4 413.1 309.5 412.3 308.5 412.7 309.5 413.5 307.2 413.4 306 414 306.4 415 305 414.3 303.5 415.9 299.1 414.8 299.3 417.5 300.9 418.8 297.1 423.5 295.3 423.1 294.2 424.2 295.4 424.4 295.6 425.7 293.9 425.6 292.2 427.4 291.6 426.6 290.7 428.1 287.5 427.5 286.5 428.2 287 429 284.4 429.6 286.8 430.4 286.9 431.3 281.2 433.8 278.8 431.1 276.9 432.2 275.7 431.3 271.5 432.7 268.5 431.7 269.5 430.2 268.3 429.6 268.1 426.1 264.9 424.4 263.4 425 263 423.7 265.7 420.7 265.2 419.3 267 418.8 265.8 417.6 263.2 419 262.3 416.4 262.9 414.8 264.6 414.3 264.6 412.6 267.5 413.7 268.4 412.5 267.3 410 269.1 409.8 271 405.5 267.8 403.5 269 399.5 272.3 400.9Z"/><path class="u st-p" data-r="provence" data-c="83" data-n="Var" d="M492.9 472.5 494.2 470.8 495 470.9 494.3 472.4ZM491.4 473.9 490.8 472.8 492.3 472.7ZM485.1 472.6 485.4 473.8 483.8 474.8 481.9 473.8ZM463.6 434.3 464.6 432.5 466.5 432.9 467.4 434.4 470.9 432.6 474.5 437 481.8 429.4 483.5 429.2 486.6 432.1 488.9 432.6 490 429.4 494.4 428.4 495.8 429.5 498.2 428.2 499.8 431.3 503.7 431.7 504.2 435.6 505.9 437.7 510.4 439.1 509.7 444.5 511.8 445.6 508.9 449.4 505.9 449.9 505.2 449.1 503.9 450.2 503.1 453.7 498.2 457.7 499.7 458.3 502 457.4 502.8 458 501.6 459.7 501.9 461.5 500 464.1 497.4 462.7 495 464.9 491.3 465.2 489.9 465.9 489.9 468.6 486.1 467 483.4 467.3 481.5 468.9 481.5 472.3 479.9 471.8 480.2 469.7 476.3 469.8 475.2 468.4 471.7 467.4 470.9 468.1 471.6 469.6 469.3 471.9 468.1 471.7 467.4 468.6 465.7 468 466 467.3 462.5 466.7 461.5 464.8 461.8 461.6 464.9 459.7 463.4 457 461.5 456.9 462.4 454.9 461.4 452.5 465.6 451.5 461.9 447.9 462.7 444.2 460 442.6 461.4 442.2 461.6 439 465.6 437.8Z"/><path class="u st-r" data-r="rhone-s" data-c="84" data-n="Vaucluse" d="M427.9 399.9 428.9 397.4 431.6 396.5 434.3 399.7 433.3 399.8 431.5 403.5 427.9 403.2 428.1 401.3 427.1 400.7ZM418.4 405.4 418.3 402.1 422.8 402.2 424.5 403.3 425.5 407.5 427.5 405.6 434.7 402.8 436.5 404.3 439.2 402.6 438.6 407 447.8 408.3 447.8 410.9 449.9 411 450.8 412.8 452.5 412.9 452.8 415.8 454.5 415.4 453.4 422.3 457.3 423.9 455 429.4 458.3 428.6 463.7 434 462.2 436.1 457.8 438.2 454.8 438.3 446.1 434.4 440.2 434.3 435.2 431.7 431.7 427.2 427.1 425.1 422.5 424.6 425.5 422 425.5 420.9 426.5 421 426.3 419.4 420.9 414.6 421.4 409.9 420.7 408.4 419.6 408.6Z"/><path class="u st-g" data-r="bourgogne" data-c="89" data-n="Yonne" d="M349.2 189.8 350.6 187.5 351.7 187.4 353.1 183.8 352.1 181.8 353.3 178.9 365 178.1 365.6 176.6 367.3 178.8 369.9 178.3 374.7 184.5 372.9 188.2 375.3 188.5 376.4 190.9 379 189.2 379 191.3 381.5 192.9 382.2 196.2 384 197.7 382.9 198.4 383.3 199.5 385.1 198.7 385.2 202 390.6 202.6 391.2 201.5 393.1 202.5 395.1 200.6 396.6 201.3 396.6 199.9 397.9 202.1 399.8 202.4 400.5 203.6 398.7 204.8 398.7 207 400.2 206.7 401.7 209.4 401.5 211.8 399.9 213.1 398.8 212.6 399.1 214.9 397.6 216.6 398.5 217.3 393.5 226 393.9 229.4 391.9 231.4 393.5 235.2 391.2 235.2 389.5 236.7 387.3 233 384.6 233.8 384.8 230.3 383.8 230 382.6 233.1 380.9 231.7 379.7 232.2 377.3 229.5 373.6 228.5 373.6 226.7 371 225 370.7 223.4 370.1 226.9 366.7 226.1 364.5 227.9 362.5 226.4 360.6 227.3 359.4 225.4 357.9 225.7 355.5 221.8 352.4 223.5 350.8 222.9 349.5 221 350 218.6 346 214.2 346.3 212.2 352.5 210.8 351.9 204.7 356.4 200.5 352.7 191.5Z"/></g><g class="m-r"><path class="rv" data-n="Vienne" d="M312.6 326.6 308.4 326.2 307.4 327.1 306.8 325.9 301.1 323 296.3 322 294 320.5 290.2 315.3 281.5 321.3 276.8 316.5 270.1 315.3 265.1 315.8 261.4 313.9 264 287.9 258.3 268.2 258.3 261.7 260.4 256.6 258.9 249.3 256.7 247.1 244.4 243.1 241.3 240.9"/><path class="rv" data-n="Durance" d="M497.4 366 493.7 370.8 495 379.6 491.5 386 487 387.3 483.5 391.5 474.6 392.4 470.5 396.1 468.4 400 469.2 405 470.5 406.3 473 414.1 469.8 419.1 468 426.4 462.9 434.7 456.8 437.8 450 436.4 446.8 434.1 441 433.7 436.7 431.8 429.2 426 423.4 424.1"/><path class="rv" data-n="Tarn" d="M376 409 376.5 403.8 374.8 400.5 371.6 402 368.9 401 362.2 403.9 361.4 408.5 357.6 411.5 355.8 415.3 348.9 417.3 345.5 416.6 341.3 420.4 335.7 420.9 331.4 424.2 311.1 426.2 305.4 428.3 299.6 432.9 295.7 431.6 290.6 426.3 287.2 424.8 285.4 419.2 281.8 414.6 275.6 414.4 273.9 416.3"/><path class="rv" data-n="Marne" d="M441.5 203.9 438.3 202.6 435.8 197 431.7 191.6 430.3 179.9 431.3 177.2 431.3 172 426.6 163.6 411.9 161.3 409.6 158.9 406.8 152 399.9 143.8 393.9 140.5 389 140.2 387.6 138.8 383.9 138 371 138.1 366 140.6 364 143.4 360.9 144.4 358.1 143.6 355.9 145.5 352.7 145.7 351.5 144.9 353 143.8 352.6 142.7 349.6 143.1 348.7 146.3 346.7 146.3 345.7 148.5 343.9 146.5 341.2 147.7 342.9 148.9 341.7 149.9 334.7 150.3 332.4 152.8 333.8 154 333.4 155.2 329.7 153.5"/><path class="rv" data-n="Seine" d="M416.1 225 414.4 215.8 412 214.5 409.3 209.5 410.8 205.3 409.2 204.4 407.1 198.9 403.4 194.7 402.7 191.4 394.5 186.6 391.6 180.4 387.6 176.7 383.6 169.5 379 168.6 377.8 167 373.9 169.6 371 169.5 365.9 173.3 364.4 172.8 360.9 175.3 358.4 174.6 355.1 176.8 346.4 177.7 344.1 176.9 344 175.7 342.2 175.4 342.7 172 339.9 171.6 338.9 168.9 336.9 169.8 332.7 166.9 332.1 163.9 329.1 160.8 330.9 157.6 329 152.5 326.5 150.7 323.3 152.5 323.8 149.6 326.7 147.1 326.4 145.6 324.1 146.3 320.3 149.8 319.2 148.2 321.3 144.6 320.1 143.4 317.4 143.5 315.7 146.4 313.3 142.4 306.2 144.3 304 142.4 300.9 142 303.8 139.3 302.2 138.7 298.3 140.5 296.9 137.7 291.1 131.9 292.7 130.4 292.2 128.8 288.3 131 287 130.4 287.8 125.8 281.8 125.3 278.8 126.3 278.8 124.9 283 123 282 118.3 280.8 117.7 278.3 122.5 276.2 122.8 275.9 115.6 273.8 116.1 273.3 120.6 271.8 118.8 272.5 116.6 270.2 113.5 267.3 113.5 264.9 117.9 260.5 114.8"/><path class="rv" data-n="Rhin" d="M523.8 217.1 523.7 214.8 520.8 211.3 520.8 204.5 523.6 194.6 521.4 187.8 525.4 175.5 527.1 173.7 526.4 170.1 527.4 165 528.7 163.7 528.3 158.4 533.3 152.1 533.6 150.1 535.3 149.7 537.8 147 540.5 139.3 542.3 137.9"/><path class="rv" data-n="Rhône" d="M469.5 295.9 466 300.3 464.4 300.4 462.9 302.4 461.8 301.5 461.1 302.4 461.8 313.3 460.3 319 457.7 320.2 457.6 324.5 454.9 327.6 453.3 327.1 447.2 319.7 446.3 316.9 443.9 315 439.8 320.2 434.3 318.3 429.4 318.4 425 320.1 424.3 322.9 423 323.2 423.8 326.6 422.4 331.7 425.1 334 421 340 420.9 342.3 423.2 348 424 358.4 427 367.3 425.9 371.5 422.5 376.9 423.4 383.6 420.8 388.4 419 397 418.7 405.1 421.1 409.5 421.8 415.6 423.5 415.4 426.8 419.4 423.7 423.8 418.8 426.9 417.8 436.6"/><path class="rv" data-n="Rhône" d="M417.8 436.6 412.4 437.3 410.3 441 411.8 442.5 407.4 446 409.5 451.1"/><path class="rv" data-n="Rhône" d="M417.8 436.6 417.7 439.5 421.2 443.8"/><path class="rv" data-n="Dordogne" d="M342.7 332.8 336.3 331.9 333.7 334.5 332.6 343.3 330.4 343.8 327.1 342.5 327.3 345.8 322 352.4 314.7 353.4 312.9 357.8 309.2 361.5 309.7 362.4 306.7 363.5 306.9 367.5 305.5 370.4"/><path class="rv" data-n="Dordogne" d="M305.5 370.8 300.2 369.3 294.7 373.6 291.3 371.7 285.1 374.3 283.6 373.9 281.1 375.8 280.3 374.6 277.6 374.9 274.7 372.9 273.7 374.5 272 374.4 269.3 373.2 268.3 371.4 267.7 372.8 266 371.3 265.3 373.2 263.8 373.7 247.3 372.6 243.4 371 241 374 235.4 373.1 234.2 371.8 228.9 373.6 226.1 372 225.7 369.4 224.6 369.9 223.2 368 221.8 368.8 220.2 366.5 216.7 366.3 215 363.6"/><path class="rv" data-n="Yonne" d="M388.6 251.9 387 247 385 244.8 380 243.8 376.8 240.9 376.9 237.2 374.8 233.2 374.8 230.8 373 230.6 371.2 228.1 372.4 225.1 375.7 224.7 376.1 221.2 377.4 220.7 377.2 216.4 373.8 212.8 374.5 211 370.8 201.3 362.9 198.1 363.4 196.6 361.6 192.4 363.1 190.3 361.3 188.6 361.7 187.2 358.7 181 354.8 178.7 350.5 177.9 350 176.8"/><path class="rv" data-n="Sane" d="M426.2 262.5 422.8 265.4 427 271 426.3 281.4 421.8 295.1 419.6 305.8 419.8 311.5 423.3 315.2 423.3 322.8"/><path class="rv" data-n="Garonne" d="M258.9 489.3 260.3 482.6 257.2 479.1 253.6 472.1 257.9 469.8 266.2 470.5 278 462.6 283.6 456 285.5 450.1 289.6 445.9 288.7 442 279.3 422.7 274.9 416.8 271.6 415.8 268.3 416.2 263.8 412.9 257.6 410.7 255.8 407.8 246.4 405.7 245 397.8 242.2 396.4 236.5 390.1 234.8 390 232 387.1 224.6 387.9 222.4 386.7 219.2 380.8 213.5 375.7 213 373.2 211.5 371.8 212.9 369"/><path class="rv" data-n="Loire" d="M352.3 244.9 350.7 239.6 347.3 236 349.1 229.3 342 219.3 331.4 212 327.4 211.6 325.3 210.2 325.4 208.9 323 206.7 318 205.8 315.9 206.5 315.2 205 310 204.1 304.2 206.9 298.5 215 288.3 222.4 285.7 226.4 272.9 231.6 265.5 231 259.3 232.4 246.5 239.7 241.3 240.9 235.9 238.2 227.1 229.6 218.8 228.7 215.9 229.1 212.9 231.3 205.7 229.4 194.9 230.3 189.6 232 181.9 238.4 176.9 239.4 173 238.4"/><path class="rv" data-n="Loire" d="M354.9 255.4 352.3 244.9"/><path class="rv" data-n="Loire" d="M399.5 374.8 398.8 377.3 397.9 377.4 389.5 372.2 387.5 365.6 389 363.8 387.9 358.5 388.8 354.8 390.1 353.6 393.5 353.2 396.4 350.5 396.8 347.3 400.7 341.7 401.4 333.5 398.8 327.8 398.2 319.9 391.9 311.8 394.7 306 394.5 301.7 390 290.1 389.5 283.8 380.4 279.3 380.3 275.7 375.2 267.6 369.7 263.6 365.1 262.9 359.6 255.7 357.7 255.3 355.7 256.2 354.9 255.4"/><path class="rv" data-n="Saône" d="M469 191 465.2 190.7 459.3 197.6 462.3 201 460.9 205.1 465.3 209.9 465.1 214.5 463.2 215.2 462.8 217.1 461.2 216.4 452.1 222.6 450.7 226 446.9 228.4 445.4 233.2 442.1 237.2 442.6 239.2 441.1 244.6 433.1 249 432.1 254.7 428.4 258.5"/><path class="rv" data-n="Lot" d="M368.3 393.4 366.2 394.4 361.6 393.9 359.4 396.6 354.3 394.7 350.9 394.8 347.7 392.6 339.6 390.4 335.2 385.4 327.5 384.7 320.1 388.6 315.4 388.8 304.7 394.8 297.9 394.1 293 394.9 277.8 392.5 272.4 393.1 265.7 397.9 261.9 397.6 257.3 395.5 255.3 398.1 251.2 398.7 245.9 401.5"/><path class="rv" data-n="Cher" d="M324.8 314.4 326.6 302 329.3 299.6 331.8 299 336 293.7 337.4 279 335.1 272.2 326.3 262.7 319.3 244.1 316.7 242 313.5 241.6 305.9 238.1 301.7 239.2 293.2 239.1 286.2 235.4 278.4 235.4 268.2 232.6 261 232.7 256.7 233.9"/><path class="rv" data-n="Allier" d="M387.5 388.6 388.2 384.1 386.8 379.1 382 375.5 378.7 370.5 379.5 367.4 377.4 365.9"/><path class="rv" data-n="Allier" d="M377.4 365.9 376.5 363.2 369 356.3 367.8 348.2 364.9 340.9 362.6 339 362.8 334.7 360.1 330.5 360.2 324.1 362.9 321.1 366.1 313.2 366.8 313.6 369.4 310.9 369.8 308.9 368.1 302.8 368.2 296.8 363.9 289 364.5 279 358.8 272.1 353.7 267.9 353.1 266 354.6 262.4 354.9 255.4"/></g><g class="m-l"><text class="lb lb-reg" x="371" y="112.5" text-anchor="middle" data-r="champagne">샹파뉴</text><text class="lb lb-reg" x="536" y="179.9" text-anchor="middle" data-r="alsace">알자스</text><text class="lb lb-reg" x="409.9" y="223.1" text-anchor="middle" data-r="bourgogne">부르고뉴</text><text class="lb lb-reg" x="388.8" y="308.6" text-anchor="middle" data-r="beaujolais">보졸레</text><text class="lb lb-reg" x="454.5" y="277.3" text-anchor="middle" data-r="jura">쥐라</text><text class="lb lb-reg" x="486.6" y="331.6" text-anchor="middle" data-r="savoie">사부아</text><text class="lb lb-reg" x="401.9" y="376.3" text-anchor="middle" data-r="rhone-n">북부 론</text><text class="lb lb-reg" x="444.2" y="403" text-anchor="middle" data-r="rhone-s">남부 론</text><text class="lb lb-reg" x="484.1" y="444.8" text-anchor="middle" data-r="provence">프로방스</text><text class="lb lb-reg" x="352.8" y="444.8" text-anchor="middle" data-r="languedoc">랑그도크</text><text class="lb lb-reg" x="330.6" y="498.4" text-anchor="middle" data-r="roussillon">루시용</text><text class="lb lb-reg" x="270.7" y="418" text-anchor="middle" data-r="sudouest">쉬드우에스트</text><text class="lb lb-reg" x="209.4" y="378.8" text-anchor="middle" data-r="bordeaux">보르도</text><text class="lb lb-reg" x="248" y="239.4" text-anchor="middle" data-r="loire">루아르</text><text class="lb lb-reg" x="603.6" y="519.2" text-anchor="middle" data-r="corse">코르스</text></g><g class="m-p"><g class="pin" data-k="champagne" tabindex="0" data-tip="랭스"><circle class="pd" cx="388.7" cy="128.5" r="2.6"/><text class="pl" x="394.7" y="132" text-anchor="start">랭스</text></g><g class="pin" data-k="champagne" tabindex="0" data-tip="에페르네"><circle class="pd" cx="386.3" cy="140.6" r="2.6"/><text class="pl" x="386.3" y="153.6" text-anchor="middle">에페르네</text></g><g class="pin" data-k="alsace" tabindex="0" data-tip="콜마르"><circle class="pd" cx="513.5" cy="189.2" r="2.6"/><text class="pl" x="507.5" y="192.7" text-anchor="end">콜마르</text></g><g class="pin" data-k="bourgogne" tabindex="0" data-tip="샤블리"><circle class="pd" cx="381.5" cy="209" r="2.6"/><text class="pl" x="375.5" y="212.5" text-anchor="end">샤블리</text></g><g class="pin" data-k="bourgogne" tabindex="0" data-tip="본"><circle class="pd" cx="421.6" cy="252" r="2.6"/><text class="pl" x="415.6" y="255.5" text-anchor="end">본</text></g><g class="pin" data-k="bourgogne" tabindex="0" data-tip="뉘생조르주"><circle class="pd" cx="425.6" cy="245.6" r="2.6"/></g><g class="pin" data-k="bourgogne" tabindex="0" data-tip="마콩"><circle class="pd" cx="422.3" cy="292" r="2.6"/></g><g class="pin" data-k="beaujolais" tabindex="0" data-tip="물랭아방"><circle class="pd" cx="419.1" cy="298.5" r="2.6"/></g><g class="pin" data-k="rhone-n" tabindex="0" data-tip="코트로티"><circle class="pd" cx="422.9" cy="337.4" r="2.6"/><text class="pl" x="428.9" y="340.9" text-anchor="start">코트로티</text></g><g class="pin" data-k="rhone-n" tabindex="0" data-tip="에르미타주"><circle class="pd" cx="424.9" cy="360.7" r="2.6"/><text class="pl" x="430.9" y="364.2" text-anchor="start">에르미타주</text></g><g class="pin" data-k="rhone-s" tabindex="0" data-tip="샤토뇌프뒤파프"><circle class="pd" cx="426" cy="417.1" r="2.6"/><text class="pl" x="420" y="420.6" text-anchor="end">샤토뇌프뒤파프</text></g><g class="pin" data-k="provence" tabindex="0" data-tip="방돌"><circle class="pd" cx="464.9" cy="467" r="2.6"/><text class="pl" x="464.9" y="480" text-anchor="middle">방돌</text></g><g class="pin" data-k="languedoc" tabindex="0" data-tip="픽생루"><circle class="pd" cx="384.9" cy="432.8" r="2.6"/></g><g class="pin" data-k="languedoc" tabindex="0" data-tip="리무"><circle class="pd" cx="321.2" cy="474.1" r="2.6"/></g><g class="pin" data-k="roussillon" tabindex="0" data-tip="바뉠스"><circle class="pd" cx="358.5" cy="505.9" r="2.6"/></g><g class="pin" data-k="sudouest" tabindex="0" data-tip="카오르"><circle class="pd" cx="290.7" cy="396.3" r="2.6"/><text class="pl" x="296.7" y="399.8" text-anchor="start">카오르</text></g><g class="pin" data-k="sudouest" tabindex="0" data-tip="마디랑"><circle class="pd" cx="229.4" cy="444.7" r="2.6"/></g><g class="pin" data-k="sudouest" tabindex="0" data-tip="쥐랑송"><circle class="pd" cx="215.5" cy="458.7" r="2.6"/></g><g class="pin" data-k="bordeaux" tabindex="0" data-tip="포이약"><circle class="pd" cx="205.5" cy="352" r="2.6"/><text class="pl" x="199.5" y="355.5" text-anchor="end">포이약</text></g><g class="pin" data-k="bordeaux" tabindex="0" data-tip="생테밀리옹"><circle class="pd" cx="228.1" cy="369.8" r="2.6"/><text class="pl" x="234.1" y="373.3" text-anchor="start">생테밀리옹</text></g><g class="pin" data-k="bordeaux" tabindex="0" data-tip="소테른"><circle class="pd" cx="219.9" cy="389.6" r="2.6"/></g><g class="pin" data-k="loire" tabindex="0" data-tip="상세르"><circle class="pd" cx="345.6" cy="236.1" r="2.6"/><text class="pl" x="339.6" y="239.6" text-anchor="end">상세르</text></g><g class="pin" data-k="loire" tabindex="0" data-tip="부브레"><circle class="pd" cx="268.9" cy="230.9" r="2.6"/><text class="pl" x="268.9" y="223.9" text-anchor="middle">부브레</text></g><g class="pin" data-k="loire" tabindex="0" data-tip="시농"><circle class="pd" cx="247.6" cy="244" r="2.6"/></g><g class="pin" data-k="loire" tabindex="0" data-tip="사브니에르"><circle class="pd" cx="214.1" cy="230.8" r="2.6"/></g><g class="pin" data-k="loire" tabindex="0" data-tip="뮈스카데"><circle class="pd" cx="190.6" cy="242" r="2.6"/><text class="pl" x="190.6" y="255" text-anchor="middle">뮈스카데</text></g><g class="pin" data-k="jura" tabindex="0" data-tip="아르부아"><circle class="pd" cx="457.3" cy="257.6" r="2.6"/></g><g class="pin" data-k="corse" tabindex="0" data-tip="파트리모니오"><circle class="pd" cx="613.3" cy="482.1" r="2.6"/></g></g><g class="m-sc"><g class="sc"><path d="M16 560V564H66.1V560"/><text x="71.1" y="565">100 km</text></g><g class="na"><path d="M622 10l5 13-5-3.4-5 3.4z"/><text x="622" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--st-r)"></i>레드 중심</span><span><i style="background:var(--st-g)"></i>화이트 중심</span><span><i style="background:var(--st-s)"></i>스파클링</span><span><i style="background:var(--st-p)"></i>로제 중심</span><span><i class="dot"></i>대표 산지·마을</span></div>
+    </div>
+    <div class="mapinfo" id="frx-info" aria-live="polite"></div>
+  </div>
+</div>
+<div class="try"><b>해볼 것</b><ul>
+  <li>‘피노 누아’와 ‘그르나슈’를 차례로 눌러 보세요. 서늘한 북쪽과 뜨거운 남쪽으로 정확히 갈립니다.</li>
+  <li>‘카베르네 프랑’을 누르면 보르도와 함께 루아르가 강조됩니다. 시농과 소뮈르 샹피니에서는 카베르네 프랑이 주인공입니다.</li>
+</ul></div>
+
+<h2>기후가 품종을 고른다</h2>
+<p>프랑스 와인 산지는 세 가지 기후로 크게 나뉩니다. 대서양 쪽의 해양성 기후는 온화하고 비가 많아 해마다 작황 차이(빈티지 차이)가 큽니다. 내륙의 대륙성 기후는 여름이 짧고 덥고 겨울이 춥습니다. 남쪽의 지중해성 기후는 덥고 건조하며 햇볕이 넉넉합니다. 포도는 익는 데 필요한 열의 양이 품종마다 다르기 때문에, 일찍 익는 품종은 북쪽에서, 늦게 익는 품종은 남쪽에서 자리를 잡았습니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="chart" viewBox="0 0 900 360" role="img" aria-label="품종별 숙성 시기와 대표 산지">
+      <g id="ripen"></g>
+    </svg>
+    <div class="map-legend"><span><i style="background:var(--st-r)"></i>레드 품종</span><span><i style="background:var(--st-g)"></i>화이트 품종</span></div>
+  </div>
+  <figcaption><b>그림 2-2.</b> 익는 데 필요한 열이 적은 품종(왼쪽)부터 많은 품종(오른쪽)까지. 막대의 위치는 일반적인 경향을 나타낸 상대적인 값이며, 오른쪽 글은 그 품종이 대표적으로 자라는 프랑스 산지다. 북쪽의 서늘한 산지는 왼쪽 품종을, 남쪽의 더운 산지는 오른쪽 품종을 쓴다.</figcaption>
+</figure>
+
+<div class="grid-cards">
+  <div class="card"><h4>해양성</h4><p class="meta">보르도 · 루아르 서부 · 쉬드우에스트</p><p>온화하고 습하다. 서리·비·곰팡이병의 위험이 커서 여러 품종을 섞어 위험을 나누는 블렌딩 문화가 생겼다.</p></div>
+  <div class="card"><h4>대륙성</h4><p class="meta">부르고뉴 · 샹파뉴 · 알자스 · 쥐라</p><p>여름은 짧고 덥고 겨울은 춥다. 일찍 익는 피노 누아와 샤르도네, 리슬링 같은 품종을 한 가지만 쓰는 경우가 많다.</p></div>
+  <div class="card"><h4>지중해성</h4><p class="meta">남부 론 · 랑그도크 · 루시용 · 프로방스 · 코르스</p><p>덥고 건조하며 바람(미스트랄)이 강하다. 그르나슈·시라·무르베드르처럼 열과 가뭄에 강한 품종을 섞는다.</p></div>
+</div>
+
+<h2>라벨 읽기</h2>
+<p>프랑스 라벨은 품종 대신 산지 이름을 앞세웁니다. 산지 이름이 곧 품종과 스타일을 알려 주기 때문입니다(알자스는 예외로 품종을 적습니다). 보르도는 샤토 이름과 등급을, 부르고뉴는 마을과 밭 이름을 크게 씁니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 300" role="img" aria-label="보르도와 부르고뉴 라벨 비교">
+      <g id="labels"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 2-3.</b> 보르도 라벨(왼쪽)과 부르고뉴 라벨(오른쪽)의 구조. 이름은 설명을 위한 가상의 예다. ‘Mis en bouteille au château/au domaine’은 생산자가 직접 병입했다는 뜻이다.</figcaption>
+</figure>
+
+<h2>산지 한눈에</h2>
+<div class="tablewrap wide"><table>
+  <thead><tr><th>산지</th><th>대표 품종</th><th>대표 와인과 특징</th><th>더 보기</th></tr></thead>
+  <tbody id="fr-table"></tbody>
+</table></div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>AOC(AOP)는 산지 경계, 품종, 수확량, 양조 방법을 정한 원산지 통제 명칭이다. 그 아래에 IGP와 뱅 드 프랑스가 있다.</li>
+  <li>대륙성 기후의 북쪽(부르고뉴·샹파뉴·알자스)은 일찍 익는 품종을, 지중해성의 남쪽(론 남부·랑그도크·프로방스)은 그르나슈·시라·무르베드르를 쓴다.</li>
+  <li>해양성 기후의 보르도는 날씨 위험을 나누려고 여러 품종을 섞는다.</li>
+  <li>프랑스 라벨은 품종이 아니라 산지를 앞세운다. 보르도는 샤토와 등급, 부르고뉴는 마을과 밭(클리마)을 본다.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="3"><p class="q">다음 중 라벨에 품종 이름을 쓰는 것이 일반적인 프랑스 산지는?</p>
+    <ol class="opts"><li>보르도</li><li>부르고뉴</li><li>알자스</li><li>샤토뇌프뒤파프</li></ol>
+    <div class="why">알자스는 리슬링·게뷔르츠트라미너처럼 품종을 라벨에 적는다. 다른 산지는 산지 이름을 앞세운다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">루아르의 시농과 소뮈르 샹피니에서 주로 쓰는 레드 품종은?</p>
+    <ol class="opts"><li>피노 누아</li><li>카베르네 프랑</li><li>그르나슈</li><li>말벡</li></ol>
+    <div class="why">카베르네 프랑은 루아르 중부의 대표 레드 품종이다.</div></div>
+  <div class="quiz" data-a="4"><p class="q">프로방스의 생산량 대부분을 차지하는 스타일은?</p>
+    <ol class="opts"><li>스위트 화이트</li><li>스파클링</li><li>오크 숙성 레드</li><li>로제</li></ol>
+    <div class="why">프로방스는 세계에서 가장 유명한 로제 산지로, 생산량의 대부분이 로제다.</div></div>
+  <div class="quiz" data-a="1"><p class="q">AOC 규정이 정하지 않는 것은?</p>
+    <ol class="opts"><li>판매 가격</li><li>허용 품종</li><li>최대 수확량</li><li>산지 경계</li></ol>
+    <div class="why">AOC는 생산 조건을 정할 뿐 가격은 정하지 않는다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>AOC 제도와 INAO: 프랑스 국립 원산지·품질 연구소(<a href="https://www.inao.gouv.fr/" rel="noopener">inao.gouv.fr</a>).</li>
+  <li>지도: 데파르트망 경계 france-geojson(IGN·INSEE 기반), 강 Natural Earth. 산지는 데파르트망 단위로 칠한 근사치다.</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="basics.html"><small>← 이전</small>01장 · 와인의 기초</a><a class="next" href="bordeaux.html"><small>다음 →</small>03장 · 보르도</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, $$ = WB.$$, esc = WB.esc;
+  /* ---------- pyramid ---------- */
+  var tiers = [
+    ['AOC / AOP', '원산지 통제 명칭', '산지 경계·품종·수확량·양조법을 법으로 정한다', 'var(--st-r)'],
+    ['IGP', '지리적 표시 보호(옛 뱅 드 페이)', '넓은 지역 단위, 품종 선택이 자유롭다(페이 독 등)', 'var(--t-r2)'],
+    ['뱅 드 프랑스', '산지 표시 없는 와인', '여러 지역을 섞어도 되고 품종·빈티지 표기 가능', 'var(--t-r1)']
+  ];
+  var o = '';
+  tiers.forEach(function (t, i) {
+    var y = 34 + i * 80, w = 150 + i * 90, cx = 175, x = cx - w / 2;
+    o += '<path d="M' + (x + 22) + ' ' + y + ' H' + (x + w - 22) + ' L' + (x + w) + ' ' + (y + 66) + ' H' + x + ' Z" style="fill:' + t[3] + '"/>';
+    o += '<text x="' + cx + '" y="' + (y + 31) + '" text-anchor="middle" class="t-l t-b" style="fill:' + (i ? 'var(--ink)' : '#fff') + '">' + t[0] + '</text>';
+    o += '<text x="' + cx + '" y="' + (y + 50) + '" text-anchor="middle" class="t-s" style="fill:' + (i ? 'var(--ink-2)' : '#fff') + '">' + t[1] + '</text>';
+    o += '<path d="M' + (x + w - 8) + ' ' + (y + 36) + ' H352" class="ln"/><text x="360" y="' + (y + 40) + '" class="t-s t-2">' + t[2] + '</text>';
+  });
+  var steps = [['그랑 크뤼', '밭 이름만(로마네콩티)'], ['프르미에 크뤼', '마을 + 밭(뉘생조르주 레 생조르주)'], ['마을(코뮌)', '본로마네'], ['지역', '부르고뉴 · 부르고뉴 코트 도르']];
+  o += '<text x="760" y="22" text-anchor="middle" class="t-s t-b">AOC 안의 단계(부르고뉴)</text>';
+  steps.forEach(function (st, i) {
+    var y = 34 + i * 62;
+    o += '<rect x="660" y="' + y + '" width="200" height="48" rx="6" class="box2"/><text x="760" y="' + (y + 21) + '" text-anchor="middle" class="t-b">' + st[0] + '</text><text x="760" y="' + (y + 38) + '" text-anchor="middle" class="t-s t-mut">' + st[1] + '</text>';
+  });
+  o += '<path d="M640 260 V40" stroke="var(--ink-2)" stroke-width="1.2" marker-end="url(#fr-ah)"/>';
+  $('#fr-pyr').innerHTML = '<defs><marker id="fr-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink-2)"/></marker></defs>' + o;
+
+  /* ---------- regions ---------- */
+  var R = {
+    champagne: ['샹파뉴', '피노 누아 · 뫼니에 · 샤르도네', '세계 스파클링의 기준. 북쪽 한계의 서늘한 기후와 백악(초크) 토양에서 산도 높은 베이스 와인을 만들어 병 속에서 2차 발효한다.', 'champagne.html', '5장'],
+    alsace: ['알자스', '리슬링 · 게뷔르츠트라미너 · 피노 그리 · 뮈스카', '보주산맥이 비구름을 막아 프랑스에서 가장 건조한 산지 가운데 하나. 품종을 라벨에 적고, 51개 그랑 크뤼가 있다. 크레망 달자스(스파클링)도 많다.', 'rhone.html', '6장'],
+    bourgogne: ['부르고뉴', '피노 누아 · 샤르도네', '대륙성 기후와 석회암·이회토. 밭(클리마) 단위의 등급이 정교하다. 샤블리, 코트 드 뉘, 코트 드 본, 코트 샬로네즈, 마코네.', 'burgundy.html', '4장'],
+    beaujolais: ['보졸레', '가메', '화강암 언덕의 가메. 송이째 발효(탄산 침용)로 과일 향이 화사하다. 북부의 10개 크뤼는 더 진하고 오래 간다.', 'burgundy.html', '4장'],
+    jura: ['쥐라', '사바냉 · 샤르도네 · 풀사르 · 트루소', '효모 막(부알) 아래에서 6년 넘게 숙성하는 산화형 화이트 ‘뱅 존’과, 말린 포도로 만드는 ‘뱅 드 파이유’.', 'rhone.html', '6장'],
+    savoie: ['사부아', '자케르 · 알테스 · 몽되즈', '알프스 고지대의 산뜻한 화이트와 가벼운 레드.', 'rhone.html', '6장'],
+    'rhone-n': ['북부 론', '시라 · 비오니에 · 마르산 · 루산', '가파른 화강암 테라스의 시라. 코트 로티(비오니에를 함께 발효), 에르미타주, 코르나스, 콩드리외(비오니에).', 'rhone.html', '6장'],
+    'rhone-s': ['남부 론', '그르나슈 · 시라 · 무르베드르 · 생소', '지중해성 기후와 미스트랄. 큰 조약돌(갈레)이 덮인 샤토뇌프뒤파프, 지공다스, 바케라스, 로제만 만드는 타벨.', 'rhone.html', '6장'],
+    provence: ['프로방스', '그르나슈 · 생소 · 시라 · 무르베드르 · 롤', '생산량의 대부분이 연한 색의 드라이 로제. 방돌은 무르베드르로 힘 있는 레드를 만든다.', 'rhone.html', '6장'],
+    languedoc: ['랑그도크', '그르나슈 · 시라 · 카리냥 · 무르베드르', '프랑스에서 포도밭이 가장 넓은 지역. 픽생루, 미네르부아, 코르비에르, 포제르, 그리고 넓은 IGP 페이 독. 리무는 스파클링의 오랜 산지.', 'rhone.html', '6장'],
+    roussillon: ['루시용', '그르나슈 · 카리냥 · 뮈스카', '피레네산맥 아래의 뜨거운 산지. 발효 중 알코올을 더해 단맛을 남기는 뱅 두 나튀렐(바뉠스, 모리, 리브잘트).', 'rhone.html', '6장'],
+    sudouest: ['쉬드우에스트', '말벡 · 타나 · 망상 · 보르도 품종', '토착 품종의 보고. 카오르(말벡), 마디랑(타나), 쥐랑송(망상 스위트·드라이), 베르주라크(보르도 품종).', 'rhone.html', '6장'],
+    bordeaux: ['보르도', '카베르네 소비뇽 · 메를로 · 카베르네 프랑 · 소비뇽 블랑 · 세미용', '해양성 기후의 블렌드 산지. 좌안 자갈의 카베르네, 우안 점토의 메를로, 소테른의 귀부 스위트.', 'bordeaux.html', '3장'],
+    loire: ['루아르', '믈롱 · 슈냉 블랑 · 카베르네 프랑 · 소비뇽 블랑', '강을 따라 하구의 뮈스카데부터 앙주·소뮈르의 슈냉과 카베르네 프랑, 투렌의 부브레, 동쪽 끝의 상세르·푸이 퓌메까지 이어진다.', 'rhone.html', '6장'],
+    corse: ['코르스', '니엘루치오 · 시아카렐루 · 베르멘티누', '지중해 섬의 화강암과 편암. 니엘루치오는 산지오베제와 가까운 품종이다.', 'rhone.html', '6장']
+  };
+  var G = {
+    'pinot-noir': ['피노 누아', 'r', '껍질이 얇고 일찍 익는다. 붉은 체리·딸기·장미, 옅은 색과 섬세한 탄닌.', ['bourgogne', 'champagne', 'alsace', 'loire', 'jura']],
+    gamay: ['가메', 'r', '가볍고 과일 향이 화사하다. 탄산 침용과 잘 어울린다.', ['beaujolais', 'loire']],
+    'cabernet-franc': ['카베르네 프랑', 'r', '라즈베리·제비꽃·연필심, 서늘하면 피망 향. 카베르네 소비뇽의 부모 품종.', ['loire', 'bordeaux']],
+    merlot: ['메를로', 'r', '자두·블랙체리, 둥근 탄닌. 일찍 익어 점토에서도 잘 자란다.', ['bordeaux', 'sudouest', 'languedoc']],
+    syrah: ['시라', 'r', '블랙베리·후추·올리브·훈연. 북부 론에서는 단독, 남쪽에서는 블렌드.', ['rhone-n', 'rhone-s', 'languedoc', 'provence']],
+    'cabernet-sauvignon': ['카베르네 소비뇽', 'r', '카시스·삼나무·민트, 두꺼운 껍질과 높은 탄닌. 늦게 익어 따뜻한 자갈이 필요하다.', ['bordeaux', 'sudouest', 'languedoc']],
+    malbec: ['말벡', 'r', '카오르의 ‘검은 와인’. 진한 색과 자두·감초.', ['sudouest']],
+    grenache: ['그르나슈', 'r', '딸기잼·향신료, 알코올이 높고 색은 옅은 편. 덥고 건조한 남쪽의 주인공.', ['rhone-s', 'languedoc', 'roussillon', 'provence', 'corse']],
+    mourvedre: ['무르베드르', 'r', '아주 늦게 익는다. 야생 고기·가죽·허브, 단단한 탄닌. 방돌의 주품종.', ['provence', 'rhone-s', 'languedoc']],
+    chardonnay: ['샤르도네', 'w', '산지와 양조에 따라 레몬·사과부터 버터·견과까지 폭이 넓다.', ['bourgogne', 'champagne', 'jura', 'languedoc']],
+    'sauvignon-blanc': ['소비뇽 블랑', 'w', '자몽·풀·구스베리, 높은 산도. 상세르와 보르도 화이트.', ['loire', 'bordeaux', 'sudouest']],
+    chenin: ['슈냉 블랑', 'w', '사과·모과·꿀, 높은 산도로 드라이부터 스위트·스파클링까지.', ['loire']],
+    riesling: ['리슬링', 'w', '라임·복숭아·꽃, 숙성하면 페트롤 향. 알자스에서는 대개 드라이.', ['alsace']],
+    gewurz: ['게뷔르츠트라미너', 'w', '리치·장미·생강의 화려한 향, 낮은 산도.', ['alsace']],
+    viognier: ['비오니에', 'w', '살구·복숭아·꽃, 풍만한 질감. 콩드리외의 품종.', ['rhone-n', 'languedoc']],
+    semillon: ['세미용', 'w', '꿀·밀랍·레몬. 귀부병에 잘 걸려 소테른의 주품종이 된다.', ['bordeaux', 'sudouest']],
+    savagnin: ['사바냉', 'w', '호두·향신료. 쥐라의 뱅 존을 만드는 품종.', ['jura']],
+    melon: ['믈롱 드 부르고뉴', 'w', '중성적이고 산뜻하다. 뮈스카데의 품종으로 효모 앙금 숙성(쉬르 리)이 많다.', ['loire']]
+  };
+  var svg = $('#frx svg'), info = $('#frx-info');
+  var EMPTY = '<p class="hint">지도에서 산지를 누르거나 위의 품종 버튼을 눌러 보세요.</p>';
+  function renderR(k) {
+    var r = R[k];
+    if (!r) return '<p class="hint">설명이 없습니다.</p>';
+    var gs = Object.keys(G).filter(function (g) { return G[g][3].indexOf(k) >= 0; });
+    return '<h4>' + esc(r[0]) + '</h4><div class="sub">' + esc(r[1]) + '</div><p>' + esc(r[2]) + '</p>' +
+      (gs.length ? '<div class="small">이 산지의 대표 품종</div><div class="chips">' + gs.map(function (g) { return '<button class="chip" data-g="' + g + '"><i style="background:' + (G[g][1] === 'r' ? 'var(--st-r)' : 'var(--st-g)') + '"></i>' + esc(G[g][0]) + '</button>'; }).join('') + '</div>' : '') +
+      '<p class="small"><a href="' + r[3] + '">' + r[4] + '에서 자세히 →</a></p>';
+  }
+  var ex = WB.mapExplorer(svg, { info: info, keyAttr: 'r', render: renderR, empty: EMPTY, onSelect: function () { $$('#grape-chips .chip').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); }); } });
+  var box = $('#grape-chips');
+  box.innerHTML = '<div class="chips">' + Object.keys(G).map(function (g) { return '<button class="chip" aria-pressed="false" data-g="' + g + '"><i style="background:' + (G[g][1] === 'r' ? 'var(--st-r)' : 'var(--st-g)') + '"></i>' + esc(G[g][0]) + '</button>'; }).join('') + '</div>';
+  function pickGrape(g) {
+    var x = G[g];
+    $$('#grape-chips .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.g === g ? 'true' : 'false'); });
+    $$('.pin.on', svg).forEach(function (p) { p.classList.remove('on'); });
+    WB.highlight(svg, x[3], 'r');
+    info.innerHTML = '<h4>' + esc(x[0]) + '</h4><div class="sub">' + (x[1] === 'r' ? '레드 품종' : '화이트 품종') + '</div><p>' + esc(x[2]) + '</p><div class="small">주요 산지</div><div class="chips">' +
+      x[3].map(function (k) { return '<button class="chip" data-reg="' + k + '">' + esc(R[k][0]) + '</button>'; }).join('') + '</div>';
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('button[data-g]');
+    if (b) {
+      if (b.closest('#grape-chips') && b.getAttribute('aria-pressed') === 'true') { b.setAttribute('aria-pressed', 'false'); WB.highlight(svg, [], 'r'); info.innerHTML = EMPTY; return; }
+      pickGrape(b.dataset.g); return;
+    }
+    var r = e.target.closest && e.target.closest('button[data-reg]');
+    if (r) { WB.highlight(svg, [], 'r'); ex.show(r.dataset.reg); }
+  });
+
+  /* ---------- ripening chart ---------- */
+  var RP = [
+    ['뮈스카·믈롱', 'w', 1, '루아르 하구(뮈스카데)'], ['피노 누아', 'r', 1.5, '부르고뉴 · 샹파뉴 · 알자스'], ['샤르도네', 'w', 1.6, '샤블리 · 부르고뉴 · 샹파뉴'],
+    ['가메', 'r', 2, '보졸레'], ['소비뇽 블랑', 'w', 2.2, '상세르 · 보르도'], ['리슬링', 'w', 2.6, '알자스'],
+    ['메를로', 'r', 3, '보르도 우안'], ['카베르네 프랑', 'r', 3.4, '루아르 · 보르도'], ['시라', 'r', 3.8, '북부 론'],
+    ['카베르네 소비뇽', 'r', 4.3, '보르도 좌안'], ['그르나슈', 'r', 4.7, '남부 론 · 랑그도크'], ['무르베드르', 'r', 5.2, '방돌 · 남부 론']
+  ];
+  var X0 = 150, X1 = 600, g = '';
+  g += '<text x="' + X0 + '" y="16" class="t">일찍 익음 · 서늘한 북쪽</text><text x="' + X1 + '" y="16" text-anchor="end">늦게 익음 · 더운 남쪽</text>';
+  RP.forEach(function (p, i) {
+    var y = 30 + i * 26, x = X0 + (X1 - X0) * (p[2] - 0.8) / 4.6;
+    g += '<text x="' + (X0 - 10) + '" y="' + (y + 12) + '" text-anchor="end" style="fill:var(--ink);font-size:12px">' + esc(p[0]) + '</text>';
+    g += '<rect x="' + X0 + '" y="' + (y + 4) + '" width="' + (X1 - X0) + '" height="10" rx="4" style="fill:var(--surface-2)"/>';
+    g += '<rect x="' + X0 + '" y="' + (y + 4) + '" width="' + Math.max(6, x - X0) + '" height="10" rx="4" style="fill:' + (p[1] === 'r' ? 'var(--st-r)' : 'var(--st-g)') + '"/>';
+    g += '<text x="' + (X1 + 14) + '" y="' + (y + 13) + '" style="fill:var(--ink-2);font-size:11.5px">' + esc(p[3]) + '</text>';
+  });
+  $('#ripen').innerHTML = g;
+
+  /* ---------- labels ---------- */
+  var L = '';
+  function lab(x, title, lines, notes) {
+    var s = '<rect x="' + x + '" y="20" width="220" height="250" rx="6" fill="var(--surface)" stroke="var(--ink-2)"/><rect x="' + (x + 10) + '" y="30" width="200" height="230" rx="3" fill="none" stroke="var(--line)"/>';
+    s += '<text x="' + (x + 110) + '" y="50" text-anchor="middle" class="t-s t-mut">' + title + '</text>';
+    lines.forEach(function (l) { s += '<text x="' + (x + 110) + '" y="' + l[0] + '" text-anchor="middle" class="' + l[2] + '">' + l[1] + '</text>'; });
+    notes.forEach(function (n) {
+      var ty = n[3] || n[0];
+      s += '<path d="M' + (x + 200) + ' ' + (n[0] - 4) + ' L' + (x + 222) + ' ' + (n[0] - 4) + ' L' + (x + 236) + ' ' + (ty - 4) + '" class="ln"/><circle cx="' + (x + 236) + '" cy="' + (ty - 4) + '" r="3" fill="var(--ink-2)"/>';
+      s += '<text x="' + (x + 244) + '" y="' + ty + '" class="t-s t-b">' + n[1] + '</text><text x="' + (x + 244) + '" y="' + (ty + 14) + '" class="t-s t-mut">' + n[2] + '</text>';
+    });
+    return s;
+  }
+  L += lab(20, '보르도', [[96, 'CHÂTEAU ○○○', 't-l t-b'], [118, 'Grand Cru Classé en 1855', 't-s'], [160, 'PAUILLAC', 't-l'], [176, 'Appellation Pauillac Contrôlée', 't-s t-mut'], [212, '2016', 't-l'], [244, 'Mis en bouteille au château', 't-s t-mut']],
+    [[98, '샤토 이름', '생산자이자 브랜드', 86], [120, '등급', '1855 등급의 샤토만 적는다', 128], [164, 'AOC', '포이약 = 좌안 카베르네', 172], [248, '샤토 병입', '']]);
+  L += lab(470, '부르고뉴', [[96, 'DOMAINE ○○○', 't-s t-b'], [140, 'NUITS-SAINT-GEORGES', 't-b'], [160, '1er Cru · Les Saint-Georges', 't-s'], [178, 'Appellation Nuits-Saint-Georges', 't-s t-mut'], [194, '1er Cru Contrôlée', 't-s t-mut'], [222, '2019', 't-l'], [248, 'Mis en bouteille au domaine', 't-s t-mut']],
+    [[98, '도멘(생산자)', '같은 밭도 생산자가 여럿'], [142, '마을(코뮌) 이름', '', 136], [164, '프르미에 크뤼 + 밭 이름', '클리마가 품질의 열쇠', 166], [226, '빈티지', '']]);
+  $('#labels').innerHTML = L;
+
+  /* ---------- table ---------- */
+  var order = ['champagne', 'alsace', 'bourgogne', 'beaujolais', 'jura', 'savoie', 'loire', 'bordeaux', 'sudouest', 'rhone-n', 'rhone-s', 'languedoc', 'roussillon', 'provence', 'corse'];
+  $('#fr-table').innerHTML = order.map(function (k) { var r = R[k]; return '<tr><td><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td><td>' + esc(r[2]) + '</td><td><a href="' + r[3] + '">' + r[4] + '</a></td></tr>'; }).join('');
+})();
+</script></body></html>

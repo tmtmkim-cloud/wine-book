@@ -1,0 +1,1504 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>피에몬테: 바롤로·바르바레스코의 밭 · WineBook</title><meta name="description" content="랑게 코무네 지도와 MGA(밭) 지도로 보는 바롤로·바르바레스코. 48개 대표 밭의 위치·토양·스타일과 생산자, 지층, 전통과 현대 양조, 숙성 규정."><meta property="og:title" content="피에몬테: 바롤로·바르바레스코의 밭 · WineBook"><meta property="og:description" content="랑게 코무네 지도와 MGA(밭) 지도로 보는 바롤로·바르바레스코. 48개 대표 밭의 위치·토양·스타일과 생산자, 지층, 전통과 현대 양조, 숙성 규정."><meta property="og:type" content="article"><meta property="og:locale" content="ko_KR"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>/* WineBook — 와인 이해 교과서
+   Layout: one reading column (~44rem) with figures, maps and labs breaking out to a wide track.
+   Colour carries meaning everywhere: claret = red wine, gold = white wine, blue = sparkling, pink = rosé. */
+
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-2);
+  line-height: 1.78;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img, svg, canvas { max-width: 100%; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3, h4 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: var(--fs-6); letter-spacing: -0.02em; margin: 0.2em 0 0.4em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-5); letter-spacing: -0.015em; margin: 2.6em 0 0.6em; }
+h3 { font-size: var(--fs-3); font-weight: 650; margin: 2em 0 0.5em; }
+h4 { font-size: var(--fs-2); font-weight: 650; margin: 1.5em 0 0.4em; }
+p { margin: 0 0 1.1em; }
+strong { font-weight: 650; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.fr, .it { font-style: italic; color: var(--ink-2); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.5em 0; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- top bar ---------- */
+.top {
+  position: sticky; top: 0; z-index: 50;
+  height: var(--top-h);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  height: 36px; min-width: 36px; padding: 0 10px;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit; font-size: var(--fs-0); cursor: pointer;
+}
+.icon-btn:hover { border-color: var(--accent); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+
+/* chapter drawer */
+.drawer {
+  position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60;
+  width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto;
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 14px 10px 18px;
+}
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a {
+  display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline;
+  padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none;
+}
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 6rem; }
+.shell > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.shell > .article, .shell > .home-wide { max-width: none; }
+.article > * { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.article > .wide, .article > .fig.wide, .article > .sim, .article > .mapwrap, .article > .grid-cards, .article > .tablewrap.wide, .shell > .wide { max-width: var(--wide); }
+.article > .full { max-width: none; }
+
+/* chapter head */
+.ch-head { padding-top: clamp(2rem, 6vw, 4.5rem); }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; font-variant-numeric: tabular-nums; }
+.ch-lede { font-size: var(--fs-3); line-height: 1.7; color: var(--ink-2); margin-bottom: 1.6em; }
+.goals {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: 1.1rem 1.3rem 0.6rem; margin: 1.6rem auto;
+}
+.goals b { display: block; font-size: var(--fs-1); margin-bottom: 0.3em; }
+.goals ul { margin: 0 0 0.6em; padding-left: 1.2em; }
+.goals li { margin: 0.25em 0; }
+.toc { margin: 1rem auto 0; font-size: var(--fs-1); }
+.toc summary { cursor: pointer; color: var(--muted); }
+.toc ol { margin: 0.6em 0 0; padding-left: 1.3em; columns: 2; column-gap: 2rem; }
+.toc li { break-inside: avoid; margin: 0.15em 0; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
+/* ---------- figures ---------- */
+.fig { margin: 2rem auto 2.2rem; }
+.fig-box {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2);
+  padding: clamp(10px, 2vw, 22px); overflow: hidden;
+}
+.fig-box.flush { padding: 0; }
+.fig-box > svg { display: block; width: 100%; height: auto; }
+figcaption { font-size: var(--fs-1); color: var(--ink-2); line-height: 1.65; margin-top: 0.7rem; max-width: var(--measure); }
+.fig.wide figcaption { margin-left: auto; margin-right: auto; }
+figcaption b { color: var(--ink); }
+.cols { display: grid; gap: 14px; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); align-items: start; }
+@media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+.cols > .panel-col { min-width: 0; }
+
+/* diagram text inside inline svgs */
+.dg text { font-family: var(--font); fill: var(--ink); font-size: 12px; }
+.dg .t-mut { fill: var(--muted); }
+.dg .t-2 { fill: var(--ink-2); }
+.dg .t-b { font-weight: 650; }
+.dg .t-s { font-size: 10.5px; }
+.dg .t-l { font-size: 14px; }
+.dg .t-xl { font-size: 18px; font-family: var(--serif); font-weight: 650; }
+.dg .ln { stroke: var(--line); fill: none; }
+.dg .ln2 { stroke: var(--ink-2); fill: none; stroke-width: 1.2; }
+.dg .box { fill: var(--surface-2); stroke: var(--line); }
+.dg .box2 { fill: var(--surface); stroke: var(--line); }
+.dg .acc { fill: var(--accent); }
+.dg .acc-s { stroke: var(--accent); fill: none; }
+.dg .red { fill: var(--st-r); } .dg .gold { fill: var(--st-g); } .dg .blue { fill: var(--st-s); } .dg .rose { fill: var(--st-p); }
+.dg .red-s { stroke: var(--st-r); fill: none; } .dg .gold-s { stroke: var(--st-g); fill: none; }
+.dg .blue-s { stroke: var(--st-s); fill: none; } .dg .rose-s { stroke: var(--st-p); fill: none; }
+.dg .wash-r { fill: var(--t-r1); } .dg .wash-g { fill: var(--t-g1); } .dg .wash-s { fill: var(--t-s1); } .dg .wash-p { fill: var(--t-p); }
+.dg .land { fill: var(--map-land); } .dg .water { fill: var(--map-water); }
+.dg .arrow { stroke: var(--ink-2); stroke-width: 1.4; fill: none; marker-end: url(#ah); }
+.dg .halo { paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+
+/* ---------- maps ---------- */
+.mapwrap { margin: 2rem auto 2.2rem; }
+.mapwrap .map-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, 1fr); gap: 14px; align-items: start; }
+.mapwrap .map-grid.single { grid-template-columns: 1fr; }
+@media (max-width: 860px) { .mapwrap .map-grid { grid-template-columns: 1fr; } }
+.map-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 10px; position: relative; }
+.map { display: block; width: 100%; height: auto; }
+.map .b { fill: var(--map-land); stroke: var(--map-bg-edge); stroke-width: 0.5; }
+.map .b-prov { stroke-width: 0.8; }
+.map .b-base { stroke-width: 0.7; }
+.map .u { stroke: var(--map-edge); stroke-width: 0.7; stroke-linejoin: round; transition: opacity .15s, filter .15s; }
+.map .t-r1 { fill: var(--t-r1); } .map .t-r2 { fill: var(--t-r2); } .map .t-r3 { fill: var(--t-r3); }
+.map .t-g1 { fill: var(--t-g1); } .map .t-g2 { fill: var(--t-g2); } .map .t-g3 { fill: var(--t-g3); }
+.map .t-s1 { fill: var(--t-s1); } .map .t-s2 { fill: var(--t-s2); } .map .t-s3 { fill: var(--t-s3); }
+.map .t-p { fill: var(--t-p); } .map .t-n2 { fill: var(--t-n2); }
+.map .st-r { fill: var(--st-r); } .map .st-g { fill: var(--st-g); } .map .st-s { fill: var(--st-s); }
+.map .st-p { fill: var(--st-p); } .map .st-n { fill: var(--st-n); }
+.map .w { fill: var(--map-water); stroke: none; }
+.map .w-sea { fill-rule: evenodd; }
+.map .rv { fill: none; stroke: var(--map-river); stroke-width: 0.9; stroke-linecap: round; stroke-linejoin: round; }
+.map .rv-big { stroke-width: 1.6; }
+.map text { font-family: var(--font); font-size: 10px; fill: var(--ink); paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.map .lb-reg { font-size: 12px; font-weight: 700; }
+.map .lb-app { font-size: 9.5px; fill: var(--ink-2); }
+.map .lb-top { font-weight: 700; fill: var(--ink); }
+.map .lb-big { font-size: 11.5px; font-weight: 700; fill: var(--ink); }
+.map .lb-gc { font-size: 8.5px; fill: var(--ink-2); }
+.map .lb-water { font-size: 9px; font-style: italic; fill: var(--map-water-ink); }
+.map .lb-bank { font-size: 13px; font-weight: 700; fill: var(--muted); letter-spacing: 0.04em; }
+.map .lb-note { font-size: 10px; }
+.map .lb-town { font-size: 9.5px; fill: var(--muted); }
+.map .pin { cursor: pointer; }
+.map .pin .pd { fill: var(--ink); stroke: var(--halo); stroke-width: 1.5; }
+.map .pin .pl { font-size: 9.5px; font-weight: 600; }
+.map .pin text { pointer-events: auto; }
+.map .pin-vil .pd { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+.map .pin-uga .pd { fill: var(--t-g3); }
+.map .pin-town .pd { fill: var(--muted); }
+.map .pin-mga .pd { fill: var(--ink); }
+.map .pin:hover .pd, .map .pin:focus .pd, .map .pin.on .pd { fill: var(--accent); }
+.map .pin.dim { opacity: 0.25; }
+.map .pin.hl .pd { fill: var(--accent); stroke: var(--accent); stroke-opacity: 0.35; stroke-width: 7; }
+.map .pin.hl .pl { font-weight: 700; }
+.map.focus .pin:not(.hl):not(.on) { opacity: 0.35; }
+.map .pin.on .pl { font-weight: 700; }
+.map .sc path { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.map .sc text, .map .na text { font-size: 9px; fill: var(--ink-2); stroke-width: 2px; }
+.map .na path { fill: var(--ink-2); stroke: none; }
+.map .merged { stroke: var(--ink); stroke-dasharray: 2 2; }
+.map .inset { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 2; }
+.map .inset-l { font-size: 9px; font-weight: 700; }
+.map .docg { fill: none; stroke: var(--ink); stroke-width: 1.3; stroke-dasharray: 5 3; pointer-events: none; }
+.map .docg-l { font-size: 9px; font-weight: 600; }
+.map .cypress { fill: none; stroke: var(--good); stroke-width: 2.4; stroke-dasharray: 1 3; stroke-linecap: round; }
+.map .leader { fill: none; stroke: var(--ink-2); stroke-width: 0.7; }
+/* climat maps */
+.map .cl-v { fill: var(--cl-v); stroke: var(--map-edge); stroke-width: 0.4; }
+.map .cl-v.w { fill: var(--cl-vw); }
+.map .cl-p { fill: var(--cl-p); stroke: none; }
+.map .cl-p.w { fill: var(--cl-pw); }
+.map .cl-p1 { fill: transparent; stroke: var(--map-edge); stroke-width: 0.8; }
+.map .cl-g { fill: var(--cl-g); stroke: var(--map-edge); stroke-width: 0.9; }
+.map .cl-g.w { fill: var(--cl-gw); }
+.map .cl-cc { fill: var(--cl-gw); fill-opacity: 0.55; stroke: var(--st-g); stroke-width: 1; }
+.map .cl-sub { fill: none; stroke: var(--map-edge); stroke-width: 0.6; stroke-dasharray: 2 1.5; pointer-events: none; }
+.map .cl-com { fill: none; stroke: var(--ink-2); stroke-width: 0.7; stroke-dasharray: 4 3; opacity: 0.55; pointer-events: none; }
+.map .lb-cl { font-size: 10px; }
+.map .lb-gc2 { font-weight: 700; fill: var(--cl-gc-ink); stroke: var(--cl-gc-halo); stroke-width: 2.6px; }
+.map .lb-gc2.sub { font-weight: 600; font-size: 9px; }
+.map .lb-gc2.lead { fill: var(--ink); stroke: var(--halo); stroke-width: 3px; }
+.map .lb-p1 { font-size: 9px; fill: var(--ink); }
+/* interaction states */
+.map .u[data-k], .map .u[data-r] { cursor: pointer; }
+.map .u:hover, .map .u.on { filter: brightness(0.9) saturate(1.15); }
+.map.focus .u:not(.on):not(.keep) { opacity: 0.28; }
+.map .u.hl { stroke: var(--ink); stroke-width: 1.6; }
+.map .u.hi-r { fill: var(--t-r3); } .map .u.hi-g { fill: var(--t-g3); } .map .u.hi-s { fill: var(--t-s3); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 4px 2px; font-size: var(--fs-0); color: var(--ink-2); }
+.map-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.map-legend i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+.map-legend i.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); border: 0; }
+.map-legend i.ring { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); border: 1.6px solid var(--ink); }
+.map-legend i.dash { width: 18px; height: 0; border: 0; border-top: 1.4px dashed var(--ink); border-radius: 0; }
+.map-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.mapinfo { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 16px 18px; min-height: 220px; font-size: var(--fs-1); line-height: 1.7; }
+.mapinfo h4 { margin: 0 0 0.2em; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; }
+.mapinfo .sub { color: var(--muted); font-size: var(--fs-0); margin-bottom: 0.7em; }
+.mapinfo .kv { display: grid; grid-template-columns: 6.2em 1fr; gap: 3px 10px; margin: 0.6em 0; }
+.mapinfo .kv dt { color: var(--muted); }
+.mapinfo .kv dd { margin: 0; }
+.mapinfo .hint { color: var(--muted); }
+.mapinfo .chips { margin-top: 0.5em; }
+.mapinfo ul { margin: 0.3em 0 0.6em; padding-left: 1.1em; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.linkbtn:hover { color: var(--accent-strong); }
+
+/* ---------- controls ---------- */
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: var(--fs-0); padding: 5px 12px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font: inherit; font-size: var(--fs-0); cursor: pointer; margin: 0 4px 6px 0; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+select, input[type="number"], input[type="text"] { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 10px; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.ctl { display: grid; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); }
+.ctl output { font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); margin-right: 4px; white-space: nowrap; }
+.tag.r { background: var(--t-r1); color: var(--ink); } .tag.g { background: var(--t-g1); color: var(--ink); }
+.tag.s { background: var(--t-s1); color: var(--ink); } .tag.p { background: var(--t-p); color: var(--ink); }
+.tag.gc { background: var(--cl-g); color: #fff; } .tag.p1 { background: var(--cl-p); color: var(--ink); }
+
+/* ---------- labs (simulators) ---------- */
+.sim { margin: 2.4rem auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); box-shadow: var(--shadow); overflow: hidden; }
+.sim-head { display: flex; align-items: baseline; gap: 12px; padding: 14px 18px 4px; }
+.sim-head .sim-n { font-size: var(--fs-0); color: var(--accent); font-weight: 650; white-space: nowrap; }
+.sim-head h3 { margin: 0; font-size: var(--fs-3); }
+.sim-body { padding: 10px 18px 18px; display: grid; gap: 16px; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); align-items: start; }
+.sim-body.stack { grid-template-columns: 1fr; }
+@media (max-width: 760px) { .sim-body { grid-template-columns: 1fr; } }
+.sim-ctrl { display: grid; gap: 14px; align-content: start; }
+.sim-out { min-width: 0; }
+.readouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.readout { background: var(--surface-2); border-radius: var(--r1); padding: 8px 10px; }
+.readout span { display: block; font-size: var(--fs-0); color: var(--muted); }
+.readout b { font-size: 1.15rem; font-weight: 650; }
+.sim-note { padding: 0 18px 16px; font-size: var(--fs-1); color: var(--ink-2); }
+.try { margin: 0 auto 2rem; font-size: var(--fs-1); color: var(--ink-2); }
+.try b { color: var(--ink); }
+.try ul { margin: 0.3em 0; padding-left: 1.2em; }
+
+/* ---------- callouts ---------- */
+.box { border-radius: var(--r2); padding: 1rem 1.2rem 0.3rem; margin: 1.6rem auto; border: 1px solid var(--line); background: var(--surface); }
+.box .box-t { display: block; font-weight: 650; margin-bottom: 0.35em; }
+.box.key { border-left: 4px solid var(--accent); }
+.box.note { background: var(--surface-2); border-color: transparent; }
+.box.warn { border-left: 4px solid var(--st-g); }
+.box.calc { border-left: 4px solid var(--st-s); }
+.box p:last-child, .box ul:last-child { margin-bottom: 0.9em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 1.6rem auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: var(--fs-1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line-2); }
+th { font-weight: 650; color: var(--ink-2); background: var(--surface-2); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ---------- cards ---------- */
+.grid-cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); margin: 1.6rem auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.card h4 { margin: 0 0 0.3em; font-size: var(--fs-2); }
+.card p { font-size: var(--fs-1); color: var(--ink-2); margin-bottom: 0.5em; }
+.card .meta { font-size: var(--fs-0); color: var(--muted); margin-bottom: 0.4em; }
+.card.link { color: inherit; text-decoration: none; display: block; }
+.card.link:hover { border-color: var(--accent); }
+
+/* ---------- summary / quiz / sources / pager ---------- */
+.summary ol { padding-left: 1.3em; }
+.summary li { margin: 0.45em 0; }
+.quiz-set { display: grid; gap: 14px; }
+.quiz { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 18px; }
+.quiz .q { font-weight: 600; margin: 0 0 0.6em; }
+.quiz .opts { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.quiz .opts li { border: 1px solid var(--line); border-radius: var(--r1); padding: 8px 12px; cursor: pointer; font-size: var(--fs-1); background: var(--surface); }
+.quiz .opts li:hover { border-color: var(--accent); }
+.quiz .opts li.right { border-color: var(--good); background: color-mix(in srgb, var(--good) 12%, var(--surface)); }
+.quiz .opts li.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var(--surface)); }
+.quiz .why { display: none; margin-top: 0.7em; font-size: var(--fs-1); color: var(--ink-2); }
+.quiz.done .why { display: block; }
+.sources { margin-top: 3rem; font-size: var(--fs-0); color: var(--ink-2); }
+.sources ol { padding-left: 1.4em; }
+.sources li { margin: 0.25em 0; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 3rem; }
+.pager a { display: block; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); text-decoration: none; color: var(--ink); }
+.pager a:hover { border-color: var(--accent); }
+.pager small { display: block; }
+.pager .next { text-align: right; grid-column: 2; }
+.foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); }
+
+/* tooltip */
+.tip {
+  position: fixed; z-index: 90; pointer-events: none; max-width: 300px;
+  background: var(--ink); color: var(--bg); font-size: var(--fs-0); line-height: 1.5;
+  padding: 6px 9px; border-radius: 6px; box-shadow: var(--shadow);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.tip b { font-weight: 650; }
+
+/* charts */
+.chart { display: block; width: 100%; height: auto; }
+.chart text { font-family: var(--font); font-size: 11px; fill: var(--ink-2); }
+.chart .ax { stroke: var(--line); stroke-width: 1; }
+.chart .grid { stroke: var(--line-2); stroke-width: 1; }
+.chart .cell { stroke: var(--surface); stroke-width: 2; cursor: default; }
+.chart .cell:hover { stroke: var(--ink); stroke-width: 1.5; }
+.chart .lbl-dark { fill: var(--seq-ink-dark); }
+.chart .lbl-light { fill: var(--seq-ink-light); }
+.legend-ramp { display: flex; align-items: center; gap: 4px; font-size: var(--fs-0); color: var(--ink-2); margin-top: 8px; flex-wrap: wrap; }
+.legend-ramp i { width: 26px; height: 10px; display: inline-block; border-radius: 2px; }
+/* vintage heatmap: score layer (default) and drink-status layer */
+.vint .d, .vint .td { display: none; }
+.vint.show-d .s, .vint.show-d .ts { display: none; }
+.vint.show-d .d, .vint.show-d .td { display: inline; }
+.vint .d-H { fill: var(--t-s3); } .vint .d-DH { fill: var(--t-s1); } .vint .d-D { fill: var(--t-r1); }
+.vint .d-PP { fill: var(--surface-3); } .vint .d-NYR { fill: var(--seq-0); }
+.vint .td { fill: var(--ink); }
+.vint .vc:hover .cell { stroke: var(--ink); stroke-width: 1.5; }
+.hscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hscroll > svg { min-width: 760px; }
+
+/* home */
+.hero { padding: clamp(2.5rem, 8vw, 5.5rem) 0 1rem; }
+.hero h1 { font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.15; margin-bottom: 0.35em; }
+.hero .lede { font-size: var(--fs-3); color: var(--ink-2); max-width: 40rem; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 10px; margin: 1.4rem 0 0.8rem; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 1px solid var(--accent); }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: transparent; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 1.6rem auto; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px; }
+.stat b { display: block; font-size: 1.6rem; font-weight: 650; letter-spacing: -0.01em; }
+.stat span { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; display: block; }
+.paths { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.path h4 { margin: 0 0 0.2em; }
+.path .steps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.path .steps a { font-size: var(--fs-0); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px; color: var(--ink); }
+.path .steps a:hover { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media print { .top, .drawer, .pager, .sim .sim-ctrl { display: none !important; } body { background: #fff; } }
+
+/* ---------- tasting chapter ---------- */
+.steps4 { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 920px) { .steps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps4 { grid-template-columns: 1fr; } }
+.steps4 > li { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 14px 16px 12px; }
+.steps4 .st-h { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.steps4 .st-h svg { width: 34px; height: 34px; flex: none; fill: var(--accent-wash); stroke: var(--accent); stroke-width: 1.5; stroke-linejoin: round; stroke-linecap: round; }
+.steps4 .st-h b { font-size: var(--fs-2); line-height: 1.25; }
+.steps4 .st-h small { display: block; color: var(--muted); font-size: var(--fs-0); font-weight: 400; }
+.steps4 dl { margin: 0; font-size: var(--fs-1); }
+.steps4 dt { font-weight: 600; margin-top: 6px; }
+.steps4 dd { margin: 0; color: var(--ink-2); font-size: var(--fs-0); line-height: 1.5; }
+.swatches { display: grid; gap: 18px 22px; grid-template-columns: 5fr 3fr 5fr; }
+@media (max-width: 860px) { .swatches { grid-template-columns: 1fr; } }
+.sw-group h4 { margin: 0 0 6px; font-size: var(--fs-1); }
+.sw-grid { display: grid; grid-template-columns: 2.6em repeat(var(--cols), minmax(0, 1fr)); gap: 5px; align-items: center; }
+.sw-grid > b { font-size: 0.75rem; font-weight: 600; color: var(--ink-2); text-align: center; line-height: 1.25; }
+.sw-grid > span { font-size: 0.75rem; color: var(--muted); }
+.sw-grid > i { display: block; height: 34px; border-radius: 8px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); cursor: default; }
+.sw-grid > i:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.agestrip { position: relative; height: 16px; border-radius: 8px; margin: 14px 6px 4px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08); }
+.agestrip i { position: absolute; top: -5px; width: 4px; height: 26px; margin-left: -2px; background: var(--ink); border-radius: 2px; transition: left .2s; }
+.agescale { position: relative; height: 38px; margin: 0 6px 6px; font-size: var(--fs-0); color: var(--muted); }
+.agescale span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.agescale span:first-child { transform: none; }
+.sim-body.wheel-body { grid-template-columns: minmax(0, 1.55fr) minmax(250px, 1fr); }
+@media (max-width: 900px) { .sim-body.wheel-body { grid-template-columns: 1fr; } }
+.wheel-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.wheel { display: block; width: 100%; height: auto; min-width: 500px; max-width: 660px; margin: 0 auto; }
+.wheel text { font-family: var(--font); fill: var(--ink); font-size: 10.5px; pointer-events: none; }
+.wheel .w1t { font-size: 13px; font-weight: 700; }
+.wheel .w2t { font-size: 10.5px; font-weight: 650; }
+.wheel .wsub { font-size: 9.5px; fill: var(--ink-2); }
+.wheel .ctr { fill: var(--surface-2); }
+.wheel .seg1 { stroke: var(--surface); stroke-width: 2; }
+.wheel .seg2 { stroke: var(--surface); stroke-width: 1.5; fill-opacity: 0.5; }
+.wheel .seg3 { stroke: var(--surface); stroke-width: 1; fill-opacity: 0.18; transition: fill-opacity .15s; }
+.wheel .wd { cursor: pointer; outline: none; transition: opacity .15s; }
+.wheel .wd:hover .seg3 { fill-opacity: 0.34; }
+.wheel .wd:focus-visible .seg3 { stroke: var(--ink); stroke-width: 1.5; }
+.wheel .wd.hl .seg3 { fill-opacity: 0.4; }
+.wheel .wd.on .seg3 { fill-opacity: 0.48; stroke: var(--ink); stroke-width: 1.6; }
+.wheel .wd.on text, .wheel .wd.hl text { font-weight: 700; }
+.wheel.focus .wd:not(.hl):not(.on) { opacity: 0.25; }
+.pick-h { display: block; margin: 0.8em 0 0.3em; }
+.chip .x { color: inherit; opacity: 0.7; }
+.prof-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-0); color: var(--ink-2); margin: 2px 0 8px; }
+.prof-legend i { display: inline-block; border-radius: 50%; margin-right: 6px; vertical-align: -2px; }
+.prof-legend i.da { width: 12px; height: 12px; background: var(--accent); }
+.prof-legend i.db { width: 14px; height: 14px; border: 2.5px solid var(--ink); }
+.prof-row { display: grid; grid-template-columns: 4.6em minmax(0, 1fr) 10.5em; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.prof-row:last-child { border-bottom: 0; }
+.prof-row .pl { font-weight: 600; }
+.prof-row .pv { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+@media (max-width: 560px) { .prof-row { grid-template-columns: 4.2em minmax(0, 1fr) 7.6em; gap: 8px; } }
+.track { position: relative; height: 24px; margin: 0 11px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 11px; height: 2px; background: var(--line); border-radius: 1px; }
+.track .tk { position: absolute; top: 8px; width: 2px; height: 8px; margin-left: -1px; background: var(--line); }
+.track .da, .track .db { position: absolute; top: 50%; border-radius: 50%; transition: left .35s ease; }
+.track .da { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--accent); }
+.track .db { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 2.5px solid var(--ink); }
+.track .na { position: absolute; left: 0; right: 0; top: 2px; text-align: center; font-size: var(--fs-0); color: var(--muted); }
+.track .na span { background: var(--surface); padding: 0 6px; }
+.sip { display: grid; gap: 4px; }
+.sip-row { display: grid; grid-template-columns: 7em minmax(0, 1fr); gap: 10px; align-items: center; }
+.sip-row .sl { font-size: var(--fs-1); font-weight: 600; line-height: 1.3; }
+.sip-row .sl small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); }
+.sip-row svg { display: block; width: 100%; height: 42px; }
+.sip .ar { fill: var(--accent); fill-opacity: 0.16; }
+.sip .cv { fill: none; stroke: var(--accent); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.sip .bs { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sip .mk { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.sip .fz { fill: var(--surface-2); }
+.sip-axis { position: relative; height: 40px; font-size: var(--fs-0); color: var(--muted); }
+.sip-axis span { position: absolute; top: 2px; transform: translateX(-50%); white-space: nowrap; }
+.sip-axis span.ev { top: 20px; color: var(--ink); font-weight: 600; }
+.sip-axis span.l0 { transform: none; }
+.sip-axis span.r0 { transform: translateX(-100%); }
+.cnote { font-family: var(--serif); font-size: var(--fs-2); line-height: 2.05; }
+.cnote .nt { border-radius: 4px; padding: 3px 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: opacity .2s; }
+.cnote .nt i { font-family: var(--font); font-style: normal; font-size: 0.72rem; font-weight: 650; padding: 1px 7px; border-radius: 999px; margin-right: 5px; vertical-align: 2px; color: var(--ink); white-space: nowrap; }
+.nt.a { background: color-mix(in srgb, var(--st-r) 13%, transparent); } .nt.a i { background: color-mix(in srgb, var(--st-r) 32%, var(--surface)); }
+.nt.n { background: color-mix(in srgb, var(--st-s) 13%, transparent); } .nt.n i { background: color-mix(in srgb, var(--st-s) 32%, var(--surface)); }
+.nt.p { background: color-mix(in srgb, var(--st-g) 16%, transparent); } .nt.p i { background: color-mix(in srgb, var(--st-g) 36%, var(--surface)); }
+.nt.c { background: color-mix(in srgb, var(--st-p) 16%, transparent); } .nt.c i { background: color-mix(in srgb, var(--st-p) 36%, var(--surface)); }
+.cnotes.focus .nt:not(.on) { opacity: 0.25; }
+.cnote-h { display: block; font-size: var(--fs-0); color: var(--muted); margin-bottom: 4px; }
+.nb-grid { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.nb-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 6px 0 10px; }
+.nb-out { background: var(--surface-2); border-radius: var(--r2); padding: 14px 18px; font-size: var(--fs-1); line-height: 1.8; min-height: 9em; }
+.nb-out p { margin: 0; }
+.nb-dl { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 6px 12px; margin: 0; }
+.nb-dl dt { font-weight: 650; }
+.nb-dl dd { margin: 0; }
+button.btn { font: inherit; font-weight: 600; cursor: pointer; }
+.trange { display: grid; gap: 7px; }
+.tr-row { display: grid; grid-template-columns: 12.5em minmax(0, 1fr); gap: 12px; align-items: center; font-size: var(--fs-1); line-height: 1.3; }
+.tr-row .tl small { display: block; color: var(--muted); font-size: var(--fs-0); }
+.tr-track { position: relative; height: 26px; background: var(--surface-2); border-radius: 6px; }
+.tr-track .band { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 6px); }
+.tr-track .fr { position: absolute; top: 0; bottom: 0; width: 0; border-left: 1.5px dashed var(--ink-2); }
+.tr-track .bar { position: absolute; top: 5px; bottom: 5px; border-radius: 4px; min-width: 6px; }
+.tr-track .bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); white-space: nowrap; color: var(--ink); font-weight: 600; }
+.tr-axis { position: relative; height: 38px; font-size: var(--fs-0); color: var(--muted); }
+.tr-axis span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.tr-axis span.ev { top: 18px; color: var(--ink-2); }
+@media (max-width: 560px) { .tr-row { grid-template-columns: 1fr; gap: 3px; } .tr-row.ax > div:first-child { display: none; } }
+.glasses { display: grid; gap: 14px 10px; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); text-align: center; }
+.glasses svg { width: 100%; max-width: 116px; height: auto; display: block; margin: 0 auto 4px; }
+.glasses .go { fill: none; stroke: var(--ink-2); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.glasses .bub { fill: none; stroke: var(--ink-2); stroke-width: 0.8; opacity: 0.6; }
+.glasses b { display: block; font-size: var(--fs-1); }
+.glasses small { color: var(--muted); font-size: var(--fs-0); }
+#age-glass { display: block; width: 100%; max-width: 480px; height: auto; margin: 0 auto; }
+.ctl { min-width: 0; }
+.ctl select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+@media (max-width: 640px) { .tablewrap table:has(th:nth-child(4)) { min-width: 600px; } }
+@media (max-width: 560px) { .sip-axis span.ev.l0 { display: none; } .sip-row { grid-template-columns: 5.6em minmax(0, 1fr); } }
+
+/* ---------- basics chapter ---------- */
+.keylist { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; font-size: var(--fs-1); }
+.keylist.two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; margin-top: 14px; }
+@media (max-width: 700px) { .keylist.two { grid-template-columns: 1fr; } }
+.keylist li { display: grid; grid-template-columns: 1.9em minmax(0, 1fr); gap: 8px; align-items: start; border-radius: 8px; padding: 4px; margin: -4px; transition: background .15s; }
+.keylist li:hover, .keylist li:focus-within, .keylist li.on { background: var(--accent-wash); }
+.keylist li > i { font-style: normal; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--accent); color: var(--on-accent); display: inline-grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+.keylist b { display: block; }
+.keylist span { color: var(--ink-2); font-size: var(--fs-1); line-height: 1.6; }
+.dg .knum circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.dg .knum text { fill: var(--on-accent); font-weight: 700; font-size: 13px; }
+.dg .kpart { transition: opacity .15s; }
+.dg.kfocus .kpart:not(.on) { opacity: 0.35; }
+.hbars { display: grid; gap: 7px; }
+.hb-row { display: grid; grid-template-columns: 10.5em minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--fs-1); }
+.hb-track { position: relative; height: 24px; margin-right: 5.5em; }
+.hb-bar { position: absolute; left: 0; top: 4px; bottom: 4px; border-radius: 0 4px 4px 0; }
+.hb-bar span { position: absolute; left: calc(100% + 6px); top: 50%; transform: translateY(-50%); font-size: var(--fs-0); font-weight: 600; white-space: nowrap; color: var(--ink); }
+.hb-legend { display: flex; gap: 16px; font-size: var(--fs-0); color: var(--ink-2); margin: 0 0 10px; }
+.hb-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+@media (max-width: 560px) { .hb-row { grid-template-columns: 7.8em minmax(0, 1fr); } }
+.tr-track .bar.risk { background: repeating-linear-gradient(135deg, var(--ink-2) 0 2px, transparent 2px 6px); opacity: 0.75; }
+.tr-row.sep { border-top: 1px dashed var(--line); padding-top: 7px; }
+@media (max-width: 560px) { .tr-axis.months span:nth-child(even) { display: none; } }
+.rip svg { display: block; width: 100%; }
+.rip .cur { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.rip .oth { fill: none; stroke: var(--muted); stroke-width: 1.2; opacity: 0.7; }
+.rip .hv { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 4 3; }
+.rip .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.rip .vr { stroke: var(--ink-2); stroke-width: 1; }
+.rip text.ttl { font-weight: 650; fill: var(--ink); font-size: 12px; }
+.rip text.vl { font-weight: 700; fill: var(--ink); font-size: 12px; }
+.rp-say { margin: 10px 0 0; font-size: var(--fs-1); }
+.ladder-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 12px; align-items: start; margin: 4px 0 18px; }
+.ladder-row > b { padding-top: 2px; font-size: var(--fs-1); }
+.ladder-bar { height: 8px; border-radius: 4px; margin: 6px 0 8px; }
+.ladder-scale { display: flex; justify-content: space-between; font-size: var(--fs-0); color: var(--muted); }
+.ladder ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 6px; }
+.ladder li a { display: block; height: 100%; text-decoration: none; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font-size: var(--fs-0); line-height: 1.4; font-weight: 600; }
+.ladder li a small { display: block; color: var(--muted); font-weight: 400; }
+.ladder li a:hover { border-color: var(--accent); }
+@media (max-width: 700px) { .ladder ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } .ladder-row { grid-template-columns: 1fr; gap: 4px; } }
+
+/* ---------- review chapter ---------- */
+.gl-tools { display: grid; gap: 10px; margin: 1.2rem auto 0.6rem; }
+.gl-search { font: inherit; font-size: var(--fs-2); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; width: 100%; }
+.gl-search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-wash); }
+.gl-count { font-size: var(--fs-0); color: var(--muted); margin: 0; }
+.gl-group { margin: 22px 0 4px; font-family: var(--serif); font-size: var(--fs-4); font-weight: 650; color: var(--accent); }
+.gl-list { margin: 0; }
+.gl-item { display: grid; grid-template-columns: minmax(0, 14em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line-2); }
+.gl-item dt b { font-size: var(--fs-2); }
+.gl-item dt small { display: block; color: var(--muted); font-size: var(--fs-0); line-height: 1.45; margin-top: 2px; }
+.gl-item dd { margin: 0; font-size: var(--fs-1); color: var(--ink-2); line-height: 1.7; }
+.gl-item dd .gl-meta { display: block; margin-top: 4px; font-size: var(--fs-0); }
+.gl-item dd .gl-meta a { margin-right: 8px; }
+.gl-empty { color: var(--muted); padding: 1.2rem 0; }
+mark { background: color-mix(in srgb, var(--accent) 22%, transparent); color: inherit; border-radius: 2px; padding: 0 1px; }
+@media (max-width: 640px) { .gl-item { grid-template-columns: 1fr; } }
+.scorebar { position: sticky; top: calc(var(--top-h) + 8px); z-index: 5; display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 10px 8px 18px; box-shadow: var(--shadow); margin: 0 auto 14px; font-size: var(--fs-1); }
+.scorebar .sb-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.scorebar .sb-bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+.scorebar b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scorebar button { font: inherit; font-size: var(--fs-0); border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.scorebar button:hover { border-color: var(--accent); }
+.quiz .q small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-bottom: 2px; }
+.score-msg { margin: 10px auto 0; font-size: var(--fs-1); color: var(--ink-2); min-height: 1.5em; }
+
+/* ---------- home ---------- */
+.home-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 64px); align-items: center; padding: clamp(2.5rem, 7vw, 5.5rem) 0 1.5rem; }
+@media (max-width: 860px) { .home-hero { grid-template-columns: 1fr; } }
+.home-hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.4rem); line-height: 1.1; margin: 0 0 0.45em; letter-spacing: -0.01em; }
+.home-hero .lede { font-size: var(--fs-3); color: var(--ink-2); line-height: 1.75; margin: 0; max-width: 34rem; }
+.hero-maps { display: grid; grid-template-columns: 1.1fr 1fr; gap: 14px; align-items: end; }
+.hero-maps figure { margin: 0; }
+.hero-map { display: block; width: 100%; height: auto; }
+.hero-map .hm-land { fill: var(--surface); stroke: var(--line); stroke-width: 0.5; }
+.hero-map .hm-dots circle { fill: var(--accent); stroke: var(--surface); stroke-width: 1.2; transform-box: fill-box; transform-origin: center; }
+.hero-map .hm-lab { font-family: var(--font); font-size: 10.5px; font-weight: 650; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.hero-maps figcaption { text-align: center; font-size: var(--fs-0); color: var(--muted); margin-top: 6px; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-map .hm-dots circle { animation: hm-in .45s ease-out both; animation-delay: calc(var(--i, 0) * 28ms + 150ms); }
+}
+@keyframes hm-in { from { opacity: 0; transform: scale(0.1); } to { opacity: 1; transform: scale(1); } }
+.home .sec { margin: 3.2rem auto 0; }
+.home .sec > h2 { margin-top: 0; }
+.share-bar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--surface); }
+.share-bar span { display: block; min-width: 2px; }
+.share-legend { display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 10px 0 0; font-size: var(--fs-1); color: var(--ink-2); list-style: none; padding: 0; }
+.share-legend li { display: flex; align-items: baseline; gap: 6px; }
+.share-legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; align-self: center; }
+.share-legend b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.toc-grid { display: grid; gap: 18px 32px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); align-items: start; }
+.toc-grp h3 { font-size: var(--fs-1); color: var(--muted); font-weight: 600; margin: 0 0 6px; font-family: var(--font); }
+.toc-grp ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.toc-grp li a { display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 6px; padding: 10px 2px; border-bottom: 1px solid var(--line-2); text-decoration: none; color: var(--ink); }
+.toc-grp li a:hover span, .toc-grp li a:focus-visible span { color: var(--accent); }
+.toc-grp li a i { font-style: normal; color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 650; }
+.toc-grp li a span { font-weight: 600; }
+.toc-grp li a small { display: block; font-weight: 400; color: var(--muted); font-size: var(--fs-0); margin-top: 1px; }
+.path.card h4 { font-size: var(--fs-2); }
+.fig-box.xs, .map-card.xs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.xs-hint { display: none; }
+.xs > .xs-hint { display: block; position: sticky; left: 0; font-size: var(--fs-0); color: var(--muted); margin: 0 0 6px; }
+</style><script>try{var t=localStorage.getItem("wb-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script></head><body data-slug="piedmont"><header class="top"><a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a><span class="sp"></span><span class="now">08장 · 피에몬테</span><button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button><button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button></header><nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol><li><a href="index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li><li class="grp">기초</li><li><a href="basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li><li class="grp">프랑스</li><li><a href="france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li><li><a href="bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li><li><a href="burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li><li><a href="champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li><li><a href="rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li><li class="grp">이탈리아</li><li><a href="italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li><li><a href="piedmont.html" aria-current="page"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li><li><a href="tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li><li><a href="veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li><li class="grp">평가</li><li><a href="critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li><li><a href="vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li><li class="grp">만들기와 마시기</li><li><a href="winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li><li><a href="tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li><li><a href="review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li></ol></nav><main id="main" class="shell"><header class="ch-head"><div class="ch-label"><span class="ch-n">Chapter 08</span><span>바롤로·바르바레스코의 MGA</span></div><h1>피에몬테: 바롤로·바르바레스코의 밭</h1><p class="ch-lede">바롤로와 바르바레스코는 같은 품종 네비올로로 만들지만, 언덕 하나 너머마다 맛이 달라집니다. 이탈리아에서 부르고뉴처럼 ‘밭’을 읽어야 하는 거의 유일한 산지이기도 합니다. 이 장에서는 코무네 지도에서 출발해 밭(MGA) 단위 지도로 내려가, 대표 밭 48곳의 자리와 토양, 스타일, 그 밭을 만드는 생산자를 하나씩 짚어 봅니다.</p><div class="goals"><b>이 장을 마치면</b><ul><li>네비올로의 특징(옅은 색, 높은 산도와 탄닌)과 피에몬테의 주요 품종을 설명할 수 있다.</li><li>바롤로 11개 코무네와 바르바레스코 3개 코무네의 위치와 성격 차이를 지도에서 찾을 수 있다.</li><li>토르토니아·세라발리아 지층이 라 모라와 세랄룽가의 스타일 차이를 어떻게 만드는지 이해한다.</li><li>MGA 제도를 이해하고 칸누비·브루나테·몬프리바토·프란차·아실리 같은 대표 밭과 생산자를 연결할 수 있다.</li><li>바롤로와 바르바레스코의 숙성 규정과 출시 시기를 구별할 수 있다.</li></ul></div><details class="toc" open></details></header><article class="article">
+
+<h2>안개의 포도, 네비올로</h2>
+<p>피에몬테(Piemonte)는 ‘산의 발치’라는 뜻입니다. 알프스와 아펜니노 산맥이 세 방향을 둘러싼 이탈리아 북서부의 이 주에서 가장 귀한 와인은 네비올로(Nebbiolo)로 만듭니다. 이름은 안개(nebbia)에서 왔다는 설이 유력합니다. 10월 수확철이면 랑게 언덕의 골짜기마다 안개가 차오르는데, 늦게 익는 네비올로는 바로 그 무렵에야 수확됩니다.</p>
+<p>네비올로는 역설적인 품종입니다. 색은 피노 누아처럼 옅은데 탄닌과 산도는 카베르네 소비뇽보다 높습니다. 그래서 어릴 때는 거칠고 닫혀 있다가 오래 숙성하면 장미, 타르, 체리, 감초, 송로버섯 향이 피어납니다. ‘타르와 장미’라는 표현이 여기서 나왔습니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 230" role="img" aria-label="피노 누아, 네비올로, 카베르네 소비뇽의 색·탄닌·산도 비교">
+      <g id="neb-fig"></g>
+    </svg>
+  </div>
+  <figcaption><b>그림 8-1.</b> 네비올로의 역설. 잔 속 색은 피노 누아만큼 옅지만 탄닌과 산도는 세 품종 가운데 가장 높다. 막대는 일반적인 경향을 1~5로 단순화한 값이고, 잔의 색은 젊은 와인의 대표적인 색조를 그린 것이다.</figcaption>
+</figure>
+
+<div class="grid-cards">
+  <div class="card"><h4>네비올로</h4><p class="meta">레드 · 피에몬테 최고급</p><p>바롤로, 바르바레스코, 랑게 네비올로, 로에로. 북부 알토 피에몬테에서는 ‘스판나’라고 부르며 가티나라·젬메를 만든다.</p></div>
+  <div class="card"><h4>바르베라</h4><p class="meta">레드 · 가장 많이 심는 품종</p><p>산도는 높고 탄닌은 낮아 부드럽고 상큼하다. 바르베라 다스티, 니차 DOCG, 바르베라 달바.</p></div>
+  <div class="card"><h4>돌체토</h4><p class="meta">레드 · 일상의 와인</p><p>‘작고 달콤한 것’이라는 이름과 달리 드라이하다. 산도가 낮고 쌉쌀한 아몬드 끝맛. 돌리아니, 디아노 달바.</p></div>
+  <div class="card"><h4>모스카토 비앙코</h4><p class="meta">화이트 · 스위트 발포</p><p>모스카토 다스티는 알코올 5% 안팎의 약발포 스위트 와인, 아스티는 완전 발포 스푸만테다.</p></div>
+  <div class="card"><h4>코르테세 · 아르네이스</h4><p class="meta">화이트 · 드라이</p><p>가비(코르테세)는 레몬과 미네랄, 로에로 아르네이스는 배·흰 꽃·아몬드 향.</p></div>
+</div>
+
+<h2>랑게 지도: 코무네와 마을</h2>
+<p>바롤로와 바르바레스코는 송로버섯의 도시 알바(Alba)를 사이에 두고 남서쪽과 북동쪽에 있습니다. 바롤로 DOCG는 11개 코무네에 걸쳐 있는데, 바롤로·카스틸리오네 팔레토·세랄룽가 달바는 코무네 전체가, 나머지 8곳은 일부만 들어갑니다. 바르바레스코 DOCG는 바르바레스코·네이베·트레이소 전체와 알바의 일부(산 로코 세노 델비오)로 이루어지며, 재배 면적은 바롤로의 3분의 1 정도입니다. 코무네나 마을 점을 누르면 그곳의 성격과 대표 생산자가 나타납니다.</p>
+
+<div class="mapwrap wide" id="lan">
+  <div class="map-grid">
+    <div class="map-card">
+      <svg class="map map-lan" viewBox="0 0 640 673" role="group" aria-label="랑게: 바롤로·바르바레스코 코무네 지도"><g class="m-bg"><path class="b" data-n="Albaretto della Torre" d="M424.5 466.5 427.5 467.3 457.7 490.3 464.8 494 463.9 499.5 461.7 499.2 454.5 496 446.3 487.8 442.1 495.3 450.6 517.1 451.2 521.6 413.8 518.6 393.9 510.1 384.9 503.7 383.4 499.7 396.2 481.5 403.1 466.4 402.5 459.9Z"/><path class="b" data-n="Arguello" d="M451.2 521.6 450.6 517.1 442.1 495.3 446.3 487.8 454.5 496 461.7 499.2 463.9 499.5 464.8 494 473 495 517.4 511.3 533.4 510.9 540.8 514.5 543.8 518.8 543.6 521 525.4 547.2 519 553.9 516.8 551.1 503.1 542.4 475.1 528.8 459.4 522.1Z"/><path class="b" data-n="Bene Vagienna" d="M66.9 561.6 61.7 576.1 53 583.3 37.2 594.3 32.5 594.5 26.1 597.8 21.5 602.5 15.1 610.7 14.5 614.8 21.2 632.7 22.2 633.2 27.1 632.4 55.1 639 60.4 643.9 59.8 659.9 58.3 665.1 56.3 667.7 52.6 671.3 45.8 676.1 40.7 678 -5 678 -5 550.3 6.2 571.2 18.9 570.3 31 567.2 49.6 573.1Z"/><path class="b" data-n="Benevello" d="M453.4 377.4 463.1 382.7 465.8 383.4 471.9 380.6 476.4 377.5 482.5 370.6 485.7 364.1 503.2 386.3 510.7 388.6 520.6 400 533.6 428.2 531.3 432.3 528.8 431.5 527.3 430.7 512.2 430.8 477.3 437.3 466.6 428.2 457.5 426.5 460.2 424.8 463.8 421.2 464.8 402.3 462.9 392.9 459.1 389.5Z"/><path class="b" data-n="Bergolo" d="M645 648.4 638.4 642.8 619.9 608.6 617.8 601.5 632.4 593.7 634.5 593.5 637 594 645 603.1Z"/><path class="b" data-n="Borgomale" d="M485.7 364.1 477.1 355.7 474.8 352.5 474.5 351.2 475.4 348.2 481.8 344.2 487.7 341.4 492.3 342 508.8 347.9 513.5 350.8 519.5 362.9 525.2 372.2 529.9 372.6 537.8 371.1 540.2 378.1 543 384.5 576.5 418.2 597 429.3 592.7 444.9 584.3 453.3 563 459.6 544.6 452.8 527.6 442.6 527.1 441.9 527.2 434.6 528.8 431.5 531.3 432.3 533.6 428.2 520.6 400 510.7 388.6 503.2 386.3Z"/><path class="b" data-n="Bosia" d="M563 459.6 584.3 453.3 587.2 454 591.9 458.4 598 467.3 614.5 494.7 603.5 506.2 590.2 523 580.1 533 576.4 534.8 565.4 522.4 559.2 517.1 548.5 514 551 509.6 551.9 504.7 550.9 495.1 550.1 492.9 546.3 488.8 546.6 485.2 553 473.4Z"/><path class="b" data-n="Bossolasco" d="M370.7 678 365.3 660.9 350.2 628.1 347.3 624 338 623.5 332.1 627.1 329.3 618.7 354.2 613.1 366.5 613.1 383 616.6 387.2 618 401 627.3 423.7 633.4 432.9 635.3 464.2 649 452.4 661.9 453.5 665.8 451.5 672.9 448.8 678Z"/><path class="b" data-n="Bra" d="M-5 119.5 0.5 122.3 27.4 143.9 38 163.2 44.5 184.2 55.4 203.6 59.1 208.1 68.6 216.9 71.1 218.5 107.2 226.3 125.6 228.1 133.7 252.2 132.3 252.3 126.7 259.1 112 260.6 108.5 259.6 106.2 260 102.8 261.8 95.8 267.7 93.7 268.8 85.2 279.5 82.2 291.7 84.8 295.5 85.4 298.8 84 305.6 69.5 300.1 63.7 297.1 40.2 277.2 28.9 266.6 -1.6 270.5 -5 269.3Z"/><path class="b" data-n="Castiglione Tinella" d="M645 162.5 631.9 154.1 625.7 154.5 624.2 155.4 623.2 156.9 622.5 161.8 612.5 161.4 613.5 152.6 614.4 150.4 616.6 149.3 618.1 153.2 623.4 153.6 624.7 152.4 624.9 146.3 619.7 122.2 628.9 120.1 631.3 120.7 633.7 122.8 641.8 120.4 645 116.6Z"/><path class="b" data-n="Castino" d="M584.3 453.3 592.7 444.9 597 429.3 576.5 418.2 543 384.5 537.8 371.1 560.4 365.1 568.5 366.5 571.4 364.9 577.8 359 586.8 345.4 590 343.6 598.4 349.9 606.2 363 611.6 370.2 617.3 375.9 628.6 394.3 631.5 400.6 635.7 405.8 645 411.2 645 470.7 628.2 483 620.7 494.6 618.8 495.7 614.5 494.7 598 467.3 591.9 458.4 587.2 454Z"/><path class="b" data-n="Cerretto Langhe" d="M384.9 503.7 393.9 510.1 413.8 518.6 459.4 522.1 475.1 528.8 501.2 541.4 518 552 519 553.9 490 589.6 488.3 598.9 482.8 599.9 473.6 595.2 451 578.6 446.8 573.5 442.8 570.9 430.7 565.5 407.7 557.4 395 559.6 396.3 558.2 397.6 552.9 396.6 544.2 393.5 528.7 379.3 504Z"/><path class="b" data-n="Cissone" d="M383 616.6 366.5 613.1 354.2 613.1 329.3 618.7 315.9 623.5 310.7 603.7 359.1 556.6 362.2 554.9 372 552.3 375 553.2 386.9 562.2 389.9 567.5 394.1 583.7 394.1 592.7 387.9 613.9Z"/><path class="b" data-n="Cortemilia" d="M645 603.1 637 594 632.4 593.7 630 577.1 628 574 618.1 563.1 606.9 554.3 595.2 548.5 585.5 539.2 580.1 533 590.2 523 610.1 498.8 614.5 494.7 618.8 495.7 620.7 494.6 628.2 483 645 470.7Z"/><path class="b" data-n="Cossano Belbo" d="M645 360.2 637.7 358.8 631.5 356.4 630.3 353.8 628.5 345 620.2 330.5 626.6 295.6 628.8 270 642 263 645 260.4Z"/><path class="b" data-n="Cravanzana" d="M519 553.9 525.4 547.2 543.6 521 543.8 518.8 540.8 514.5 548.5 514 559.2 517.1 565.4 522.4 576.4 534.8 577.8 540.6 576 560.8 572.4 572.5 569.7 577.6 553.8 594.7 541.5 615.7 540.2 617 533.9 617.5 493.3 602.6 488.3 598.9 490 589.6Z"/><path class="b" data-n="Farigliano" d="M123.1 678 122.1 673.6 119.5 669.7 109.4 657.6 95.5 647.3 94.9 646.3 95.9 642.9 101.4 631.8 123.6 623.3 123.8 630.4 125.9 640 133.4 666.9 139.6 678Z"/><path class="b" data-n="Feisoglio" d="M452.4 661.9 464.2 649 463.6 647.6 464 641 476 613.4 481.5 608 482.8 599.9 488.3 598.9 493.3 602.6 533.9 617.5 549 637.9 547.5 648.4 542.8 651.7 541 654.4 540.7 657.3 541.3 663.1 542.6 667.4 530.4 666.1 516.1 667.8 513.6 668.8 512 670.5 509.9 678 501.9 672.9 456.6 661.7Z"/><path class="b" data-n="Gorzegno" d="M509.9 678 512 670.5 513.6 668.8 517.2 667.4 530.4 666.1 553.3 668.8 578.7 673.5 580.5 678Z"/><path class="b" data-n="Lequio Berria" d="M464.8 494 457.7 490.3 427.5 467.3 424.5 466.5 438.7 457 450 445.6 459 431.3 457.5 426.5 466.6 428.2 477.3 437.3 512.2 430.8 527.3 430.7 528.8 431.5 527.2 434.6 527.1 441.9 527.6 442.6 544.6 452.8 563 459.6 553 473.4 546.6 485.2 546.3 488.8 550.1 492.9 550.9 495.1 551.9 504.7 551 509.6 548.5 514 540.8 514.5 533.4 510.9 517.4 511.3 473 495Z"/><path class="b" data-n="Lequio Tanaro" d="M40.7 678 45.8 676.1 50.6 672.8 58 665.6 59.9 659.3 60.4 643.9 54.6 638.7 27.1 632.4 22.2 633.2 21.2 632.7 14.5 614.8 15.1 610.7 21.5 602.5 26.1 597.8 31.6 594.9 34 594.1 37.2 594.3 53 583.3 61.7 576.1 66.7 561.2 91.4 554.6 98.4 556.1 105.8 559.2 126.6 577 110.1 579.8 107.8 582.6 104.6 591.8 105.4 598.6 122.5 616.5 125.3 617.1 123.6 623.3 101.4 631.8 95.9 642.9 94.9 646.3 95.5 647.3 91 650.5 75.7 663.6 62.5 678Z"/><path class="b" data-n="Levice" d="M617.8 601.5 619.9 608.6 638.4 642.8 645 648.4 645 678 580.5 678 578.7 673.5 553.3 668.8 542.6 667.4 541.3 663.1 540.6 656.3 541 654.4 542.8 651.7 547.5 648.4 549 637.9 556.1 639.8 563 640.6 572.9 640.4 575.4 638.7 580.2 630.7 575.8 622.4 572 610.8 581.2 599.3 604.7 603.7Z"/><path class="b" data-n="Mango" d="M612.5 161.4 622.5 161.8 621.5 166.9 623.1 175.4 628.3 186.8 634.3 195.5 640.2 207.8 639 218.1 643.5 231.5 645 232.1 645 260.4 642 263 628.8 270 626.6 295.6 620.2 330.5 628.5 345 598.4 349.9 590 343.6 586.8 345.4 577.8 359 571.4 364.9 568.5 366.5 560.4 365.1 557.4 354.7 556.3 347.2 556.7 341.6 562.4 342.7 562.8 341.7 564 338.4 565.6 328.7 553 294.3 563.3 278.1 562.2 234.7 559.8 230.1 557.9 223.4 558.8 219.6 564.7 217.8 571.3 216.8 577.9 213.6 578.4 206 587.4 194.1 595.2 187.8 597.5 187.4 599.7 181.1 598.2 176.3Z"/><path class="b" data-n="Monchiero" d="M185.4 586.5 182.2 588.8 169.9 594.8 166 595 162.7 594.1 160.6 592.6 149.7 593.7 138.3 601 135.6 604.1 132.1 612.2 124.6 617.1 122.5 616.5 105.4 598.6 104.6 591.8 107.8 582.6 110.1 579.8 126.8 577 129.7 574.7 131.5 570.5 132 568.4 131.8 563.9 134.6 557.1 158.4 544.5 167.3 538.5 171.6 544.6 179 570.8 181 581.8 183.9 585.7Z"/><path class="b" data-n="Montaldo Roero" d="M181.2 83 174.5 59.5 170.2 53.9 159.9 46.2 138.9 37.3 128.3 34.2 97.7 13.7 72.1 -5 141.2 -5 142 -4.4 179.6 23 198.9 40.3 221.8 44.2 227 77 223.7 76.9 204.7 80.7 185.5 83.1Z"/><path class="b" data-n="Montelupo Albese" d="M316.8 410.6 352.4 405.6 356.6 406.9 361.9 407.5 372.9 397 375.5 386.2 380.8 380.1 386.4 375.2 391.2 381.8 393.9 388.4 396.4 396.8 407.7 438.9 405.7 449.3 399 453 398.2 452 392.8 453 379.4 459.7 341.2 435.4 321.7 431 318.1 416.3 315.7 412.7Z"/><path class="b" data-n="Narzole" d="M147.6 435.2 141.6 467 128.3 478.1 107.4 493.7 102 497.1 94.8 499.4 94.2 504.5 94.6 520.3 98.2 535.5 105.8 559.2 98.4 556.1 91.4 554.6 66.7 561.2 66.9 561.6 49.6 573.1 31 567.2 18.9 570.3 5.8 570.9 -5 550.3 -5 482.5 -2.4 480.2 5.4 476.5 7.3 476.9 25.9 458.1 23.8 426 34.1 421.6 41.8 421 58.7 421.7 61.6 423.9 72.4 438.3 72.9 442.1 77.1 450.9 78.6 452.5 81.8 454.1 89 456.9 92.9 456.1 107.9 447.9 113 438.8 113.4 428 117.9 424.3 127.9 423.9 134.8 425.6 138 427.4Z"/><path class="b" data-n="Neviglie" d="M571.3 216.8 564.7 217.8 558.8 219.6 557.9 223.4 559.8 230.1 562.2 234.7 563.3 278.1 553 294.3 542.1 283.4 514.6 251.6 497 230.1 494.2 224.1 493.1 213.4 504 191.8 513.8 188.7 524.8 180.5 529.4 179.4 542 193.7 559.3 210.6 564.9 209 568.5 212.7Z"/><path class="b" data-n="Niella Belbo" d="M448.8 678 451.5 672.9 453.5 665.8 452.4 661.9 456.6 661.7 470.2 664.8 501.9 672.9 509.9 678Z"/><path class="b" data-n="Piozzo" d="M62.5 678 75.7 663.6 91 650.5 95.5 647.3 98.8 649.8 109.4 657.6 119.5 669.7 122.1 673.6 123.1 678Z"/><path class="b" data-n="Pocapaglia" d="M125.6 228.1 107.2 226.3 71.1 218.5 68.6 216.9 56.5 205 44.5 184.2 38 163.2 27.4 143.9 0.5 122.3 -5 119.5 -5 118.8 -1.5 119 1.3 117 2.6 113.7 5.9 73.6 0.5 64.9 -5 62.1 -5 56 -0.3 55.9 14.9 56.1 33.9 65 35.5 66.7 37.5 73.2 63.1 96.4 85.4 125.7 123.5 162.6 123.5 167.5 117.9 188.1 114.3 197.3 110.3 199 112.9 210.1 122.5 215.6 127.1 219.6 128.3 225.8Z"/><path class="b" data-n="Rocchetta Belbo" d="M645 411.2 635.7 405.8 631.5 400.6 628.6 394.3 617.3 375.9 610.2 368.5 599.8 352.6 598.4 349.9 628.5 345 630.3 353.8 631.5 356.4 637.7 358.8 645 360.2Z"/><path class="b" data-n="Roddino" d="M379.3 504 393.5 528.7 396.6 544.2 397.6 552.9 396.3 558.2 395 559.6 383.1 559.1 375 553.2 372 552.3 362.2 554.9 359.1 556.6 310.7 603.7 315.9 623.5 312 626.9 294.5 638.4 288.9 634 279.5 622.2 284.3 608.4 301.9 581.9 309.3 546.6 304.8 534 301.3 527.5 296.3 521.2 299.5 522.6 307.5 523.6 311.1 520.9 311.1 516.8 316.3 508.5 318.5 512.3 323.8 518.1 333.2 520.7 338.4 517.8 341.4 514.6 347.5 510.2 362.9 503.3 370.2 502.1Z"/><path class="b" data-n="Rodello" d="M424.5 466.5 402.5 459.9 399 453 405.7 449.3 407.7 438.9 393.9 388.4 391.2 381.8 386.4 375.2 390.9 354.9 394.5 348.3 397 347.9 408.1 352.8 411.3 357.2 450.1 389.4 455.8 392.4 459.1 389.5 462 391.7 463.2 394.2 464.8 402.3 463.8 421.2 460.2 424.8 457.5 426.5 459 431.3 450 445.6 438.7 457Z"/><path class="b" data-n="Sanfrè" d="M-5 62.1 0.5 64.9 5.9 73.6 2.6 113.7 1.3 117 -1.5 119 -5 118.8Z"/><path class="b" data-n="Santa Vittoria d&#x27;Alba" d="M133.7 252.2 125.6 228.1 128.3 225.8 127.1 219.6 122.5 215.6 112.9 210.1 110.3 199 114.3 197.3 116.2 200.3 119.3 203.1 124.3 204.5 130.3 202.9 134.9 200.8 137.1 198.8 170.2 185.2 190.4 178.6 206.6 178.8 217.9 183.2 223.1 186.3 235.8 216.8 239.9 238.6 236 236.4 218.7 238.3 166.4 248.1 152 249.4Z"/><path class="b" data-n="Santo Stefano Belbo" d="M622.5 161.8 623.2 156.9 624.2 155.4 625.7 154.5 631.9 154.1 645 162.5 645 232.1 643.5 231.5 639 218.1 640.2 207.8 634.3 195.5 628.3 186.8 623.1 175.4 621.5 166.9Z"/><path class="b" data-n="Serravalle Langhe" d="M464.2 649 432.9 635.3 423.7 633.4 401 627.3 387.2 618 383 616.6 387.9 613.9 394.1 592.7 394.1 583.7 390.6 569.6 387.8 563.5 383.1 559.1 395 559.6 407.7 557.4 430.7 565.5 442.8 570.9 446.8 573.5 451 578.6 473.6 595.2 482.8 599.9 481.5 608 476 613.4 464 641 463.6 647.6Z"/><path class="b" data-n="Sinio" d="M402.5 459.9 403.1 466.4 396.2 481.5 383.4 499.7 384.9 503.7 379.3 504 370.2 502.1 362.9 503.3 347.5 510.2 341.4 514.6 338.4 517.8 333.2 520.7 328.2 519.6 323.8 518.1 318.5 512.3 316.5 509 317.8 502.9 315.6 492.8 313.4 485.6 309.5 478.3 318.3 455.9 320.5 446.8 319.9 437.8 310.8 420.2 310.7 412.9 315.7 412.7 316.5 413.5 318.1 416.3 321.7 431 341.2 435.4 379.4 459.7 392.8 453 398.2 452Z"/><path class="b" data-n="Somano" d="M278.9 678 291.5 651.5 295.9 646 302.5 639.8 310.7 634.9 332.1 627.1 338 623.5 347.3 624 350.2 628.1 365.3 660.9 370.7 678Z"/><path class="b" data-n="Torre Bormida" d="M632.4 593.7 617.8 601.5 604.7 603.7 581.2 599.3 572 610.8 575.8 622.4 580.2 630.7 575.4 638.7 572.9 640.4 563 640.6 556.1 639.8 549 637.9 533.9 617.5 539 617.4 540.9 616.4 553.8 594.7 569.7 577.6 572.4 572.5 576 560.8 577.8 540.6 576.4 534.8 580.1 533 585.5 539.2 595.2 548.5 606.9 554.3 618.1 563.1 628 574 630 577.1Z"/><path class="b" data-n="Trezzo Tinella" d="M487.7 341.4 494.5 326.1 496.5 317.3 496.8 313.3 487.2 292.1 483.6 275.3 483.6 272.5 496.1 257.2 501.1 249.8 500.4 241.5 497 230.1 514.6 251.6 542.1 283.4 553 294.3 565.6 328.7 564 338.4 562.4 342.7 556.7 341.6 556.3 347.2 557.4 354.7 560.4 365.1 536.9 371.6 529.9 372.6 525.2 372.2 519.5 362.9 513.5 350.8 508.8 347.9 494.3 342.5Z"/></g><g class="m-u"><path class="u t-r1" data-k="c-alba" data-n="Alba" d="M421.5 211.2 419.4 223.2 419.1 230 419.8 236.4 420.7 237.4 438.2 243.3 442.3 246.2 445 266.1 459.4 277.7 474.3 308.3 478.9 314.9 493.3 328.1 487.7 341.4 475.4 348.2 474.5 351.2 474.8 352.5 477.1 355.7 485.7 364.1 482.5 370.6 475.6 378.2 470.7 381.3 465.8 383.4 463.1 382.7 453.4 377.4 446 370.5 429.8 358.3 417.3 357.2 407.9 350.9 406 348.3 410.9 341.8 415.7 338.7 421.1 337 426 336.7 425.2 331.9 409.2 317.7 397.7 314 386.9 312.2 378.3 284.8 367.3 289.5 350 299.9 338 313.5 338.3 317.1 320.9 326.6 318.9 320.5 306.9 304.2 304.3 301.8 297.4 299.3 292.8 300 281.9 296.8 276.7 291.7 269.1 304.8 262.1 325.6 261.5 336.4 259.1 356.1 256.4 361 244.9 353.9 241.8 348.6 238.2 328.2 236.8 323.9 234.6 323.3 246.8 313.1 260 305.9 265.4 298.8 274.4 274.8 280.7 250.9 288.3 240.4 288.3 234.8 287.8 234.2 286.3 234.4 272.9 238.5 270.3 234.4 259.4 210.9 249.1 187.5 240 165.1 238.9 159 256.3 153.6 282 152.2 304.2 137.6 310.9 136.1 342.5 152.5 389.7 157.1 404.3 149.5 408.2 140.6 410.4 133.8 409.3 129.2 410.6 124.3 413.7 117.9 418 118.8 427.5 132.4 430.5 137.8 428.7 144.3 421.4 159 415.5 175.6 413.3 185.4 420.1 194.2 421.6 200.1Z"/><path class="u t-g1" data-k="c-roero" data-n="Baldissero d&#x27;Alba" d="M181.2 83 174.5 115 170.2 103.8 162 96.3 157.8 93.3 150.3 92.5 121.1 83 116.6 71.7 111.4 61.8 87.2 50.9 51.1 43.8 16.1 23.5 -5 3.4 -5 -5 72.1 -5 97.7 13.7 128.3 34.2 138.9 37.3 159.9 46.2 170.2 53.9 174.5 59.5Z"/><path class="u t-r3" data-k="c-barbaresco" data-n="Barbaresco" d="M421.5 211.2 421.6 200.1 420.1 194.2 413.3 185.4 415.5 175.6 421.4 159 428.7 144.3 430.5 137.8 427.5 132.4 429.3 128.4 432.1 124.8 434.3 124 438 124.1 443.3 119.3 447.9 112 458.3 118.2 464.6 115.9 477.5 102.9 480 101.9 481.1 104.1 483.7 114.8 483.7 126.6 482.7 135 480.3 144.2 476.2 149.9 474 156.9 472.2 165.7 474.9 176 478.8 181.8 478.9 183.3 476.8 190.8 474.4 194.8 460.8 199.3 442.6 199.9 438.5 199Z"/><path class="u t-r3" data-k="c-barolo" data-n="Barolo" d="M221.4 415.3 222.8 432 217.6 435 210.2 460 201.2 483.1 195.4 489.2 193.8 485.3 173.6 469.6 163.8 464.3 159.3 462.5 150.8 461 144.9 463 141.6 467 147.6 435.2 185.7 420.9 208.5 414.6Z"/><path class="u t-g1" data-k="c-roero" data-n="Canale" d="M318.3 -5 315.5 -3 312 -5Z"/><path class="u t-g1" data-k="c-roero" data-n="Castagnito" d="M464.6 115.9 458.3 118.2 447.9 112 444.7 116.4 435.9 108.6 425.3 97.2 407.3 84.2 360.3 75.2 350.1 78.7 344.2 76.1 339.7 72 338.7 70.6 352 41.4 354.7 44.8 361.9 45.3 372 40.2 385.6 38 391.3 38.5 403 41.6 412.5 47.4 418.8 56.4 419.1 61.8 438.3 69.6 447.1 72 449.3 78.2 455.8 90.6 465.3 105.4Z"/><path class="u t-g1" data-k="c-roero" data-n="Castellinaldo d&#x27;Alba" d="M390.1 -5 405.9 6.9 407.1 18.1 407.2 31.1 405.5 33.3 394.8 39.7 391.3 38.5 385.6 38 379.4 38.8 372 40.2 361.9 45.3 354.7 44.8 352 41.4 352.7 38.9 347.4 34.9 344.6 34 342.4 34.1 338.6 32.5 333.7 27.5 331.6 23.5 330.4 15.1 331.2 6.6 324.8 -5Z"/><path class="u t-r3" data-k="c-castiglione" data-n="Castiglione Falletto" d="M244.9 353.9 256.4 361 260 369.6 265.4 384.9 273.4 420.6 273 427 271.7 428.8 259.6 434.5 243.1 445 234.5 447.4 226 435.5 222.8 432 221.4 415.3 223.1 407.8 228.8 390.6 230.4 388.5 234.5 386 246.6 367.8Z"/><path class="u t-r2" data-k="c-cherasco" data-n="Cherasco" d="M-5 269.3 -1.6 270.5 28.9 266.6 40.2 277.2 63.7 297.1 69.5 300.1 84 305.6 85.4 298.8 84.8 295.5 82.2 291.7 85 280.1 91.6 270.8 93.7 268.8 95.8 267.7 107.8 283.2 108.2 284.3 107 286.6 102.4 291.3 100.5 301 100.8 310.7 113.1 331.8 117.2 387 112.8 400.7 112.1 423.3 113.4 428 113 438.8 107.9 447.9 92.9 456.1 88.3 456.8 78.6 452.5 77.1 450.9 72.9 442.1 72.4 438.3 61.6 423.9 58.7 421.7 41.8 421 34.1 421.6 23.8 426 25.9 458.1 7.3 476.9 5.4 476.5 2.9 477.4 -2.4 480.2 -5 482.5Z"/><path class="u t-g1" data-k="c-roero" data-n="Corneliano d&#x27;Alba" d="M256.3 153.6 238.9 159 238.5 153.7 236 151 211.7 143.9 194 139.7 185.9 139.9 179.2 144.4 179 145.3 176.7 147 169.1 145.7 165.4 143.5 160.2 135.1 174.5 115 181.2 83 185.5 83.1 204.7 80.7 223.7 76.9 227 77 236.6 79.9 256 83.4 283.9 86.3 292.4 86 301.1 91.5 305.4 99.3 304.6 112.5 297.8 118.5 296.1 119.2 288.7 119.6 284.6 118.7 273.6 111.7 272.1 109 271.7 104.5 266.4 97.4 261.3 92.2 255.8 92.3 247.7 100.1 244 106.2 239.6 129.1 241.2 133.9 248 148.2 252.3 153.3Z"/><path class="u t-r2" data-k="c-diano" data-n="Diano d&#x27;Alba" d="M320.9 326.6 338.3 317.1 338 313.5 350 299.9 367.3 289.5 378.3 284.8 386.9 312.2 397.7 314 409.2 317.7 425.2 331.9 426 336.7 421.1 337 415.7 338.7 410.9 341.8 406 348.3 407.9 350.9 417.3 357.2 429.8 358.3 446 370.5 453.4 377.4 459.1 389.5 455.8 392.4 450.1 389.4 411.3 357.2 408.1 352.8 398 348.2 396.2 348 394.5 348.3 390.9 354.9 386.4 375.2 380.8 380.1 375.5 386.2 372.9 397 362.6 407 361.9 407.5 359.1 407.3 352.4 405.6 316.8 410.6 313.7 399.6 310.5 396.7 289.6 390.7 261.9 360.5 259.1 356.1 261.5 336.4 280.1 355.3 288 351.7 308.4 344.6 314 338.9 313.7 330.2Z"/><path class="u t-r1" data-k="c-dogliani" data-n="Dogliani" d="M139.6 678 133.4 666.9 125.9 640 123.8 630.4 123.6 623.3 125.3 617.1 132.1 612.2 135.6 604.1 138.3 601 149.7 593.7 160.6 592.6 162.7 594.1 166 595 171.9 594.1 197 580.2 203.5 580.6 223.3 593.7 236.4 594.5 247.2 593.1 247.7 591.7 249.3 590.2 260.4 593.1 283 604.3 284.3 608.4 279.5 622.2 288.9 634 294.5 638.4 312 626.9 315.9 623.5 329.3 618.7 332.1 627.1 310.7 634.9 302.5 639.8 295.9 646 291.5 651.5 278.9 678Z"/><path class="u t-g1" data-k="c-roero" data-n="Govone" d="M548.8 -5 544.3 0 543.1 4.6 526.9 16.4 518.8 14.1 518.3 12.5 516.1 10.9 509.7 9 506 8.6 504.5 9.1 501.6 13.1 500.9 16.4 503.7 26.6 504 36.4 500.3 33.1 492.2 32.4 489.4 30.6 484.8 26.1 479.5 11.9 473.1 -1.6 470.8 -5Z"/><path class="u t-r2" data-k="c-grinzane" data-n="Grinzane Cavour" d="M261.5 336.4 262.1 325.6 269.1 304.8 276.7 291.7 281.9 296.8 292.8 300 298.2 299.4 304.3 301.8 309.9 307.7 318.9 320.5 320.9 326.6 313.7 330.2 314 338.9 308.4 344.6 288 351.7 280.1 355.3Z"/><path class="u t-g1" data-k="c-roero" data-n="Guarene" d="M427.5 132.4 418 118.8 413.7 117.9 409.6 127.1 409.3 129.2 410.4 133.8 409.7 136.5 404.3 149.5 389.7 157.1 342.5 152.5 312.2 136.6 308.4 136.3 304.2 137.6 297.8 118.5 304.6 112.5 305.4 99.3 301.1 91.5 311.5 80.8 314.6 79.1 319.5 80 324.7 86.9 334.2 77.8 338.7 70.6 344.2 76.1 350.1 78.7 360.3 75.2 407.3 84.2 425.3 97.2 435.9 108.6 444.7 116.4 443.3 119.3 438 124.1 434.3 124 432.1 124.8 429.3 128.4Z"/><path class="u t-r2" data-k="c-lamorra" data-n="La Morra" d="M234.6 323.3 236.8 323.9 238.2 328.2 241.8 348.6 244.9 353.9 246.6 367.8 234.5 386 230.4 388.5 228.8 390.6 223.1 407.8 221.4 415.3 208.5 414.6 185.7 420.9 147.6 435.2 136.9 426.8 134.8 425.6 127.9 423.9 117.9 424.3 113.4 428 112.1 423.3 112.8 400.7 117.2 387 113.1 331.8 100.8 310.7 100.5 301 102.4 291.3 107 286.6 108.2 284.3 107.8 283.2 95.8 267.7 102.8 261.8 106.2 260 108.5 259.6 112 260.6 126.7 259.1 132.3 252.3 141.8 269.9 142.3 271.6 140.6 275.5 135 283.4 134.3 287.2 136.4 301.4 138.8 311.6 142.1 318.4 150.1 328 155 332.1 158.5 332.7 169.2 331.9 172.4 329.7 172.2 327.7 173 324.7 182.7 316.6 194.1 308.2 205.1 305 212.9 304.7 216 305.6 219.8 307.7 221.4 310.3 222.1 318.9 225 323.9 230.9 324.8Z"/><path class="u t-g1" data-k="c-roero" data-n="Magliano Alfieri" d="M447.1 72 438.3 69.6 419.1 61.8 418.8 56.4 412.5 47.4 403 41.6 394.8 39.7 404.5 34.1 407.2 31.1 407.1 18.1 405.9 6.9 421 3 442.5 -5 470.8 -5 473.1 -1.6 479.5 11.9 484.8 26.1 489.4 30.6 492.2 32.4 500.3 33.1 504 36.4 504.3 38.1 504.3 40.4 501.5 46 498.1 47.9 488.5 49.9 486.3 51.6 491.1 55.8 481.1 67.6 463.6 75.8 452.5 72.5Z"/><path class="u t-r2" data-k="c-monforte" data-n="Monforte d&#x27;Alba" d="M195.4 489.2 201.2 483.1 210.2 460 217.6 435 222.8 432 226 435.5 234.5 447.4 243.1 445 259.6 434.5 271.7 428.8 274.4 452 279.7 479.8 288.9 510.9 301.3 527.5 304.8 534 309.3 546.6 301.9 581.9 284.3 608.4 283 604.3 260.4 593.1 250.1 590.2 248.5 590.8 247.4 592.6 247.2 593.1 236.4 594.5 223.3 593.7 203.5 580.6 197 580.2 185.4 586.5 183.9 585.7 181 581.8 179 570.8 171.6 544.6 167 537.9 170.4 529.5 174 526.2 178.3 523.7 195.1 522 198 520.2 203.7 514.6 204.3 512.9 203.3 509.1Z"/><path class="u t-g1" data-k="c-roero" data-n="Monteu Roero" d="M222.8 -5 226 -4.4 228.1 -5 278.4 -5 270.7 1.1 261.2 13.2 256.3 25.6 247.6 37.7 244.2 40 225.3 43.9 218.3 44 198.9 40.3 179.6 23 141.2 -5Z"/><path class="u t-g1" data-k="c-roero" data-n="Monticello d&#x27;Alba" d="M238.9 159 240 165.1 249.1 187.5 259.4 210.9 270.3 234.4 272.9 238.5 239.9 238.6 235.8 216.8 223.1 186.3 217.9 183.2 206.6 178.8 190.4 178.6 170.2 185.2 137.1 198.8 134.9 200.8 130.3 202.9 124.3 204.5 120.6 203.7 118.5 202.5 114.3 197.3 117.9 188.1 124.3 184.1 134 167.1 148 145.5 160.2 135.1 165.4 143.5 169.1 145.7 176.7 147 179 145.3 179.2 144.4 185.9 139.9 194 139.7 211.7 143.9 236 151 238.5 153.7Z"/><path class="u t-r3" data-k="c-neive" data-n="Neive" d="M474.4 194.8 477.6 188.8 478.9 183.3 478.4 180.8 474.9 176 472.2 165.7 474 156.9 476.2 149.9 480.3 144.2 482.7 135 483.7 126.6 483.8 117.1 482.9 109.8 480 101.9 478.6 102.3 469.8 110.3 464.6 115.9 465.3 105.4 455.8 90.6 449.3 78.2 447.1 72 452.5 72.5 463.6 75.8 481.1 67.6 491.1 55.8 521.1 79.3 526.1 81.2 528.1 78.8 530.4 73.5 543.7 76 558.3 83.3 562.4 86.6 565.4 91.5 569.6 107.4 567.4 108.1 565.4 110 567 122.4 568.6 125.3 571.2 127.8 581.6 141.8 584.9 147.4 594.2 165.7 599.7 181.1 597.5 187.4 595.2 187.8 587.4 194.1 578.4 206 577.9 213.6 571.3 216.8 568.5 212.7 564.9 209 559.3 210.6 542 193.7 529.4 179.4 524.8 180.5 513.8 188.7 504 191.8 505.7 188.9 503.2 187.1 497.4 186.7 490.1 187.3Z"/><path class="u t-r2" data-k="c-novello" data-n="Novello" d="M141.6 467 144.9 463 150.8 461 162 463.4 173.6 469.6 193.8 485.3 203.3 509.1 204.3 512.9 203.7 514.6 198 520.2 195.1 522 178.3 523.7 174 526.2 170.4 529.5 167.4 536.5 167.3 538.5 158.4 544.5 134.6 557.1 131.8 563.9 132 568.4 129.7 574.7 126.6 577 105.8 559.2 98.2 535.5 94.6 520.3 94.5 501.3 94.8 499.4 102.9 496.7 110.5 491.5 128.3 478.1Z"/><path class="u t-g1" data-k="c-roero" data-n="Piobesi d&#x27;Alba" d="M304.2 137.6 282 152.2 255.5 153.7 252.3 153.3 248 148.2 246.7 145.7 241.2 133.9 239.6 129.1 243.9 106.6 247.7 100.1 255.8 92.3 261.3 92.2 266.4 97.4 271.7 104.5 272.1 109 273.6 111.7 284.6 118.7 288.7 119.6 296.1 119.2 297.8 118.5Z"/><path class="u t-g1" data-k="c-roero" data-n="Priocca" d="M442.5 -5 421 3 405.9 6.9 403.5 5.6 390.1 -5Z"/><path class="u t-r2" data-k="c-roddi" data-n="Roddi" d="M272.9 238.5 286.3 234.4 287.8 234.2 288.3 234.8 288.3 240.4 280.7 250.9 274.4 274.8 265.4 298.8 260 305.9 246.8 313.1 234.6 323.3 231.8 324.7 225 323.9 222.1 318.9 221.6 312.5 221.4 310.3 219.8 307.7 216 305.6 212.3 304.7 211.7 298.2 205 280.8 182.2 268.8 181.9 260 176.8 246.2 218.7 238.3 236 236.4 239.9 238.6Z"/><path class="u t-g1" data-k="c-roero" data-n="Santo Stefano Roero" d="M228.1 -5 226 -4.4 222.8 -5Z"/><path class="u t-r3" data-k="c-serralunga" data-n="Serralunga d&#x27;Alba" d="M256.4 361 259.1 356.1 261.9 360.5 289.6 390.7 310.5 396.7 313.7 399.6 316.8 410.6 315.7 412.7 310.7 412.9 310.8 420.2 319.9 437.8 320.5 446.8 318.3 455.9 309.5 478.3 313.4 485.6 315.6 492.8 317.8 502.9 316.3 508.5 311.1 516.8 311.1 520.9 307.5 523.6 304.1 523.5 296.9 521.6 288.9 510.9 279.7 479.8 274.4 452 271.7 428.8 273 427 273.4 420.6 265.4 384.9Z"/><path class="u t-g1" data-k="c-roero" data-n="Sommariva Perno" d="M-5 3.4 16.1 23.5 51.1 43.8 87.2 50.9 111.4 61.8 116.6 71.7 121.1 83 150.3 92.5 157.8 93.3 162 96.3 170.2 103.8 174.5 115 160.2 135.1 148 145.5 134 167.1 124.3 184.1 117.9 188.1 123.5 167.5 123.5 162.6 85.4 125.7 63.1 96.4 37.5 73.2 35.5 66.7 33.9 65 14.9 56.1 -5 56Z"/><path class="u t-r3" data-k="c-treiso" data-n="Treiso" d="M493.3 328.1 478.9 314.9 474.3 308.3 459.4 277.7 445 266.1 442.3 246.2 438.2 243.3 420.7 237.4 419.8 236.4 419.2 226.6 419.9 218.9 421.5 211.2 438.5 199 442.6 199.9 460.8 199.3 474.4 194.8 490.1 187.3 497.4 186.7 502.2 187 505.7 188.9 493.1 213.4 494.2 224.1 498.3 233 500.4 241.5 501.1 249.8 496.1 257.2 483.6 272.5 483.6 275.3 487.2 292.1 496.8 313.3 496.5 317.3 494.5 326.1Z"/><path class="u t-r2" data-k="c-verduno" data-n="Verduno" d="M132.3 252.3 152 249.4 166.4 248.1 176.8 246.2 181.9 260 182.2 268.8 205 280.8 211.7 298.2 212.3 304.7 203.2 305.4 194.1 308.2 176.1 321.7 173 324.7 172.2 328.9 172.4 329.7 169.2 331.9 156.3 332.6 150.1 328 140.8 316.3 138.8 311.6 136.4 301.4 134.3 287.2 135 283.4 140.6 275.5 142.3 271.6 140.4 266.8Z"/><path class="u t-g1" data-k="c-roero" data-n="Vezza d&#x27;Alba" d="M312 -5 315.5 -3 318.3 -5 324.8 -5 331.2 6.6 330.4 15.1 331.6 23.5 333.7 27.5 338.6 32.5 342.4 34.1 344.6 34 347.4 34.9 352.7 38.9 338.7 70.6 334.2 77.8 327.8 84.3 324.7 86.9 319.5 80 314.6 79.1 311.5 80.8 301.1 91.5 292.4 86 283.9 86.3 256 83.4 236.6 79.9 227 77 221.8 44.2 244.2 40 247.6 37.7 256.3 25.6 261.2 13.2 270.7 1.1 278.4 -5Z"/></g><g class="m-r"><path class="rv rv-big" data-n="Tanaro" d="M77.1 435.3 73.1 340.5 88.2 292.8 111.6 255.9 153.7 233.7 272 208.9 329.5 169.5 358.3 165.4 408 137.2 480.8 60.4 539.6 -23.7 556 -69.6"/></g><g class="m-o"><path class="docg" d="M228.9 314.9 225.3 311 220.5 308.5 220.3 307.7 211.8 305 208 299.7 214.6 293.7 210.1 283.9 203 279.3 182.6 276.7 179.3 278.2 175 283.2 174.6 293.7 164.3 302.3 160.4 308.3 157.7 310.4 150.7 312.6 143.9 313.7 141.8 315.4 138.4 316.5 135.8 314.8 130.2 309.1 126.4 306.1 123.3 304.9 115.2 304.6 113.2 303.8 110.3 301.6 107.7 296.9 102.7 294.6 100.9 292 97.9 295.3 104.4 305.8 100.4 311.2 114.7 321.8 113.2 348.2 108.6 345.1 106.7 346.2 104.8 348 104.7 352.1 103.3 353.8 103.1 356.1 103.8 359.6 105.3 361 109.1 363.5 112.3 364.2 119.5 371.5 117.9 387.1 111.4 397.1 114.1 428.7 119.6 424.7 130 425 147.1 435.2 141.9 470.2 127.4 480 128.3 481.3 128.9 485.1 127 486.3 120.9 494.9 120.4 497.8 121.8 500.3 130.1 504.7 134.2 508.8 142.2 511.7 152.4 511.3 153.6 513.1 154.2 516.9 156.2 521.6 155.3 523.4 151.9 525.4 151.4 524.3 149.3 523.2 144.8 529.7 145 533.1 146.3 534.6 151.7 537.4 153.3 539.1 155 546.7 167.1 538.8 173 542.2 174.2 560 181.4 563.2 181.3 563.7 185.8 562 188.8 559 192.1 553.7 193.8 552.4 203.2 549.3 208.6 550.1 212.6 548.7 216.2 545.6 220.2 540.7 222.6 538.9 227.6 536.8 236.4 535.8 239.9 538.9 246.7 543 250.4 543.2 254.5 540.5 260.5 538.6 265.5 539.6 266.4 548.7 273.3 545.8 275.8 543.8 280 542.3 287 538.3 295.3 531.1 295.9 528.5 296 521.8 306.2 525 311.5 521.2 311.5 512 316.3 508.5 318.3 498.3 312.4 490.4 313.7 481.8 305.3 475.7 307.5 466.4 320.6 456 318.6 440.6 323.5 437.9 316.5 410.4 315 407.9 313.8 400 311.1 397.1 310.8 393.8 307.8 389.5 303.3 385.3 298.9 382.4 296.2 377.8 293.7 370.8 285.8 365.4 284.6 358.7 280.9 356.3 279.1 348.2 266.4 343.7 261.2 336.2 259.2 332.4 261.5 328.1 261.6 324.3 258.1 322.6 257.2 320.9 258.4 315.2 260.1 310.6 258.9 307.9 255.1 306.2 247.9 305.8 242.4 308.4 232.3 314.8Z"/><text class="docg-l" x="55.3" y="529.2" text-anchor="middle">바롤로 DOCG 경계</text><path class="docg" d="M519.3 78.3 516.6 74.5 514.8 73.4 513.5 73.3 491.1 55.8 476.5 73.1 467.3 79.4 460.9 73.4 447.1 72 450.7 83.6 452.6 84.4 453.9 86.4 458.8 95.7 466.4 97.6 464.5 111.4 464.6 115.9 458.3 118.2 447.9 112 442.7 119.9 443.3 125.5 439.3 124 434.3 124 432.1 124.8 430.6 126.6 427.7 131.6 427.3 133.9 432 139.6 431.6 141.4 425.8 147.6 423 152.6 418.5 167.8 411.8 183.8 411.8 184.9 413.3 185.4 416 188.4 416.8 190.6 418.2 191.4 418.5 193.4 420.7 194.5 420.8 195.6 419.5 197.8 420.7 199.5 423.1 201.2 421.9 203.3 423.3 203.7 423.8 204.6 420.7 206.9 420.6 208.1 422.1 214.1 420.2 215.6 420.4 217.8 419.4 220.1 419.8 223.8 418.7 228.8 420.2 233.9 419.8 236.4 420.4 236.9 419.6 239 420.2 242.4 423.5 246.2 424.4 250.6 428.9 257.4 428.7 261.1 430.7 264.1 433.5 266 439.3 267.5 440.2 268.3 445 266.1 451.2 266.2 453.5 264.8 458.9 267.7 462.2 268.1 462.2 270.3 460 273.2 460.8 274.7 458.5 275.9 458.4 276.7 460.9 279.3 462 285.3 466.1 291.8 468.4 293.3 471.3 297.2 475.3 299.3 475.8 302.6 474.2 303.8 470.5 303.8 469.9 305.4 470.7 306.4 478 310.4 478.7 312.1 478.5 313.6 479.8 316.5 483.4 319.9 485.5 321.1 487.2 323.4 490.6 324.7 493.3 328.1 494.4 327.1 494.5 323.7 496.2 318.7 496.8 313.3 494.1 308.1 492.5 303.1 489.5 297.9 488.8 294.9 486.8 291.2 486.6 288.3 487.4 285.3 484 276.6 483.6 272.5 492.6 260.9 500.9 251.5 501.1 249.8 499.8 248 499.8 245.6 496.7 243.8 497 243 501.8 241.1 497.6 236.3 497.3 235.3 498.4 232.7 498.2 231.6 495.8 228.2 493.2 222.4 492.7 219.4 490.2 217.5 494.6 211.5 504 191.8 505.9 191.7 513.4 189.1 524.8 180.5 529.4 179.4 529.8 182.5 531.7 185.4 535.1 184.2 536.1 187.4 540.6 187.5 543.1 200.8 547.7 200 549.4 205.6 550.7 206.7 551.2 209 555 211.8 564.7 208.8 569.2 213.7 571.7 217.6 571.8 219 573.1 220.2 578.4 216.1 576.9 211.5 576.9 207.9 576.1 207.1 579.1 205.8 583.6 200.1 587.2 194.8 590 188 597.5 187.4 599.6 181.8 598.2 176.3 595.3 173.6 594.1 170.6 594.2 165.7 589 154.2 583.1 145 582.1 142.3 577.1 136.6 575.5 132.5 573.5 129.9 569.2 126 567 122.4 566.4 118.9 567.1 114.7 565.4 110 567.4 108.1 569.6 107.4 567.1 99.5 566.7 92.9 564.1 90.2 560.8 84.1 556.8 83.2 554.3 81 546.5 80.5 543.7 76 540.7 73 534.8 70.2 531.3 70.2 530.2 74.5 528.1 78.8 526.1 81.2 526 80.5 523.8 79.2 520.7 79.5Z"/><text class="docg-l" x="584.1" y="212.5" text-anchor="middle">바르바레스코 DOCG 경계</text><rect class="inset" x="98.7" y="289.7" width="264.4" height="300.2"/><rect class="inset" x="413.8" y="102.6" width="141" height="154"/></g><g class="m-l"><text class="lb lb-app" x="388.4" y="182.7" text-anchor="middle">알바</text><text class="lb lb-app lb-top" x="421.6" y="122.1" text-anchor="middle">바르바레스코</text><text class="lb lb-app lb-top" x="151.4" y="455.2" text-anchor="middle">바롤로</text><text class="lb lb-app lb-top" x="257.3" y="367.2" text-anchor="middle">카스틸리오네 팔레토</text><text class="lb lb-app" x="56.1" y="359.6" text-anchor="middle">케라스코</text><text class="lb lb-app" x="349.9" y="357.8" text-anchor="middle">디아노</text><text class="lb lb-app" x="201.8" y="636.2" text-anchor="middle">돌리아니</text><text class="lb lb-app" x="288.9" y="327.6" text-anchor="middle">그린차네</text><text class="lb lb-app" x="90.8" y="347.8" text-anchor="middle">라 모라</text><text class="lb lb-app" x="218" y="584.7" text-anchor="middle">몬포르테 달바</text><text class="lb lb-app lb-top" x="564.4" y="99.9" text-anchor="middle">네이베</text><text class="lb lb-app" x="131.1" y="522" text-anchor="middle">노벨로</text><text class="lb lb-app" x="237.2" y="274.9" text-anchor="middle">로디</text><text class="lb lb-app lb-top" x="370.9" y="482.8" text-anchor="start">세랄룽가 달바</text><text class="lb lb-app lb-top" x="480.5" y="259.7" text-anchor="middle">트레이소</text><text class="lb lb-app" x="139.8" y="281.8" text-anchor="middle">베르두노</text><text class="lb lb-water" x="271" y="199" text-anchor="middle" transform="rotate(-28 271 199)">타나로강</text><text class="lb lb-bank" x="104.9" y="33.7" text-anchor="middle">로에로</text></g><g class="m-p"><g class="pin pin-vil" data-k="c-barolo" tabindex="0" data-tip="바롤로 마을"><circle class="pd" cx="187.9" cy="458.6" r="4.2"/></g><g class="pin pin-vil" data-k="c-lamorra" tabindex="0" data-tip="라 모라 마을"><circle class="pd" cx="170.9" cy="384.3" r="4.2"/></g><g class="pin pin-vil" data-k="c-castiglione" tabindex="0" data-tip="카스틸리오네 팔레토 마을"><circle class="pd" cx="254.5" cy="424.2" r="4.2"/></g><g class="pin pin-vil" data-k="c-monforte" tabindex="0" data-tip="몬포르테 달바 마을"><circle class="pd" cx="238" cy="534.1" r="4.2"/></g><g class="pin pin-vil" data-k="c-serralunga" tabindex="0" data-tip="세랄룽가 달바 마을"><circle class="pd" cx="301.9" cy="460" r="4.2"/></g><g class="pin pin-vil" data-k="c-verduno" tabindex="0" data-tip="베르두노 마을"><circle class="pd" cx="162.9" cy="306.9" r="4.2"/></g><g class="pin pin-vil" data-k="c-novello" tabindex="0" data-tip="노벨로 마을"><circle class="pd" cx="157.4" cy="521.6" r="4.2"/></g><g class="pin pin-vil" data-k="c-grinzane" tabindex="0" data-tip="그린차네 카부르 마을"><circle class="pd" cx="289.8" cy="341.9" r="4.2"/></g><g class="pin pin-vil" data-k="c-diano" tabindex="0" data-tip="디아노 달바 마을"><circle class="pd" cx="353.8" cy="343.8" r="4.2"/></g><g class="pin pin-vil" data-k="c-barbaresco" tabindex="0" data-tip="바르바레스코 마을"><circle class="pd" cx="460.4" cy="140.6" r="4.2"/></g><g class="pin pin-vil" data-k="c-neive" tabindex="0" data-tip="네이베 마을"><circle class="pd" cx="526.7" cy="142.7" r="4.2"/></g><g class="pin pin-vil" data-k="c-treiso" tabindex="0" data-tip="트레이소 마을"><circle class="pd" cx="471.4" cy="241.9" r="4.2"/></g><g class="pin pin-vil" data-k="c-alba" tabindex="0" data-tip="알바 마을"><circle class="pd" cx="368.9" cy="212.8" r="4.2"/></g><g class="pin pin-vil" data-k="c-monchiero" tabindex="0" data-tip="몬키에로 마을"><circle class="pd" cx="141.5" cy="558.2" r="4.2"/></g></g><g class="m-sc"><g class="sc"><path d="M14 655V659H63.5V655"/><text x="68.5" y="660">2 km</text></g><g class="na"><path d="M622 10l5 13-5-3.4-5 3.4z"/><text x="622" y="35" text-anchor="middle">N</text></g></g></svg>
+      <div class="map-legend"><span><i style="background:var(--t-r3)"></i>코무네 전체가 DOCG</span><span><i style="background:var(--t-r2)"></i>일부가 바롤로 DOCG</span><span><i style="background:var(--t-r1)"></i>알바·돌리아니</span><span><i style="background:var(--t-g1)"></i>로에로</span><span><i class="dash"></i>DOCG 경계</span><span><i style="background:transparent;border:1.2px dashed var(--ink)"></i>아래 밭 지도 범위</span><span><i class="ring"></i>마을</span></div>
+    </div>
+    <div class="mapinfo" id="lan-info" aria-live="polite"></div>
+  </div>
+</div>
+
+<h2>두 개의 지층: 향의 서쪽, 힘의 동쪽</h2>
+<p>바롤로 지역의 스타일 차이는 땅속에서 시작됩니다. 랑게의 지층은 북서쪽으로 기울어 있어서, 서쪽(라 모라·베르두노·바롤로)에서는 젊은 토르토니아절 지층이, 동쪽(세랄룽가·몬포르테)에서는 그 아래에 있던 오래된 세라발리아절 지층이 땅 위로 드러납니다.</p>
+<ul>
+  <li><b>서쪽, 산타가타 화석 이회토(토르토니아절)</b>: 청회색의 석회질 이회토로 마그네슘과 망간이 많습니다. 향이 화사하고 탄닌이 부드러우며 비교적 일찍 열리는 바롤로가 나옵니다.</li>
+  <li><b>동쪽, 레퀴오 층과 디아노 사암(세라발리아절)</b>: 이회토와 사암이 번갈아 쌓인 단단하고 메마른 땅입니다. 구조가 강하고 탄닌이 촘촘하며 오래 숙성해야 하는 바롤로가 나옵니다.</li>
+</ul>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 420" role="img" aria-label="라 모라에서 세랄룽가까지의 지질 단면과 스타일 스펙트럼">
+      <defs>
+        <clipPath id="pm-gnd"><path d="M20 120 C50 92 70 82 95 81 C130 80 150 92 180 110 C220 135 260 190 300 205 C330 214 355 196 380 170 C400 148 425 130 450 128 C470 127 480 132 495 145 C515 165 530 196 560 212 C590 222 610 200 640 170 C660 148 680 120 705 115 C730 112 745 125 765 150 C785 178 805 205 830 210 C850 213 865 212 880 212 L880 330 L20 330 Z"/></clipPath>
+        <pattern id="pm-tor" width="16" height="8" patternUnits="userSpaceOnUse"><rect width="16" height="8" fill="var(--surface-2)"/><path d="M1 4h7" stroke="var(--muted)" stroke-width=".7" opacity=".6"/></pattern>
+        <pattern id="pm-san" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="var(--surface)"/><circle cx="2" cy="2" r=".9" fill="var(--ink-2)"/><circle cx="6" cy="6" r=".9" fill="var(--ink-2)"/></pattern>
+        <pattern id="pm-leq" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="var(--surface-3)"/><rect y="6" width="12" height="3" fill="var(--surface)"/></pattern>
+        <marker id="pm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--ink-2)"/></marker>
+        <linearGradient id="pm-spec" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="var(--seq-2)"/><stop offset="1" stop-color="var(--seq-7)"/></linearGradient>
+      </defs>
+      <text x="20" y="22" class="t-s t-mut">서쪽</text><text x="880" y="22" text-anchor="end" class="t-s t-mut">동쪽</text>
+      <g clip-path="url(#pm-gnd)">
+        <rect x="0" y="0" width="900" height="340" fill="url(#pm-leq)"/>
+        <path d="M0 330 L900 10 L900 32 L0 352Z" fill="url(#pm-san)"/>
+        <path d="M0 0 L900 0 L900 10 L0 330Z" fill="url(#pm-tor)"/>
+      </g>
+      <path d="M20 120 C50 92 70 82 95 81 C130 80 150 92 180 110 C220 135 260 190 300 205 C330 214 355 196 380 170 C400 148 425 130 450 128 C470 127 480 132 495 145 C515 165 530 196 560 212 C590 222 610 200 640 170 C660 148 680 120 705 115 C730 112 745 125 765 150 C785 178 805 205 830 210 C850 213 865 212 880 212" fill="none" stroke="var(--ink-2)" stroke-width="1.4"/>
+      <g stroke="var(--st-r)" stroke-width="2"><path d="M130 84v-10M160 98v-10M200 124v-10M240 160v-10M400 152v-10M425 133v-10M505 155v-10M525 182v-10M650 158v-10M680 126v-10M735 116v-10M770 157v-10M795 188v-10"/></g>
+      <g class="t-s">
+        <circle cx="95" cy="81" r="4.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/><text x="95" y="66" text-anchor="middle" class="t-b">라 모라</text>
+        <circle cx="300" cy="205" r="4.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/><text x="300" y="196" text-anchor="middle" class="t-b halo">바롤로</text>
+        <circle cx="450" cy="128" r="4.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/><text x="450" y="113" text-anchor="middle" class="t-b">카스틸리오네 팔레토</text>
+        <circle cx="705" cy="115" r="4.5" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/><text x="705" y="100" text-anchor="middle" class="t-b">세랄룽가 달바</text>
+      </g>
+      <text x="36" y="196" class="t-s t-b halo">토르토니아절 · 산타가타 화석 이회토</text>
+      <text x="36" y="211" class="t-s t-mut halo">약 1,160만~720만 년 전 · 석회질 이회토</text>
+      <text x="640" y="262" class="t-s t-b halo">세라발리아절 · 레퀴오 층</text>
+      <text x="640" y="277" class="t-s t-mut halo">약 1,380만~1,160만 년 전 · 이회토와 사암 교대층</text>
+      <path d="M560 128 L512 160" class="ln2" marker-end="url(#pm-ah)"/>
+      <text x="566" y="124" class="t-s t-b halo">디아노 사암</text>
+      <text x="566" y="138" class="t-s t-mut halo">로케 디 카스틸리오네의 모래</text>
+      <text x="36" y="318" class="t-s t-mut halo">← 지층이 서(북서)쪽으로 기울어 깊어진다</text>
+      <rect x="120" y="356" width="660" height="14" rx="4" fill="url(#pm-spec)"/>
+      <text x="112" y="367" text-anchor="end" class="t-s t-b">향·섬세함</text>
+      <text x="788" y="367" class="t-s t-b">구조·힘</text>
+      <g class="t-s">
+        <path d="M150 352v22M300 352v22M450 352v22M600 352v22M740 352v22" stroke="var(--ink)" stroke-width="1.2"/>
+        <text x="150" y="392" text-anchor="middle">라 모라·베르두노</text>
+        <text x="300" y="392" text-anchor="middle">바롤로</text>
+        <text x="450" y="392" text-anchor="middle">카스틸리오네 팔레토</text>
+        <text x="600" y="392" text-anchor="middle">몬포르테 달바</text>
+        <text x="740" y="392" text-anchor="middle">세랄룽가 달바</text>
+        <text x="450" y="412" text-anchor="middle" class="t-mut">몬포르테는 이 단면보다 남쪽에 있지만 같은 세라발리아 지층 위에 있다</text>
+      </g>
+    </svg>
+  </div>
+  <figcaption><b>그림 8-2.</b> 라 모라에서 세랄룽가까지 서-동 방향 지질 단면(축척 아님)과 코무네별 스타일 스펙트럼. 북서쪽으로 기운 지층 때문에 서쪽 마을은 젊은 토르토니아 이회토 위에, 동쪽 마을은 오래된 세라발리아 지층 위에 있다. 카스틸리오네 팔레토는 두 지층이 만나는 자리다. 스펙트럼은 일반적인 평가를 단순화한 것으로, 같은 마을 안에서도 밭과 생산자에 따라 차이가 크다.</figcaption>
+</figure>
+
+<h2>MGA: 바롤로의 ‘밭 이름’</h2>
+<p>이탈리아에는 부르고뉴처럼 법으로 정한 그랑 크뤼가 없습니다. 대신 바르바레스코(2007년 시행)와 바롤로(2010년 빈티지부터)는 와인을 만들 수 있는 구역을 이름 붙은 단위로 나눈 MGA(Menzione Geografica Aggiuntiva, 추가 지리 표기) 제도를 도입했습니다. 바롤로에는 11개 코무네 이름을 포함해 181개, 바르바레스코에는 66개의 MGA가 있습니다. 라벨에 MGA를 적으려면 포도가 모두 그 MGA에서 나와야 합니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 270" role="img" aria-label="바롤로 라벨 읽기">
+      <rect x="40" y="20" width="250" height="230" rx="6" fill="var(--surface)" stroke="var(--ink-2)"/>
+      <rect x="52" y="32" width="226" height="206" rx="3" fill="none" stroke="var(--line)"/>
+      <text x="165" y="62" text-anchor="middle" class="t-s t-mut">생산자 이름</text>
+      <text x="165" y="100" text-anchor="middle" class="t-xl">BAROLO</text>
+      <text x="165" y="118" text-anchor="middle" style="font-size:8.5px" class="t-mut">Denominazione di Origine Controllata e Garantita</text>
+      <text x="165" y="150" text-anchor="middle" class="t-l t-b">BRUNATE</text>
+      <text x="165" y="176" text-anchor="middle" class="t-b">RISERVA</text>
+      <text x="165" y="206" text-anchor="middle" class="t-l">2016</text>
+      <text x="165" y="226" text-anchor="middle" style="font-size:8.5px" class="t-mut">Imbottigliato all'origine da …</text>
+      <g class="t-s">
+        <path d="M232 58 H330" class="ln"/><circle cx="330" cy="58" r="3" fill="var(--ink-2)"/><text x="340" y="56" class="t-b">생산자</text><text x="340" y="70" class="t-mut">같은 밭이라도 생산자에 따라 스타일이 크게 다르다</text>
+        <path d="M240 98 H330" class="ln"/><circle cx="330" cy="98" r="3" fill="var(--ink-2)"/><text x="340" y="96" class="t-b">DOCG 이름: 바롤로</text><text x="340" y="110" class="t-mut">네비올로 100%, 최소 38개월 숙성(나무통 18개월 포함)</text>
+        <path d="M232 146 H330" class="ln"/><circle cx="330" cy="146" r="3" fill="var(--st-r)"/><text x="340" y="144" class="t-b">MGA(밭 이름): 브루나테</text><text x="340" y="158" class="t-mut">포도 100%가 이 MGA에서 나와야 한다. 적지 않으면 여러 밭을 섞은 ‘클래식’ 바롤로</text>
+        <path d="M212 172 H330" class="ln"/><circle cx="330" cy="174" r="3" fill="var(--ink-2)"/><text x="340" y="176" class="t-b">리제르바</text><text x="340" y="190" class="t-mut">최소 62개월 숙성, 수확 6년째 1월부터 출시. 좋은 해에만 만드는 생산자가 많다</text>
+        <path d="M212 202 H330" class="ln"/><circle cx="330" cy="206" r="3" fill="var(--ink-2)"/><text x="340" y="208" class="t-b">빈티지(수확 연도)</text><text x="340" y="222" class="t-mut">일반 바롤로는 수확 4년째 1월부터 출시할 수 있다</text>
+      </g>
+    </svg>
+  </div>
+  <figcaption><b>그림 8-3.</b> 바롤로 라벨 읽기. MGA 표기는 ‘어느 밭에서 왔는가’를 알려 줄 뿐 품질 등급이 아니다. MGA 안의 더 작은 구획 이름(비냐, Vigna)을 덧붙일 수도 있다. 라벨 디자인과 생산자는 설명을 위한 가상의 예다.</figcaption>
+</figure>
+
+<div class="box key"><span class="box-t">MGA는 등급이 아니다</span>
+<p>부르고뉴의 그랑 크뤼·프르미에 크뤼와 달리 MGA에는 위아래가 없습니다. 크기도 제각각이어서 부시아는 약 298 ha로 바롤로에서 가장 크고, 몬프리바토는 6 ha 남짓입니다. 큰 MGA일수록 그 안의 구획마다 품질과 성격이 크게 달라질 수 있으니, 결국 ‘어느 밭의 누가 만든 와인인가’를 함께 봐야 합니다.</p></div>
+
+<h2>밭 지도: MGA와 생산자</h2>
+<p>아래 지도는 바롤로와 바르바레스코의 대표 MGA 48곳을 코무네 경계 위에 표시한 것입니다. 점은 각 밭의 대략적인 중심(±0.5 km)이며 실제 MGA 경계가 아닙니다. 점을 누르면 자리, 토양, 스타일, 생산자가 나타나고, 오른쪽 생산자 이름을 누르면 그 생산자가 가진 밭이 지도에 강조됩니다.</p>
+
+<div class="mapwrap wide" id="mga">
+  <div class="map-tools">
+    <div class="seg" id="mga-tabs"><button data-v="barolo" aria-pressed="true">바롤로 MGA</button><button data-v="barbaresco">바르바레스코 MGA</button></div>
+  </div>
+  <div class="map-grid">
+    <div class="map-card">
+      <div class="mga-pane" data-v="barolo"><svg class="map map-mga" viewBox="0 0 600 679" role="group" aria-label="바롤로 MGA(밭) 지도"><g class="m-bg"><path class="b" data-n="Cissone" d="M605 684 500.7 684 545.8 640 586.9 600.6 594 596.8 605 593.5Z"/><path class="b" data-n="Lequio Tanaro" d="M-5 684 -5 597.3 4.1 599.4 20.7 606.2 67.1 646.1 30.2 652.4 27.6 654.5 25.2 658.7 22.4 665.2 18 679.2 18.6 684Z"/><path class="b" data-n="Monchiero" d="M198.6 667.4 191.4 672.5 172.6 682.5 169.1 684 147.5 684 143.1 681 118.9 683.4 118 684 18.6 684 18 679.2 22.4 665.2 25.2 658.7 27.6 654.5 30.2 652.4 67.4 646.1 74.1 640.9 76.5 635.6 78.1 631.5 79.3 627 78.9 616.9 85 601.5 109.1 588.5 138.4 573.4 158.1 560.1 167.7 573.8 184.3 632.3 184.9 638.7 187.4 651.9 188.9 656.9 195.4 665.5Z"/><path class="b" data-n="Montelupo Albese" d="M492.5 274.1 528 268.4 572.1 262.9 581.4 265.8 587 266.6 593.3 267.2 594.8 266.1 605 256.2 605 366.6 546.9 329.6 503.4 319.8 495.4 286.8 491.7 280.5 490 278.8Z"/><path class="b" data-n="Narzole" d="M114.2 329.2 100.8 400.2 71.1 424.9 53.2 438.6 24.3 459.8 14.1 466.5 12.3 467.4 5.2 470 -3.9 472.6 -5 481.7 -5 514.8 -4.3 519.4 1.4 544.6 3.8 553.3 18.6 599.9 20.7 606.2 4.1 599.4 -5 597.3 -5 374.2 25.3 357.6 32.5 346.1 36.8 337.1 37.7 312.9 45.7 306.1 47.8 304.7 51.3 304 55.3 303.8 70.1 303.8 85.4 307.7 92.7 311.7Z"/><path class="b" data-n="Roddino" d="M605 593.5 594 596.8 586.9 600.6 545.8 640 500.7 684 441.3 684 459.2 657.1 475.6 578 465.5 549.9 457.7 535.3 446.7 521.3 450.5 523.6 453.6 524.4 464.1 526.5 471.7 526.7 479.5 520.6 479.7 511.6 491.3 493 496.3 501.4 508.1 514.3 517.9 517.8 529 520.1 540.6 513.7 542.4 512.2 545.7 508 547.4 506.6 556.9 499.2 560.9 496.8 595.4 481.3 605 479.8Z"/><path class="b" data-n="Sinio" d="M605 479.8 595.4 481.3 560.9 496.8 556.9 499.2 547.4 506.6 545.7 508 542.4 512.2 540.6 513.7 529 520.1 517.9 517.8 508.1 514.3 496.3 501.4 491.3 493 494.6 480.5 489.7 457.9 484.8 441.7 476 425.4 495.7 375.4 500.8 354.9 499.3 334.9 484.9 308.1 479.1 295.5 478.8 279.3 490 278.8 491.7 280.5 495.4 286.8 503.4 319.8 546.9 329.6 605 366.6Z"/></g><g class="m-u"><path class="u t-n2" data-k="c-alba" data-n="Alba" d="M605 -5 605 3.4 566.7 26.7 539.7 56.9 540.4 65.1 501.7 86.3 497.2 72.8 476.9 44 470.3 36.3 464.4 30.9 450.9 25.5 449 25.2 442 25.8 438.8 26.9 414.4 19.8 402.8 8.4 385.9 37.6 370.1 84.1 368.7 108.2 363.3 152.2 357.3 163.1 331.6 147.5 324.6 135.6 316.7 89.9 313.4 80.2 308.6 78.9 336 56.2 365.3 40 377.4 24.1 388.4 -5Z"/><path class="u t-r2" data-k="c-barolo" data-n="Barolo" d="M279.1 284.7 282.4 322 270.5 328.7 254.2 384.6 234 436.2 221 449.8 217.4 441.2 172.2 406.1 150.3 394.1 146.2 392.1 140.4 390.2 121.2 386.7 108.2 391.3 100.8 400.2 114.2 329.2 199.3 297.1 250.2 283.1Z"/><path class="u t-r2" data-k="c-castiglione" data-n="Castiglione Falletto" d="M331.6 147.5 357.3 163.1 365.5 182.5 377.5 216.7 395.3 296.4 394.6 310.9 394.1 312.6 391.7 314.7 364.6 327.5 327.6 350.9 308.3 356.4 289.4 329.7 282.4 322 279.1 284.7 283 267.9 295.7 229.3 299.2 224.8 308.4 219.1 335.5 178.4Z"/><path class="u t-r1" data-k="c-cherasco" data-n="Cherasco" d="M-5 -5 24.8 -5 13.1 7.4 8.8 29 9.5 50.7 12.1 56.1 36.9 97.9 46.1 221.4 36.4 251.9 34.7 302.5 37.7 312.9 36.8 337.1 32.5 346.1 25.3 357.6 -5 374.2Z"/><path class="u t-r1" data-k="c-diano" data-n="Diano d&#x27;Alba" d="M501.7 86.3 540.4 65.1 539.7 56.9 566.7 26.7 605 3.4 605 256.2 593.3 267.2 581.4 265.8 572.1 262.9 528 268.4 492.5 274.1 488.6 257.9 485.5 249.6 478.4 243 431.6 229.7 369.7 162.1 363.3 152.2 368.7 108.2 410.4 150.6 427.9 142.4 473.7 126.5 486.2 113.9 485.5 94.3Z"/><path class="u t-n2" data-k="c-dogliani" data-n="Dogliani" d="M118 684 118.9 683.4 143.1 681 147.5 684 169.1 684 172.6 682.5 191.4 672.5 198.6 667.4 224.5 653.2 239 654.1 283.4 683.4 293.5 684 322 684 336.8 682.1 338 678.9 339.7 676.9 341.5 675.7 343.3 675.7 364.6 681.5 370.4 684Z"/><path class="u t-r1" data-k="c-grinzane" data-n="Grinzane Cavour" d="M368.7 108.2 370.1 84.1 385.9 37.6 402.8 8.4 414.4 19.8 438.8 26.9 442 25.8 449 25.2 450.9 25.5 464.4 30.9 470.3 36.3 476.9 44 497.2 72.8 501.7 86.3 485.5 94.3 486.2 113.9 473.7 126.5 427.9 142.4 410.4 150.6Z"/><path class="u t-r1" data-k="c-lamorra" data-n="La Morra" d="M308.6 78.9 313.4 80.2 316.7 89.9 324.6 135.6 331.6 147.5 335.5 178.4 308.4 219.1 299.2 224.8 295.7 229.3 283 267.9 279.1 284.7 250.2 283.1 199.3 297.1 114.2 329.2 92.7 311.7 90.1 310.2 85.4 307.7 70.1 303.8 55.3 303.8 51.3 304 47.8 304.7 45.7 306.1 37.7 312.9 34.7 302.5 36.4 251.9 46.1 221.4 36.9 97.9 12.1 56.1 9.5 50.7 8.8 29 13.1 7.4 24.8 -5 84.9 -5 84.5 -1.8 89.2 30 94.4 52.9 99 63.3 101.8 68 119.7 89.4 124.7 94 130.8 98.6 133.6 99.8 138.5 100 162.5 98.1 169.7 93.3 169.1 91.4 169.1 88.9 171 82.1 177.9 75.3 192.6 64 218.1 45.2 227.5 42 238.4 38.8 242.8 38.1 260.1 37.4 267 39.3 275.5 44 276.8 45.5 279 49.9 279.6 54.8 279.1 58.4 280.6 69.1 287.2 80.2 291.8 81.6 300.3 82.3 302.3 82.2 305.4 81.1Z"/><path class="u t-r1" data-k="c-monforte" data-n="Monforte d&#x27;Alba" d="M221 449.8 234 436.2 254.2 384.6 270.5 328.7 282.4 322 289.4 329.7 308.3 356.4 327.6 350.9 364.6 327.5 391.7 314.7 395.8 354.6 397.6 366.6 403 396.9 409.5 428.7 430 498.3 446.7 521.3 457.7 535.3 465.5 549.9 475.6 578 459.2 657.1 441.3 684 370.4 684 364.6 681.5 343.3 675.7 341.5 675.7 339.7 676.9 338 678.9 336.8 682.1 322 684 293.5 684 283.4 683.4 239 654.1 224.5 653.2 198.6 667.4 195.4 665.5 190.1 658.9 188.3 655.4 184.9 638.7 184.3 632.3 167.7 573.8 158.1 560.1 157.5 558.8 158.4 555.6 165.1 539.9 166.7 537.8 173.1 532.4 182.9 526.9 189.8 525.9 220.4 523.2 226.9 519.1 239.5 506.7 240.8 502.9 238.6 494.4 234.8 486.5Z"/><path class="u t-r1" data-k="c-novello" data-n="Novello" d="M100.8 400.2 108.2 391.3 121.2 386.7 140.4 390.2 146.2 392.1 172.2 406.1 217.4 441.2 221 449.8 234.8 486.5 238.6 494.4 240.8 502.9 239.5 506.7 226.9 519.1 220.4 523.2 189.8 525.9 182.9 526.9 173.1 532.4 166.7 537.8 165.1 539.9 158.4 555.6 157.5 558.8 158.1 560.1 138.4 573.4 109.1 588.5 85 601.5 78.9 616.9 79.3 627 78.1 631.5 74.1 640.9 67.1 646.1 20.7 606.2 3.8 553.3 1.4 544.6 -4.3 519.4 -5 514.8 -5 481.7 -4.6 476.9 -3.9 472.6 5.2 470 14.1 466.5 31.1 454.9 71.1 424.9Z"/><path class="u t-r1" data-k="c-roddi" data-n="Roddi" d="M388.4 -5 377.4 24.1 365.3 40 336 56.2 308.6 78.9 305.4 81.1 302.3 82.2 300.3 82.3 291.8 81.6 287.2 80.2 280.6 69.1 279.1 58.4 279.6 54.8 279 49.9 276.8 45.5 275.5 44 267 39.3 263.7 38.2 258.8 37.4 257.3 22.9 246.7 -5Z"/><path class="u t-r2" data-k="c-serralunga" data-n="Serralunga d&#x27;Alba" d="M357.3 163.1 363.3 152.2 369.7 162.1 431.6 229.7 478.4 243 485.5 249.6 488.6 257.9 492.5 274.1 490 278.8 478.8 279.3 479.1 295.5 484.9 308.1 499.3 334.9 500.8 354.9 495.7 375.4 476 425.4 484.8 441.7 489.7 457.9 494.6 480.5 491.3 493 479.7 511.6 479.5 520.6 471.7 526.7 464.1 526.5 450.5 523.6 448 522.2 446.7 521.3 430 498.3 409.5 428.7 403 396.9 397.6 366.6 395.8 354.6 391.7 314.7 394.1 312.6 394.6 310.9 395.3 296.4 377.5 216.7 365.5 182.5Z"/><path class="u t-r1" data-k="c-verduno" data-n="Verduno" d="M246.7 -5 257.3 22.9 258.8 37.4 242.8 38.1 238.4 38.8 227.5 42 218.1 45.2 192.6 64 177.9 75.3 175.7 77.4 171 82.1 169.1 88.9 169.1 91.4 169.7 93.3 162.5 98.1 138.5 100 133.6 99.8 130.8 98.6 124.7 94 119.7 89.4 101.8 68 99 63.3 94.4 52.9 89.2 30 84.5 -1.8 84.9 -5Z"/></g><g class="m-r"><path class="rv rv-big" data-n="Tanaro" d="M-18.7 10.8 33.7 -71.8"/></g><g class="m-p"><g class="pin pin-vil" data-k="c-barolo" tabindex="0" data-tip="바롤로 마을"><circle class="pd" cx="204.2" cy="381.4" r="4.6"/><text class="pl" x="204.2" y="394.4" text-anchor="middle">바롤로</text></g><g class="pin pin-vil" data-k="c-lamorra" tabindex="0" data-tip="라 모라 마을"><circle class="pd" cx="166.2" cy="215.2" r="4.6"/><text class="pl" x="166.2" y="208.2" text-anchor="middle">라 모라</text></g><g class="pin pin-vil" data-k="c-castiglione" tabindex="0" data-tip="카스틸리오네 팔레토 마을"><circle class="pd" cx="353.2" cy="304.5" r="4.6"/><text class="pl" x="359.2" y="308" text-anchor="start">카스틸리오네 팔레토</text></g><g class="pin pin-vil" data-k="c-monforte" tabindex="0" data-tip="몬포르테 달바 마을"><circle class="pd" cx="316.3" cy="550.1" r="4.6"/><text class="pl" x="316.3" y="563.1" text-anchor="middle">몬포르테 달바</text></g><g class="pin pin-vil" data-k="c-serralunga" tabindex="0" data-tip="세랄룽가 달바 마을"><circle class="pd" cx="459.2" cy="384.6" r="4.6"/><text class="pl" x="465.2" y="388.1" text-anchor="start">세랄룽가 달바</text></g><g class="pin pin-vil" data-k="c-verduno" tabindex="0" data-tip="베르두노 마을"><circle class="pd" cx="148.4" cy="42.2" r="4.6"/><text class="pl" x="154.4" y="45.7" text-anchor="start">베르두노</text></g><g class="pin pin-vil" data-k="c-novello" tabindex="0" data-tip="노벨로 마을"><circle class="pd" cx="136.1" cy="522.3" r="4.6"/><text class="pl" x="130.1" y="525.8" text-anchor="end">노벨로</text></g><g class="pin pin-vil" data-k="c-grinzane" tabindex="0" data-tip="그린차네 카부르 마을"><circle class="pd" cx="432" cy="120.5" r="4.6"/><text class="pl" x="438" y="124" text-anchor="start">그린차네 카부르</text></g><g class="pin pin-vil" data-k="c-diano" tabindex="0" data-tip="디아노 달바 마을"><circle class="pd" cx="575.2" cy="124.8" r="4.6"/><text class="pl" x="569.2" y="128.3" text-anchor="end">디아노 달바</text></g><g class="pin pin-vil" data-k="c-monchiero" tabindex="0" data-tip="몬키에로 마을"><circle class="pd" cx="100.5" cy="604.1" r="4.6"/><text class="pl" x="94.5" y="607.6" text-anchor="end">몬키에로</text></g><g class="pin pin-mga" data-k="cannubi" tabindex="0" data-tip="칸누비 · 바롤로"><circle class="pd" cx="232.2" cy="345.7" r="3.4"/><text class="pl" x="238.2" y="349.2" text-anchor="start">칸누비</text></g><g class="pin pin-mga" data-k="sarmassa" tabindex="0" data-tip="사르마사 · 바롤로"><circle class="pd" cx="202.4" cy="337.7" r="3.4"/><text class="pl" x="196.4" y="341.2" text-anchor="end">사르마사</text></g><g class="pin pin-mga" data-k="bricco-viole" tabindex="0" data-tip="브리코 델레 비올레 · 바롤로"><circle class="pd" cx="127.9" cy="382" r="3.4"/><text class="pl" x="121.9" y="385.5" text-anchor="end">브리코 델레 비올레</text></g><g class="pin pin-mga" data-k="ravera" tabindex="0" data-tip="라베라 · 노벨로"><circle class="pd" cx="153.3" cy="453.4" r="3.4"/><text class="pl" x="147.3" y="456.9" text-anchor="end">라베라</text></g><g class="pin pin-mga" data-k="brunate" tabindex="0" data-tip="브루나테 · 라 모라"><circle class="pd" cx="179.7" cy="302.6" r="3.4"/><text class="pl" x="185.7" y="306.1" text-anchor="start">브루나테</text></g><g class="pin pin-mga" data-k="cerequio" tabindex="0" data-tip="체레퀴오 · 라 모라"><circle class="pd" cx="149" cy="298.3" r="3.4"/><text class="pl" x="143" y="301.8" text-anchor="end">체레퀴오</text></g><g class="pin pin-mga" data-k="rocche-annunziata" tabindex="0" data-tip="로케 델라눈치아타 · 라 모라"><circle class="pd" cx="203.8" cy="253.4" r="3.4"/><text class="pl" x="197.8" y="256.9" text-anchor="end">로케 델라눈치아타</text></g><g class="pin pin-mga" data-k="arborina" tabindex="0" data-tip="아르보리나 · 라 모라"><circle class="pd" cx="234.5" cy="234.9" r="3.4"/><text class="pl" x="240.5" y="238.4" text-anchor="start">아르보리나</text></g><g class="pin pin-mga" data-k="monvigliero" tabindex="0" data-tip="몬빌리에로 · 베르두노"><circle class="pd" cx="175.5" cy="62.6" r="3.4"/><text class="pl" x="181.5" y="66.1" text-anchor="start">몬빌리에로</text></g><g class="pin pin-mga" data-k="monprivato" tabindex="0" data-tip="몬프리바토 · 카스틸리오네 팔레토"><circle class="pd" cx="324.3" cy="310.7" r="3.4"/><text class="pl" x="318.3" y="314.2" text-anchor="end">몬프리바토</text></g><g class="pin pin-mga" data-k="villero" tabindex="0" data-tip="빌레로 · 카스틸리오네 팔레토"><circle class="pd" cx="364.6" cy="319.9" r="3.4"/><text class="pl" x="370.6" y="323.4" text-anchor="start">빌레로</text></g><g class="pin pin-mga" data-k="bricco-rocche" tabindex="0" data-tip="브리코 로케 · 카스틸리오네 팔레토"><circle class="pd" cx="342.6" cy="325.5" r="3.4"/><text class="pl" x="336.6" y="329" text-anchor="end">브리코 로케</text></g><g class="pin pin-mga" data-k="rocche-castiglione" tabindex="0" data-tip="로케 디 카스틸리오네 · 카스틸리오네 팔레토"><circle class="pd" cx="329.5" cy="341.5" r="3.4"/><text class="pl" x="335.5" y="345" text-anchor="start">로케 디 카스틸리오네</text></g><g class="pin pin-mga" data-k="fiasco" tabindex="0" data-tip="피아스코 · 카스틸리오네 팔레토"><circle class="pd" cx="382.1" cy="286.1" r="3.4"/><text class="pl" x="388.1" y="289.6" text-anchor="start">피아스코</text></g><g class="pin pin-mga" data-k="bricco-boschis" tabindex="0" data-tip="브리코 보스키스 · 카스틸리오네 팔레토"><circle class="pd" cx="362.8" cy="255.3" r="3.4"/><text class="pl" x="362.8" y="248.3" text-anchor="middle">브리코 보스키스</text></g><g class="pin pin-mga" data-k="bussia" tabindex="0" data-tip="부시아 · 몬포르테 달바"><circle class="pd" cx="280.4" cy="462.7" r="3.4"/><text class="pl" x="274.4" y="466.2" text-anchor="end">부시아</text></g><g class="pin pin-mga" data-k="santo-stefano-perno" tabindex="0" data-tip="산토 스테파노 디 페르노 · 몬포르테 달바"><circle class="pd" cx="414" cy="478.1" r="3.4"/><text class="pl" x="408" y="481.6" text-anchor="end">산토 스테파노 디 페르노</text></g><g class="pin pin-mga" data-k="ginestra" tabindex="0" data-tip="지네스트라 · 몬포르테 달바"><circle class="pd" cx="368" cy="553.2" r="3.4"/><text class="pl" x="374" y="556.7" text-anchor="start">지네스트라</text></g><g class="pin pin-mga" data-k="mosconi" tabindex="0" data-tip="모스코니 · 몬포르테 달바"><circle class="pd" cx="394.3" cy="570.4" r="3.4"/><text class="pl" x="400.3" y="573.9" text-anchor="start">모스코니</text></g><g class="pin pin-mga" data-k="gabutti" tabindex="0" data-tip="가부티 · 세랄룽가 달바"><circle class="pd" cx="440.3" cy="342.7" r="3.4"/><text class="pl" x="446.3" y="346.2" text-anchor="start">가부티</text></g><g class="pin pin-mga" data-k="ornato" tabindex="0" data-tip="오르나토 · 세랄룽가 달바"><circle class="pd" cx="436" cy="395" r="3.4"/><text class="pl" x="430" y="398.5" text-anchor="end">오르나토</text></g><g class="pin pin-mga" data-k="marenca" tabindex="0" data-tip="마렌카 · 세랄룽가 달바"><circle class="pd" cx="443.4" cy="419.7" r="3.4"/><text class="pl" x="437.4" y="423.2" text-anchor="end">마렌카</text></g><g class="pin pin-mga" data-k="francia" tabindex="0" data-tip="프란차 · 세랄룽가 달바"><circle class="pd" cx="436" cy="447.4" r="3.4"/><text class="pl" x="430" y="450.9" text-anchor="end">프란차</text></g><g class="pin pin-mga" data-k="arione" tabindex="0" data-tip="아리오네 · 세랄룽가 달바"><circle class="pd" cx="444.7" cy="490.4" r="3.4"/><text class="pl" x="438.7" y="493.9" text-anchor="end">아리오네</text></g><g class="pin pin-mga" data-k="vignarionda" tabindex="0" data-tip="비냐 리온다 · 세랄룽가 달바"><circle class="pd" cx="465.3" cy="473.2" r="3.4"/><text class="pl" x="471.3" y="476.7" text-anchor="start">비냐 리온다</text></g><g class="pin pin-mga" data-k="falletto" tabindex="0" data-tip="팔레토 · 세랄룽가 달바"><circle class="pd" cx="467.9" cy="422.7" r="3.4"/><text class="pl" x="473.9" y="426.2" text-anchor="start">팔레토</text></g><g class="pin pin-mga" data-k="lazzarito" tabindex="0" data-tip="라차리토 · 세랄룽가 달바"><circle class="pd" cx="479.8" cy="356.3" r="3.4"/><text class="pl" x="485.8" y="359.8" text-anchor="start">라차리토</text></g><g class="pin pin-mga" data-k="cerretta" tabindex="0" data-tip="체레타 · 세랄룽가 달바"><circle class="pd" cx="477.6" cy="316.9" r="3.4"/><text class="pl" x="483.6" y="320.4" text-anchor="start">체레타</text></g><g class="pin pin-mga" data-k="prapo" tabindex="0" data-tip="프라포 · 세랄룽가 달바"><circle class="pd" cx="468.8" cy="289.8" r="3.4"/><text class="pl" x="474.8" y="293.3" text-anchor="start">프라포</text></g></g><g class="m-sc"><g class="sc"><path d="M12 663V667H67.3V663"/><text x="72.3" y="668">1 km</text></g><g class="na"><path d="M582 10l5 13-5-3.4-5 3.4z"/><text x="582" y="35" text-anchor="middle">N</text></g></g></svg></div>
+      <div class="mga-pane" data-v="barbaresco" hidden><svg class="map map-mga" viewBox="0 0 600 656" role="group" aria-label="바르바레스코 MGA(밭) 지도"><g class="m-bg"><path class="b" data-n="Neviglie" d="M605 661 453.8 661 426.9 629.9 353.3 539.7 341.3 514.8 336.7 469.9 382.4 379.1 423.9 366.3 469.8 331.7 489.2 327.2 542.2 387.1 605 448.3Z"/><path class="b" data-n="Trezzo Tinella" d="M342.8 661 349.2 653.6 370.3 622.4 367.7 587.8 358.5 552.2 353.3 539.7 426.9 629.9 453.8 661Z"/></g><g class="m-u"><path class="u t-n2" data-k="c-alba" data-n="Alba" d="M36.2 460.4 31.2 482.5 29.4 492.7 27.5 510.8 26.6 525 26.3 539.6 29.1 566.3 33.1 570.6 38.2 571.3 106.4 595.1 123.8 607.6 129.7 661 -5 661 -5 86.6 3.5 69.1 5.9 69.1 21.8 72.6 61.6 129.6 74.1 152.7 66.3 179.7 35.9 241.5 11.2 311.2 2.1 352.3 30.3 389.2 36.8 413.9 37.6 441Z"/><path class="u t-r2" data-k="c-barbaresco" data-n="Barbaresco" d="M36.2 460.4 37.6 441 36.8 413.9 30.3 389.2 2.1 352.3 11.2 311.2 35.9 241.5 66.3 179.7 74.1 152.7 61.6 129.6 62.5 126.5 69.2 112.8 80.7 97.8 86.4 95 90 94.5 105.7 94.8 127.7 74.6 133.6 62.7 147.3 44 180.3 64.2 190.8 70.1 213.9 63.3 217.3 60.7 227.7 48.5 239 37 271.2 5.9 276 3.5 281.9 1.9 286.6 11.2 293.9 34.9 295.5 42.2 297.3 55.8 297.7 65.4 297.2 105.5 293.1 140.7 283 179.5 270.5 194.9 265.8 203.2 256.7 232.5 254 244.7 249.2 269.8 249.5 274.3 260.3 313 270 327.4 275.1 333 276.7 337.2 277.4 343.3 271.9 366.6 268.5 375 258.3 391.6 201.4 410.5 124.7 413 111.6 409 107.8 409.2 67.3 436.7Z"/><path class="u t-g1" data-k="c-roero" data-n="Castagnito" d="M217.3 60.7 213.9 63.3 190.8 70.1 180.3 64.2 147.3 44 133.6 62.7 96.9 29.9 64.5 -5 205.9 -5 220.1 16.5Z"/><path class="u t-g1" data-k="c-roero" data-n="Guarene" d="M61.6 129.6 21.8 72.6 5.9 69.1 3.5 69.1 -5 86.6 -5 -5 64.5 -5 96.9 29.9 133.6 62.7 127.7 74.6 105.7 94.8 90 94.5 86.4 95 80.7 97.8 69.2 112.8 62.5 126.5Z"/><path class="u t-r2" data-k="c-neive" data-n="Neive" d="M258.3 391.6 268.5 375 271.9 366.6 277.4 343.3 276.7 337.2 275.1 333 270 327.4 260.3 313 249.5 274.3 249.2 269.8 254 244.7 256.7 232.5 265.8 203.2 270.5 194.9 283 179.5 293.1 140.7 297.2 105.5 297.7 65.4 297.3 55.8 295.5 42.2 293.9 34.9 286.6 11.2 281.9 1.9 276 3.5 271.2 5.9 239 37 227.7 48.5 217.3 60.7 220.1 16.5 205.9 -5 605 -5 605 448.3 542.2 387.1 489.2 327.2 469.8 331.7 423.9 366.3 382.4 379.1 389.5 366.9 381.8 360.8 379.4 359.5 363 357.9 355 357.7 324.1 360.1 316 362.6Z"/><path class="u t-r2" data-k="c-treiso" data-n="Treiso" d="M129.7 661 123.8 607.6 106.4 595.1 38.2 571.3 33.1 570.6 29.1 566.3 26.3 539.6 26.6 525 27.5 510.8 29.4 492.7 31.2 482.5 36.2 460.4 67.3 436.7 107.8 409.2 111.6 409 124.7 413 201.4 410.5 258.3 391.6 316 362.6 324.1 360.1 350.5 357.8 363 357.9 379.4 359.5 381.8 360.8 389.5 366.9 382.4 379.1 336.7 469.9 341.3 514.8 353.3 539.7 358.5 552.2 367.7 587.8 370.3 622.4 349.2 653.6 342.8 661Z"/></g><g class="m-r"><path class="rv rv-big" data-n="Tanaro" d="M-20.3 149.9 285.3 -172.5"/></g><g class="m-p"><g class="pin pin-vil" data-k="c-barbaresco" tabindex="0" data-tip="바르바레스코 마을"><circle class="pd" cx="199.5" cy="164.1" r="4.6"/><text class="pl" x="199.5" y="157.1" text-anchor="middle">바르바레스코</text></g><g class="pin pin-vil" data-k="c-neive" tabindex="0" data-tip="네이베 마을"><circle class="pd" cx="477.8" cy="173" r="4.6"/><text class="pl" x="477.8" y="166" text-anchor="middle">네이베</text></g><g class="pin pin-vil" data-k="c-treiso" tabindex="0" data-tip="트레이소 마을"><circle class="pd" cx="245.9" cy="589.3" r="4.6"/><text class="pl" x="251.9" y="592.8" text-anchor="start">트레이소</text></g><g class="pin pin-mga" data-k="asili" tabindex="0" data-tip="아실리 · 바르바레스코"><circle class="pd" cx="147.9" cy="253.1" r="3.4"/><text class="pl" x="153.9" y="256.6" text-anchor="start">아실리</text></g><g class="pin pin-mga" data-k="martinenga" tabindex="0" data-tip="마르티넹가 · 바르바레스코"><circle class="pd" cx="125.7" cy="272.8" r="3.4"/><text class="pl" x="119.7" y="276.3" text-anchor="end">마르티넹가</text></g><g class="pin pin-mga" data-k="rabaja" tabindex="0" data-tip="라바야 · 바르바레스코"><circle class="pd" cx="142.2" cy="299.3" r="3.4"/><text class="pl" x="148.2" y="302.8" text-anchor="start">라바야</text></g><g class="pin pin-mga" data-k="pora" tabindex="0" data-tip="포라 · 바르바레스코"><circle class="pd" cx="112.5" cy="230" r="3.4"/><text class="pl" x="106.5" y="233.5" text-anchor="end">포라</text></g><g class="pin pin-mga" data-k="secondine" tabindex="0" data-tip="세콘디네 · 바르바레스코"><circle class="pd" cx="178.2" cy="198.8" r="3.4"/><text class="pl" x="184.2" y="202.3" text-anchor="start">세콘디네</text></g><g class="pin pin-mga" data-k="roncagliette" tabindex="0" data-tip="론칼리에테 · 바르바레스코"><circle class="pd" cx="145.3" cy="180.3" r="3.4"/><text class="pl" x="139.3" y="183.8" text-anchor="end">론칼리에테</text></g><g class="pin pin-mga" data-k="paje" tabindex="0" data-tip="파예 · 바르바레스코"><circle class="pd" cx="161.7" cy="143.3" r="3.4"/><text class="pl" x="155.7" y="146.8" text-anchor="end">파예</text></g><g class="pin pin-mga" data-k="montestefano" tabindex="0" data-tip="몬테스테파노 · 바르바레스코"><circle class="pd" cx="254.5" cy="157.1" r="3.4"/><text class="pl" x="260.5" y="160.6" text-anchor="start">몬테스테파노</text></g><g class="pin pin-mga" data-k="montefico" tabindex="0" data-tip="몬테피코 · 바르바레스코"><circle class="pd" cx="227.4" cy="110.9" r="3.4"/><text class="pl" x="233.4" y="114.4" text-anchor="start">몬테피코</text></g><g class="pin pin-mga" data-k="ovello" tabindex="0" data-tip="오벨로 · 바르바레스코"><circle class="pd" cx="243.7" cy="60" r="3.4"/><text class="pl" x="249.7" y="63.5" text-anchor="start">오벨로</text></g><g class="pin pin-mga" data-k="rio-sordo" tabindex="0" data-tip="리오 소르도 · 바르바레스코"><circle class="pd" cx="254.7" cy="345.4" r="3.4"/><text class="pl" x="260.7" y="348.9" text-anchor="start">리오 소르도</text></g><g class="pin pin-mga" data-k="albesani" tabindex="0" data-tip="알베사니(산토 스테파노) · 네이베"><circle class="pd" cx="451.7" cy="258.5" r="3.4"/><text class="pl" x="457.7" y="262" text-anchor="start">알베사니(산토 스테파노)</text></g><g class="pin pin-mga" data-k="gallina" tabindex="0" data-tip="갈리나 · 네이베"><circle class="pd" cx="414.5" cy="108.4" r="3.4"/><text class="pl" x="408.5" y="111.9" text-anchor="end">갈리나</text></g><g class="pin pin-mga" data-k="starderi" tabindex="0" data-tip="스타르데리 · 네이베"><circle class="pd" cx="404.8" cy="191.6" r="3.4"/><text class="pl" x="398.8" y="195.1" text-anchor="end">스타르데리</text></g><g class="pin pin-mga" data-k="curra" tabindex="0" data-tip="쿠라 · 네이베"><circle class="pd" cx="373.8" cy="345.3" r="3.4"/><text class="pl" x="379.8" y="348.8" text-anchor="start">쿠라</text></g><g class="pin pin-mga" data-k="serraboella" tabindex="0" data-tip="세라보엘라 · 네이베"><circle class="pd" cx="501" cy="327.8" r="3.4"/><text class="pl" x="507" y="331.3" text-anchor="start">세라보엘라</text></g><g class="pin pin-mga" data-k="pajore" tabindex="0" data-tip="파요레 · 트레이소"><circle class="pd" cx="203.1" cy="484.2" r="3.4"/><text class="pl" x="197.1" y="487.7" text-anchor="end">파요레</text></g><g class="pin pin-mga" data-k="rombone" tabindex="0" data-tip="롬보네 · 트레이소"><circle class="pd" cx="250.8" cy="518.8" r="3.4"/><text class="pl" x="256.8" y="522.3" text-anchor="start">롬보네</text></g><g class="pin pin-mga" data-k="bernadot" tabindex="0" data-tip="베르나도트 · 트레이소"><circle class="pd" cx="320.7" cy="576.5" r="3.4"/><text class="pl" x="326.7" y="580" text-anchor="start">베르나도트</text></g></g><g class="m-sc"><g class="sc"><path d="M12 640V644H115.9V640"/><text x="120.9" y="645">1 km</text></g><g class="na"><path d="M582 10l5 13-5-3.4-5 3.4z"/><text x="582" y="35" text-anchor="middle">N</text></g></g></svg></div>
+      <div class="map-legend"><span><i class="dot"></i>MGA(대략적 중심)</span><span><i class="ring"></i>마을</span><span><i style="background:var(--t-r2)"></i>코무네 전체가 DOCG</span><span><i style="background:var(--t-r1)"></i>일부가 DOCG</span></div>
+    </div>
+    <div>
+      <div class="mapinfo" id="mga-info" aria-live="polite"></div>
+      <div class="card" style="margin-top:12px">
+        <h4>생산자별 밭 보기</h4>
+        <p class="small" style="margin:0 0 8px">대표적인 밭만 담았습니다. 셀러가 있는 코무네도 함께 강조됩니다.</p>
+        <div id="prod-chips"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="try"><b>해볼 것</b><ul>
+  <li>‘자코모 콘테르노’를 눌러 보세요. 셀러는 몬포르테에 있지만 밭(프란차·체레타·아리오네)은 모두 세랄룽가의 같은 능선에 모여 있습니다.</li>
+  <li>‘프로두토리 델 바르바레스코’를 누르면 바르바레스코 탭으로 넘어가 조합이 리제르바로 따로 병입하는 밭들이 한꺼번에 강조됩니다.</li>
+  <li>라 모라의 로케 델라눈치아타와 세랄룽가의 비냐 리온다를 차례로 눌러 스타일 설명을 비교해 보세요. 앞에서 본 지층 차이가 그대로 드러납니다.</li>
+</ul></div>
+
+<h2>밭별 특징 한눈에</h2>
+<p>지도에 표시한 48개 MGA를 코무네별로 정리했습니다. 밭 이름을 누르면 지도에서 위치를 보여 줍니다. 크기는 확인된 경우에만 적었습니다.</p>
+<div class="tablewrap wide">
+  <table id="mga-table">
+    <thead><tr><th>밭(MGA)</th><th>자리와 토양</th><th>스타일</th><th>생산자</th></tr></thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<h2>바롤로 전쟁: 전통과 현대</h2>
+<p>1980~90년대 바롤로는 두 진영으로 갈라졌습니다. 엘리오 알타레, 로베르토 보에르치오, 도메니코 클레리코, 루치아노 산드로네, 파올로 스카비노 같은 ‘바롤로 보이즈’는 침용을 짧게 줄이고 프랑스산 새 바리크를 들여와, 어릴 때부터 부드럽고 과일 향이 풍부한 바롤로를 만들었습니다. 바르톨로 마스카렐로, 주세페 리날디, 자코모 콘테르노, 브루노 지아코사 같은 전통파는 긴 침용과 큰 오크통을 고집했습니다. 미국 평론가들의 높은 점수가 현대파에 힘을 실어 주기도 했습니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="dg" viewBox="0 0 900 330" role="img" aria-label="전통 바롤로와 현대 바롤로 양조 비교">
+      <text x="225" y="26" text-anchor="middle" class="t-l t-b">전통파</text>
+      <text x="675" y="26" text-anchor="middle" class="t-l t-b">현대파</text>
+      <line x1="450" y1="10" x2="450" y2="262" class="ln"/>
+      <text x="40" y="58" class="t-s t-b">침용 기간</text>
+      <g transform="translate(40,66)">
+        <rect x="0" y="0" width="360" height="12" rx="4" fill="var(--surface-2)"/>
+        <rect x="150" y="0" width="150" height="12" rx="4" class="red"/>
+        <text x="0" y="28" class="t-s t-mut">0일</text><text x="300" y="28" text-anchor="middle" class="t-s t-mut">60일</text>
+        <text x="225" y="-6" text-anchor="middle" class="t-s">30~60일, 때로 그 이상</text>
+      </g>
+      <g transform="translate(490,66)">
+        <rect x="0" y="0" width="360" height="12" rx="4" fill="var(--surface-2)"/>
+        <rect x="20" y="0" width="30" height="12" rx="4" class="red"/>
+        <text x="0" y="28" class="t-s t-mut">0일</text><text x="300" y="28" text-anchor="middle" class="t-s t-mut">60일</text>
+        <text x="58" y="10" class="t-s">4~10일 · 회전식 발효조</text>
+      </g>
+      <text x="40" y="132" class="t-s t-b">숙성 용기</text>
+      <path d="M150 158 Q225 142 300 158 L300 212 Q225 228 150 212 Z" fill="var(--surface-3)" stroke="var(--ink-2)" stroke-width="1.2"/>
+      <path d="M172 154 V216 M196 151.2 V218.8 M254 151.2 V218.8 M278 154 V216" stroke="var(--ink-2)" stroke-width="2.2"/>
+      <text x="225" y="244" text-anchor="middle" class="t-s t-b">보테(큰 오크통) 20~100 hL</text>
+      <text x="225" y="258" text-anchor="middle" class="t-s t-mut">슬라보니아·오스트리아산, 오래 써서 나무 향이 거의 없다</text>
+      <path d="M643 170 Q675 162 707 170 L707 202 Q675 210 643 202 Z" fill="var(--surface)" stroke="var(--ink-2)" stroke-width="1.2"/>
+      <path d="M652 168.1 V203.9 M663 166.6 V205.4 M687 166.6 V205.4 M698 168.1 V203.9" stroke="var(--ink-2)" stroke-width="1.8"/>
+      <text x="675" y="244" text-anchor="middle" class="t-s t-b">바리크 225 L</text>
+      <text x="675" y="258" text-anchor="middle" class="t-s t-mut">프랑스산 새 오크, 바닐라·토스트 향</text>
+      <text x="450" y="200" text-anchor="middle" class="t-s t-mut">크기 비율은 실제와 다름</text>
+      <text x="40" y="282" class="t-s t-b">결과</text>
+      <text x="225" y="282" text-anchor="middle" class="t-s">옅은 석류색, 촘촘하고 강한 탄닌, 장미·타르</text>
+      <text x="225" y="298" text-anchor="middle" class="t-s t-mut">제대로 열리려면 10년 이상</text>
+      <text x="675" y="282" text-anchor="middle" class="t-s">짙은 색, 둥근 탄닌, 잘 익은 과일과 오크 향</text>
+      <text x="675" y="298" text-anchor="middle" class="t-s t-mut">출시 직후부터 마시기 쉽다</text>
+      <rect x="250" y="306" width="400" height="22" rx="6" class="box"/>
+      <text x="450" y="321" text-anchor="middle" class="t-s">오늘날 대부분은 중간 길이 침용과 큰 오크통 사이 어딘가로 수렴했다</text>
+    </svg>
+  </div>
+  <figcaption><b>그림 8-4.</b> 전통파와 현대파의 양조 차이. 침용 막대는 같은 0~60일 축에 그렸다. 2000년대 이후에는 현대파도 새 오크 비중을 줄이고 전통파도 위생과 선별을 개선하면서 두 진영의 차이가 크게 줄었다.</figcaption>
+</figure>
+
+<h2>숙성 규정과 마시기 좋은 때</h2>
+<p>바롤로와 바르바레스코는 법으로 정한 최소 숙성 기간을 채워야 출시할 수 있습니다. 기간은 수확한 해 11월 1일부터 셉니다. 아래 막대에서 진한 부분이 그중 나무통에서 보내야 하는 최소 기간입니다.</p>
+
+<figure class="fig wide">
+  <div class="fig-box">
+    <svg class="chart" viewBox="0 0 900 270" role="img" aria-label="바롤로와 바르바레스코의 최소 숙성 기간">
+      <g id="aging"></g>
+    </svg>
+    <div class="map-legend"><span><i style="background:var(--st-r)"></i>나무통 숙성(최소)</span><span><i style="background:var(--t-r1)"></i>그 밖의 숙성(병·탱크 등)</span></div>
+  </div>
+  <figcaption><b>그림 8-5.</b> 바롤로·바르바레스코 DOCG의 최소 숙성 기간과 가장 이른 출시 시점. 랑게 네비올로에는 최소 숙성 규정이 없어 수확 이듬해부터 나온다.</figcaption>
+</figure>
+
+<p>숙성 규정은 최소한일 뿐입니다. 좋은 빈티지의 바롤로는 대개 수확 후 10년 무렵부터 제맛이 나기 시작해 20~30년 이상 발전하고, 바르바레스코는 그보다 몇 년 일찍 열립니다. 세랄룽가나 몬포르테의 구조적인 와인, 전통 방식의 리제르바는 더 오래 기다려야 합니다. 빈티지별 평가와 시음 적기는 <a href="vintages.html">12장</a>에서 다룹니다.</p>
+
+<h2>랑게 밖의 피에몬테</h2>
+<div class="tablewrap wide"><table>
+  <thead><tr><th>와인</th><th>품종</th><th>지역</th><th>스타일</th></tr></thead>
+  <tbody>
+    <tr><td><b>바르베라 다스티 · 니차</b></td><td>바르베라</td><td>아스티·몬페라토</td><td>높은 산도, 낮은 탄닌, 체리와 자두. 니차 DOCG는 바르베라 100%의 상위 등급</td></tr>
+    <tr><td><b>돌리아니 · 디아노 달바</b></td><td>돌체토</td><td>랑게 남부</td><td>부드러운 산도, 쌉쌀한 아몬드 끝맛, 일찍 마시는 레드</td></tr>
+    <tr><td><b>모스카토 다스티 · 아스티</b></td><td>모스카토 비앙코</td><td>아스티·쿠네오·알레산드리아</td><td>복숭아·오렌지꽃 향의 스위트 발포. 모스카토 다스티는 알코올 5% 안팎의 약발포</td></tr>
+    <tr><td><b>가비</b></td><td>코르테세</td><td>알레산드리아 남부</td><td>레몬·청사과·미네랄의 드라이 화이트</td></tr>
+    <tr><td><b>로에로 · 로에로 아르네이스</b></td><td>네비올로 · 아르네이스</td><td>타나로강 왼쪽의 모래 언덕</td><td>가볍고 향기로운 네비올로, 배·흰 꽃 향의 화이트</td></tr>
+    <tr><td><b>가티나라 · 젬메</b></td><td>네비올로(스판나)</td><td>알토 피에몬테</td><td>가티나라는 산성 화산암(반암), 젬메는 빙하 퇴적토. 서늘하고 섬세한 네비올로에 베스폴리나·크로아티나를 조금 섞기도 한다</td></tr>
+    <tr><td><b>카레마</b></td><td>네비올로</td><td>발레 다오스타 경계</td><td>돌담 테라스와 돌기둥 퍼걸러. 산도가 높고 가벼운 산악 네비올로</td></tr>
+    <tr><td><b>루케 디 카스타뇰레 몬페라토</b></td><td>루케</td><td>몬페라토</td><td>장미·향신료가 화려한 아로마틱 레드</td></tr>
+  </tbody>
+</table></div>
+
+<h2>핵심 정리</h2>
+<div class="summary"><ol>
+  <li>네비올로는 색이 옅지만 산도와 탄닌이 높고, 오래 숙성하면 장미·타르·송로버섯 향을 낸다.</li>
+  <li>바롤로는 11개 코무네(3곳은 전체, 8곳은 일부), 바르바레스코는 바르바레스코·네이베·트레이소와 알바 일부로 이루어진다.</li>
+  <li>서쪽의 토르토니아 이회토(라 모라·베르두노)는 향기롭고 부드러운 바롤로를, 동쪽의 세라발리아 지층(세랄룽가·몬포르테)은 구조적이고 오래 가는 바롤로를 만든다.</li>
+  <li>MGA는 밭의 이름이지 등급이 아니다. 바롤로 181개, 바르바레스코 66개가 있고 크기도 제각각이다.</li>
+  <li>바롤로는 최소 38개월(나무통 18개월), 리제르바 62개월. 바르바레스코는 26개월(나무통 9개월), 리제르바 50개월.</li>
+</ol></div>
+
+<h2>확인 퀴즈</h2>
+<div class="quiz-set">
+  <div class="quiz" data-a="3"><p class="q">MGA(Menzione Geografica Aggiuntiva)에 대한 설명으로 맞는 것은?</p>
+    <ol class="opts"><li>부르고뉴의 그랑 크뤼처럼 품질 등급이다</li><li>생산자 이름을 등록한 제도다</li><li>와인이 나온 밭 구역의 공식 이름이며 위아래가 없다</li><li>리제르바에만 쓸 수 있다</li></ol>
+    <div class="why">MGA는 지리 표기일 뿐 등급이 아니다. 라벨에 쓰려면 포도가 모두 그 MGA에서 나와야 한다.</div></div>
+  <div class="quiz" data-a="2"><p class="q">가장 구조적이고 오래 숙성해야 하는 바롤로로 알려진 코무네는?</p>
+    <ol class="opts"><li>라 모라</li><li>세랄룽가 달바</li><li>베르두노</li><li>노벨로</li></ol>
+    <div class="why">세랄룽가는 메마르고 단단한 세라발리아 지층 위의 좁은 능선이다. 라 모라와 베르두노는 향기롭고 부드러운 쪽이다.</div></div>
+  <div class="quiz" data-a="4"><p class="q">자코모 콘테르노의 리제르바 ‘몬포르티노’가 1978년부터 나오는 밭은?</p>
+    <ol class="opts"><li>칸누비</li><li>부시아</li><li>몬프리바토</li><li>프란차</li></ol>
+    <div class="why">자코모 콘테르노는 1974년 세랄룽가의 카시나 프란차를 사들였고, 몬포르티노도 이 밭에서 만든다.</div></div>
+  <div class="quiz" data-a="1"><p class="q">바르바레스코(리제르바 아님)의 최소 숙성 기간은?</p>
+    <ol class="opts"><li>26개월(나무통 9개월 포함)</li><li>38개월(나무통 18개월 포함)</li><li>50개월</li><li>규정 없음</li></ol>
+    <div class="why">바르바레스코 26개월, 리제르바 50개월. 38개월은 바롤로의 기준이다.</div></div>
+  <div class="quiz" data-a="3"><p class="q">1980~90년대 ‘바롤로 보이즈’가 들여온 방식이 아닌 것은?</p>
+    <ol class="opts"><li>짧은 침용</li><li>프랑스산 새 바리크</li><li>30~60일의 긴 침용과 큰 보테</li><li>회전식 발효조</li></ol>
+    <div class="why">긴 침용과 큰 보테는 전통파의 방식이다.</div></div>
+</div>
+
+<div class="sources"><b>출처</b><ol>
+  <li>MGA 수(바롤로 181, 바르바레스코 66)와 숙성 규정: 바롤로·바르바레스코·알바·랑게·돌리아니 보호 협회(<a href="https://www.langhevini.it/" rel="noopener">langhevini.it</a>)와 각 DOCG 생산 규정.</li>
+  <li>밭 크기(칸누비 핵심 15 ha·5개 구역 34 ha, 브루나테 25 ha, 아실리 14 ha, 라바야 20 ha, 라차리토 8 ha, 비냐 리온다 10 ha, 몬프리바토 6 ha 등): <a href="https://www.decanter.com/premium/barolo-barbaresco-vineyards-10-high-flying-sites-451115" rel="noopener">Decanter, Barolo and Barbaresco vineyards: 10 high-flying sites</a>.</li>
+  <li>부시아 약 298 ha: <a href="https://www.winewithseth.com/winewiki/bussia/" rel="noopener">Wine with Seth, Bussia</a>. 자코모 콘테르노의 프란차(1974)·체레타(2008)·아리오네(2015, 9 ha) 매입: <a href="https://en.wikipedia.org/wiki/Giacomo_Conterno" rel="noopener">Wikipedia, Giacomo Conterno</a>.</li>
+  <li>가야 소리 산 로렌초 3.38 ha: <a href="https://www.justerinis.com/latest-offers/new-release-gajas-2021-barbaresco-crus" rel="noopener">Justerini &amp; Brooks</a>.</li>
+  <li>지도: 코무네 경계 openpolis geojson-italy(ISTAT), DOCG 경계 WineRegions(CC0), 타나로강 Natural Earth. MGA 점은 대략적인 중심 위치.</li>
+</ol></div>
+
+</article><nav class="pager" aria-label="챕터 이동"><a class="prev" href="italy.html"><small>← 이전</small>07장 · 이탈리아 와인 지도</a><a class="next" href="tuscany.html"><small>다음 →</small>09장 · 토스카나</a></nav><footer class="foot">WineBook · 와인 이해 교과서. 지도 데이터: IGN·INSEE 기반 france-geojson, ISTAT 기반 openpolis geojson-italy, INAO délimitations parcellaires(Licence Ouverte, OpenDataWine 경유), Natural Earth, WineRegions(CC0). 점수·빈티지 수치는 각 장의 출처를 따릅니다.</footer></main><script>/* WineBook shared runtime: theme, chapter drawer, toc, tooltips, quizzes, segmented controls, map explorer. */
+(function () {
+  'use strict';
+  var WB = (window.WB = window.WB || {});
+  var $ = (WB.$ = function (s, r) { return (r || document).querySelector(s); });
+  var $$ = (WB.$$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); });
+  WB.esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; }
+  }
+
+  /* ---- theme ---- */
+  var root = document.documentElement;
+  var saved = store('wb-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  WB.isDark = isDark;
+  function themeIcon(btn) {
+    btn.innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg><span>밝게</span>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><span>어둡게</span>';
+  }
+
+  /* ---- chapter drawer ---- */
+  function buildTop() {
+    var btn = $('#theme-btn');
+    if (btn) {
+      themeIcon(btn);
+      btn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        store('wb-theme', next);
+        themeIcon(btn);
+        document.dispatchEvent(new CustomEvent('wb-theme'));
+      });
+    }
+    var menu = $('#menu-btn'), drawer = $('#drawer');
+    if (menu && drawer) {
+      menu.addEventListener('click', function () {
+        var open = drawer.hasAttribute('hidden');
+        if (open) drawer.removeAttribute('hidden'); else drawer.setAttribute('hidden', '');
+        menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !drawer.hasAttribute('hidden')) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); menu.focus(); }
+      });
+      document.addEventListener('click', function (e) {
+        if (!drawer.hasAttribute('hidden') && !drawer.contains(e.target) && !menu.contains(e.target)) { drawer.setAttribute('hidden', ''); menu.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  }
+
+  /* ---- in-page toc ---- */
+  function buildToc() {
+    var toc = $('.toc');
+    var art = $('.article');
+    if (!toc || !art) return;
+    var hs = $$('h2', art).filter(function (h) { return !h.closest('.sim'); });
+    if (hs.length < 3) { toc.remove(); return; }
+    var html = '<summary>이 장의 차례</summary><ol>';
+    hs.forEach(function (h, i) {
+      if (!h.id) h.id = 's' + (i + 1);
+      html += '<li><a href="#' + h.id + '">' + WB.esc(h.textContent) + '</a></li>';
+    });
+    toc.innerHTML = html + '</ol>';
+  }
+
+  /* ---- tooltip ---- */
+  var tip;
+  WB.tip = function (html, x, y) {
+    if (!tip) { tip = document.createElement('div'); tip.className = 'tip'; tip.setAttribute('role', 'tooltip'); document.body.appendChild(tip); }
+    if (html == null) { tip.hidden = true; return; }
+    tip.innerHTML = html;
+    tip.hidden = false;
+    var w = tip.offsetWidth;
+    var px = Math.max(w / 2 + 6, Math.min(window.innerWidth - w / 2 - 6, x));
+    tip.style.left = px + 'px';
+    tip.style.top = Math.max(tip.offsetHeight + 16, y) + 'px';
+  };
+  function tipFor(el) {
+    if (el.dataset.tip) return WB.esc(el.dataset.tip);
+    if (el.dataset.n) {
+      var s = '<b>' + WB.esc(el.dataset.n) + '</b>';
+      if (el.dataset.ha) s += ' · ' + Number(el.dataset.ha).toFixed(2) + ' ha';
+      if (el.dataset.extra) s += '<br>' + WB.esc(el.dataset.extra);
+      return s;
+    }
+    return null;
+  }
+  function bindTips() {
+    document.addEventListener('pointermove', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip], .map .u[data-n], .chart [data-tip]');
+      if (!el) { WB.tip(null); return; }
+      var h = tipFor(el);
+      if (h) WB.tip(h, e.clientX, e.clientY); else WB.tip(null);
+    });
+    document.addEventListener('focusin', function (e) {
+      var el = e.target.closest && e.target.closest('[data-tip]');
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      WB.tip(tipFor(el), r.left + r.width / 2, r.top);
+    });
+    document.addEventListener('focusout', function () { WB.tip(null); });
+    window.addEventListener('scroll', function () { WB.tip(null); }, { passive: true });
+  }
+
+  /* ---- quizzes ---- */
+  function bindQuiz() {
+    $$('.quiz').forEach(function (q) {
+      var ans = parseInt(q.dataset.a, 10);
+      var opts = $$('.opts li', q);
+      opts.forEach(function (li, i) {
+        li.tabIndex = 0;
+        li.setAttribute('role', 'button');
+        function pick() {
+          if (q.classList.contains('done')) return;
+          q.classList.add('done');
+          opts[ans - 1].classList.add('right');
+          if (i !== ans - 1) li.classList.add('wrong');
+        }
+        li.addEventListener('click', pick);
+        li.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+      });
+    });
+  }
+
+  /* ---- segmented controls ---- */
+  WB.seg = function (seg, cb) {
+    var bs = $$('button', seg);
+    bs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        bs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        cb(b.dataset.v, b);
+      });
+    });
+    var on = bs.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || bs[0];
+    if (on) { on.setAttribute('aria-pressed', 'true'); }
+    return function (v) { bs.forEach(function (b) { if (b.dataset.v === v) b.click(); }); };
+  };
+
+  /* ---- map explorer ----
+     opts: { info: el, data: {key: obj}, render(key, obj, el) -> html, keyAttr: 'k'|'r', empty: html } */
+  WB.mapExplorer = function (svg, opts) {
+    opts = opts || {};
+    var attr = opts.keyAttr || 'k';
+    var info = opts.info;
+    var current = null;
+    function units(key) { return $$('.u[data-' + attr + '="' + key + '"], .pin[data-k="' + key + '"]', svg); }
+    function show(key, el) {
+      current = key;
+      $$('.u.on, .pin.on', svg).forEach(function (u) { u.classList.remove('on'); });
+      if (key) units(key).forEach(function (u) { u.classList.add('on'); });
+      svg.classList.toggle('focus', !!key && opts.focus !== false);
+      if (info) {
+        var obj = opts.data && opts.data[key];
+        info.innerHTML = key ? (opts.render ? opts.render(key, obj, el) : (obj ? obj : WB.esc(key))) : (opts.empty || '');
+      }
+      if (opts.onSelect) opts.onSelect(key, el);
+    }
+    svg.addEventListener('click', function (e) {
+      var el = e.target.closest('.u[data-' + attr + '], .pin[data-k]');
+      if (!el) { show(null); return; }
+      var key = el.classList.contains('pin') ? el.dataset.k : el.getAttribute('data-' + attr);
+      show(current === key ? null : key, el);
+    });
+    svg.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.classList && e.target.classList.contains('pin')) {
+        e.preventDefault();
+        show(e.target.dataset.k, e.target);
+      }
+    });
+    if (info && opts.empty) info.innerHTML = opts.empty;
+    return { show: show, units: units, get current() { return current; } };
+  };
+
+  /* highlight a set of unit keys (e.g. a producer's holdings) */
+  WB.highlight = function (svg, keys, attr) {
+    attr = attr || 'k';
+    var set = {};
+    (keys || []).forEach(function (k) { set[k] = 1; });
+    var any = keys && keys.length;
+    $$('.u[data-' + attr + ']', svg).forEach(function (u) {
+      var on = !!set[u.getAttribute('data-' + attr)];
+      u.classList.toggle('on', on);
+    });
+    $$('.pin', svg).forEach(function (p) { p.classList.toggle('hl', !!set[p.dataset.k]); });
+    svg.classList.toggle('focus', !!any);
+  };
+
+  /* ---- wide figures on narrow screens: keep text legible by letting the figure scroll sideways ---- */
+  function fitWide() {
+    $$('.fig-box > svg, .map-card > svg.map').forEach(function (svg) {
+      var vb = svg.viewBox && svg.viewBox.baseVal;
+      if (!vb || !vb.width) return;
+      var box = svg.parentNode;
+      var cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var narrow = avail > 0 && avail / vb.width < 0.7;
+      box.classList.toggle('xs', narrow);
+      svg.style.minWidth = narrow ? Math.round(vb.width * 0.82) + 'px' : '';
+      if (narrow && !box.querySelector(':scope > .xs-hint')) {
+        var h = document.createElement('div');
+        h.className = 'xs-hint';
+        h.textContent = '옆으로 밀어 전체 보기';
+        box.insertBefore(h, box.firstChild);
+      }
+    });
+  }
+  WB.fitWide = fitWide;
+
+  WB.fmt = function (n, d) { return Number(n).toLocaleString('ko-KR', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: d == null ? 0 : d }); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    buildTop();
+    buildToc();
+    bindTips();
+    bindQuiz();
+    fitWide();
+    var ft;
+    window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitWide, 150); });
+  });
+})();
+</script><script>
+(function () {
+  var $ = WB.$, $$ = WB.$$, esc = WB.esc;
+
+  /* ---------- communes: name, italian, status, description ---------- */
+  var C = {
+    'c-barolo': ['바롤로', 'Barolo', '코무네 전체가 바롤로 DOCG', '이 와인에 이름을 준 마을. 팔레티 성(와인 박물관 WiMu)이 마을 한가운데 있다. 서쪽과 동쪽 지층이 만나는 자리라 향과 구조가 고르게 섞인다.'],
+    'c-lamorra': ['라 모라', 'La Morra', '일부가 바롤로 DOCG', '바롤로에서 재배 면적이 가장 넓은 코무네 중 하나. 해발 500 m가 넘는 능선 위 마을에서 랑게 전체가 내려다보인다. 토르토니아 이회토가 중심이라 향기롭고 부드러우며 비교적 일찍 열린다.'],
+    'c-castiglione': ['카스틸리오네 팔레토', 'Castiglione Falletto', '코무네 전체가 바롤로 DOCG', '작은 코무네지만 두 지층이 만나는 한가운데에 있어 향과 힘을 함께 갖춘다. 몬프리바토·빌레로·로케 디 카스틸리오네가 모두 여기에 있다.'],
+    'c-monforte': ['몬포르테 달바', "Monforte d'Alba", '일부가 바롤로 DOCG', '세라발리아 지층(레퀴오 층)이 중심이라 힘 있고 진한 바롤로가 나온다. 부시아·지네스트라·모스코니 같은 큰 MGA가 있다.'],
+    'c-serralunga': ['세랄룽가 달바', "Serralunga d'Alba", '코무네 전체가 바롤로 DOCG', '남북으로 길고 좁은 능선. 메마르고 단단한 세라발리아 토양에서 가장 구조적이고 오래 가는 바롤로가 나온다. 능선 양쪽 사면에 프란차·비냐 리온다·라차리토·팔레토가 줄지어 있다.'],
+    'c-verduno': ['베르두노', 'Verduno', '일부가 바롤로 DOCG', '바롤로 지역의 북쪽 끝. 몬빌리에로의 향기로운 바롤로와, 가볍고 후추 향이 나는 토착 품종 펠라베르가로 알려져 있다.'],
+    'c-novello': ['노벨로', 'Novello', '일부가 바롤로 DOCG', '바롤로 남서쪽. 라베라 밭이 있고, 엘비오 코뇨가 되살린 토착 청포도 나스체타로도 알려져 있다.'],
+    'c-grinzane': ['그린차네 카부르', 'Grinzane Cavour', '일부가 바롤로 DOCG', '통일 이탈리아의 첫 총리가 된 카부르 백작이 젊은 시절 이곳 성의 영지를 경영했다. 19세기 중반 이 일대에서 오늘날 같은 드라이 바롤로가 자리 잡았다.'],
+    'c-diano': ['디아노 달바', "Diano d'Alba", '일부가 바롤로 DOCG', '돌체토 DOCG(디아노 달바)로 더 유명한 마을. 바롤로 DOCG에는 일부 밭만 들어간다.'],
+    'c-cherasco': ['케라스코', 'Cherasco', '아주 작은 부분만 바롤로 DOCG', '바롤로 DOCG에 들어가는 면적이 아주 작은 코무네.'],
+    'c-roddi': ['로디', 'Roddi', '일부가 바롤로 DOCG', '바롤로 DOCG의 북쪽 가장자리. 송로버섯 개 훈련 학교로도 알려진 마을이다.'],
+    'c-barbaresco': ['바르바레스코', 'Barbaresco', '코무네 전체가 바르바레스코 DOCG', '중세의 탑이 상징인 마을. 타나로강 가까이 낮은 언덕이라 바롤로보다 따뜻하고 일찍 익어, 탄닌이 더 부드럽고 일찍 열린다. 아실리·라바야·몬테스테파노가 있다.'],
+    'c-neive': ['네이베', 'Neive', '코무네 전체가 바르바레스코 DOCG', '언덕 위 중세 마을. 브루노 지아코사의 본거지이며 알베사니·갈리나·쿠라 같은 밭이 있다.'],
+    'c-treiso': ['트레이소', 'Treiso', '코무네 전체가 바르바레스코 DOCG', '바르바레스코 지역에서 가장 높은 마을. 서늘해서 향기롭고 섬세한 스타일이 많다.'],
+    'c-alba': ['알바', 'Alba', '일부(산 로코 세노 델비오)가 바르바레스코 DOCG', '랑게의 중심 도시. 흰 송로버섯 축제로 유명하고 세레토·피오 체사레·프루노토 같은 큰 생산자가 있다.'],
+    'c-monchiero': ['몬키에로', 'Monchiero', 'DOCG 밖', '바롤로 DOCG 경계 바로 밖 타나로 강가의 마을. 주세페 마스카렐로 에 필리오의 셀러가 여기에 있다.'],
+    'c-dogliani': ['돌리아니', 'Dogliani', '돌체토 DOCG', '돌체토로 만드는 돌리아니 DOCG의 중심. 훗날 이탈리아 대통령이 된 루이지 에이나우디가 1897년 세운 포데리 루이지 에이나우디가 있다.'],
+    'c-roero': ['로에로', 'Roero', '로에로 DOCG', '타나로강 왼쪽(북쪽)의 모래가 많은 언덕. 가볍고 향기로운 네비올로와 화이트 아르네이스가 유명하다.']
+  };
+
+  /* ---------- MGAs: name, italian, commune, place, soil, style, note, size, other producers ---------- */
+  function m(n, it, c, ex, so, st, no, sz, px) { return { n: n, it: it, c: c, ex: ex, so: so, st: st, no: no || '', sz: sz || '', px: px || [] }; }
+  var M = {
+    'monvigliero': m('몬빌리에로', 'Monvigliero', 'c-verduno', '베르두노 마을 아래의 남향 사면', '모래가 섞인 산타가타 화석 이회토', '바롤로에서 가장 향기로운 밭으로 꼽힌다. 장미·흰 후추·향신료, 비단 같은 질감', 'G.B. 부를로토가 송이째 발로 으깨 만드는 몬빌리에로가 이 밭의 명성을 크게 높였다.', '', ['프라텔리 알레산드리아']),
+    'brunate': m('브루나테', 'Brunate', 'c-lamorra', '라 모라와 바롤로에 걸친 남~남동향 원형극장', '산타가타 화석 이회토, 사암층이 섞인다', '라 모라의 향에 바롤로다운 구조를 더한 대형 크뤼. 검은 체리·타르·장미, 오래 숙성한다', '', '약 25 ha', ['마르카리니', '프란체스코 리날디', '마리오 마렌고', '엔초 볼리에티', '바타시올로']),
+    'cerequio': m('체레퀴오', 'Cerequio', 'c-lamorra', '브루나테 서쪽에 이어진 남~남동향 원형극장', '산타가타 화석 이회토', '잘 익은 과일과 둥근 탄닌. 풍성하면서도 우아하다', '가야의 바롤로 ‘콘테이사’가 이 밭에서 나온다.', '', ['바타시올로', '보롤리']),
+    'rocche-annunziata': m('로케 델라눈치아타', "Rocche dell'Annunziata", 'c-lamorra', '라 모라 남동쪽, 침식된 바위 절벽(로케) 아래. 남동향 구역과 남~남서향 구역', '청색 이회토와 모래', '라 모라에서 가장 섬세한 밭. 붉은 과일·꽃·향신료, 고운 탄닌', '', '약 30 ha', ['트레디베리', '아우렐리오 세티모', '로케 코스타마냐', '마우로 벨리오', '프라텔리 레벨로']),
+    'arborina': m('아르보리나', 'Arborina', 'c-lamorra', '아눈치아타 마을 가까운 완만한 사면', '토르토니아 이회토', '부드럽고 향기로운 과일, 비교적 일찍 열린다', '', '', ['마우로 벨리오', '코리노']),
+    'sarmassa': m('사르마사', 'Sarmassa', 'c-barolo', '바롤로 마을 북쪽, 브루나테와 칸누비 사이', '점토가 많은 토르토니아 이회토', '칸누비보다 진하고 단단하다. 검은 체리와 흙내음', '', '', []),
+    'cannubi': m('칸누비', 'Cannubi', 'c-barolo', '바롤로 마을 북동쪽의 길고 낮은 남향 언덕, 해발 250~320 m', '모래가 많은 청회색 석회질 이회토. 서쪽과 동쪽 성격이 만나는 경계 지대', '향과 구조의 균형. 붉은 과일·장미·감초, 매끄러운 질감', '1752년 ‘Cannubio’라고 적힌 병이 남아 있을 만큼 오래된 이름이다. 언덕의 다른 구역(칸누비 보스키스·무스카텔·산 로렌초·발레타)도 ‘칸누비’를 쓸 수 있게 되면서 범위 논쟁이 이어졌다.', '핵심 15 ha, 같은 이름의 5개 구역 34 ha', ['다밀라노', '포데리 루이지 에이나우디', '세리오 에 바티스타 보르고뇨']),
+    'bricco-viole': m('브리코 델레 비올레', 'Bricco delle Viole', 'c-barolo', '바롤로 서쪽의 높은 능선(해발 400 m 이상)', '토르토니아 이회토', '바이올렛과 붉은 과일, 생생한 산도. 서늘한 해에는 늦게 익는다', '', '', []),
+    'ravera': m('라베라', 'Ravera', 'c-novello', '노벨로와 바롤로 경계의 능선', '석회질 이회토에 사암이 섞인다', '단단한 구조에 서늘한 산도, 힘과 긴장감', '', '', []),
+    'monprivato': m('몬프리바토', 'Monprivato', 'c-castiglione', '카스틸리오네 팔레토 마을 남서쪽의 남서향 사면', '점토·이회토·석회', '높은 향, 정교한 탄닌, 아주 오래 가는 깊이', '대부분(약 93%)을 주세페 마스카렐로가 갖고 있다. 작황이 좋은 해에는 오래된 포도나무로 리제르바 ‘카 드 모리시오’를 만든다.', '약 6 ha', ['조반니 소르도']),
+    'villero': m('빌레로', 'Villero', 'c-castiglione', '마을 남동쪽, 남서향 원형극장', '이회토와 사암이 섞인 경계 지대', '복합적이고 단단하다. 짙은 과일과 흙, 향신료', '비에티는 뛰어난 해에만 빌레로 리제르바를 만든다.', '', ['조반니 소르도', '보롤리']),
+    'bricco-rocche': m('브리코 로케', 'Bricco Rocche', 'c-castiglione', '로케 디 카스틸리오네 능선의 꼭대기', '사암과 이회토', '집중력 있고 단단한 구조', '세레토의 모노폴(단독 소유) 밭이며, 세레토의 바롤로 셀러도 이곳에 있다.', '', []),
+    'rocche-castiglione': m('로케 디 카스틸리오네', 'Rocche di Castiglione', 'c-castiglione', '마을 남쪽으로 이어지는 가파르고 좁은 능선, 동~남동향', '모래가 많은 디아노 사암과 이회토', '꽃향과 미네랄, 팽팽하고 섬세한 탄닌. 카스틸리오네의 ‘우아한 쪽’', '몬포르테 쪽까지 걸쳐 있다.', '', ['몬키에로']),
+    'fiasco': m('피아스코', 'Fiasco', 'c-castiglione', '마을 북동쪽, 세랄룽가 쪽을 바라보는 사면', '이회토와 사암', '진하고 힘 있는 구조, 검은 과일', '파올로 스카비노의 ‘브릭 델 피아스크’가 이 밭에서 나온다.', '', []),
+    'bricco-boschis': m('브리코 보스키스', 'Bricco Boschis', 'c-castiglione', '마을 북동쪽 언덕', '석회질 이회토와 모래·점토', '전통 양조의 장기 숙성형, 탄탄한 탄닌', '사실상 카발로토 가문의 모노폴. 리제르바 ‘비냐 산 주세페’가 대표작이다.', '', []),
+    'bussia': m('부시아', 'Bussia', 'c-monforte', '몬포르테 북쪽에서 바롤로·카스틸리오네 경계까지 펼쳐진 원형극장, 주로 남~남서향', '레퀴오 층의 이회토·사암', '풍성하고 힘 있는 과일, 발사믹과 향신료. 구역마다 성격이 크게 다르다', '바롤로에서 가장 큰 MGA. 부시아 소프라나·소타나, 로미라스코, 치칼라, 콜로넬로, 무니에, 피안폴베레 같은 구역을 모두 품고 있어 MGA가 등급이 아니라 이름이라는 점을 잘 보여 준다.', '약 298 ha', ['포데리 콜라 ‘다르디 레 로제’', '프루노토', '파루소', '로케 데이 만초니']),
+    'santo-stefano-perno': m('산토 스테파노 디 페르노', 'Santo Stefano di Perno', 'c-monforte', '몬포르테 동쪽 페르노 마을 근처', '레퀴오 층', '단단하고 흙내음 나는 구조, 숙성이 필요하다', '', '', []),
+    'ginestra': m('지네스트라', 'Ginestra', 'c-monforte', '몬포르테 남동쪽의 크고 가파른 원형극장', '레퀴오 층의 이회토·사암', '밀도 높은 과일과 강한 탄닌, 힘 있는 몬포르테 스타일', '', '', ['파올로 콘테르노']),
+    'mosconi': m('모스코니', 'Mosconi', 'c-monforte', '몬포르테 남쪽', '레퀴오 층', '진하고 구조적이며 잘 익은 과일', '', '', []),
+    'gabutti': m('가부티', 'Gabutti', 'c-serralunga', '세랄룽가 마을 북서쪽', '레퀴오 층', '단단하고 고전적인 세랄룽가', '카펠라노가 접목하지 않은 자근 포도나무(피에 프랑코)를 기르는 밭으로 유명하다.', '', []),
+    'ornato': m('오르나토', 'Ornato', 'c-serralunga', '마을 서쪽 사면', '레퀴오 층', '힘 있고 잘 익은 과일, 둥근 질감', '', '', []),
+    'marenca': m('마렌카', 'Marenca', 'c-serralunga', '마을 남쪽의 서사면', '레퀴오 층', '구조와 깊이, 향신료', '가야의 바롤로 ‘스페르스’가 마렌카와 리베테의 포도로 만들어진다.', '', ['루이지 피라']),
+    'francia': m('프란차', 'Francia', 'c-serralunga', '마을 남쪽의 서~남서향 사면', '레퀴오 층의 석회질 이회토와 사암', '엄격하고 깊은 구조. 철분·감초·검은 체리, 수십 년을 간다', '자코모 콘테르노가 1974년 사들인 카시나 프란차 영지. 1978년부터 전설적인 리제르바 ‘몬포르티노’도 이 밭의 포도로 만든다.', '', []),
+    'arione': m('아리오네', 'Arione', 'c-serralunga', '프란차 남쪽에 맞닿은 사면', '레퀴오 층', '프란차와 닮은 단단한 구조', '자코모 콘테르노가 2015년 사들인 9 ha.', '', []),
+    'vignarionda': m('비냐 리온다', 'Vigna Rionda', 'c-serralunga', '마을 남쪽의 남향 사면, 해발 약 330 m', '석회질 이회토', '세랄룽가에서도 가장 힘 있고 정교한 밭. 발사믹·철분·감초, 아주 오래 간다', '브루노 지아코사의 전설적인 ‘콜리나 리온다’가 이 밭에서 나왔다.', '약 10 ha', ['피일리 루이지 오데로', '루이지 피라', '조반니 로소', '귀도 포로']),
+    'falletto': m('팔레토', 'Falletto', 'c-serralunga', '마을 남동쪽 사면', '레퀴오 층', '힘과 우아함의 균형, 깊고 긴 여운', '브루노 지아코사가 1982년 사들인 밭. 가장 좋은 구획에서 리제르바 ‘레 로케 델 팔레토’를 만든다.', '', []),
+    'lazzarito': m('라차리토', 'Lazzarito', 'c-serralunga', '마을 북동쪽. 가장 좋은 구역은 바람을 막아 주는 남~남서향', '석회 함량이 높은 이회토', '근육질의 진한 구조, 검은 과일과 감초', '폰타나프레다가 가장 큰 소유자다.', '약 8 ha', ['귀도 포로', '카사 E. 디 미라피오레']),
+    'cerretta': m('체레타', 'Cerretta', 'c-serralunga', '마을 북동쪽 사면', '레퀴오 층', '짙고 짭짤한 미네랄, 단단한 탄닌', '자코모 콘테르노가 2008년 이 밭에 3 ha를 사들였다.', '', ['스키아벤차']),
+    'prapo': m('프라포', 'Prapò', 'c-serralunga', '마을 북동쪽 끝', '레퀴오 층', '단단한 구조와 꽃향, 숙성하면 우아해진다', '', '', ['스키아벤차']),
+    'paje': m('파예', 'Pajè', 'c-barbaresco', '바르바레스코 마을 서쪽, 타나로강 쪽', '석회질 이회토', '엄격하고 섬세한 탄닌, 오래 간다', '', '', []),
+    'roncagliette': m('론칼리에테', 'Roncagliette', 'c-barbaresco', '마을 서쪽 언덕', '점토와 이회토', '풍성한 과일(소리 틸딘)부터 부드러운 질감(코스타 루시)까지', '가야의 ‘소리 틸딘’(언덕 위)과 ‘코스타 루시’(그 아래 남서향)가 이 MGA에 있다.', '', []),
+    'secondine': m('세콘디네', 'Secondine', 'c-barbaresco', '마을 남서쪽 바로 아래의 남향 사면', '석회질 이회토', '단단하고 깊은 구조', '가야의 ‘소리 산 로렌초’(3.38 ha)가 이 MGA에 있다. 타나로강에서 올라오는 따뜻한 공기의 덕을 본다.', '', []),
+    'pora': m('포라', 'Pora', 'c-barbaresco', '아실리 서쪽', '석회질 이회토', '균형 잡힌 중간 무게, 붉은 과일과 향신료', '', '', ['무소']),
+    'asili': m('아실리', 'Asili', 'c-barbaresco', '마을 남쪽의 원형극장, 해발 200~270 m', '실트·점토·모래가 섞인 석회질 토양', '바르바레스코에서 가장 향기롭고 섬세한 밭. 장미·붉은 체리, 비단 같은 질감', '', '약 14 ha', ['카 델 바이오', '카시나 루이신']),
+    'martinenga': m('마르티넹가', 'Martinenga', 'c-barbaresco', '아실리와 라바야 사이의 작은 원형극장', '석회질 이회토', '우아하고 향기로운 스타일', '마르케시 디 그레지의 모노폴. 안에 ‘캄프 그로스’와 ‘가이운’ 구획이 있다.', '', []),
+    'rabaja': m('라바야', 'Rabajà', 'c-barbaresco', '아실리 남쪽의 남~남서향 사면', '모래와 점토가 섞인 석회암', '아실리보다 진하고 구조적. 검은 체리와 향신료', '', '약 20 ha', ['주세페 코르테세', '카시나 루이신']),
+    'montestefano': m('몬테스테파노', 'Montestefano', 'c-barbaresco', '마을 동쪽의 가파른 남향 사면', '석회 함량이 높은 이회토', '바르바레스코에서 가장 힘 있고 구조적인 밭. ‘바롤로 같은 바르바레스코’라고 불린다', '', '', ['조르다노 루이지', '프루노토']),
+    'montefico': m('몬테피코', 'Montefico', 'c-barbaresco', '마을 북동쪽', '석회질 이회토', '팽팽하고 미네랄이 강하다', '', '', ['카를로 지아코사']),
+    'ovello': m('오벨로', 'Ovello', 'c-barbaresco', '마을 북동쪽, 타나로강 가까운 서늘한 사면', '석회질 이회토', '산도가 생생하고 탄닌이 뚜렷하다', '', '', ['칸티나 델 피노', '알비노 로카']),
+    'rio-sordo': m('리오 소르도', 'Rio Sordo', 'c-barbaresco', '마을 남동쪽', '석회질 이회토와 모래', '부드럽고 향기로운 스타일', '', '', ['카시나 델레 로제', '무소']),
+    'gallina': m('갈리나', 'Gallina', 'c-neive', '네이베 북서쪽, 바르바레스코 쪽', '석회질 이회토', '둥글고 풍성한 과일', '', '', ['우고 레퀴오']),
+    'starderi': m('스타르데리', 'Starderi', 'c-neive', '네이베 서쪽', '석회질 이회토', '진한 과일과 단단한 탄닌', '', '', []),
+    'albesani': m('알베사니', 'Albesani', 'c-neive', '네이베 남쪽의 남~남서향 사면', '석회질 이회토', '잘 익은 과일과 풍성한 질감', '안의 ‘산토 스테파노’ 구획은 카스텔로 디 네이베 소유이며, 브루노 지아코사가 오랫동안 이 포도로 전설적인 산토 스테파노를 만들었다.', '', ['칸티나 델 피노']),
+    'curra': m('쿠라', 'Currà', 'c-neive', '네이베 남서쪽, 트레이소 경계 근처', '석회질 이회토', '향기롭고 섬세하다', '', '', []),
+    'serraboella': m('세라보엘라', 'Serraboella', 'c-neive', '네이베 남쪽', '석회질 이회토', '단단한 구조와 짙은 과일', '', '', ['파이틴 ‘소리 파이틴’', '칠리우티']),
+    'pajore': m('파요레', 'Pajorè', 'c-treiso', '트레이소 북쪽의 높은 사면', '석회질 이회토', '섬세하고 향기로운 서늘한 고지대 스타일', '', '', ['리치']),
+    'rombone': m('롬보네', 'Rombone', 'c-treiso', '트레이소 마을 북쪽', '석회질 이회토', '우아하고 정교하다', '', '', []),
+    'bernadot': m('베르나도트', 'Bernadot', 'c-treiso', '트레이소 동쪽', '석회질 이회토', '부드럽고 향기로운 과일', '', '', [])
+  };
+
+  /* ---------- producers: name, italian, home commune, camp, text, MGAs ---------- */
+  function p(n, it, h, t, d, mg) { return { n: n, it: it, h: h, t: t, d: d, m: mg }; }
+  var P = {
+    gconterno: p('자코모 콘테르노', 'Giacomo Conterno', 'c-monforte', '전통', '1974년 사들인 세랄룽가의 프란차에서 바롤로와 리제르바 ‘몬포르티노’를 만든다. 긴 침용과 큰 오크통의 전통 양조. 2008년 체레타, 2015년 아리오네를 더했다.', ['francia', 'cerretta', 'arione']),
+    aconterno: p('알도 콘테르노', 'Poderi Aldo Conterno', 'c-monforte', '전통', '1969년 설립. 부시아의 로미라스코·치칼라·콜로넬로를 따로 병입하고, 셋을 섞어 리제르바 ‘그란부시아’를 만든다.', ['bussia']),
+    bmascarello: p('바르톨로 마스카렐로', 'Bartolo Mascarello', 'c-barolo', '전통', '칸누비·산 로렌초·루에·로케 델라눈치아타를 섞어 바롤로 한 가지만 만든다. 바리크와 단일 밭 유행을 거부한 상징적인 생산자.', ['cannubi', 'rocche-annunziata']),
+    grinaldi: p('주세페 리날디', 'Giuseppe Rinaldi', 'c-barolo', '전통', '브루나테, 그리고 칸누비 산 로렌초·라베라·레 코스테를 섞은 ‘트레 티네’. 큰 오크통의 고전 스타일.', ['brunate', 'ravera', 'cannubi']),
+    gmascarello: p('주세페 마스카렐로 에 필리오', 'Giuseppe Mascarello e Figlio', 'c-monchiero', '전통', '몬프리바토의 대부분을 갖고 있다. 셀러는 DOCG 밖 몬키에로에 있다.', ['monprivato', 'villero', 'santo-stefano-perno']),
+    giacosa: p('브루노 지아코사', 'Bruno Giacosa', 'c-neive', '전통', '바롤로와 바르바레스코 모두의 거장. 뛰어난 해의 리제르바는 빨간 라벨로 낸다.', ['falletto', 'asili', 'rabaja', 'albesani']),
+    vietti: p('비에티', 'Vietti', 'c-castiglione', '절충', '카스틸리오네 팔레토 마을 한가운데의 셀러. 여러 코무네의 대표 밭을 따로 병입한다.', ['rocche-castiglione', 'villero', 'brunate', 'lazzarito', 'ravera']),
+    cavallotto: p('카발로토', 'Cavallotto', 'c-castiglione', '전통', '1920년대 말부터 브리코 보스키스 언덕을 일궈 온 가족 와이너리.', ['bricco-boschis']),
+    brovia: p('브로비아', 'Brovia', 'c-castiglione', '전통', '로케 디 카스틸리오네와 빌레로의 고전적인 바롤로.', ['rocche-castiglione', 'villero']),
+    burlotto: p('G.B. 부를로토', 'G.B. Burlotto', 'c-verduno', '전통', '몬빌리에로를 송이째 발로 으깨 오래 침용한다. 토착 품종 펠라베르가로도 유명하다.', ['monvigliero', 'cannubi']),
+    castelloverduno: p('카스텔로 디 베르두노', 'Castello di Verduno', 'c-verduno', '전통', '베르두노 성의 와이너리. 바롤로 몬빌리에로와 바르바레스코 라바야.', ['monvigliero', 'rabaja']),
+    massolino: p('마솔리노', 'Massolino', 'c-serralunga', '전통', '세랄룽가 마을의 가족 와이너리. 비냐 리온다 리제르바가 대표작이다.', ['vignarionda']),
+    cappellano: p('카펠라노', 'Cappellano', 'c-serralunga', '전통', '가부티의 접목하지 않은 포도나무로 ‘피에 프랑코’를 만든다. 평론가들에게 점수를 매기지 말아 달라고 한 일로도 유명하다.', ['gabutti']),
+    germano: p('에토레 제르마노', 'Ettore Germano', 'c-serralunga', '절충', '세랄룽가의 체레타·프라포·라차리토를 따로 병입한다.', ['cerretta', 'prapo', 'lazzarito']),
+    fontanafredda: p('폰타나프레다', 'Fontanafredda', 'c-serralunga', '절충', '비토리오 에마누엘레 2세가 1858년 사들인 영지에서 출발한 대형 와이너리. 라차리토의 가장 큰 소유자.', ['lazzarito']),
+    altare: p('엘리오 알타레', 'Elio Altare', 'c-lamorra', '현대', '1980년대 ‘바롤로 보이즈’를 이끈 인물. 짧은 침용과 프랑스산 바리크를 들여왔다.', ['arborina', 'cerretta']),
+    voerzio: p('로베르토 보에르치오', 'Roberto Voerzio', 'c-lamorra', '현대', '극단적으로 낮은 수확량과 밭별 병입으로 유명하다.', ['brunate', 'cerequio', 'rocche-annunziata', 'sarmassa']),
+    ratti: p('레나토 라티', 'Renato Ratti', 'c-lamorra', '절충', '아눈치아타 수도원 옆에서 시작했다. 레나토 라티는 1970년대에 바롤로 밭 지도를 처음 만든 사람 중 하나다.', ['rocche-annunziata']),
+    oddero: p('오데로', 'Oddero', 'c-lamorra', '전통', '라 모라의 오래된 가문. 바롤로 여러 코무네와 바르바레스코 갈리나에 밭이 있다.', ['brunate', 'villero', 'rocche-castiglione', 'vignarionda', 'bussia', 'gallina']),
+    scavino: p('파올로 스카비노', 'Paolo Scavino', 'c-castiglione', '현대', '‘브릭 델 피아스크’가 대표작. 여러 코무네의 밭을 고루 갖고 있다.', ['fiasco', 'rocche-annunziata', 'cannubi', 'monvigliero', 'ravera', 'prapo']),
+    sandrone: p('루치아노 산드로네', 'Luciano Sandrone', 'c-barolo', '현대', '1970년대 말 시작. 옛 칸누비 보스키스 밭의 ‘알레스테’가 대표작이다.', ['cannubi']),
+    vajra: p('G.D. 바이라', 'G.D. Vajra', 'c-barolo', '절충', '바롤로 서쪽 고지대 베르녜에 있다. 높은 곳의 브리코 델레 비올레가 대표작이다.', ['bricco-viole', 'ravera']),
+    pira: p('E. 피라 에 필리 – 키아라 보스키스', 'E. Pira & Figli – Chiara Boschis', 'c-barolo', '절충', '1990년대부터 키아라 보스키스가 이끈다. 칸누비와 모스코니.', ['cannubi', 'mosconi']),
+    marchesi: p('마르케시 디 바롤로', 'Marchesi di Barolo', 'c-barolo', '절충', '19세기 팔레티 후작 가문의 영지에서 이어진 역사적인 와이너리.', ['cannubi', 'sarmassa']),
+    brezza: p('브레차', 'Brezza', 'c-barolo', '전통', '바롤로 마을의 가족 와이너리. 칸누비·사르마사·카스텔레로.', ['cannubi', 'sarmassa']),
+    clerico: p('도메니코 클레리코', 'Domenico Clerico', 'c-monforte', '현대', '‘바롤로 보이즈’의 한 명. 지네스트라의 ‘치아봇 멘틴’, 모스코니의 ‘페르크리스티나’.', ['ginestra', 'mosconi']),
+    grasso: p('엘리오 그라소', 'Elio Grasso', 'c-monforte', '절충', '지네스트라의 ‘카사 마테’와 가바리니의 ‘키니에라’.', ['ginestra']),
+    fantino: p('콘테르노 판티노', 'Conterno Fantino', 'c-monforte', '현대', '지네스트라의 ‘소리 지네스트라’·‘비냐 델 그리스’, 그리고 모스코니.', ['ginestra', 'mosconi']),
+    fenocchio: p('자코모 페노키오', 'Giacomo Fenocchio', 'c-monforte', '전통', '부시아에 자리한 전통 생산자. 부시아·빌레로·칸누비를 따로 병입한다.', ['bussia', 'villero', 'cannubi']),
+    cogno: p('엘비오 코뇨', 'Elvio Cogno', 'c-novello', '절충', '노벨로 라베라의 ‘브리코 페르니체’. 토착 청포도 나스체타를 되살렸다.', ['ravera']),
+    ceretto: p('세레토', 'Ceretto', 'c-alba', '절충', '알바의 가족 회사. 바롤로 브리코 로케(모노폴)와 바르바레스코 브리코 아실리가 대표작이다.', ['bricco-rocche', 'brunate', 'prapo', 'cannubi', 'asili', 'bernadot']),
+    piocesare: p('피오 체사레', 'Pio Cesare', 'c-alba', '절충', '1881년 알바 시내에서 시작한 생산자. 세랄룽가 오르나토가 대표작이다.', ['ornato', 'mosconi']),
+    chiarlo: p('미켈레 키아를로', 'Michele Chiarlo', '', '절충', '본거지는 몬페라토. 바롤로 체레퀴오가 대표작이다.', ['cerequio', 'asili']),
+    gaja: p('가야', 'Gaja', 'c-barbaresco', '현대', '1961년 안젤로 가야가 경영을 맡은 뒤 밭별 와인과 바리크를 도입해 바르바레스코를 세계에 알렸다. 바롤로 ‘스페르스’(세랄룽가)와 ‘콘테이사’(라 모라)도 만든다.', ['secondine', 'roncagliette', 'marenca', 'cerequio']),
+    produttori: p('프로두토리 델 바르바레스코', 'Produttori del Barbaresco', 'c-barbaresco', '전통', '1958년 설립된 조합. 뛰어난 해에는 9개 밭의 리제르바를 따로 병입한다(그중 8곳이 이 지도에 있다).', ['asili', 'montefico', 'montestefano', 'ovello', 'paje', 'pora', 'rabaja', 'rio-sordo']),
+    roagna: p('로아냐', 'Roagna', 'c-barbaresco', '전통', '아주 긴 침용과 오래된 포도나무. 파예·몬테피코·아실리.', ['paje', 'montefico', 'asili']),
+    brocca: p('브루노 로카', 'Bruno Rocca', 'c-barbaresco', '현대', '라바야의 가족 와이너리.', ['rabaja', 'curra']),
+    gresy: p('마르케시 디 그레지', 'Marchesi di Grésy', 'c-barbaresco', '절충', '마르티넹가 모노폴의 주인.', ['martinenga']),
+    rivella: p('세라피노 리벨라', 'Serafino Rivella', 'c-barbaresco', '전통', '몬테스테파노 한 밭에 집중하는 작은 생산자.', ['montestefano']),
+    sottimano: p('소티마노', 'Sottimano', 'c-neive', '절충', '네이베의 쿠라와 트레이소의 파요레.', ['curra', 'pajore']),
+    castelloneive: p('카스텔로 디 네이베', 'Castello di Neive', 'c-neive', '전통', '알베사니 안의 ‘산토 스테파노’ 구획 주인.', ['albesani']),
+    spinetta: p('라 스피네타', 'La Spinetta', '', '현대', '본거지는 모스카토 산지인 카스타뇰레 델레 란체. 갈리나·스타르데리를 진하고 현대적인 스타일로 만든다.', ['gallina', 'starderi']),
+    nada: p('피오렌초 나다', 'Fiorenzo Nada', 'c-treiso', '절충', '트레이소의 롬보네.', ['rombone'])
+  };
+  var BBR_HOME = ['c-barbaresco', 'c-neive', 'c-treiso'];
+
+  function cname(k) { return C[k] ? C[k][0] : ''; }
+  function prodsOf(mk) { return Object.keys(P).filter(function (k) { return P[k].m.indexOf(mk) >= 0; }); }
+  function chipP(k) { return '<button class="chip" data-p="' + k + '">' + esc(P[k].n) + '</button>'; }
+  function chipM(k) { return '<button class="chip" data-m="' + k + '">' + esc(M[k].n) + '</button>'; }
+  function tag(s) { return '<span class="tag">' + esc(s) + '</span>'; }
+
+  function renderC(k) {
+    var c = C[k];
+    if (!c) return '<p class="hint">이 지역은 설명이 없습니다.</p>';
+    var mg = Object.keys(M).filter(function (x) { return M[x].c === k; });
+    var pr = Object.keys(P).filter(function (x) { return P[x].h === k; });
+    return '<h4>' + esc(c[0]) + '</h4><div class="sub"><span class="it">' + esc(c[1]) + '</span> · ' + esc(c[2]) + '</div><p>' + esc(c[3]) + '</p>' +
+      (mg.length ? '<div class="small">이 장에서 다루는 밭</div><div class="chips">' + mg.map(chipM).join('') + '</div>' : '') +
+      (pr.length ? '<div class="small">여기에 셀러가 있는 생산자</div><div class="chips">' + pr.map(chipP).join('') + '</div>' : '');
+  }
+  function renderM(k) {
+    var x = M[k];
+    if (!x) return '<p class="hint">이 밭은 설명이 없습니다.</p>';
+    var pr = prodsOf(k);
+    return '<h4>' + esc(x.n) + '</h4><div class="sub"><span class="it">' + esc(x.it) + '</span> · ' + esc(cname(x.c)) + (x.sz ? ' · ' + esc(x.sz) : '') + '</div>' +
+      '<dl class="kv"><dt>자리</dt><dd>' + esc(x.ex) + '</dd><dt>토양</dt><dd>' + esc(x.so) + '</dd><dt>스타일</dt><dd>' + esc(x.st) + '</dd></dl>' +
+      (x.no ? '<p>' + esc(x.no) + '</p>' : '') +
+      '<div class="small">생산자</div><div class="chips">' + pr.map(chipP).join('') + x.px.map(tag).join('') + '</div>';
+  }
+  function renderAny(k) { return k.indexOf('c-') === 0 ? renderC(k) : renderM(k); }
+
+  /* ---------- overview map ---------- */
+  var EMPTY_C = '<p class="hint">코무네나 마을 점을 누르면 그곳의 성격, 이 장에서 다루는 밭, 셀러가 있는 생산자가 나타납니다.</p>';
+  var lan = WB.mapExplorer($('#lan svg'), { info: $('#lan-info'), render: renderC, empty: EMPTY_C });
+
+  /* ---------- MGA maps ---------- */
+  var EMPTY_M = '<p class="hint">지도의 점(밭)을 누르면 자리·토양·스타일과 생산자가 나타납니다. 생산자를 고르면 그 생산자의 밭이 강조됩니다.</p>';
+  var info = $('#mga-info');
+  var panes = $$('.mga-pane');
+  var paneOf = {}, ex = {}, current = 'barolo', curP = null;
+  panes.forEach(function (pn) {
+    var svg = $('svg', pn), v = pn.dataset.v;
+    $$('.pin[data-k]', svg).forEach(function (pin) { if (M[pin.dataset.k]) paneOf[pin.dataset.k] = v; });
+    ex[v] = WB.mapExplorer(svg, { info: info, render: renderAny, empty: EMPTY_M, focus: false, onSelect: function (key) {
+      if (!curP) return;
+      clearProducer(false);
+      if (key) ex[v].units(key).forEach(function (u) { u.classList.add('on'); });
+    } });
+  });
+  var setTab = WB.seg($('#mga-tabs'), function (v) { current = v; panes.forEach(function (pn) { pn.hidden = pn.dataset.v !== v; }); });
+  info.innerHTML = EMPTY_M;
+
+  function clearProducer(resetInfo) {
+    curP = null;
+    $$('#prod-chips .chip').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+    panes.forEach(function (pn) { WB.highlight($('svg', pn), []); });
+    if (resetInfo) info.innerHTML = EMPTY_M;
+  }
+  function selectProducer(k, scroll) {
+    var x = P[k];
+    curP = k;
+    $$('#prod-chips .chip').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.p === k ? 'true' : 'false'); });
+    var keys = x.m.slice();
+    if (x.h) keys.push(x.h);
+    var cnt = { barolo: 0, barbaresco: 0 };
+    x.m.forEach(function (mk) { if (paneOf[mk]) cnt[paneOf[mk]]++; });
+    panes.forEach(function (pn) {
+      var svg = $('svg', pn);
+      $$('.pin.on', svg).forEach(function (q) { q.classList.remove('on'); });
+      WB.highlight(svg, keys);
+    });
+    if (!cnt[current]) setTab(cnt.barolo >= cnt.barbaresco ? 'barolo' : 'barbaresco');
+    var where = [];
+    if (cnt.barolo) where.push('바롤로 ' + cnt.barolo + '곳');
+    if (cnt.barbaresco) where.push('바르바레스코 ' + cnt.barbaresco + '곳');
+    info.innerHTML = '<h4>' + esc(x.n) + '</h4><div class="sub"><span class="it">' + esc(x.it) + '</span>' + (x.h ? ' · 셀러: ' + esc(cname(x.h)) : '') + ' · ' + esc(x.t) + '</div>' +
+      '<p>' + esc(x.d) + '</p><div class="small">이 지도에 있는 밭(' + where.join(', ') + ')</div><div class="chips">' + x.m.map(chipM).join('') + '</div>' +
+      '<p class="small"><button class="chip" data-clear="1">강조 해제</button></p>';
+    if (scroll) $('#mga').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function goMGA(k, scroll) {
+    var v = paneOf[k];
+    if (!v) return;
+    if (v !== current) setTab(v);
+    ex[v].show(k);
+    if (scroll) $('#mga').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* producer chips, grouped */
+  var bar = [], bbr = [];
+  Object.keys(P).forEach(function (k) {
+    var allB = P[k].m.every(function (mk) { return paneOf[mk] === 'barbaresco'; });
+    (allB || BBR_HOME.indexOf(P[k].h) >= 0 ? bbr : bar).push(k);
+  });
+  $('#prod-chips').innerHTML = '<div class="small">바롤로 쪽</div><div class="chips">' + bar.map(chipP).join('') + '</div>' +
+    '<div class="small">바르바레스코 쪽</div><div class="chips">' + bbr.map(chipP).join('') + '</div>';
+  $$('#prod-chips .chip').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var b = t.closest && t.closest('button[data-m]');
+    if (b) { goMGA(b.dataset.m, !b.closest('#mga')); return; }
+    var q = t.closest && t.closest('button[data-p]');
+    if (q) {
+      if (q.closest('#prod-chips') && q.getAttribute('aria-pressed') === 'true') { clearProducer(true); return; }
+      selectProducer(q.dataset.p, !q.closest('#mga'));
+      return;
+    }
+    if (t.closest && t.closest('button[data-clear]')) clearProducer(true);
+  });
+
+  /* ---------- MGA table ---------- */
+  var order = ['c-verduno', 'c-lamorra', 'c-barolo', 'c-novello', 'c-castiglione', 'c-monforte', 'c-serralunga', 'c-barbaresco', 'c-neive', 'c-treiso'];
+  var rows = '';
+  order.forEach(function (ck) {
+    var ks = Object.keys(M).filter(function (k) { return M[k].c === ck; });
+    if (!ks.length) return;
+    rows += '<tr><th colspan="4">' + esc(cname(ck)) + ' <span class="small">' + esc(C[ck][2]) + '</span></th></tr>';
+    ks.forEach(function (k) {
+      var x = M[k];
+      var names = prodsOf(k).map(function (pk) { return P[pk].n; }).concat(x.px);
+      rows += '<tr><td><button class="linkbtn" data-m="' + k + '">' + esc(x.n) + '</button><br><span class="small it">' + esc(x.it) + '</span>' + (x.sz ? '<br><span class="small">' + esc(x.sz) + '</span>' : '') + '</td>' +
+        '<td>' + esc(x.ex) + '<br><span class="small">' + esc(x.so) + '</span></td><td>' + esc(x.st) + '</td><td class="small">' + esc(names.join(', ')) + '</td></tr>';
+    });
+  });
+  $('#mga-table tbody').innerHTML = rows;
+
+  /* ---------- nebbiolo paradox figure ---------- */
+  var W = [
+    ['피노 누아', '#B9465A', 0.55, [2, 2, 4]],
+    ['네비올로', '#B0503E', 0.6, [2, 5, 5]],
+    ['카베르네 소비뇽', '#4E1530', 0.95, [5, 4, 3]]
+  ];
+  var AX = ['색의 농도', '탄닌', '산도'];
+  var o = '';
+  W.forEach(function (w, i) {
+    var x0 = 20 + i * 300;
+    o += '<text x="' + (x0 + 140) + '" y="24" text-anchor="middle" class="t-l t-b">' + w[0] + '</text>';
+    o += '<path d="M' + (x0 + 18) + ' 48 h64 c0 46 -12 72 -32 72 c-20 0 -32 -26 -32 -72z" fill="none" stroke="var(--ink-2)" stroke-width="1.2"/>';
+    o += '<path d="M' + (x0 + 19.5) + ' 74 h61 c-2 28 -13 44 -30.5 44 c-17.5 0 -28.5 -16 -30.5 -44z" fill="' + w[1] + '" fill-opacity="' + w[2] + '"/>';
+    o += '<path d="M' + (x0 + 50) + ' 120 v40 M' + (x0 + 32) + ' 162 h36" stroke="var(--ink-2)" stroke-width="1.2" fill="none"/>';
+    AX.forEach(function (a, j) {
+      var y = 62 + j * 44, bx = x0 + 110, L = 150;
+      o += '<text x="' + bx + '" y="' + y + '" class="t-s">' + a + '</text>';
+      o += '<rect x="' + bx + '" y="' + (y + 6) + '" width="' + L + '" height="10" rx="4" fill="var(--surface-2)"/>';
+      o += '<rect x="' + bx + '" y="' + (y + 6) + '" width="' + (L * w[3][j] / 5) + '" height="10" rx="4" class="red"/>';
+      o += '<text x="' + (bx + L + 8) + '" y="' + (y + 15) + '" class="t-s t-b">' + w[3][j] + '</text>';
+    });
+  });
+  o += '<text x="450" y="214" text-anchor="middle" class="t-s t-mut">막대: 1(낮음)~5(높음) · 잔: 젊은 와인의 대표 색조</text>';
+  $('#neb-fig').innerHTML = o;
+
+  /* ---------- aging chart ---------- */
+  var R = [
+    ['바르바레스코', 26, 9, '수확 3년째 1월부터 출시'],
+    ['바르바레스코 리제르바', 50, 9, '5년째 1월부터'],
+    ['바롤로', 38, 18, '4년째 1월부터'],
+    ['바롤로 리제르바', 62, 18, '6년째 1월부터']
+  ];
+  var X0 = 190, K = 9.2, g = '';
+  [0, 12, 24, 36, 48, 60].forEach(function (mo) {
+    var x = X0 + mo * K;
+    g += '<line class="grid" x1="' + x + '" y1="20" x2="' + x + '" y2="222"/><text x="' + x + '" y="240" text-anchor="middle">' + (mo ? mo + '개월' : '0') + '</text>';
+  });
+  R.forEach(function (r, i) {
+    var y = 34 + i * 48, wx = r[2] * K, tx = r[1] * K;
+    g += '<text x="' + (X0 - 12) + '" y="' + (y + 13) + '" text-anchor="end" style="fill:var(--ink);font-size:12.5px;font-weight:600">' + r[0] + '</text>';
+    g += '<rect x="' + X0 + '" y="' + y + '" width="' + (wx - 1) + '" height="18" rx="4" style="fill:var(--st-r)" data-tip="' + r[0] + ': 나무통 최소 ' + r[2] + '개월"/>';
+    g += '<rect x="' + (X0 + wx + 1) + '" y="' + y + '" width="' + (tx - wx - 1) + '" height="18" rx="4" style="fill:var(--t-r1)" data-tip="' + r[0] + ': 총 최소 ' + r[1] + '개월"/>';
+    g += '<text x="' + (X0 + tx + 8) + '" y="' + (y + 13) + '" style="fill:var(--ink);font-size:12px"><tspan font-weight="700">' + r[1] + '개월</tspan> · ' + r[3] + '</text>';
+  });
+  g += '<text x="' + X0 + '" y="262" style="fill:var(--muted);font-size:11px">수확한 해 11월 1일부터 센 기간</text>';
+  $('#aging').innerHTML = g;
+})();
+</script></body></html>
