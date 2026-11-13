@@ -1,0 +1,30 @@
+{
+ "sources": [
+  {
+   "id": "orfeo21",
+   "name": "orfeo21",
+   "platform": "naver",
+   "blog_id": "orfeo21",
+   "url": "https://blog.naver.com/orfeo21",
+   "rss": "https://rss.blog.naver.com/orfeo21.xml",
+   "enabled": true,
+   "hint": ""
+  },
+  {
+   "id": "fascinoya",
+   "name": "fascinoya",
+   "platform": "naver",
+   "blog_id": "fascinoya",
+   "url": "https://blog.naver.com/fascinoya",
+   "rss": "https://rss.blog.naver.com/fascinoya.xml",
+   "enabled": true,
+   "hint": ""
+  }
+ ],
+ "settings": {
+  "model": "claude-sonnet-5-5",
+  "max_posts_per_run": 20,
+  "web_search": true,
+  "web_search_max_uses": 3
+ }
+}

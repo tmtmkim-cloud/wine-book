@@ -1,0 +1,1603 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>와인 리뷰 지도 · WineBook</title>
+<meta name="description" content="와인 블로그의 시음 리뷰를 점수·등급·나라·지역·품종별로 모아 지도와 검색으로 보는 WineBook 부록.">
+<meta property="og:title" content="와인 리뷰 지도 · WineBook">
+<meta property="og:description" content="블로그 시음 리뷰를 점수·등급·산지·품종별로 정리한 지도와 목록.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%238B173D'/%3E%3Cpath d='M10 6h12c0 6-2 10-6 10s-6-4-6-10z' fill='%23fff'/%3E%3Cpath d='M16 16v8M11 25h10' stroke='%23fff' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<script>try{var t=localStorage.getItem('wb-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+/* WineBook 리뷰 지도 — WineBook 교과서와 같은 색·글꼴 체계를 씁니다.
+   색의 뜻: 클라레 = 레드, 금색 = 화이트, 파랑 = 스파클링, 분홍 = 로제. 점수는 클라레 순차 색. */
+:root {
+  --bg: #F2F3EF;
+  --surface: #FFFFFF;
+  --surface-2: #E9EBE5;
+  --surface-3: #DDE0D8;
+  --ink: #181B20;
+  --ink-2: #444850;
+  --muted: #666C78;
+  --line: #D5D8D0;
+  --line-2: #E6E8E2;
+  --accent: #8B173D;
+  --accent-strong: #6E1030;
+  --accent-wash: rgba(139, 23, 61, 0.08);
+  --on-accent: #FFFFFF;
+  --good: #1E7A3A;
+  --bad: #B3261E;
+
+  /* wine styles (validated as a 4-slot set, light surface) */
+  --st-r: #9B2C4A;
+  --st-g: #C99520;
+  --st-s: #2F74BF;
+  --st-p: #E3768A;
+  --st-n: #E3E5DE;
+
+  /* map tones: ordinal ramps per style */
+  --t-r1: #F9C9CE; --t-r2: #E47F8D; --t-r3: #B33B53;
+  --t-g1: #F8EACE; --t-g2: #E9CE94; --t-g3: #D7A94F;
+  --t-s1: #DFEDFC; --t-s2: #B9D4F1; --t-s3: #7FAFE2;
+  --t-p: #F2B6C2; --t-n2: #DCDED6;
+  --map-land: #ECEEE8; --map-edge: #FFFFFF; --map-bg-edge: #D3D6CD;
+  --map-water: #D7E4EF; --map-river: #7FA3C4; --map-water-ink: #4F7396; --halo: #FFFFFF;
+  --cl-v: #F6E3E6; --cl-vw: #F7EFD9; --cl-p: #EBA9B4; --cl-pw: #EDD49C; --cl-g: #A9324E; --cl-gw: #C99520;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #5A1426;
+
+  /* sequential claret ramp (scores, intensity) */
+  --seq-0: #F4F1F1;
+  --seq-1: #FFE8EA; --seq-2: #F9C9CE; --seq-3: #F2A6AE; --seq-4: #E47F8D;
+  --seq-5: #D05A6E; --seq-6: #B33B53; --seq-7: #922940; --seq-8: #711A2E;
+  --seq-ink-dark: #FFFFFF; --seq-ink-light: #181B20;
+
+  --shadow: 0 1px 2px rgba(24, 27, 32, 0.05), 0 8px 24px rgba(24, 27, 32, 0.05);
+
+  --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Noto Sans CJK KR", system-ui, sans-serif;
+  --serif: "Hahmlet", "Noto Serif KR", "Noto Serif CJK KR", "AppleMyungjo", serif;
+
+  --fs-0: 0.8125rem;
+  --fs-1: 0.9375rem;
+  --fs-2: 1.0625rem;
+  --fs-3: 1.25rem;
+  --fs-4: 1.5625rem;
+  --fs-5: 2.125rem;
+  --fs-6: 3rem;
+
+  --measure: 44rem;
+  --wide: 72rem;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r1: 6px;
+  --r2: 10px;
+  --top-h: 56px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+    --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+    --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+    --good: #4CC46F; --bad: #FF7A70;
+    --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+    --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+    --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+    --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+    --t-p: #8E4A63; --t-n2: #2A2D35;
+    --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+    --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+    --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+    --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+    --seq-0: #1E1F25;
+    --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+    --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+    --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121318; --surface: #191A20; --surface-2: #20222A; --surface-3: #2A2D36;
+  --ink: #E8E9EC; --ink-2: #B5B9C3; --muted: #8B909C; --line: #2C2F38; --line-2: #22252D;
+  --accent: #E48396; --accent-strong: #F2A6B4; --accent-wash: rgba(228, 131, 150, 0.12); --on-accent: #2A0712;
+  --good: #4CC46F; --bad: #FF7A70;
+  --st-r: #A6344F; --st-g: #B5820C; --st-s: #407BC5; --st-p: #CF6E96; --st-n: #2A2D35;
+  --t-r1: #52242C; --t-r2: #8E3646; --t-r3: #D05A6E;
+  --t-g1: #3E3218; --t-g2: #7A5E1E; --t-g3: #C08A1E;
+  --t-s1: #22324A; --t-s2: #31507A; --t-s3: #4F86C8;
+  --t-p: #8E4A63; --t-n2: #2A2D35;
+  --map-land: #23262E; --map-edge: #191A20; --map-bg-edge: #333742;
+  --map-water: #1B2633; --map-river: #4F6F8F; --map-water-ink: #8FB0CC; --halo: #191A20;
+  --cl-v: #3A2329; --cl-vw: #3A3220; --cl-p: #7A2F42; --cl-pw: #6E5822; --cl-g: #D05A6E; --cl-gw: #D3A23A;
+  --cl-gc-ink: #FFFFFF; --cl-gc-halo: #3A0B18;
+  --seq-0: #1E1F25;
+  --seq-1: #2E1A1F; --seq-2: #472026; --seq-3: #692B35; --seq-4: #8E3646;
+  --seq-5: #B04559; --seq-6: #D05A6E; --seq-7: #E37A89; --seq-8: #F09DA6;
+  --seq-ink-dark: #181B20; --seq-ink-light: #FFFFFF;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+:root { --st-sw: #C2741F; --st-f: #7A4A2E; --st-o: #D47A2C; --t-sw1: #F6E0C4; --t-f1: #E8D6CB; --t-o1: #F8DCC4; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --st-sw: #C8822F; --st-f: #A7714B; --st-o: #DB8540; --t-sw1: #4A3418; --t-f1: #3F2D22; --t-o1: #4B3016; } }
+:root[data-theme="dark"] { --st-sw: #C8822F; --st-f: #A7714B; --st-o: #DB8540; --t-sw1: #4A3418; --t-f1: #3F2D22; --t-o1: #4B3016; }
+
+/* ---------- base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 16px); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: var(--fs-2); line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+::selection { background: var(--accent-wash); }
+h1, h2, h3 { line-height: 1.3; text-wrap: balance; color: var(--ink); }
+h1 { font-family: var(--serif); font-weight: 700; font-size: clamp(2.1rem, 7vw, var(--fs-6)); letter-spacing: -0.02em; margin: 0.15em 0 0.3em; }
+h2 { font-family: var(--serif); font-weight: 650; font-size: var(--fs-4); letter-spacing: -0.015em; margin: 0.2em 0 0.3em; }
+h3 { font-size: var(--fs-2); font-weight: 650; margin: 1.4em 0 0.4em; }
+p { margin: 0 0 0.9em; }
+small, .small { font-size: var(--fs-0); color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+button { font: inherit; }
+
+/* ---------- top bar (WineBook 공통) ---------- */
+.top { position: sticky; top: 0; z-index: 50; height: var(--top-h); display: flex; align-items: center; gap: 12px; padding: 0 var(--gutter); background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(1.4) blur(10px); -webkit-backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; min-width: 0; }
+.brand svg { width: 26px; height: 26px; flex: none; }
+.brand b { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.brand span { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; }
+.top .sp { flex: 1; }
+.top .now { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 32vw; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 36px; min-width: 36px; padding: 0 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-size: var(--fs-0); cursor: pointer; text-decoration: none; }
+.icon-btn:hover { border-color: var(--accent); color: var(--ink); }
+.icon-btn svg { width: 16px; height: 16px; }
+@media (max-width: 640px) { .brand span, .top .now { display: none; } }
+.drawer { position: fixed; inset: var(--top-h) 0 auto auto; z-index: 60; width: min(420px, 100vw); max-height: calc(100vh - var(--top-h)); overflow: auto; background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line); box-shadow: var(--shadow); padding: 14px 10px 18px; }
+.drawer ol { list-style: none; margin: 0; padding: 0; }
+.drawer li a { display: grid; grid-template-columns: 2.4rem 1fr; gap: 6px; align-items: baseline; padding: 8px 10px; border-radius: var(--r1); color: var(--ink); text-decoration: none; }
+.drawer li a:hover { background: var(--surface-2); }
+.drawer li a[aria-current="page"] { background: var(--accent-wash); }
+.drawer li a i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; font-size: var(--fs-0); }
+.drawer li a small { display: block; grid-column: 2; margin-top: -2px; }
+.drawer .grp { margin: 12px 10px 4px; font-size: var(--fs-0); color: var(--muted); }
+
+/* ---------- shell ---------- */
+.shell { padding: 0 var(--gutter) 5rem; }
+.shell > * { max-width: var(--wide); margin-left: auto; margin-right: auto; }
+.ch-head { padding-top: 1.8rem; }
+.ch-label { display: flex; gap: 12px; align-items: baseline; color: var(--muted); font-size: var(--fs-1); }
+.ch-label .ch-n { color: var(--accent); font-weight: 650; }
+.ch-lede { font-size: var(--fs-2); line-height: 1.7; color: var(--ink-2); max-width: var(--measure); margin-bottom: 1.1rem; }
+.headbar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; }
+.kpis { display: flex; flex-wrap: wrap; gap: 8px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 6px 12px; font-size: var(--fs-0); color: var(--ink-2); line-height: 1.35; min-width: 76px; }
+.kpi b { display: block; font-size: 1.25rem; color: var(--ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; font-weight: 600; font-size: var(--fs-1); text-decoration: none; border: 1px solid var(--accent); cursor: pointer; line-height: 1.4; }
+.btn.go { background: var(--accent); color: var(--on-accent); }
+.btn.go:hover { background: var(--accent-strong); color: var(--on-accent); }
+.btn.alt { color: var(--accent); background: var(--surface); }
+.btn.alt:hover { background: var(--accent-wash); }
+.btn[disabled] { opacity: 0.65; cursor: progress; }
+.btn svg { width: 16px; height: 16px; }
+.btn.spin svg { animation: spin 1.1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.runline { margin: 10px 0 0; font-size: var(--fs-0); color: var(--muted); line-height: 1.6; }
+.runline.warn { color: var(--bad); }
+.runline a { color: inherit; }
+.banner { margin-top: 12px; padding: 8px 14px; border-radius: var(--r2); background: var(--t-g1); color: var(--ink); font-size: var(--fs-1); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 650; color: var(--accent); cursor: pointer; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+/* ---------- controls ---------- */
+.controls { margin-top: 1.2rem; padding: 10px 0 8px; border-bottom: 1px solid var(--line-2); }
+.searchrow { display: flex; gap: 8px; }
+.search { flex: 1; position: relative; }
+.search input { width: 100%; font: inherit; font-size: var(--fs-1); padding: 9px 36px 9px 38px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); -webkit-appearance: none; appearance: none; }
+.search input:focus { border-color: var(--accent); outline: none; }
+.search > svg { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); pointer-events: none; }
+.search .clear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; color: var(--muted); cursor: pointer; font-size: 1.1rem; padding: 4px 8px; }
+#filter-btn .badge { background: var(--accent); color: var(--on-accent); border-radius: 999px; padding: 0 6px; font-size: 0.72rem; line-height: 1.5; }
+.filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px 10px; margin-top: 10px; }
+.filters label { display: flex; flex-direction: column; gap: 3px; font-size: var(--fs-0); color: var(--muted); min-width: 0; }
+select, input[type="text"], input[type="url"], input[type="password"], textarea { font: inherit; font-size: var(--fs-1); color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: 6px 9px; width: 100%; min-width: 0; }
+select:focus, input:focus, textarea:focus { border-color: var(--accent); outline: none; }
+.typechips { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 3px 11px; font-size: var(--fs-0); cursor: pointer; line-height: 1.6; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.chip i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.chip .x { font-style: normal; opacity: 0.7; }
+.rangebox { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+.rangebox input[type="range"] { flex: 1; accent-color: var(--accent); min-width: 0; }
+.rangebox output { min-width: 2.2em; text-align: right; font-variant-numeric: tabular-nums; }
+.check { flex-direction: row !important; align-items: center; gap: 6px !important; color: var(--ink-2) !important; }
+.active { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.viewbar { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; margin-top: 10px; flex-wrap: wrap; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface-2); border-radius: 999px; }
+.seg button { border: 0; background: transparent; color: var(--ink-2); font-size: var(--fs-0); padding: 5px 13px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); font-weight: 600; }
+.viewbar .right { display: flex; align-items: center; gap: 10px; font-size: var(--fs-0); color: var(--muted); }
+.viewbar select { width: auto; font-size: var(--fs-0); padding: 4px 8px; }
+@media (max-width: 760px) {
+  .filters { display: none; grid-template-columns: 1fr 1fr; }
+  .filters.open { display: grid; }
+}
+@media (min-width: 761px) { #filter-btn { display: none; } }
+
+.view { margin-top: 14px; }
+#gdim { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+#gdim::-webkit-scrollbar { display: none; }
+#gdim button { white-space: nowrap; flex: none; }
+@media (max-width: 640px) {
+  .ch-head { padding-top: 1.1rem; }
+  .ch-lede { font-size: var(--fs-1); margin-bottom: 0.8rem; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; gap: 6px; }
+  .kpi { min-width: 0; padding: 5px 9px; }
+  .kpi b { font-size: 1.05rem; }
+  .headbar { gap: 10px; }
+}
+
+/* ---------- 점수 배지 ---------- */
+.sc { display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: var(--r1); font-weight: 700; font-size: 1.3rem; line-height: 1.1; min-height: 56px; font-variant-numeric: tabular-nums; text-align: center; padding: 4px 2px; white-space: nowrap; }
+.sc small { font-size: 0.68rem; font-weight: 500; color: inherit; opacity: 0.85; }
+.sc.star { font-size: 0.8rem; letter-spacing: -1px; }
+.b-classic { background: var(--seq-8); color: var(--seq-ink-dark); }
+.b-outstanding { background: var(--seq-6); color: var(--seq-ink-dark); }
+.b-verygood { background: var(--seq-4); color: var(--seq-ink-light); }
+.b-good { background: var(--seq-3); color: var(--seq-ink-light); }
+.b-average { background: var(--seq-2); color: var(--seq-ink-light); }
+.b-low { background: var(--seq-1); color: var(--seq-ink-light); }
+.b-none { background: var(--surface-2); color: var(--muted); }
+.bg-classic { background: var(--seq-8); } .bg-outstanding { background: var(--seq-6); } .bg-verygood { background: var(--seq-4); }
+.bg-good { background: var(--seq-3); } .bg-average { background: var(--seq-2); } .bg-low { background: var(--seq-1); } .bg-none { background: var(--surface-3); }
+
+/* ---------- 종류 ---------- */
+.tag { display: inline-block; font-size: 0.75rem; line-height: 1.5; padding: 0 7px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); white-space: nowrap; }
+.tag.red { background: var(--t-r1); color: var(--ink); } .tag.white { background: var(--t-g1); color: var(--ink); }
+.tag.sparkling { background: var(--t-s1); color: var(--ink); } .tag.rose { background: var(--t-p); color: var(--ink); }
+.tag.sweet { background: var(--t-sw1); color: var(--ink); } .tag.fortified { background: var(--t-f1); color: var(--ink); }
+.tag.orange { background: var(--t-o1); color: var(--ink); }
+.tag.cls { background: var(--accent-wash); color: var(--accent-strong); }
+.dot-red { background: var(--st-r); } .dot-white { background: var(--st-g); } .dot-sparkling { background: var(--st-s); }
+.dot-rose { background: var(--st-p); } .dot-sweet { background: var(--st-sw); } .dot-fortified { background: var(--st-f); }
+.dot-orange { background: var(--st-o); } .dot-other { background: var(--muted); }
+
+/* ---------- 목록 ---------- */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 10px; }
+@media (max-width: 520px) { .cards { grid-template-columns: 1fr; } }
+.wcard { display: grid; grid-template-columns: 62px 1fr; gap: 12px; text-align: left; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: 12px 14px; color: var(--ink); cursor: pointer; align-items: start; }
+.wcard:hover { border-color: var(--accent); }
+.wbody { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.wtop { display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; font-size: var(--fs-0); color: var(--muted); line-height: 1.5; }
+.wtop .grade { color: var(--accent-strong); font-weight: 600; }
+.wname { font-weight: 650; font-size: var(--fs-1); line-height: 1.4; }
+.wko { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.45; }
+.wmeta { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.5; }
+.wsrc { font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.more { display: flex; justify-content: center; margin: 16px 0; }
+.empty-note { padding: 28px 16px; text-align: center; color: var(--muted); background: var(--surface); border: 1px dashed var(--line); border-radius: var(--r2); }
+
+/* ---------- 분류 ---------- */
+.gtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+details.grp { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); margin-bottom: 8px; }
+details.grp > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 14px; }
+details.grp > summary::-webkit-details-marker { display: none; }
+details.grp > summary::before { content: "›"; position: absolute; left: 11px; top: 9px; color: var(--muted); transition: transform .15s; font-size: 1.1rem; line-height: 1.4; }
+details.grp > summary { position: relative; padding-left: 28px; }
+details.grp[open] > summary::before { transform: rotate(90deg); }
+.glabel { font-weight: 650; }
+.glabel small { font-weight: 400; margin-left: 6px; }
+.gmeta { font-size: var(--fs-0); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.gbar { grid-column: 1 / -1; display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface-2); }
+.gbar i { display: block; height: 100%; }
+details.grp .rows { padding: 0 10px 8px; }
+details.grp details.grp { border: 0; border-top: 1px solid var(--line-2); border-radius: 0; margin: 0; background: transparent; }
+.row { display: grid; grid-template-columns: 46px 1fr; gap: 10px; align-items: center; width: 100%; text-align: left; padding: 7px 6px; border: 0; border-top: 1px solid var(--line-2); background: none; color: var(--ink); cursor: pointer; }
+.row:hover { background: var(--surface-2); }
+.row .sc { min-height: 34px; font-size: 0.95rem; }
+.row .rn { font-size: var(--fs-1); font-weight: 600; line-height: 1.4; }
+.row .rm { display: block; font-size: var(--fs-0); color: var(--muted); font-weight: 400; line-height: 1.45; }
+
+/* ---------- 지도 ---------- */
+.mapbox { position: relative; }
+#map { height: min(70vh, 660px); border-radius: var(--r2); border: 1px solid var(--line); background: var(--map-water); z-index: 1; }
+@media (max-width: 760px) { #map { height: 64vh; } }
+.maptools { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between; margin-top: 8px; font-size: var(--fs-0); color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.maperr { display: flex; align-items: center; justify-content: center; height: 100%; padding: 24px; text-align: center; color: var(--muted); }
+.leaflet-container { font-family: var(--font); background: var(--map-water); }
+.leaflet-container a { color: var(--accent); }
+.wpin .pin { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; font-size: 11px; font-weight: 700; color: #fff; border: 2px solid var(--surface); box-shadow: 0 1px 4px rgba(0,0,0,.35); font-variant-numeric: tabular-nums; font-family: var(--font); }
+.wpin .pin.approx { border-style: dashed; }
+.wclu span { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--surface); color: var(--ink); border: 3px solid var(--accent); font-weight: 700; font-size: 13px; box-shadow: var(--shadow); font-family: var(--font); }
+.wclu.big span { width: 48px; height: 48px; font-size: 14px; }
+.leaflet-popup-content-wrapper, .leaflet-popup-tip { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+.leaflet-popup-content-wrapper { border-radius: var(--r2); }
+.leaflet-popup-content { margin: 12px 14px; font-size: var(--fs-1); line-height: 1.5; min-width: 200px; }
+.pop b { display: block; font-size: var(--fs-1); }
+.pop .pm { color: var(--muted); font-size: var(--fs-0); display: block; margin: 2px 0 8px; }
+.pop .pr { display: grid; grid-template-columns: 40px 1fr; gap: 8px; align-items: center; margin-top: 6px; }
+.pop .pr .sc { min-height: 30px; font-size: 0.9rem; }
+.leaflet-control-attribution { font-size: 10px; }
+.leaflet-bar a { background: var(--surface); color: var(--ink); border-bottom-color: var(--line); }
+
+/* ---------- 상세·설정 시트 ---------- */
+.sheet { position: fixed; inset: 0; z-index: 70; display: flex; justify-content: flex-end; background: rgba(10, 10, 14, 0.38); }
+.panel { position: relative; width: min(560px, 100vw); height: 100%; overflow: auto; background: var(--surface); border-left: 1px solid var(--line); box-shadow: var(--shadow); padding: 16px 22px 48px; overscroll-behavior: contain; }
+@media (max-width: 760px) {
+  .sheet { align-items: flex-end; }
+  .panel { width: 100%; height: auto; max-height: 92vh; border-left: 0; border-top: 1px solid var(--line); border-radius: 16px 16px 0 0; padding: 14px 18px 40px; }
+}
+.panel .x { position: sticky; top: 0; float: right; z-index: 2; }
+.panel h2 { clear: none; margin-right: 70px; }
+.dtop { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: var(--fs-0); color: var(--muted); margin-top: 4px; }
+.dko { color: var(--ink-2); font-size: var(--fs-1); margin: 0 0 0.6em; }
+.dscore { display: flex; align-items: center; gap: 14px; margin: 0.8em 0; flex-wrap: wrap; }
+.dscore .sc { width: 84px; min-height: 66px; font-size: 1.7rem; }
+.dscore .sc.star { font-size: 1rem; }
+.dscore .bandtxt { font-size: var(--fs-1); line-height: 1.55; }
+.dscore .bandtxt small { display: block; }
+.kv { display: grid; grid-template-columns: 6.6em 1fr; gap: 4px 12px; margin: 0.8em 0; font-size: var(--fs-1); line-height: 1.6; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; min-width: 0; }
+.panel .note { font-size: var(--fs-0); color: var(--muted); }
+.wm { background: var(--surface-2); border-radius: var(--r2); padding: 12px 14px; font-size: var(--fs-1); }
+.wm p { margin: 0 0 0.5em; }
+.wm .kv { margin: 0.4em 0 0; }
+.wm .src a { word-break: break-all; }
+.dlinks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.3em; }
+.sec { border-top: 1px solid var(--line); padding-top: 4px; margin-top: 16px; }
+.sec h3 { margin: 0.8em 0 0.4em; }
+.sec .help { font-size: var(--fs-0); color: var(--ink-2); line-height: 1.65; }
+.sec ol.help { padding-left: 1.3em; margin: 0 0 0.8em; }
+.field { display: flex; gap: 8px; align-items: center; margin: 8px 0; flex-wrap: wrap; }
+.field > input, .field > select { flex: 1; min-width: 160px; }
+textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
+.msg { font-size: var(--fs-0); color: var(--ink-2); min-height: 1.2em; margin: 4px 0 0; }
+.msg.err { color: var(--bad); } .msg.ok { color: var(--good); }
+.srcrow { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
+.srcrow small { display: block; word-break: break-all; }
+.toolrow { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 10px 0; font-size: var(--fs-0); color: var(--ink-2); }
+.toolrow select { width: auto; }
+.statbox { font-size: var(--fs-1); line-height: 1.6; }
+.statbox ul { margin: 6px 0; padding-left: 1.2em; font-size: var(--fs-0); color: var(--ink-2); }
+
+/* ---------- 시작 안내 ---------- */
+.setup { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--r2); padding: 16px 20px; margin-top: 16px; }
+.setup h2 { font-size: var(--fs-3); margin-top: 0.2em; }
+.setup ol { padding-left: 1.3em; margin: 0.4em 0 1em; }
+.setup li { margin: 0.35em 0; font-size: var(--fs-1); }
+.setup code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
+
+.toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 90; background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 14px; font-size: var(--fs-1); box-shadow: var(--shadow); max-width: min(92vw, 560px); line-height: 1.5; }
+.toast a { color: inherit; }
+.toast.err { background: var(--bad); color: #fff; }
+.foot { margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); font-size: var(--fs-0); color: var(--muted); line-height: 1.7; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--accent)"/><path d="M10 6h12c0 6-2 10-6 10s-6-4-6-10z" fill="var(--on-accent)"/><path d="M16 16v8M11 25h10" stroke="var(--on-accent)" stroke-width="2" stroke-linecap="round"/></svg><b>WineBook</b><span>와인 이해 교과서</span></a>
+  <span class="sp"></span>
+  <span class="now">부록 · 와인 리뷰 지도</span>
+  <button class="icon-btn" id="menu-btn" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>목차</span></button>
+  <button class="icon-btn" id="theme-btn" aria-label="밝기 전환"></button>
+</header>
+<nav class="drawer" id="drawer" hidden aria-label="전체 목차"><ol>
+  <li><a href="../index.html"><i>◦</i><span>WineBook<small>와인 이해 교과서</small></span></a></li>
+  <li><a href="./" aria-current="page"><i>◇</i><span>와인 리뷰 지도<small>블로그 시음 리뷰 모음</small></span></a></li>
+  <li class="grp">기초</li>
+  <li><a href="../basics.html"><i>01</i><span>와인의 기초<small>포도·테루아·스타일·등급</small></span></a></li>
+  <li class="grp">프랑스</li>
+  <li><a href="../france.html"><i>02</i><span>프랑스 와인 지도<small>지역별·품종별 한눈에</small></span></a></li>
+  <li><a href="../bordeaux.html"><i>03</i><span>보르도<small>좌안·우안과 샤토</small></span></a></li>
+  <li><a href="../burgundy.html"><i>04</i><span>부르고뉴<small>클리마와 도멘</small></span></a></li>
+  <li><a href="../champagne.html"><i>05</i><span>샹파뉴<small>마을·하우스·클로</small></span></a></li>
+  <li><a href="../rhone.html"><i>06</i><span>론과 프랑스의 다른 산지<small>론·루아르·알자스·남부</small></span></a></li>
+  <li class="grp">이탈리아</li>
+  <li><a href="../italy.html"><i>07</i><span>이탈리아 와인 지도<small>20개 주와 토착 품종</small></span></a></li>
+  <li><a href="../piedmont.html"><i>08</i><span>피에몬테<small>바롤로·바르바레스코의 MGA</small></span></a></li>
+  <li><a href="../tuscany.html"><i>09</i><span>토스카나<small>키안티 클라시코·몬탈치노·볼게리</small></span></a></li>
+  <li><a href="../veneto.html"><i>10</i><span>베네토와 남부 이탈리아<small>아마로네·프로세코·에트나</small></span></a></li>
+  <li class="grp">평가</li>
+  <li><a href="../critics.html"><i>11</i><span>평론가와 점수<small>MW·평론가·점수 체계</small></span></a></li>
+  <li><a href="../vintages.html"><i>12</i><span>빈티지와 시음 적기<small>빈티지 차트와 숙성 곡선</small></span></a></li>
+  <li class="grp">만들기와 마시기</li>
+  <li><a href="../winemaking.html"><i>13</i><span>양조<small>레드·화이트·로제·샴페인</small></span></a></li>
+  <li><a href="../tasting.html"><i>14</i><span>노즈와 팔레트<small>테이스팅 표현법</small></span></a></li>
+  <li><a href="../review.html"><i>15</i><span>용어집과 종합 퀴즈<small>복습</small></span></a></li>
+</ol></nav>
+
+<main id="main" class="shell">
+  <header class="ch-head">
+    <div class="ch-label"><span class="ch-n">부록</span><span>블로그 시음 리뷰 모음</span></div>
+    <h1>와인 리뷰 지도</h1>
+    <p class="ch-lede">와인 블로그의 시음 리뷰를 점수와 등급, 나라·지역·품종별로 모았습니다. 와인마다 블로거 평가 요약과 양조 방법을 정리했고, 원문은 각 블로그 링크로 이어집니다.</p>
+    <div class="headbar">
+      <div class="kpis" id="kpis"></div>
+      <div class="acts">
+        <button class="btn go" id="refresh-btn" title="블로그 새 글을 수집해 반영합니다"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg><span>새로고침</span></button>
+        <button class="btn alt" id="settings-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>설정</span></button>
+      </div>
+    </div>
+    <p class="runline" id="runline"></p>
+    <div class="banner" id="demo-banner" hidden><b>샘플 데이터 미리보기</b><span>실제 블로그 리뷰가 아닌 예시입니다.</span><button class="linkbtn" id="demo-off">끄기</button></div>
+  </header>
+
+  <section id="setup" class="setup" hidden></section>
+
+  <section id="app">
+    <div class="controls">
+      <div class="searchrow">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="q" placeholder="와인·생산자·산지·품종·양조 검색 (예: 피노 누아, 바롤로, 오크)" aria-label="검색" autocomplete="off">
+          <button class="clear" id="q-clear" aria-label="검색어 지우기" hidden>×</button>
+        </div>
+        <button class="icon-btn" id="filter-btn" aria-expanded="false" aria-controls="filters">필터 <span class="badge" id="fbadge" hidden></span></button>
+      </div>
+      <div class="filters" id="filters">
+        <label>블로그<select id="f-source"></select></label>
+        <label>나라<select id="f-country"></select></label>
+        <label>지역<select id="f-region"></select></label>
+        <label>품종<select id="f-grape"></select></label>
+        <label>평가 등급<select id="f-band"></select></label>
+        <label>블로거 등급<select id="f-grade"></select></label>
+        <label>분류 등급<select id="f-cls"></select></label>
+        <label>최소 점수 <small>(100점 환산)</small><span class="rangebox"><input type="range" id="f-min" min="0" max="98" step="1" value="0"><output id="f-min-out">전체</output></span></label>
+        <label class="check"><input type="checkbox" id="f-noscore" checked> 점수 없는 와인도 보기</label>
+        <div class="typechips" id="f-types"></div>
+      </div>
+      <div class="active" id="active"></div>
+      <div class="viewbar">
+        <div class="seg" role="group" aria-label="보기">
+          <button data-view="list" aria-pressed="true">목록</button>
+          <button data-view="map" aria-pressed="false">지도</button>
+          <button data-view="groups" aria-pressed="false">분류</button>
+        </div>
+        <div class="right"><span id="count" class="num"></span>
+          <select id="sort" aria-label="정렬">
+            <option value="score">점수 높은 순</option>
+            <option value="date">최근 글 순</option>
+            <option value="vnew">빈티지 최신 순</option>
+            <option value="vold">빈티지 오래된 순</option>
+            <option value="name">이름 순</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="view-list">
+      <div class="cards" id="cards"></div>
+      <div class="more" id="more-box" hidden><button class="btn alt" id="more-btn">더 보기</button></div>
+    </div>
+    <div class="view" id="view-map" hidden>
+      <div class="mapbox"><div id="map"></div></div>
+      <div class="maptools">
+        <div class="legend" id="legend"></div>
+        <div><span id="map-note"></span> · <button class="linkbtn" id="map-fit">전체 보기</button></div>
+      </div>
+    </div>
+    <div class="view" id="view-groups" hidden>
+      <div class="gtools">
+        <div class="seg" id="gdim" role="group" aria-label="분류 기준">
+          <button data-g="band">평가 등급</button>
+          <button data-g="geo">나라·지역</button>
+          <button data-g="grape">품종</button>
+          <button data-g="grade">블로거 등급</button>
+          <button data-g="cls">분류 등급</button>
+          <button data-g="vintage">빈티지</button>
+          <button data-g="source">블로그</button>
+        </div>
+        <button class="linkbtn" id="g-openall">모두 펼치기</button>
+      </div>
+      <div id="groups"></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    리뷰의 점수·등급·원문은 각 블로거의 것이며, 이 페이지에는 Claude가 정리한 요약과 원문 링크만 담았습니다. 산지·품종·양조 정보는 글과 공개 자료로 정리해 틀린 부분이 있을 수 있으니 중요한 판단 전에는 원문과 생산자 자료를 확인하세요.
+    점수 환산과 평가 등급 구간은 <a href="../critics.html">11장 평론가와 점수</a>의 기준을 따릅니다. 지도: © OpenStreetMap contributors © CARTO.
+  </footer>
+</main>
+
+<div class="sheet" id="detail" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="d-title"><button class="icon-btn x" data-close>닫기</button><div id="d-body"></div></div></div>
+
+<div class="sheet" id="settings" hidden><div class="panel" role="dialog" aria-modal="true" aria-labelledby="set-title">
+  <button class="icon-btn x" data-close>닫기</button>
+  <h2 id="set-title">설정</h2>
+  <section class="sec">
+    <h3>수집 상태</h3>
+    <div class="statbox" id="set-status"></div>
+  </section>
+  <section class="sec">
+    <h3>GitHub 연결 <small>새로고침·블로그 추가에 필요</small></h3>
+    <ol class="help">
+      <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 만들기</a> (Fine-grained token)</li>
+      <li>Repository access: <b>Only select repositories</b> → <b id="repo-name1"></b></li>
+      <li>Permissions: <b>Actions</b>와 <b>Contents</b>를 <b>Read and write</b>로</li>
+      <li>만든 토큰을 아래에 붙여 넣고 저장 (이 기기의 브라우저에만 저장됩니다)</li>
+    </ol>
+    <div class="field"><input type="password" id="tok" placeholder="github_pat_…" autocomplete="off" spellcheck="false"><button class="btn alt" id="tok-save">저장</button></div>
+    <div class="field"><button class="linkbtn" id="tok-test">연결 확인</button><span class="small">·</span><button class="linkbtn" id="tok-clear">토큰 지우기</button></div>
+    <p class="msg" id="tok-msg"></p>
+    <details><summary class="small">저장소 바꾸기</summary>
+      <div class="field"><input type="text" id="repo-in" placeholder="owner/repo"><input type="text" id="branch-in" placeholder="branch" style="max-width:120px"><button class="btn alt" id="repo-save">적용</button></div>
+    </details>
+  </section>
+  <section class="sec">
+    <h3>블로그</h3>
+    <div id="src-list"></div>
+    <div class="field"><input type="url" id="src-url" placeholder="블로그 주소 (네이버·티스토리) 또는 RSS 주소" autocomplete="off"><button class="btn alt" id="src-add">추가</button></div>
+    <p class="msg" id="src-msg"></p>
+  </section>
+  <section class="sec">
+    <h3>과거 글 추가</h3>
+    <p class="help">RSS에는 최근 글만 나옵니다. 예전 리뷰는 글 주소를 한 줄에 하나씩 붙여 넣으면 차례로 정리합니다(한 번 실행에 설정한 개수만큼, 남은 글은 다음 실행에서 이어서).</p>
+    <textarea id="bf" rows="5" placeholder="https://blog.naver.com/orfeo21/2230…&#10;https://m.blog.naver.com/fascinoya/2231…"></textarea>
+    <div class="field"><button class="btn go" id="bf-add">추가하고 정리 시작</button></div>
+    <p class="msg" id="bf-msg"></p>
+  </section>
+  <section class="sec">
+    <h3>도구</h3>
+    <div class="toolrow"><button class="btn alt" id="run-check">접속 점검</button><span>블로그 RSS와 본문을 읽을 수 있는지만 확인합니다. API 비용이 없습니다.</span></div>
+    <div class="toolrow"><select id="rp-src"></select><button class="btn alt" id="run-reprocess">다시 정리</button><span>이미 정리한 글을 다시 정리합니다. 한 번에 설정한 개수만큼 처리하고 API 비용이 듭니다.</span></div>
+    <div class="toolrow"><button class="btn alt" id="demo-toggle">샘플 데이터로 보기</button><span>설정 전에 화면을 미리 볼 수 있는 예시 데이터입니다.</span></div>
+    <p class="msg" id="tool-msg"></p>
+  </section>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+  /* ================================================================ 기본 도구 */
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { if (v == null || v === '') localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  };
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function fold(s) { return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').normalize('NFC').toLowerCase(); }
+  function isNum(v) { return typeof v === 'number' && isFinite(v); }
+  function fmt(v) { return isNum(v) ? String(Math.round(v * 10) / 10) : ''; }
+  function fmtDate(d) { return d ? String(d).slice(0, 10).replace(/-/g, '.') : ''; }
+  function ago(iso) {
+    if (!iso) return '';
+    var t = Date.parse(iso); if (!isFinite(t)) return '';
+    var m = Math.round((Date.now() - t) / 60000);
+    if (m < 1) return '방금'; if (m < 60) return m + '분 전';
+    var h = Math.round(m / 60); if (h < 24) return h + '시간 전';
+    var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+
+  /* ================================================================ 설정 */
+  var DEFAULT_BRANCH = 'main';
+  var CFG = (function () {
+    var owner = 'tmtmkim-cloud', repo = 'wine-book';
+    var m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if (m) {
+      owner = m[1];
+      var seg = location.pathname.split('/').filter(Boolean), i = seg.indexOf('reviews');
+      repo = i > 0 ? seg[i - 1] : i === 0 ? owner + '.github.io' : (seg[0] || repo);
+    }
+    var ov = (store.get('wr-repo') || '').split('/');
+    if (ov.length === 2 && ov[0] && ov[1]) { owner = ov[0]; repo = ov[1]; }
+    return { owner: owner, repo: repo, branch: store.get('wr-branch') || DEFAULT_BRANCH, dir: 'reviews/data', wf: 'wine-reviews.yml' };
+  })();
+  function repoUrl(p) { return 'https://github.com/' + CFG.owner + '/' + CFG.repo + (p || ''); }
+
+  /* ================================================================ 사전 */
+  // 나라: [한글, 위도, 경도, 별칭…]
+  var COUNTRY = {
+    'France': ['프랑스', 46.6, 2.4, 'france'], 'Italy': ['이탈리아', 42.8, 12.5, 'italia 이태리'], 'Spain': ['스페인', 40.3, -3.7, 'espana'],
+    'Portugal': ['포르투갈', 39.9, -8.2, ''], 'Germany': ['독일', 50.0, 8.0, 'deutschland'], 'Austria': ['오스트리아', 48.0, 16.0, 'osterreich'],
+    'Switzerland': ['스위스', 46.5, 7.0, ''], 'Hungary': ['헝가리', 47.3, 19.4, ''], 'Greece': ['그리스', 38.9, 22.6, ''], 'Georgia': ['조지아', 41.9, 45.3, '그루지야'],
+    'Slovenia': ['슬로베니아', 46.0, 14.6, ''], 'Croatia': ['크로아티아', 45.2, 15.5, ''], 'Lebanon': ['레바논', 33.85, 35.9, ''], 'Israel': ['이스라엘', 32.0, 35.0, ''],
+    'United States': ['미국', 37.5, -120.5, 'usa us america'], 'Canada': ['캐나다', 43.2, -79.2, ''], 'Argentina': ['아르헨티나', -33.0, -68.8, ''],
+    'Chile': ['칠레', -34.6, -71.0, ''], 'Uruguay': ['우루과이', -34.6, -56.2, ''], 'Brazil': ['브라질', -29.2, -51.5, ''], 'Australia': ['호주', -34.6, 138.9, '오스트레일리아'],
+    'New Zealand': ['뉴질랜드', -41.5, 173.9, ''], 'South Africa': ['남아프리카공화국', -33.9, 18.9, '남아공'], 'United Kingdom': ['영국', 51.0, 0.0, 'uk england 잉글랜드'],
+    'Japan': ['일본', 35.66, 138.6, ''], 'South Korea': ['대한민국', 36.5, 127.8, '한국 korea'], 'China': ['중국', 38.4, 106.2, ''], 'Moldova': ['몰도바', 47.0, 28.8, ''],
+    'Romania': ['루마니아', 45.9, 24.9, ''], 'Bulgaria': ['불가리아', 42.7, 25.5, ''], 'Turkey': ['튀르키예', 39.0, 35.0, '터키'], 'Armenia': ['아르메니아', 40.1, 45.0, ''],
+    'Mexico': ['멕시코', 32.0, -116.6, ''], 'Czechia': ['체코', 48.9, 16.6, ''], 'Slovakia': ['슬로바키아', 48.3, 17.5, ''], 'Luxembourg': ['룩셈부르크', 49.6, 6.35, ''],
+    'Cyprus': ['키프로스', 34.9, 32.9, ''], 'Morocco': ['모로코', 33.9, -5.5, '']
+  };
+  // 지역: [한글, 위도, 경도, 별칭]
+  var REGION = {
+    'Bordeaux': ['보르도', 44.95, -0.45, ''], 'Burgundy': ['부르고뉴', 47.05, 4.83, 'bourgogne 버건디 샤블리'], 'Beaujolais': ['보졸레', 46.1, 4.65, ''],
+    'Champagne': ['샹파뉴', 49.05, 4.0, '샴페인'], 'Rhône': ['론', 44.6, 4.8, 'rhone 꼬뜨 뒤 론'], 'Loire': ['루아르', 47.3, 0.4, ''], 'Alsace': ['알자스', 48.2, 7.35, ''],
+    'Languedoc-Roussillon': ['랑그독-루시용', 43.4, 3.2, '랑그독 루시용'], 'Provence': ['프로방스', 43.45, 6.2, ''], 'Jura': ['쥐라', 46.75, 5.65, ''], 'Savoie': ['사부아', 45.55, 6.0, ''],
+    'South West France': ['쉬드우에스트', 44.3, 0.6, 'sud-ouest 남서부 카오르 마디랑'], 'Corsica': ['코르시카', 42.1, 9.1, 'corse'],
+    'Piedmont': ['피에몬테', 44.65, 8.0, 'piemonte 바롤로 바르바레스코'], 'Tuscany': ['토스카나', 43.4, 11.3, 'toscana 키안티 몬탈치노 볼게리'], 'Veneto': ['베네토', 45.5, 11.3, '아마로네 발폴리첼라 프로세코'],
+    'Friuli-Venezia Giulia': ['프리울리', 46.0, 13.3, 'friuli'], 'Trentino-Alto Adige': ['트렌티노-알토아디제', 46.4, 11.2, 'alto adige sudtirol'], 'Lombardy': ['롬바르디아', 45.6, 9.9, 'lombardia 프란차코르타'],
+    'Emilia-Romagna': ['에밀리아로마냐', 44.5, 11.3, '람브루스코'], 'Marche': ['마르케', 43.4, 13.2, ''], 'Umbria': ['움브리아', 42.95, 12.5, ''], 'Lazio': ['라치오', 41.9, 12.7, ''],
+    'Abruzzo': ['아브루초', 42.25, 14.0, ''], 'Campania': ['캄파니아', 41.0, 14.8, ''], 'Puglia': ['풀리아', 40.8, 17.0, 'apulia'], 'Basilicata': ['바실리카타', 40.9, 15.7, ''],
+    'Calabria': ['칼라브리아', 39.0, 16.5, ''], 'Sicily': ['시칠리아', 37.6, 14.2, 'sicilia 에트나'], 'Sardinia': ['사르데냐', 40.1, 9.0, 'sardegna'], 'Liguria': ['리구리아', 44.1, 9.3, ''],
+    'Aosta Valley': ['발레다오스타', 45.74, 7.4, "valle d'aosta"],
+    'Rioja': ['리오하', 42.5, -2.6, ''], 'Ribera del Duero': ['리베라 델 두에로', 41.65, -4.0, ''], 'Priorat': ['프리오랏', 41.2, 0.8, ''], 'Rías Baixas': ['리아스 바이사스', 42.4, -8.7, 'rias baixas'],
+    'Jerez': ['헤레스', 36.7, -6.1, '셰리 sherry'], 'Penedès': ['페네데스', 41.35, 1.7, '카바 cava'], 'Toro': ['토로', 41.52, -5.4, ''], 'Rueda': ['루에다', 41.4, -4.95, ''],
+    'Bierzo': ['비에르소', 42.6, -6.7, ''], 'Navarra': ['나바라', 42.6, -1.7, ''], 'Ribeira Sacra': ['리베이라 사크라', 42.45, -7.6, ''], 'Canary Islands': ['카나리아 제도', 28.3, -16.5, ''],
+    'Douro': ['도우루', 41.17, -7.6, '포트 port 도루'], 'Vinho Verde': ['비뉴 베르드', 41.6, -8.4, ''], 'Alentejo': ['알렌테주', 38.5, -7.9, ''], 'Dão': ['당', 40.55, -7.9, 'dao'],
+    'Bairrada': ['바이하다', 40.4, -8.45, ''], 'Madeira': ['마데이라', 32.7, -16.9, ''], 'Lisboa': ['리스보아', 39.1, -9.2, ''],
+    'Mosel': ['모젤', 49.9, 7.0, 'mosel-saar-ruwer'], 'Rheingau': ['라인가우', 50.0, 8.0, ''], 'Pfalz': ['팔츠', 49.35, 8.15, ''], 'Rheinhessen': ['라인헤센', 49.8, 8.2, ''],
+    'Nahe': ['나헤', 49.8, 7.75, ''], 'Franken': ['프랑켄', 49.8, 10.1, ''], 'Baden': ['바덴', 48.1, 7.7, ''], 'Ahr': ['아르', 50.53, 7.0, ''], 'Württemberg': ['뷔르템베르크', 49.0, 9.2, ''],
+    'Wachau': ['바하우', 48.38, 15.45, ''], 'Kamptal': ['캄프탈', 48.5, 15.68, ''], 'Kremstal': ['크렘스탈', 48.42, 15.6, ''], 'Burgenland': ['부르겐란트', 47.8, 16.7, ''],
+    'Steiermark': ['슈타이어마르크', 46.7, 15.5, 'styria'], 'Wien': ['빈', 48.25, 16.35, 'vienna 비엔나'],
+    'Napa Valley': ['나파 밸리', 38.5, -122.4, '나파'], 'Sonoma County': ['소노마 카운티', 38.5, -122.85, '소노마'], 'Central Coast': ['센트럴 코스트', 35.6, -120.7, '파소 로블스'],
+    'Santa Barbara County': ['산타바바라', 34.65, -120.2, ''], 'Willamette Valley': ['윌래밋 밸리', 45.1, -123.1, '오리건 oregon'], 'Washington': ['워싱턴', 46.3, -119.5, '컬럼비아 밸리'],
+    'New York': ['뉴욕', 42.6, -77.0, '핑거 레이크스'], 'California': ['캘리포니아', 37.5, -120.5, ''],
+    'Barossa': ['바로사', -34.55, 138.95, 'barossa valley'], 'McLaren Vale': ['맥라렌 베일', -35.22, 138.55, ''], 'Coonawarra': ['쿠나와라', -37.3, 140.83, ''],
+    'Clare Valley': ['클레어 밸리', -33.85, 138.6, ''], 'Eden Valley': ['이든 밸리', -34.6, 139.1, ''], 'Adelaide Hills': ['애들레이드 힐스', -34.95, 138.8, ''],
+    'Margaret River': ['마거릿 리버', -33.95, 115.07, ''], 'Yarra Valley': ['야라 밸리', -37.7, 145.45, ''], 'Hunter Valley': ['헌터 밸리', -32.8, 151.3, ''], 'Tasmania': ['태즈메이니아', -41.5, 147.1, ''],
+    'Marlborough': ['말버러', -41.5, 173.9, ''], 'Central Otago': ['센트럴 오타고', -45.0, 169.2, ''], "Hawke's Bay": ['혹스 베이', -39.6, 176.8, ''], 'Martinborough': ['마틴버러', -41.2, 175.45, ''],
+    'Maipo': ['마이포', -33.7, -70.7, ''], 'Colchagua': ['콜차과', -34.65, -71.3, ''], 'Casablanca': ['카사블랑카', -33.3, -71.4, ''], 'Aconcagua': ['아콩카과', -32.8, -70.7, ''], 'Maule': ['마울레', -35.5, -71.6, ''],
+    'Mendoza': ['멘도사', -33.0, -68.8, '우코 밸리'], 'Salta': ['살타', -26.0, -65.97, ''], 'Patagonia': ['파타고니아', -38.9, -68.1, ''],
+    'Stellenbosch': ['스텔렌보스', -33.93, 18.86, ''], 'Swartland': ['스와틀랜드', -33.4, 18.7, ''], 'Constantia': ['콘스탄시아', -34.03, 18.42, ''], 'Hemel-en-Aarde': ['헤멜 엔 아르데', -34.38, 19.3, ''],
+    'Tokaj': ['토카이', 48.12, 21.4, 'tokaji'], 'Santorini': ['산토리니', 36.4, 25.43, '']
+  };
+  // 품종: [한글, 별칭]
+  var GRAPE = {
+    'Cabernet Sauvignon': ['카베르네 소비뇽', '까베르네 쇼비뇽 까쇼 카쇼 카베르네소비뇽'], 'Merlot': ['메를로', '멀롯 메를롯'], 'Cabernet Franc': ['카베르네 프랑', '까베르네 프랑'],
+    'Petit Verdot': ['프티 베르도', '쁘띠 베르도'], 'Malbec': ['말벡', '꼬 cot'], 'Carménère': ['카르메네르', '까르메네르'], 'Pinot Noir': ['피노 누아', '삐노 누아 피노누아 피노 느와 슈패트부르군더 spatburgunder'],
+    'Gamay': ['가메', '가메이'], 'Syrah': ['시라', '쉬라 쉬라즈 shiraz'], 'Grenache': ['그르나슈', '그르나쉬 가르나차 garnacha cannonau'], 'Mourvèdre': ['무르베드르', '모나스트렐 monastrell mataro'],
+    'Carignan': ['카리냥', '카리냐노 carinena'], 'Cinsault': ['생소', ''], 'Nebbiolo': ['네비올로', '스판나'], 'Sangiovese': ['산지오베제', '산조베제 브루넬로 brunello'],
+    'Barbera': ['바르베라', ''], 'Dolcetto': ['돌체토', ''], 'Corvina': ['코르비나', ''], 'Aglianico': ['알리아니코', ''], "Nero d'Avola": ['네로 다볼라', 'nero davola'],
+    'Nerello Mascalese': ['네렐로 마스칼레제', ''], 'Montepulciano': ['몬테풀치아노', ''], 'Primitivo': ['프리미티보', ''], 'Zinfandel': ['진판델', ''],
+    'Tempranillo': ['템프라니요', '뗌쁘라니요 틴타 로리스 틴토 피노 tinto fino'], 'Touriga Nacional': ['투리가 나시오날', ''], 'Blaufränkisch': ['블라우프랭키시', '블라우프렌키쉬 lemberger'],
+    'Zweigelt': ['츠바이겔트', ''], 'Saperavi': ['사페라비', ''], 'Pinotage': ['피노타주', ''], 'Tannat': ['타나', ''],
+    'Chardonnay': ['샤르도네', '샤도네이 샤도네'], 'Sauvignon Blanc': ['소비뇽 블랑', '쇼비뇽 블랑 소비뇽블랑 쏘비뇽'], 'Sémillon': ['세미용', '세미뇽'], 'Riesling': ['리슬링', '리즐링'],
+    'Chenin Blanc': ['슈냉 블랑', '쉬냉 블랑 슈냉'], 'Pinot Gris': ['피노 그리', '피노 그리지오 pinot grigio'], 'Pinot Blanc': ['피노 블랑', '피노 비앙코'], 'Gewürztraminer': ['게뷔르츠트라미너', '게뷔르츠 gewurz'],
+    'Grüner Veltliner': ['그뤼너 펠트리너', '그뤼너'], 'Viognier': ['비오니에', ''], 'Marsanne': ['마르산', ''], 'Roussanne': ['루산', ''], 'Albariño': ['알바리뇨', 'alvarinho'],
+    'Muscat': ['뮈스카', '모스카토 머스캣 moscato moscatel'], 'Furmint': ['푸르민트', ''], 'Garganega': ['가르가네가', '소아베'], 'Vermentino': ['베르멘티노', ''], 'Fiano': ['피아노', ''],
+    'Greco': ['그레코', ''], 'Verdicchio': ['베르디키오', ''], 'Assyrtiko': ['아시르티코', ''], 'Aligoté': ['알리고테', ''], 'Melon de Bourgogne': ['믈롱 드 부르고뉴', '뮈스카데 muscadet'],
+    'Meunier': ['뫼니에', '피노 뫼니에 pinot meunier'], 'Palomino': ['팔로미노', ''], 'Pedro Ximénez': ['페드로 히메네스', 'px'], 'Torrontés': ['토론테스', ''], 'Godello': ['고데요', '']
+  };
+  var TYPES = { red: '레드', white: '화이트', sparkling: '스파클링', rose: '로제', sweet: '스위트', fortified: '주정강화', orange: '오렌지', other: '기타' };
+  var TYPE_ORDER = ['red', 'white', 'sparkling', 'rose', 'sweet', 'fortified', 'orange', 'other'];
+  var BANDS = [
+    { k: 'classic', min: 95, label: '클래식', range: '95–100' },
+    { k: 'outstanding', min: 90, label: '뛰어남', range: '90–94' },
+    { k: 'verygood', min: 85, label: '아주 좋음', range: '85–89' },
+    { k: 'good', min: 80, label: '좋음', range: '80–84' },
+    { k: 'average', min: 75, label: '평범', range: '75–79' },
+    { k: 'low', min: 0, label: '추천 안 함', range: '75 미만' },
+    { k: 'none', min: null, label: '점수 없음', range: '' }
+  ];
+  var BAND_BY = {}; BANDS.forEach(function (b) { BAND_BY[b.k] = b; });
+  // WineBook 11장의 환산 구간 중앙값
+  var T20 = [[20, 99], [19, 96], [18, 93.5], [17, 91], [16, 88], [15, 85], [14, 81.5], [12, 74], [10, 65], [0, 50]];
+  var T5 = [[5, 98], [4, 93], [3, 88], [2, 82.5], [1, 74.5], [0, 60]];
+  var CHAPTER = {
+    'Bordeaux': ['bordeaux.html', '3장 보르도'], 'Burgundy': ['burgundy.html', '4장 부르고뉴'], 'Champagne': ['champagne.html', '5장 샹파뉴'],
+    'Rhône': ['rhone.html', '6장 론과 프랑스의 다른 산지'], 'Loire': ['rhone.html', '6장 론과 프랑스의 다른 산지'], 'Alsace': ['rhone.html', '6장 론과 프랑스의 다른 산지'],
+    'Languedoc-Roussillon': ['rhone.html', '6장 론과 프랑스의 다른 산지'], 'Provence': ['rhone.html', '6장 론과 프랑스의 다른 산지'], 'South West France': ['rhone.html', '6장 론과 프랑스의 다른 산지'],
+    'Jura': ['rhone.html', '6장 론과 프랑스의 다른 산지'], 'Savoie': ['rhone.html', '6장 론과 프랑스의 다른 산지'],
+    'Piedmont': ['piedmont.html', '8장 피에몬테'], 'Tuscany': ['tuscany.html', '9장 토스카나'], 'Veneto': ['veneto.html', '10장 베네토와 남부 이탈리아'],
+    'Campania': ['veneto.html', '10장 베네토와 남부 이탈리아'], 'Puglia': ['veneto.html', '10장 베네토와 남부 이탈리아'], 'Basilicata': ['veneto.html', '10장 베네토와 남부 이탈리아'],
+    'Calabria': ['veneto.html', '10장 베네토와 남부 이탈리아'], 'Sicily': ['veneto.html', '10장 베네토와 남부 이탈리아'], 'Sardinia': ['veneto.html', '10장 베네토와 남부 이탈리아']
+  };
+  var CHAPTER_COUNTRY = { 'France': ['france.html', '2장 프랑스 와인 지도'], 'Italy': ['italy.html', '7장 이탈리아 와인 지도'] };
+
+  function koCountry(n, w) { return (COUNTRY[n] && COUNTRY[n][0]) || (w && w.labels_ko && w.labels_ko.country) || n || ''; }
+  function koRegion(n, w) { return (REGION[n] && REGION[n][0]) || (w && w.labels_ko && w.labels_ko.region) || n || ''; }
+  function koGrape(name, g) { return (GRAPE[name] && GRAPE[name][0]) || (g && g.name_ko) || name || ''; }
+
+  /* ================================================================ 상태 */
+  var S = {
+    all: [], filtered: [], sources: {}, srcList: [], status: null, demo: false, view: 'list', q: '', sort: 'score', gdim: 'band',
+    f: { source: '', country: '', region: '', grape: '', band: '', grade: '', cls: '', types: [], min: 0, noScore: true },
+    limit: 60, busy: false, loaded: false
+  };
+
+  /* ================================================================ 점수 */
+  function interp(T, v) {
+    if (v >= T[0][0]) return T[0][1];
+    for (var i = 1; i < T.length; i++) {
+      var a = T[i - 1], b = T[i];
+      if (v >= b[0]) return b[1] + (a[1] - b[1]) * (v - b[0]) / (a[0] - b[0]);
+    }
+    return T[T.length - 1][1];
+  }
+  function score100(w) {
+    var sc = w.score || {}, v = sc.value, s = sc.scale;
+    if (isNum(v) && isNum(s) && s > 0) {
+      if (s === 100) return v;
+      if (s === 20) return interp(T20, v);
+      if (s === 10) return Math.min(100, v * 10);
+      if (s === 5) return interp(T5, v);
+      return interp(T5, v / s * 5);
+    }
+    return isNum(sc.est100) ? sc.est100 : null;
+  }
+  function bandOf(v) {
+    if (v == null) return BAND_BY.none;
+    var r = Math.round(v);
+    for (var i = 0; i < BANDS.length - 1; i++) if (r >= BANDS[i].min) return BANDS[i];
+    return BAND_BY.low;
+  }
+  function scoreBadge(w, cls) {
+    var sc = w.score || {}, inner, star = false;
+    if (isNum(sc.value) && isNum(sc.scale)) {
+      if (sc.scale === 5 && sc.raw && /[★☆]/.test(sc.raw)) { inner = esc(sc.raw.replace(/[^★☆]/g, '')); star = true; }
+      else inner = fmt(sc.value) + (sc.scale === 100 ? '' : '<small>/' + fmt(sc.scale) + '</small>');
+    } else if (isNum(sc.est100)) inner = '≈' + Math.round(sc.est100) + '<small>추정</small>';
+    else inner = '<small>점수 없음</small>';
+    return '<span class="sc b-' + w._band.k + (star ? ' star' : '') + (cls ? ' ' + cls : '') + '" title="' + esc(w._band.label + (w._score != null ? ' · 100점 환산 ' + fmt(w._score) : '')) + '">' + inner + '</span>';
+  }
+
+  /* ================================================================ 데이터 준비 */
+  function srcName(id) { var s = S.sources[id]; return (s && s.name) || id || ''; }
+  function prep(w) {
+    w._type = TYPES[w.type] ? w.type : 'other';
+    w._score = score100(w);
+    w._band = bandOf(w._score);
+    w._grapes = (w.grapes || []).map(function (g) { return g.name; }).filter(Boolean);
+    w._year = /^\d{4}$/.test(w.vintage || '') ? +w.vintage : null;
+    w._date = (w.post && w.post.date) || '';
+    w._name = w.name || w.name_ko || '';
+    var gr = w.grade && w.grade.raw;
+    w._gradeKey = gr ? w.source + '|' + gr : '';
+    w._gradeLabel = gr ? gr : '';
+    var parts = [w.name, w.name_ko, w.producer, w.producer_ko, w.cuvee, w.vintage, w.country, koCountry(w.country, w), w.region, koRegion(w.region, w),
+      w.subregion, w.appellation, w.labels_ko && w.labels_ko.subregion, w.labels_ko && w.labels_ko.appellation, w.classification, TYPES[w._type],
+      w.grade && w.grade.raw, w.score && w.score.raw, w._band.label, w.summary, w.food_pairing, w.drink_window, w.price,
+      w.winemaking && w.winemaking.summary, w.winemaking && w.winemaking.fermentation, w.winemaking && w.winemaking.aging, w.winemaking && w.winemaking.other,
+      w.post && w.post.title, srcName(w.source), w.source, (w.critic_scores || []).join(' ')];
+    if (COUNTRY[w.country]) parts.push(COUNTRY[w.country][3]);
+    if (REGION[w.region]) parts.push(REGION[w.region][3]);
+    (w.grapes || []).forEach(function (g) { parts.push(g.name, g.name_ko, koGrape(g.name, g)); if (GRAPE[g.name]) parts.push(GRAPE[g.name][1]); });
+    w._search = fold(parts.filter(Boolean).join(' \u0001 '));
+    return w;
+  }
+
+  /* ================================================================ GitHub */
+  function token() { return store.get('wr-gh-token') || ''; }
+  function ghError(st, data) {
+    var m = (data && data.message) || '';
+    if (st === 401) return 'GitHub 토큰이 올바르지 않거나 만료됐어요.';
+    if (st === 403) return /rate limit/i.test(m) ? 'GitHub API 요청 한도를 넘었어요. 잠시 뒤 다시 시도하세요.' : 'GitHub 토큰 권한이 부족해요. Actions·Contents를 Read and write로 주세요.';
+    if (st === 404) return '저장소나 파일을 찾지 못했어요. 토큰의 저장소 범위를 확인하세요.';
+    if (st === 409) return '다른 작업과 겹쳤어요. 잠시 뒤 다시 시도하세요.';
+    if (st === 422) return 'GitHub가 요청을 거절했어요' + (m ? ': ' + m : '.');
+    return 'GitHub 오류 ' + st + (m ? ': ' + m : '');
+  }
+  function gh(path, opt) {
+    opt = opt || {};
+    var h = { 'Accept': opt.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' };
+    var t = token();
+    if (t) h.Authorization = 'Bearer ' + t;
+    if (opt.body) h['Content-Type'] = 'application/json';
+    var url = /^https?:/.test(path) ? path : 'https://api.github.com/repos/' + CFG.owner + '/' + CFG.repo + path;
+    return fetch(url, { method: opt.method || 'GET', headers: h, body: opt.body, cache: 'no-store' }).then(function (r) {
+      if (r.status === 204) return null;
+      return r.text().then(function (txt) {
+        var data = null;
+        try { data = txt ? JSON.parse(txt) : null; } catch (e) { data = txt; }
+        if (!r.ok) { var err = new Error(ghError(r.status, data)); err.status = r.status; throw err; }
+        return data;
+      });
+    });
+  }
+  function b64(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    return btoa(bin);
+  }
+  function unb64(b) {
+    var bin = atob(String(b).replace(/\s/g, '')), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder().decode(bytes);
+  }
+  function getFile(path) {
+    return gh('/contents/' + path + '?ref=' + encodeURIComponent(CFG.branch) + '&_=' + Date.now()).then(function (d) {
+      return { text: unb64(d.content || ''), sha: d.sha };
+    }, function (e) { if (e.status === 404) return { text: '', sha: null }; throw e; });
+  }
+  function updateFile(path, change, message) {
+    // change(text) → 새 text. 겹치면 한 번 다시 시도합니다.
+    function attempt(n) {
+      return getFile(path).then(function (cur) {
+        var next = change(cur.text);
+        if (next == null || next === cur.text) return { unchanged: true };
+        var body = { message: message, content: b64(next), branch: CFG.branch };
+        if (cur.sha) body.sha = cur.sha;
+        return gh('/contents/' + path, { method: 'PUT', body: JSON.stringify(body) });
+      }).catch(function (e) { if ((e.status === 409 || e.status === 422) && n < 2) return sleep(1500).then(function () { return attempt(n + 1); }); throw e; });
+    }
+    return attempt(1);
+  }
+  function latestRunId() {
+    return gh('/actions/workflows/' + CFG.wf + '/runs?per_page=1&_=' + Date.now()).then(function (d) {
+      var r = d && d.workflow_runs && d.workflow_runs[0]; return r ? r.id : 0;
+    });
+  }
+  function runWorkflow(inputs, onp) {
+    var t0 = Date.now(), before = 0;
+    return latestRunId().catch(function () { return 0; }).then(function (id) {
+      before = id;
+      return gh('/actions/workflows/' + CFG.wf + '/dispatches', { method: 'POST', body: JSON.stringify({ ref: CFG.branch, inputs: inputs }) });
+    }).then(function () {
+      var tries = 0;
+      function find() {
+        tries++;
+        return sleep(tries === 1 ? 2500 : 4000).then(function () {
+          return gh('/actions/workflows/' + CFG.wf + '/runs?event=workflow_dispatch&per_page=5&_=' + Date.now());
+        }).then(function (d) {
+          var run = (d.workflow_runs || []).filter(function (r) { return r.id > before; }).sort(function (a, b) { return a.id - b.id; })[0];
+          if (run) return run;
+          if (tries > 25) throw new Error('실행을 찾지 못했어요. GitHub Actions 화면에서 확인해 주세요.');
+          onp && onp('queued', Date.now() - t0);
+          return find();
+        });
+      }
+      return find();
+    }).then(function (run) {
+      function poll(r) {
+        onp && onp(r.status, Date.now() - t0, r);
+        if (r.status === 'completed') return r;
+        if (Date.now() - t0 > 70 * 60000) throw new Error('70분이 지나도 끝나지 않았어요.');
+        return sleep(6000).then(function () { return gh('/actions/runs/' + r.id + '?_=' + Date.now()); }).then(poll);
+      }
+      return poll(run);
+    });
+  }
+
+  /* ================================================================ 불러오기 */
+  function fetchData(name, fresh) {
+    var viaPages = function () {
+      return fetch('data/' + name + '?v=' + Date.now(), { cache: 'no-store' }).then(function (r) {
+        if (!r.ok) throw new Error(name + ' ' + r.status); return r.json();
+      });
+    };
+    if (!fresh) return viaPages();
+    return gh('/contents/' + CFG.dir + '/' + name + '?ref=' + encodeURIComponent(CFG.branch) + '&_=' + Date.now(), { raw: true })
+      .then(function (d) { return typeof d === 'string' ? JSON.parse(d) : d; })
+      .catch(function (e) { console.warn('GitHub API에서 못 읽어 페이지 파일을 씁니다', name, e); return viaPages(); });
+  }
+  function load(fresh) {
+    var wn = S.demo ? 'sample.json' : 'wines.json';
+    return Promise.all([
+      fetchData(wn, fresh && !S.demo).catch(function (e) { console.warn(e); return null; }),
+      fetchData('sources.json', fresh).catch(function () { return null; }),
+      fetchData('status.json', fresh).catch(function () { return null; })
+    ]).then(function (res) {
+      var wd = res[0] || { wines: [] }, sd = res[1] || { sources: [] };
+      var list = (sd.sources || []).slice();
+      (wd.sources || []).forEach(function (s) { if (!list.some(function (x) { return x.id === s.id; })) list.push(s); });
+      S.srcList = list; S.sources = {}; list.forEach(function (s) { S.sources[s.id] = s; });
+      S.settings = sd.settings || {};
+      S.status = res[2];
+      S.all = (wd.wines || []).filter(function (w) { return w && (w.name || w.name_ko); }).map(prep);
+      S.loaded = true;
+      if (!S.all.length && !res[0]) S.loadError = true;
+      buildOptions();
+      apply();
+      renderHead();
+    });
+  }
+
+  /* ================================================================ 머리 */
+  function renderHead() {
+    var countries = {}, grapes = {};
+    S.all.forEach(function (w) { if (w.country) countries[w.country] = 1; w._grapes.forEach(function (g) { grapes[g] = 1; }); });
+    var srcCount = Object.keys(S.all.reduce(function (a, w) { a[w.source] = 1; return a; }, {})).length;
+    var kp = [[S.all.length, '와인'], [srcCount || S.srcList.filter(function (s) { return s.enabled !== false; }).length, '블로그'], [Object.keys(countries).length, '나라'], [Object.keys(grapes).length, '품종']];
+    $('#kpis').innerHTML = kp.map(function (k) { return '<div class="kpi"><b>' + k[0] + '</b>' + k[1] + '</div>'; }).join('');
+    $('#demo-banner').hidden = !S.demo;
+    renderRunline();
+    renderSetup();
+  }
+  function renderRunline(progress) {
+    var el = $('#runline');
+    el.classList.remove('warn');
+    if (progress) { el.innerHTML = progress; return; }
+    var st = S.status && S.status.last_run;
+    if (S.demo) { el.textContent = ''; return; }
+    if (!st) { el.textContent = '아직 수집한 적이 없어요.'; return; }
+    var t = '마지막 수집 ' + ago(st.finished || st.at) + ' · ' + (st.message || '');
+    if (S.status.totals && S.status.totals.pending) t += ' · 대기 중인 글 ' + S.status.totals.pending + '개';
+    el.innerHTML = esc(t) + (st.run_url ? ' · <a href="' + esc(st.run_url) + '" target="_blank" rel="noopener">실행 기록</a>' : '');
+    if (st.ok === false) el.classList.add('warn');
+  }
+  function renderSetup() {
+    var box = $('#setup');
+    if (S.all.length || S.demo) { box.hidden = true; return; }
+    var st = S.status && S.status.last_run;
+    var warn = st && st.ok === false ? '<p class="runline warn">' + esc(st.message || '') + '</p>' : '';
+    box.innerHTML = '<h2>아직 정리된 리뷰가 없어요</h2>' + warn +
+      '<ol>' +
+      '<li><b>Claude API 키 넣기</b> — <a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude Console</a>에서 키를 만들어 ' +
+      '<a href="' + repoUrl('/settings/secrets/actions/new') + '" target="_blank" rel="noopener">저장소 Secret</a>에 이름 <code>ANTHROPIC_API_KEY</code>로 저장합니다.</li>' +
+      '<li><b>웹 검색 켜기(권장)</b> — <a href="https://platform.claude.com/settings/privacy" target="_blank" rel="noopener">Console 설정</a>에서 웹 검색을 켜면 양조 정보를 생산자 자료로 보강합니다.</li>' +
+      '<li><b>새로고침 버튼 연결(선택)</b> — 설정에서 GitHub 토큰을 넣으면 이 페이지에서 바로 수집을 실행합니다.</li>' +
+      '<li><b>첫 수집</b> — 위의 새로고침을 누르거나 <a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub Actions</a>에서 Run workflow를 누릅니다. 이후에는 매일 아침 자동으로 새 글을 반영합니다.</li>' +
+      '</ol><p class="small">예전 리뷰는 설정 → 과거 글 추가에 글 주소를 붙여 넣으세요. <button class="linkbtn" data-act="demo">샘플 데이터로 미리보기</button></p>';
+    box.hidden = false;
+  }
+
+  /* ================================================================ 필터 */
+  function counted(arr) { var m = {}; arr.forEach(function (k) { if (k) m[k] = (m[k] || 0) + 1; }); return m; }
+  function fillSelect(sel, allLabel, entries, value) {
+    sel.innerHTML = '<option value="">' + esc(allLabel) + '</option>' + entries.map(function (e) {
+      return '<option value="' + esc(e[0]) + '"' + (e[0] === value ? ' selected' : '') + '>' + esc(e[1]) + (e[2] != null ? ' (' + e[2] + ')' : '') + '</option>';
+    }).join('');
+    if (value && !entries.some(function (e) { return e[0] === value; })) sel.value = '';
+  }
+  function byCount(m, label) {
+    return Object.keys(m).map(function (k) { return [k, label(k), m[k]]; }).sort(function (a, b) { return b[2] - a[2] || a[1].localeCompare(b[1], 'ko'); });
+  }
+  function buildOptions() {
+    var f = S.f, all = S.all;
+    var srcM = counted(all.map(function (w) { return w.source; }));
+    fillSelect($('#f-source'), '모든 블로그', byCount(srcM, srcName), f.source);
+    var cM = counted(all.map(function (w) { return w.country; }));
+    fillSelect($('#f-country'), '모든 나라', byCount(cM, function (k) { return koCountry(k); }), f.country);
+    var rM = counted(all.filter(function (w) { return !f.country || w.country === f.country; }).map(function (w) { return w.region; }));
+    var sample = {}; all.forEach(function (w) { if (w.region && !sample[w.region]) sample[w.region] = w; });
+    fillSelect($('#f-region'), '모든 지역', byCount(rM, function (k) { return koRegion(k, sample[k]); }), f.region);
+    var gM = counted([].concat.apply([], all.map(function (w) { return w._grapes; })));
+    fillSelect($('#f-grape'), '모든 품종', byCount(gM, function (k) { return koGrape(k); }), f.grape);
+    var bM = counted(all.map(function (w) { return w._band.k; }));
+    fillSelect($('#f-band'), '모든 평가 등급', BANDS.filter(function (b) { return bM[b.k]; }).map(function (b) { return [b.k, b.label + (b.range ? ' ' + b.range : ''), bM[b.k]]; }), f.band);
+    var grM = counted(all.map(function (w) { return w._gradeKey; }));
+    var multi = Object.keys(srcM).length > 1;
+    fillSelect($('#f-grade'), '모든 블로거 등급', byCount(grM, function (k) { var i = k.indexOf('|'); return k.slice(i + 1) + (multi ? ' · ' + srcName(k.slice(0, i)) : ''); }), f.grade);
+    var clM = counted(all.map(function (w) { return w.classification; }));
+    fillSelect($('#f-cls'), '모든 분류 등급', byCount(clM, function (k) { return k; }), f.cls);
+    var tM = counted(all.map(function (w) { return w._type; }));
+    $('#f-types').innerHTML = TYPE_ORDER.filter(function (t) { return tM[t]; }).map(function (t) {
+      return '<button class="chip" data-type="' + t + '" aria-pressed="' + (f.types.indexOf(t) >= 0) + '"><i class="dot-' + t + '"></i>' + TYPES[t] + ' <span class="small">' + tM[t] + '</span></button>';
+    }).join('');
+    $('#legend').innerHTML = TYPE_ORDER.filter(function (t) { return tM[t]; }).map(function (t) { return '<span><i class="dot-' + t + '"></i>' + TYPES[t] + '</span>'; }).join('') +
+      '<span>점선 테두리: 산지 중심 위치</span>';
+    var rp = $('#rp-src');
+    rp.innerHTML = '<option value="">모든 블로그</option>' + S.srcList.map(function (s) { return '<option value="' + esc(s.id) + '">' + esc(s.name || s.id) + '</option>'; }).join('');
+  }
+  function matches(w, toks) {
+    var f = S.f;
+    if (f.source && w.source !== f.source) return false;
+    if (f.country && w.country !== f.country) return false;
+    if (f.region && w.region !== f.region) return false;
+    if (f.grape && w._grapes.indexOf(f.grape) < 0) return false;
+    if (f.band && w._band.k !== f.band) return false;
+    if (f.grade && w._gradeKey !== f.grade) return false;
+    if (f.cls && w.classification !== f.cls) return false;
+    if (f.types.length && f.types.indexOf(w._type) < 0) return false;
+    if (f.min > 0) { if (w._score == null) { if (!f.noScore) return false; } else if (w._score < f.min) return false; }
+    for (var i = 0; i < toks.length; i++) if (w._search.indexOf(toks[i]) < 0) return false;
+    return true;
+  }
+  var SORTS = {
+    score: function (a, b) { return (b._score == null ? -1 : b._score) - (a._score == null ? -1 : a._score) || (b._date > a._date ? 1 : b._date < a._date ? -1 : 0); },
+    date: function (a, b) { return (b._date > a._date ? 1 : b._date < a._date ? -1 : 0) || (b._score || 0) - (a._score || 0); },
+    vnew: function (a, b) { return (b._year || 0) - (a._year || 0) || SORTS.score(a, b); },
+    vold: function (a, b) { return (a._year || 9999) - (b._year || 9999) || SORTS.score(a, b); },
+    name: function (a, b) { return a._name.localeCompare(b._name, 'ko'); }
+  };
+  function activeCount() {
+    var f = S.f; return ['source', 'country', 'region', 'grape', 'band', 'grade', 'cls'].filter(function (k) { return f[k]; }).length + f.types.length + (f.min > 0 ? 1 : 0);
+  }
+  function apply(keepLimit) {
+    var toks = fold(S.q.trim()).split(/\s+/).filter(Boolean);
+    S.filtered = S.all.filter(function (w) { return matches(w, toks); }).sort(SORTS[S.sort] || SORTS.score);
+    if (!keepLimit) S.limit = 60;
+    $('#count').textContent = S.filtered.length === S.all.length ? '와인 ' + S.all.length + '개' : S.all.length + '개 중 ' + S.filtered.length + '개';
+    var n = activeCount(); $('#fbadge').textContent = n; $('#fbadge').hidden = !n;
+    renderActive();
+    renderView();
+  }
+  function renderActive() {
+    var f = S.f, out = [];
+    function chip(key, label) { out.push('<button class="chip" data-unset="' + key + '" aria-pressed="true">' + esc(label) + ' <i class="x">✕</i></button>'); }
+    if (f.source) chip('source', srcName(f.source));
+    if (f.country) chip('country', koCountry(f.country));
+    if (f.region) chip('region', koRegion(f.region));
+    if (f.grape) chip('grape', koGrape(f.grape));
+    if (f.band) chip('band', BAND_BY[f.band].label);
+    if (f.grade) chip('grade', f.grade.slice(f.grade.indexOf('|') + 1));
+    if (f.cls) chip('cls', f.cls);
+    f.types.forEach(function (t) { chip('type:' + t, TYPES[t]); });
+    if (f.min > 0) chip('min', f.min + '점 이상');
+    if (S.q.trim()) chip('q', '“' + S.q.trim() + '”');
+    if (out.length > 1) out.push('<button class="linkbtn small" data-unset="all">모두 지우기</button>');
+    $('#active').innerHTML = out.join('');
+  }
+  function unset(key) {
+    var f = S.f;
+    if (key === 'all') { S.f = { source: '', country: '', region: '', grape: '', band: '', grade: '', cls: '', types: [], min: 0, noScore: true }; S.q = ''; $('#q').value = ''; $('#f-min').value = 0; $('#f-noscore').checked = true; }
+    else if (key === 'q') { S.q = ''; $('#q').value = ''; }
+    else if (key === 'min') { f.min = 0; $('#f-min').value = 0; }
+    else if (key.indexOf('type:') === 0) { f.types = f.types.filter(function (t) { return t !== key.slice(5); }); }
+    else { f[key] = ''; if (key === 'country') f.region = ''; }
+    $('#q-clear').hidden = !S.q;
+    $('#f-min-out').textContent = S.f.min > 0 ? S.f.min + '+' : '전체';
+    buildOptions(); apply();
+  }
+
+  /* ================================================================ 보기 */
+  function setView(v, noHash) {
+    if (['list', 'map', 'groups'].indexOf(v) < 0) v = 'list';
+    S.view = v; store.set('wr-view', v);
+    $$('.viewbar .seg button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.view === v)); });
+    $('#view-list').hidden = v !== 'list'; $('#view-map').hidden = v !== 'map'; $('#view-groups').hidden = v !== 'groups';
+    $('#sort').hidden = v === 'map';
+    if (!noHash && location.hash !== '#' + v) history.replaceState(null, '', '#' + v);
+    renderView();
+  }
+  function renderView() {
+    if (S.view === 'list') renderList();
+    else if (S.view === 'map') renderMap();
+    else renderGroups();
+  }
+  function originLine(w) {
+    var p = [];
+    if (w.country) p.push(koCountry(w.country, w));
+    if (w.region) p.push(koRegion(w.region, w));
+    var app = w.appellation || w.subregion;
+    if (app && app !== w.region) p.push(app);
+    return p.join(' › ');
+  }
+  function grapeLine(w) { return (w.grapes || []).map(function (g) { return koGrape(g.name, g) + (isNum(g.pct) && w.grapes.length > 1 ? ' ' + fmt(g.pct) + '%' : ''); }).join(', '); }
+  function card(w) {
+    var top = '<span class="tag ' + w._type + '">' + TYPES[w._type] + '</span>' + (w.vintage ? '<span class="num">' + esc(w.vintage) + '</span>' : '') +
+      (w.classification ? '<span class="tag cls">' + esc(w.classification) + '</span>' : '') + (w.grade && w.grade.raw ? '<span class="grade">' + esc(w.grade.raw) + '</span>' : '');
+    var meta = [originLine(w), grapeLine(w)].filter(Boolean).join(' · ');
+    return '<button class="wcard" data-open="' + esc(w.id) + '">' + scoreBadge(w) + '<span class="wbody"><span class="wtop">' + top + '</span>' +
+      '<span class="wname">' + esc(w.name || w.name_ko) + '</span>' + (w.name_ko && w.name_ko !== w.name ? '<span class="wko">' + esc(w.name_ko) + '</span>' : '') +
+      (meta ? '<span class="wmeta">' + esc(meta) + '</span>' : '') +
+      '<span class="wsrc">' + esc(srcName(w.source)) + (w._date ? ' · ' + fmtDate(w._date) : '') + (w.partial ? ' · 요약만' : '') + '</span></span></button>';
+  }
+  function noneHTML() {
+    if (!S.loaded) return '<div class="empty-note">불러오는 중…</div>';
+    if (!S.all.length) return '<div class="empty-note">' + (S.loadError ? '데이터를 불러오지 못했어요. 잠시 뒤 새로고침해 주세요.' : '아직 정리된 와인이 없어요.') + '</div>';
+    return '<div class="empty-note">조건에 맞는 와인이 없어요. <button class="linkbtn" data-unset="all">필터 지우기</button></div>';
+  }
+  function renderList() {
+    var list = S.filtered.slice(0, S.limit);
+    $('#cards').innerHTML = list.length ? list.map(card).join('') : noneHTML();
+    $('#more-box').hidden = S.filtered.length <= S.limit;
+    $('#more-btn').textContent = '더 보기 (' + (S.filtered.length - S.limit) + '개 남음)';
+  }
+
+  /* ---------- 분류 ---------- */
+  var GDIM = {
+    band: function (w) { return [[w._band.k, w._band.label + (w._band.range ? ' ' + w._band.range : '')]]; },
+    grape: function (w) { return w._grapes.length ? w._grapes.map(function (g) { return [g, koGrape(g)]; }) : [['', '품종 정보 없음']]; },
+    grade: function (w) { return [[w._gradeKey, w._gradeKey ? w._gradeLabel + ' · ' + srcName(w.source) : '블로거 등급 없음']]; },
+    cls: function (w) { return [[w.classification || '', w.classification || '분류 등급 없음']]; },
+    vintage: function (w) { return [[w.vintage || '', w.vintage === 'NV' ? 'NV (논빈티지)' : (w.vintage || '빈티지 정보 없음')]]; },
+    source: function (w) { return [[w.source || '', srcName(w.source)]]; },
+    geo: function (w) { return [[w.country || '', w.country ? koCountry(w.country, w) : '나라 정보 없음']]; },
+    region: function (w) { return [[w.region || '', w.region ? koRegion(w.region, w) : '지역 정보 없음']]; }
+  };
+  function groupBy(list, fn) {
+    var m = {}, order = [];
+    list.forEach(function (w) {
+      fn(w).forEach(function (kl) {
+        var g = m[kl[0]];
+        if (!g) { g = m[kl[0]] = { k: kl[0], label: kl[1], items: [] }; order.push(g); }
+        g.items.push(w);
+      });
+    });
+    return order;
+  }
+  function sortGroups(gs, dim) {
+    if (dim === 'band') { var idx = {}; BANDS.forEach(function (b, i) { idx[b.k] = i; }); return gs.sort(function (a, b) { return idx[a.k] - idx[b.k]; }); }
+    if (dim === 'vintage') return gs.sort(function (a, b) { return (a.k === '' ? 1 : 0) - (b.k === '' ? 1 : 0) || (a.k === 'NV' ? 1 : 0) - (b.k === 'NV' ? 1 : 0) || (b.k > a.k ? 1 : b.k < a.k ? -1 : 0); });
+    if (dim === 'grade') return gs.sort(function (a, b) { return (a.k === '' ? 1 : 0) - (b.k === '' ? 1 : 0) || avg(b.items) - avg(a.items) || b.items.length - a.items.length; });
+    return gs.sort(function (a, b) { return (a.k === '' ? 1 : 0) - (b.k === '' ? 1 : 0) || b.items.length - a.items.length || a.label.localeCompare(b.label, 'ko'); });
+  }
+  function avg(items) { var v = items.filter(function (w) { return w._score != null; }); return v.length ? v.reduce(function (s, w) { return s + w._score; }, 0) / v.length : -1; }
+  function bandBar(items) {
+    var c = counted(items.map(function (w) { return w._band.k; })), n = items.length;
+    return '<span class="gbar" aria-hidden="true">' + BANDS.filter(function (b) { return c[b.k]; }).map(function (b) { return '<i class="bg-' + b.k + '" style="width:' + (c[b.k] / n * 100).toFixed(2) + '%" title="' + esc(b.label) + ' ' + c[b.k] + '"></i>'; }).join('') + '</span>';
+  }
+  var GROUPS = [];
+  function groupHTML(g, path, nested) {
+    var a = avg(g.items);
+    var sub = g.sub && g.sub.length ? ' <small>' + g.sub.length + '개 지역</small>' : '';
+    return '<details class="grp" data-path="' + path + '"><summary><span class="glabel">' + esc(g.label) + sub + '</span><span class="gmeta">' + g.items.length + '개' +
+      (a >= 0 ? ' · 평균 ' + fmt(a) : '') + '</span>' + bandBar(g.items) + '</summary><div class="rows"></div></details>';
+  }
+  function renderGroups() {
+    var dim = S.gdim;
+    $$('#gdim button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.g === dim)); });
+    var gs = sortGroups(groupBy(S.filtered, GDIM[dim]), dim);
+    if (dim === 'geo') gs.forEach(function (g) { g.sub = sortGroups(groupBy(g.items, GDIM.region), 'region'); });
+    GROUPS = gs;
+    $('#groups').innerHTML = gs.length ? gs.map(function (g, i) { return groupHTML(g, String(i)); }).join('') : noneHTML();
+  }
+  function rowHTML(w) {
+    var meta = [w.vintage, originLine(w), grapeLine(w)].filter(Boolean).join(' · ');
+    return '<button class="row" data-open="' + esc(w.id) + '">' + scoreBadge(w) + '<span class="rn">' + esc(w.name || w.name_ko) +
+      '<span class="rm">' + esc(meta) + (w.grade && w.grade.raw ? ' · ' + esc(w.grade.raw) : '') + '</span></span></button>';
+  }
+  function fillGroup(det) {
+    var box = det.querySelector(':scope > .rows');
+    if (!box || box.dataset.done) return;
+    var p = det.dataset.path.split('.').map(Number), g = GROUPS[p[0]];
+    if (p.length > 1) g = g.sub[p[1]];
+    if (g.sub && p.length === 1) box.innerHTML = g.sub.map(function (s, j) { return groupHTML(s, p[0] + '.' + j, true); }).join('');
+    else box.innerHTML = g.items.slice().sort(SORTS.score).map(rowHTML).join('');
+    box.dataset.done = '1';
+  }
+
+  /* ---------- 지도 ---------- */
+  var LEAFLET_JS = ['https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js', 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'];
+  var CLUSTER_JS = ['https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js', 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js'];
+  function loadScript(list) {
+    return new Promise(function (res, rej) {
+      var i = 0;
+      (function next() {
+        if (i >= list.length) return rej(new Error('script'));
+        var s = document.createElement('script'); s.src = list[i++]; s.async = true;
+        s.onload = function () { res(); }; s.onerror = function () { s.remove(); next(); };
+        document.head.appendChild(s);
+      })();
+    });
+  }
+  var leafletP = null;
+  function loadLeaflet() {
+    if (!leafletP) leafletP = (window.L ? Promise.resolve() : loadScript(LEAFLET_JS)).then(function () {
+      return window.L.markerClusterGroup ? null : loadScript(CLUSTER_JS).catch(function () { return null; });
+    });
+    return leafletP;
+  }
+  var M = { map: null, tiles: null, layer: null, markers: {}, failed: false, fitted: false, lastKey: '' };
+  function isDark() {
+    var t = document.documentElement.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+  function tileUrl() { return 'https://{s}.basemaps.cartocdn.com/' + (isDark() ? 'dark_all' : 'light_all') + '/{z}/{x}/{y}{r}.png'; }
+  function geoOf(w) {
+    var g = w.geo || {};
+    if (isNum(g.lat) && isNum(g.lng)) return { ll: [g.lat, g.lng], approx: g.precision === 'country' || g.precision === 'region' };
+    var r = REGION[w.region]; if (r) return { ll: [r[1], r[2]], approx: true };
+    var c = COUNTRY[w.country]; if (c) return { ll: [c[1], c[2]], approx: true };
+    return null;
+  }
+  function pinColor(t) { return 'var(--st-' + ({ red: 'r', white: 'g', sparkling: 's', rose: 'p', sweet: 'sw', fortified: 'f', orange: 'o' }[t] || 'n') + ')'; }
+  function popupHTML(w) {
+    return '<div class="pop"><b>' + esc(w.name || w.name_ko) + (w.vintage ? ' ' + esc(w.vintage) : '') + '</b><span class="pm">' + esc(originLine(w)) + '</span>' +
+      '<div class="pr">' + scoreBadge(w) + '<span><span class="small">' + esc(srcName(w.source)) + (w.grade && w.grade.raw ? ' · ' + esc(w.grade.raw) : '') + '</span><br>' +
+      '<button class="linkbtn" data-open="' + esc(w.id) + '">자세히 보기</button></span></div></div>';
+  }
+  function initMap() {
+    if (M.map || M.failed) return Promise.resolve();
+    return loadLeaflet().then(function () {
+      if (M.map) return;
+      var L = window.L;
+      M.map = L.map('map', { worldCopyJump: true, minZoom: 2, maxZoom: 17, zoomControl: true }).setView([35, 10], 2);
+      M.tiles = L.tileLayer(tileUrl(), { subdomains: 'abcd', maxZoom: 19, detectRetina: false,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' }).addTo(M.map);
+      M.layer = L.markerClusterGroup ? L.markerClusterGroup({
+        showCoverageOnHover: false, maxClusterRadius: 44, spiderfyOnMaxZoom: true, chunkedLoading: true,
+        iconCreateFunction: function (c) { var n = c.getChildCount(); return L.divIcon({ html: '<span>' + n + '</span>', className: 'wclu' + (n >= 50 ? ' big' : ''), iconSize: [44, 44] }); }
+      }) : L.layerGroup();
+      M.layer.addTo(M.map);
+    }).catch(function () {
+      M.failed = true;
+      $('#map').innerHTML = '<div class="maperr">지도 라이브러리를 불러오지 못했어요. 네트워크를 확인하고 다시 열어 주세요. 목록과 분류 보기는 그대로 쓸 수 있어요.</div>';
+    });
+  }
+  function renderMap() {
+    initMap().then(function () {
+      if (!M.map) return;
+      var L = window.L;
+      M.map.invalidateSize();
+      var key = S.filtered.map(function (w) { return w.id; }).join(',');
+      if (key === M.lastKey && M.fitted) return;
+      M.lastKey = key;
+      M.layer.clearLayers(); M.markers = {};
+      var ms = [], nogeo = 0;
+      S.filtered.forEach(function (w) {
+        var g = geoOf(w); if (!g) { nogeo++; return; }
+        var lbl = w._score != null ? Math.round(w._score) : '·';
+        var icon = L.divIcon({ className: 'wpin', iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -12],
+          html: '<span class="pin' + (g.approx ? ' approx' : '') + '" style="background:' + pinColor(w._type) + '">' + lbl + '</span>' });
+        var m = L.marker(g.ll, { icon: icon, title: (w.name || '') + (w.vintage ? ' ' + w.vintage : ''), keyboard: true, riseOnHover: true });
+        m.bindPopup(function () { return popupHTML(w); }, { maxWidth: 300 });
+        M.markers[w.id] = m; ms.push(m);
+      });
+      if (M.layer.addLayers) M.layer.addLayers(ms); else ms.forEach(function (m) { M.layer.addLayer(m); });
+      $('#map-note').textContent = '지도에 ' + ms.length + '개' + (nogeo ? ' · 위치 모름 ' + nogeo + '개' : '');
+      fitAll(ms);
+    });
+  }
+  function fitAll(ms) {
+    if (!M.map) return;
+    ms = ms || Object.keys(M.markers).map(function (k) { return M.markers[k]; });
+    M.fitted = true;
+    if (!ms.length) { M.map.setView([35, 10], 2); return; }
+    var b = window.L.latLngBounds(ms.map(function (m) { return m.getLatLng(); }));
+    M.map.fitBounds(b.pad(0.12), { maxZoom: 9 });
+  }
+  function showOnMap(id) {
+    closeSheets();
+    setView('map');
+    var tryOpen = function (n) {
+      var m = M.markers[id];
+      if (!m) { if (n < 20) setTimeout(function () { tryOpen(n + 1); }, 250); return; }
+      if (M.layer.zoomToShowLayer) M.layer.zoomToShowLayer(m, function () { m.openPopup(); });
+      else { M.map.setView(m.getLatLng(), 10); m.openPopup(); }
+    };
+    tryOpen(0);
+  }
+
+  /* ================================================================ 상세 */
+  var lastFocus = null;
+  function openSheet(id) {
+    lastFocus = document.activeElement;
+    var sh = $('#' + id); sh.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var x = sh.querySelector('[data-close]'); if (x) x.focus({ preventScroll: true });
+  }
+  function closeSheets() {
+    var was = !$('#detail').hidden || !$('#settings').hidden;
+    $('#detail').hidden = true; $('#settings').hidden = true;
+    document.body.style.overflow = '';
+    if (/^#w-/.test(location.hash)) history.replaceState(null, '', '#' + S.view);
+    if (was && lastFocus && lastFocus.focus) try { lastFocus.focus({ preventScroll: true }); } catch (e) {}
+  }
+  function kvRow(k, v) { return v ? '<dt>' + k + '</dt><dd>' + v + '</dd>' : ''; }
+  function openDetail(id) {
+    var w = S.all.filter(function (x) { return x.id === id; })[0];
+    if (!w) return;
+    var sc = w.score || {}, wm = w.winemaking || {};
+    var bandTxt = '<b>' + esc(w._band.label) + '</b>' + (w._band.range ? ' <span class="small">' + esc(w._band.range) + '</span>' : '') +
+      '<small>' + (w._score != null ? '100점 환산 ' + fmt(w._score) + (sc.scale && sc.scale !== 100 ? ' (' + fmt(sc.value) + '/' + fmt(sc.scale) + ' 환산)' : '') + (sc.basis === 'estimated' ? ' · 블로거 표현으로 추정' : '') : '블로거가 점수를 매기지 않았어요') + '</small>' +
+      (w.grade && w.grade.raw ? '<small>블로거 등급: <b>' + esc(w.grade.raw) + '</b></small>' : '');
+    var ch = CHAPTER[w.region] || CHAPTER_COUNTRY[w.country];
+    var originHTML = esc(originLine(w)) + (w.subregion && w.appellation && w.subregion !== w.region ? ' <span class="small">(' + esc(w.subregion) + ')</span>' : '');
+    var grapesHTML = (w.grapes || []).map(function (g) { return esc(koGrape(g.name, g)) + ' <span class="small">' + esc(g.name) + (isNum(g.pct) ? ' ' + fmt(g.pct) + '%' : '') + '</span>'; }).join(', ');
+    var basisTxt = { post: '블로그 글', web: '웹 검색(생산자·수입사 자료)', knowledge: 'Claude의 일반 지식', mixed: '글과 공개 자료' }[wm.basis] || '';
+    var scopeTxt = { cuvee: '이 와인(퀴베)의 방식', producer: '생산자의 일반 방식', appellation: '산지의 일반 규정' }[wm.scope] || '';
+    var wmHTML = wm.summary ? '<div class="wm"><p>' + esc(wm.summary) + '</p><dl class="kv">' + kvRow('발효', esc(wm.fermentation)) + kvRow('숙성', esc(wm.aging)) + kvRow('기타', esc(wm.other)) + '</dl>' +
+      '<p class="note">' + [scopeTxt, basisTxt ? '근거: ' + basisTxt : ''].filter(Boolean).join(' · ') + '</p>' +
+      ((wm.sources || []).length ? '<p class="note src">' + wm.sources.map(function (u, i) { return '<a href="' + esc(u) + '" target="_blank" rel="noopener">자료 ' + (i + 1) + '</a>'; }).join(' · ') + '</p>' : '') +
+      '</div>' : '<p class="note">양조 정보가 아직 없어요.</p>';
+    var post = w.post || {};
+    $('#d-body').innerHTML =
+      '<div class="dtop"><span class="tag ' + w._type + '">' + TYPES[w._type] + '</span>' + (w.vintage ? '<span class="num">' + esc(w.vintage) + '</span>' : '') +
+      (w.classification ? '<span class="tag cls">' + esc(w.classification) + '</span>' : '') + '<span>' + esc(srcName(w.source)) + '</span></div>' +
+      '<h2 id="d-title">' + esc(w.name || w.name_ko) + '</h2>' + (w.name_ko && w.name_ko !== w.name ? '<p class="dko">' + esc(w.name_ko) + '</p>' : '') +
+      '<div class="dscore">' + scoreBadge(w) + '<div class="bandtxt">' + bandTxt + '</div></div>' +
+      (w.summary ? '<h3>블로거 평가 요약</h3><p>' + esc(w.summary) + '</p>' : '') +
+      '<dl class="kv">' +
+      kvRow('생산자', esc(w.producer) + (w.producer_ko && w.producer_ko !== w.producer ? ' <span class="small">' + esc(w.producer_ko) + '</span>' : '')) +
+      kvRow('산지', originHTML) + kvRow('분류 등급', esc(w.classification)) + kvRow('품종', grapesHTML) +
+      kvRow('알코올', isNum(w.abv) ? fmt(w.abv) + '%' : '') + kvRow('가격', esc(w.price)) + kvRow('시음', esc(w.tasted_on)) +
+      kvRow('마시기 좋은 때', esc(w.drink_window)) + kvRow('어울리는 음식', esc(w.food_pairing)) +
+      kvRow('평론가 점수', esc((w.critic_scores || []).join(', '))) +
+      '</dl>' +
+      '<h3>양조 방법</h3>' + wmHTML +
+      '<div class="dlinks">' + (post.url ? '<a class="btn go" href="' + esc(post.url) + '" target="_blank" rel="noopener">블로그 원문 보기</a>' : '') +
+      (geoOf(w) ? '<button class="btn alt" data-mapto="' + esc(w.id) + '">지도에서 보기</button>' : '') +
+      (ch ? '<a class="btn alt" href="../' + ch[0] + '">WineBook ' + esc(ch[1]) + '</a>' : '') + '</div>' +
+      '<p class="note" style="margin-top:1.2em">원문: ' + esc(post.title || '') + (post.date ? ' · ' + fmtDate(post.date) : '') +
+      (w.partial ? ' · 본문 대신 RSS 요약으로 정리' : '') + (w.confidence ? ' · 정리 신뢰도 ' + ({ high: '높음', medium: '보통', low: '낮음' }[w.confidence] || w.confidence) : '') + '</p>' +
+      '<p class="note">빈티지 평가는 <a href="../vintages.html">12장</a>, 양조 용어는 <a href="../winemaking.html">13장</a>, 점수 환산은 <a href="../critics.html">11장</a>을 참고하세요.</p>';
+    openSheet('detail');
+    $('#detail .panel').scrollTop = 0;
+    if (location.hash !== '#w-' + id) history.replaceState(null, '', '#w-' + id);
+  }
+
+  /* ================================================================ 설정 */
+  function msg(id, text, kind) { var el = $('#' + id); el.textContent = text || ''; el.className = 'msg' + (kind ? ' ' + kind : ''); }
+  function renderSettings() {
+    $('#repo-name1').textContent = CFG.owner + '/' + CFG.repo;
+    $('#repo-in').value = CFG.owner + '/' + CFG.repo; $('#branch-in').value = CFG.branch;
+    $('#tok').value = ''; $('#tok').placeholder = token() ? '저장된 토큰 있음 (바꾸려면 새로 입력)' : 'github_pat_…';
+    $('#demo-toggle').textContent = S.demo ? '샘플 보기 끄기' : '샘플 데이터로 보기';
+    var st = S.status && S.status.last_run, out = '';
+    if (st) {
+      out += '<p><b>' + esc(st.mode === 'check' ? '접속 점검' : st.mode === 'reprocess' ? '다시 정리' : '수집') + '</b> · ' + esc(ago(st.finished || st.at)) + (st.ok === false ? ' · <span style="color:var(--bad)">문제 있음</span>' : '') + '<br>' + esc(st.message || '') + '</p>';
+      if (st.sources && st.sources.length) out += '<ul>' + st.sources.map(function (s) {
+        return '<li>' + esc(s.name || s.id) + ': ' + esc(s.rss === 'ok' ? 'RSS ' + (s.items || 0) + '개' + (s.new != null ? ', 새 글 ' + s.new + '개' : '') + (s.latest ? ', 최근 ' + fmtDate(s.latest) : '') : s.rss === 'off' ? '수집 꺼짐' : s.rss === 'none' ? 'RSS 주소 없음' : 'RSS 오류 ' + (s.error || '')) +
+          (s.post_fetch ? ' · 본문 ' + (s.post_fetch.ok ? '읽기 OK(' + s.post_fetch.chars + '자)' : '실패 ' + esc(s.post_fetch.error || '')) : '') + '</li>';
+      }).join('') + '</ul>';
+      if (st.errors && st.errors.length) out += '<p class="small">실패한 글</p><ul>' + st.errors.slice(0, 8).map(function (e) { return '<li><a href="' + esc(e.post) + '" target="_blank" rel="noopener">' + esc(e.title || e.post) + '</a> — ' + esc(e.error) + '</li>'; }).join('') + '</ul>';
+      if (st.notes && st.notes.length) out += '<ul>' + st.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>';
+      if (st.usage && st.usage.calls) out += '<p class="small">API 사용: 호출 ' + st.usage.calls + '회, 입력 ' + Math.round(st.usage.input_tokens / 1000) + 'k·출력 ' + Math.round(st.usage.output_tokens / 1000) + 'k 토큰, 웹 검색 ' + st.usage.web_searches + '회' + (st.usage.cost_usd != null ? ', 약 $' + st.usage.cost_usd : '') + '</p>';
+    } else out = '<p>아직 수집한 적이 없어요.</p>';
+    if (S.status && S.status.totals) out += '<p class="small">정리한 글 ' + S.status.totals.posts + '개 · 와인 ' + S.status.totals.wines + '개 · 대기 ' + S.status.totals.pending + '개</p>';
+    out += '<p class="small"><a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub Actions 실행 기록</a> · <a href="' + repoUrl('/blob/' + CFG.branch + '/reviews/README.md') + '" target="_blank" rel="noopener">사용 설명</a></p>';
+    $('#set-status').innerHTML = out;
+    var srcHTML = S.srcList.map(function (s) {
+      return '<div class="srcrow"><div><b>' + esc(s.name || s.id) + '</b> <span class="small">(' + esc(s.id) + ' · ' + esc(s.platform || '') + ')</span><small>' +
+        (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url) + '</a>' : '') + (s.rss ? '' : ' · RSS 주소 없음') + '</small></div>' +
+        '<button class="chip" data-src-toggle="' + esc(s.id) + '" aria-pressed="' + (s.enabled !== false) + '">' + (s.enabled !== false ? '수집 중' : '수집 꺼짐') + '</button></div>';
+    }).join('');
+    $('#src-list').innerHTML = srcHTML || '<p class="small">등록된 블로그가 없어요.</p>';
+  }
+  function needToken(id) {
+    if (token()) return false;
+    msg(id, 'GitHub 토큰이 필요해요. 위의 ‘GitHub 연결’에서 토큰을 저장하거나, GitHub에서 직접 파일을 고칠 수 있어요.', 'err');
+    return true;
+  }
+  function detectSource(url) {
+    var u;
+    try { u = new URL(/^https?:\/\//i.test(url) ? url : 'https://' + url); } catch (e) { return null; }
+    var h = u.hostname.toLowerCase(), seg = u.pathname.split('/').filter(Boolean);
+    if (/(^|\.)blog\.naver\.com$/.test(h) && h !== 'rss.blog.naver.com') {
+      var id = u.searchParams.get('blogId') || seg[0];
+      if (!id || /\./.test(id)) return null;
+      return { id: id, name: id, platform: 'naver', blog_id: id, url: 'https://blog.naver.com/' + id, rss: 'https://rss.blog.naver.com/' + id + '.xml' };
+    }
+    if (h === 'rss.blog.naver.com') { var nid = (seg[0] || '').replace(/\.xml$/, ''); return nid ? { id: nid, name: nid, platform: 'naver', blog_id: nid, url: 'https://blog.naver.com/' + nid, rss: 'https://rss.blog.naver.com/' + nid + '.xml' } : null; }
+    if (/\.tistory\.com$/.test(h)) { var tid = h.split('.')[0]; return { id: tid, name: tid, platform: 'tistory', url: 'https://' + h, rss: 'https://' + h + '/rss' }; }
+    if (/\.blogspot\.com$/.test(h)) { var bid = h.split('.')[0]; return { id: bid, name: bid, platform: 'web', url: 'https://' + h, rss: 'https://' + h + '/feeds/posts/default?alt=rss' }; }
+    var base = h.replace(/^www\./, '').split('.')[0];
+    if (/(rss|feed|atom)|\.xml$/i.test(u.pathname)) return { id: base, name: h, platform: 'web', url: u.origin, rss: u.href };
+    if (/\.wordpress\.com$/.test(h)) return { id: base, name: h, platform: 'web', url: u.origin, rss: u.origin + '/feed/' };
+    return { id: base, name: h, platform: 'web', url: u.origin, rss: u.origin + '/feed' };
+  }
+  function editSources(fn, message) {
+    return updateFile(CFG.dir + '/sources.json', function (text) {
+      var doc = text ? JSON.parse(text) : { sources: [], settings: {} };
+      doc.sources = doc.sources || [];
+      if (fn(doc) === false) return null;
+      return JSON.stringify(doc, null, 1) + '\n';
+    }, message);
+  }
+  function addSource() {
+    var url = $('#src-url').value.trim();
+    if (!url) return msg('src-msg', '블로그 주소를 넣어 주세요.', 'err');
+    var s = detectSource(url);
+    if (!s) return msg('src-msg', '블로그 주소를 알아보지 못했어요. 블로그 첫 화면 주소나 RSS 주소를 넣어 주세요.', 'err');
+    if (needToken('src-msg')) return;
+    msg('src-msg', '추가하는 중…');
+    var added = null;
+    editSources(function (doc) {
+      if (doc.sources.some(function (x) { return x.rss === s.rss || (x.platform === 'naver' && s.platform === 'naver' && (x.blog_id || x.id).toLowerCase() === s.blog_id.toLowerCase()); })) {
+        var ex = doc.sources.filter(function (x) { return x.rss === s.rss || (x.blog_id || x.id).toLowerCase() === (s.blog_id || s.id).toLowerCase(); })[0];
+        if (ex && ex.enabled === false) { ex.enabled = true; added = ex; return; }
+        added = 'dup'; return false;
+      }
+      var ids = doc.sources.map(function (x) { return x.id; }), id = s.id.toLowerCase().replace(/[^a-z0-9_\-]/g, '-') || 'blog', n = 2;
+      while (ids.indexOf(id) >= 0) id = s.id + '-' + n++;
+      s.id = id; s.enabled = true; s.hint = '';
+      doc.sources.push(s); added = s;
+    }, 'reviews: 블로그 추가 ' + s.id).then(function () {
+      if (added === 'dup') return msg('src-msg', '이미 등록된 블로그예요.', 'ok');
+      msg('src-msg', '추가했어요: ' + (added.name || added.id) + ' (' + added.rss + '). 새로고침을 누르면 이 블로그의 최근 글부터 정리합니다.', 'ok');
+      $('#src-url').value = '';
+      return load(true).then(renderSettings);
+    }).catch(function (e) { msg('src-msg', e.message, 'err'); });
+  }
+  function toggleSource(id) {
+    if (needToken('src-msg')) return;
+    var now = null;
+    editSources(function (doc) {
+      var s = doc.sources.filter(function (x) { return x.id === id; })[0];
+      if (!s) return false;
+      s.enabled = s.enabled === false; now = s.enabled;
+    }, 'reviews: 블로그 수집 ' + id).then(function () {
+      msg('src-msg', id + ' 수집을 ' + (now ? '켰어요.' : '껐어요. 이미 정리한 와인은 그대로 남습니다.'), 'ok');
+      return load(true).then(renderSettings);
+    }).catch(function (e) { msg('src-msg', e.message, 'err'); });
+  }
+  function addBackfill() {
+    var raw = $('#bf').value;
+    var urls = (raw.match(/(?:https?:\/\/)?(?:m\.)?(?:blog\.naver\.com|naver\.me|[\w-]+\.tistory\.com)[^\s,<>"']*/gi) || [])
+      .concat((raw.match(/https?:\/\/[^\s,<>"']+/gi) || []))
+      .map(function (u) { return u.replace(/[).,]+$/, ''); });
+    urls = urls.filter(function (u, i) { return urls.indexOf(u) === i; });
+    if (!urls.length) return msg('bf-msg', '글 주소를 찾지 못했어요. https://blog.naver.com/아이디/글번호 형식으로 넣어 주세요.', 'err');
+    if (needToken('bf-msg')) return;
+    msg('bf-msg', urls.length + '개 주소를 저장하는 중…');
+    var addedN = 0;
+    updateFile(CFG.dir + '/backfill.txt', function (text) {
+      var have = text.split('\n').map(function (l) { return l.trim(); });
+      var fresh = urls.filter(function (u) { return have.indexOf(u) < 0; });
+      addedN = fresh.length;
+      if (!fresh.length) return null;
+      var d = new Date();
+      return text.replace(/\s*$/, '\n') + '# ' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' 추가\n' + fresh.join('\n') + '\n';
+    }, 'reviews: 과거 글 주소 ' + urls.length + '개 추가').then(function () {
+      $('#bf').value = '';
+      msg('bf-msg', (addedN ? addedN + '개를 추가했어요.' : '모두 이미 목록에 있어요.') + ' 정리를 시작합니다.', 'ok');
+      closeSheets();
+      refresh();
+    }).catch(function (e) { msg('bf-msg', e.message, 'err'); });
+  }
+
+  /* ================================================================ 새로고침 */
+  var toastT = null;
+  function toast(html, kind, ms) {
+    var t = $('#toast'); t.innerHTML = html; t.className = 'toast' + (kind ? ' ' + kind : ''); t.hidden = false;
+    clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, ms || 6000);
+  }
+  function setBusy(on, label) {
+    S.busy = on;
+    var b = $('#refresh-btn'); b.disabled = on; b.classList.toggle('spin', on);
+    b.querySelector('span').textContent = on ? (label || '수집 중…') : '새로고침';
+  }
+  function fmtElapsed(ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + '분 ' + (s % 60) + '초'; }
+  function refresh(inputs) {
+    if (S.busy) return;
+    if (S.demo) { S.demo = false; store.set('wr-demo', null); }
+    if (!token()) {
+      setBusy(true, '불러오는 중…');
+      return load(true).then(function () {
+        toast('최신 데이터를 다시 불러왔어요. 블로그 새 글까지 지금 수집하려면 설정에서 GitHub 토큰을 연결하세요. ' +
+          '(<a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub에서 실행</a>)', '', 9000);
+      }).catch(function (e) { toast(esc(e.message), 'err'); }).then(function () { setBusy(false); });
+    }
+    var mode = (inputs && inputs.mode) || 'new';
+    var label = mode === 'check' ? '접속 점검' : mode === 'reprocess' ? '다시 정리' : '수집';
+    setBusy(true, label + ' 요청 중…');
+    renderRunline('GitHub에 ' + label + '을 요청하고 있어요…');
+    var finalRun = null;
+    return runWorkflow(inputs || { mode: 'new' }, function (status, ms, run) {
+      var st = { queued: '대기 중', waiting: '대기 중', pending: '대기 중', requested: '대기 중', in_progress: '실행 중', completed: '마무리 중' }[status] || status;
+      setBusy(true, label + ' ' + st + '…');
+      renderRunline('GitHub에서 ' + label + ' ' + st + ' · ' + fmtElapsed(ms) + (run && run.html_url ? ' · <a href="' + esc(run.html_url) + '" target="_blank" rel="noopener">진행 상황</a>' : '') +
+        '<br><span class="small">새 글이 많으면 몇 분 걸려요. 이 페이지를 닫아도 GitHub에서 계속 진행됩니다.</span>');
+    }).then(function (run) {
+      finalRun = run;
+      return sleep(1500).then(function () { return load(true); });
+    }).then(function () {
+      var st = S.status && S.status.last_run;
+      var ok = finalRun && finalRun.conclusion === 'success';
+      toast(esc(ok ? (st && st.message) || '완료했어요.' : (st && st.message) || '실행이 실패했어요.') +
+        (finalRun && !ok ? ' <a href="' + esc(finalRun.html_url) + '" target="_blank" rel="noopener">기록 보기</a>' : ''), ok ? '' : 'err', 10000);
+    }).catch(function (e) {
+      renderRunline();
+      toast(esc(e.message), 'err', 10000);
+    }).then(function () { setBusy(false); renderRunline(); });
+  }
+
+  /* ================================================================ 테마·목차 */
+  function themeIcon() {
+    $('#theme-btn').innerHTML = isDark()
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>';
+  }
+  function toggleTheme() {
+    var next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    store.set('wb-theme', next);
+    themeIcon();
+    if (M.tiles) M.tiles.setUrl(tileUrl());
+  }
+
+  /* ================================================================ 이벤트 */
+  function bind() {
+    themeIcon();
+    $('#theme-btn').addEventListener('click', toggleTheme);
+    $('#menu-btn').addEventListener('click', function () {
+      var d = $('#drawer'), open = d.hidden; d.hidden = !open; this.setAttribute('aria-expanded', String(open));
+    });
+    var qT = null;
+    $('#q').addEventListener('input', function () {
+      var v = this.value; $('#q-clear').hidden = !v;
+      clearTimeout(qT); qT = setTimeout(function () { S.q = v; apply(); }, 140);
+    });
+    $('#q-clear').addEventListener('click', function () { unset('q'); $('#q').focus(); });
+    $('#filter-btn').addEventListener('click', function () {
+      var f = $('#filters'), open = !f.classList.contains('open'); f.classList.toggle('open', open); this.setAttribute('aria-expanded', String(open));
+    });
+    [['#f-source', 'source'], ['#f-country', 'country'], ['#f-region', 'region'], ['#f-grape', 'grape'], ['#f-band', 'band'], ['#f-grade', 'grade'], ['#f-cls', 'cls']].forEach(function (p) {
+      $(p[0]).addEventListener('change', function () {
+        S.f[p[1]] = this.value;
+        if (p[1] === 'country') { S.f.region = ''; }
+        buildOptions(); apply();
+      });
+    });
+    $('#f-min').addEventListener('input', function () { S.f.min = +this.value; $('#f-min-out').textContent = S.f.min > 0 ? S.f.min + '+' : '전체'; apply(); });
+    $('#f-noscore').addEventListener('change', function () { S.f.noScore = this.checked; apply(); });
+    $('#sort').addEventListener('change', function () { S.sort = this.value; store.set('wr-sort', S.sort); apply(); });
+    $('#more-btn').addEventListener('click', function () { S.limit += 60; renderList(); });
+    $$('.viewbar .seg button').forEach(function (b) { b.addEventListener('click', function () {
+      setView(b.dataset.view);
+      var vb = $('.viewbar'); if (vb.getBoundingClientRect().top > window.innerHeight * 0.45) vb.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }); });
+    $$('#gdim button').forEach(function (b) { b.addEventListener('click', function () { S.gdim = b.dataset.g; store.set('wr-gdim', S.gdim); renderGroups(); }); });
+    $('#g-openall').addEventListener('click', function () {
+      var dets = $$('#groups > details.grp'), open = dets.some(function (d) { return !d.open; });
+      dets.forEach(function (d) { d.open = open; if (open) fillGroup(d); });
+      this.textContent = open ? '모두 접기' : '모두 펼치기';
+    });
+    $('#groups').addEventListener('toggle', function (e) { if (e.target.open) fillGroup(e.target); }, true);
+    $('#map-fit').addEventListener('click', function () { fitAll(); });
+    $('#refresh-btn').addEventListener('click', function () { refresh(); });
+    $('#settings-btn').addEventListener('click', function () {
+      ['tok-msg', 'src-msg', 'bf-msg', 'tool-msg'].forEach(function (id) { msg(id, ''); });
+      renderSettings(); openSheet('settings'); $('#settings .panel').scrollTop = 0;
+    });
+    $('#demo-off').addEventListener('click', function () { setDemo(false); });
+
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest ? e.target : e.target.parentElement;
+      var o = t.closest('[data-open]'); if (o) { e.preventDefault(); openDetail(o.getAttribute('data-open')); return; }
+      var mp = t.closest('[data-mapto]'); if (mp) { showOnMap(mp.getAttribute('data-mapto')); return; }
+      var un = t.closest('[data-unset]'); if (un) { unset(un.getAttribute('data-unset')); return; }
+      var ty = t.closest('[data-type]'); if (ty) {
+        var k = ty.getAttribute('data-type'), i = S.f.types.indexOf(k);
+        if (i >= 0) S.f.types.splice(i, 1); else S.f.types.push(k);
+        ty.setAttribute('aria-pressed', String(i < 0)); apply(); return;
+      }
+      var sg = t.closest('[data-src-toggle]'); if (sg) { toggleSource(sg.getAttribute('data-src-toggle')); return; }
+      var act = t.closest('[data-act="demo"]'); if (act) { setDemo(true); return; }
+      if (t.closest('[data-close]') || t.classList.contains('sheet')) { closeSheets(); return; }
+      if (!$('#drawer').hidden && !t.closest('#drawer') && !t.closest('#menu-btn')) { $('#drawer').hidden = true; $('#menu-btn').setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closeSheets(); $('#drawer').hidden = true; }
+      if (e.key === '/' && document.activeElement === document.body) { e.preventDefault(); $('#q').focus(); }
+    });
+    window.addEventListener('hashchange', fromHash);
+
+    $('#tok-save').addEventListener('click', function () {
+      var v = $('#tok').value.trim();
+      if (!v) return msg('tok-msg', '토큰을 붙여 넣어 주세요.', 'err');
+      store.set('wr-gh-token', v); $('#tok').value = ''; renderSettings(); testToken();
+    });
+    $('#tok-test').addEventListener('click', testToken);
+    $('#tok-clear').addEventListener('click', function () { store.set('wr-gh-token', null); renderSettings(); msg('tok-msg', '이 기기에서 토큰을 지웠어요.', 'ok'); });
+    $('#repo-save').addEventListener('click', function () {
+      var r = $('#repo-in').value.trim(), b = $('#branch-in').value.trim() || DEFAULT_BRANCH;
+      if (!/^[\w.-]+\/[\w.-]+$/.test(r)) return msg('tok-msg', 'owner/repo 형식으로 넣어 주세요.', 'err');
+      store.set('wr-repo', r); store.set('wr-branch', b); location.reload();
+    });
+    $('#src-add').addEventListener('click', addSource);
+    $('#bf-add').addEventListener('click', addBackfill);
+    $('#run-check').addEventListener('click', function () { if (needToken('tool-msg')) return; closeSheets(); refresh({ mode: 'check' }); });
+    $('#run-reprocess').addEventListener('click', function () {
+      if (needToken('tool-msg')) return;
+      var src = $('#rp-src').value; closeSheets(); refresh({ mode: 'reprocess', source: src });
+    });
+    $('#demo-toggle').addEventListener('click', function () { closeSheets(); setDemo(!S.demo); });
+  }
+  function testToken() {
+    if (!token()) return msg('tok-msg', '저장된 토큰이 없어요.', 'err');
+    msg('tok-msg', '확인하는 중…');
+    Promise.all([gh('/contents/' + CFG.dir + '/sources.json?ref=' + encodeURIComponent(CFG.branch)), gh('/actions/workflows/' + CFG.wf)]).then(function () {
+      msg('tok-msg', '연결됐어요. 새로고침 버튼으로 바로 수집할 수 있어요.', 'ok');
+    }).catch(function (e) { msg('tok-msg', e.message, 'err'); });
+  }
+  function setDemo(on) {
+    S.demo = on; store.set('wr-demo', on ? '1' : null);
+    S.f = { source: '', country: '', region: '', grape: '', band: '', grade: '', cls: '', types: [], min: 0, noScore: true };
+    M.lastKey = ''; M.fitted = false;
+    load(false).then(function () { if (on) toast('샘플 데이터를 보여 드려요. 실제 리뷰가 아닙니다.'); });
+  }
+  function fromHash() {
+    var h = location.hash.slice(1);
+    if (/^w-/.test(h)) { if (S.loaded) openDetail(decodeURIComponent(h.slice(2))); return; }
+    if (['list', 'map', 'groups'].indexOf(h) >= 0 && h !== S.view) setView(h, true);
+  }
+
+  /* ================================================================ 시작 */
+  S.demo = /[?&]demo\b/.test(location.search) || store.get('wr-demo') === '1';
+  var h0 = location.hash.slice(1);
+  S.view = ['list', 'map', 'groups'].indexOf(h0) >= 0 ? h0 : (store.get('wr-view') || 'list');
+  S.gdim = store.get('wr-gdim') || 'band';
+  S.sort = store.get('wr-sort') || 'score';
+  $('#sort').value = S.sort;
+  bind();
+  setView(S.view, true);
+  load(false).then(function () {
+    if (/^#w-/.test(location.hash)) openDetail(decodeURIComponent(location.hash.slice(3)));
+  }).catch(function (e) { console.error(e); S.loaded = true; S.loadError = true; renderView(); });
+  if ('requestIdleCallback' in window) requestIdleCallback(function () { loadLeaflet().catch(function () {}); });
+  else setTimeout(function () { loadLeaflet().catch(function () {}); }, 1500);
+  window.WR = { S: S, M: M, CFG: CFG, refresh: refresh, openDetail: openDetail };
+})();
+</script>
+</body>
+</html>
