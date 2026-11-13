@@ -1,0 +1,74 @@
+# 와인 리뷰 수집: 블로그 RSS의 새 글과 reviews/data/backfill.txt 의 과거 글을
+# Claude API로 정리해 reviews/data/*.json 에 저장합니다.
+# 리뷰 페이지(reviews/index.html)의 '새로고침' 버튼이나 Actions 탭의 'Run workflow'로 바로 실행할 수 있습니다.
+name: 와인 리뷰 수집
+
+on:
+  schedule:
+    - cron: "37 21 * * *"   # 매일 오전 6시 37분(한국 시간)
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "new = 새 글과 과거 글 정리 / reprocess = 정리한 글 다시 정리 / check = 접속 점검(API 미사용)"
+        type: choice
+        options: [new, reprocess, check]
+        default: new
+      source:
+        description: "이 블로그 id만 처리 (비우면 전체)"
+        type: string
+        default: ""
+      limit:
+        description: "이번에 정리할 최대 글 수 (비우면 sources.json 설정값)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: wine-reviews
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      MODE: ${{ inputs.mode || 'new' }}
+      SOURCE: ${{ inputs.source || '' }}
+      LIMIT: ${{ inputs.limit || '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 리뷰 수집·정리
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python reviews/collector/collect.py
+
+      - name: 결과 저장
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reviews/data
+          if git diff --cached --quiet; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git commit -m "reviews: 리뷰 데이터 갱신 (${MODE})"
+          for i in 1 2 3; do
+            if git push origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          exit 1
+
+      - name: 페이지 다시 빌드 요청
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" > /dev/null 2>&1 || true
