@@ -23,7 +23,9 @@
  ],
  "settings": {
   "model": "claude-sonnet-5-5",
-  "max_posts_per_run": 20,
+  "filter_model": "claude-haiku-5-5",
+  "title_filter": true,
+  "max_posts_per_run": 40,
   "web_search": true,
   "web_search_max_uses": 3
  }

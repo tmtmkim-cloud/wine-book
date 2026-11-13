@@ -1,20 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""WineBook 와인 리뷰 수집기 (GitHub Actions에서 실행).
+"""WineBook 와인 리뷰 정리기 (GitHub Actions에서 필요할 때 실행).
 
 하는 일
-  1) data/sources.json 에 적힌 블로그의 RSS에서 새 글을 찾습니다.
-  2) data/backfill.txt (와 POST_URLS)에 적힌 과거 글 주소를 대기열에 넣습니다.
+  1) data/sources.json 에 적힌 블로그의 전체 글 목록을 가져옵니다
+     (네이버는 블로그 글 목록, 그 밖의 블로그는 사이트맵, 둘 다 안 되면 RSS의 최근 글).
+  2) 제목으로 와인 글을 고릅니다(저렴한 모델로 한꺼번에 분류하고, 애매하면 포함).
   3) 글 본문을 가져와 Claude API로 와인 정보(점수·등급·산지·품종·양조 방법·좌표)를 정리합니다.
   4) data/wines.json, data/state.json, data/status.json 을 갱신합니다.
+  이미 정리한 글은 건너뛰므로, 다시 실행하면 그사이 새로 생긴 글만 정리합니다.
+  남은 글이 있으면 워크플로가 다음 실행을 스스로 이어 붙입니다.
 
 환경 변수
   ANTHROPIC_API_KEY   Claude API 키 (저장소 Secret)
-  MODE                new(기본) | reprocess | check
-  SOURCE              이 블로그 id만 처리 (비우면 전체)
+  MODE                all(기본) | check | reprocess
+  SOURCE              이 블로그 id만 처리 (비우면 켜 둔 블로그 전체)
+  TITLE_FILTER        on(기본) | off  — off면 제목 필터 없이 모든 글을 정리하고, 전에 제목으로 거른 글도 다시 봅니다
   LIMIT               이번 실행에서 정리할 최대 글 수 (비우면 settings.max_posts_per_run)
+  CHAIN               자동으로 이어서 실행한 횟수 (워크플로가 채움)
   POST_URLS           (선택) 공백·쉼표로 구분한 글 주소
-  TIME_BUDGET_MIN     새 글 정리를 시작할 수 있는 최대 시간(분, 기본 45)
+  TIME_BUDGET_MIN     새 글 정리를 시작할 수 있는 최대 시간(분, 기본 100)
 
 외부 패키지 없이 파이썬 표준 라이브러리만 씁니다.
 """
@@ -58,6 +63,9 @@ FALLBACK_MODELS = ["claude-sonnet-5-5", "claude-haiku-5-5"]
 PRICES = {"claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "claude-opus-5-5": (4.0, 20.0)}
 WEB_SEARCH_PRICE = 0.01
 MAX_TRIES = 3
+MAX_CHAIN = 60
+TITLE_SKIP = "제목으로 거른 글"
+DEFAULT_FILTER_MODEL = "claude-haiku-5-5"
 TEXT_LIMIT = 24000
 POLITE_DELAY = float(os.environ.get("POLITE_DELAY", "1.5"))
 TYPES = {"red", "white", "rose", "sparkling", "sweet", "fortified", "orange", "other"}
@@ -200,6 +208,19 @@ def decode(data: bytes, headers: dict) -> str:
         return data.decode(enc, "replace")
     except LookupError:
         return data.decode("utf-8", "replace")
+
+
+def parse_loose_json(text: str):
+    """조금 어긋난 JSON(잘못된 \\' 이스케이프, 제어 문자, JSONP 감싸기)도 읽습니다."""
+    t = (text or "").strip()
+    m = re.match(r"^[\w$.]+\((.*)\)\s*;?\s*$", t, re.S)
+    if m:
+        t = m.group(1)
+    try:
+        return json.loads(t)
+    except json.JSONDecodeError:
+        t2 = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", " ", t.replace("\\'", "'"))
+        return json.loads(t2)
 
 
 # ----------------------------------------------------------------------------- HTML → 텍스트
@@ -512,6 +533,146 @@ def parse_feed(data: bytes):
     return channel_title, items
 
 
+# ----------------------------------------------------------------------------- 전체 글 목록
+
+def _epoch_date(v):
+    if isinstance(v, (int, float)) and not isinstance(v, bool):
+        x = float(v) / (1000.0 if v > 1e11 else 1.0)
+        try:
+            return datetime.fromtimestamp(x, KST).date().isoformat()
+        except (OverflowError, OSError, ValueError):
+            return None
+    return parse_date(v)
+
+
+def list_naver_posts(blog_id, max_pages=400):
+    """네이버 블로그의 전체 공개 글 목록 [{no, title, date, category}]. 실패하면 FetchError."""
+    errors = []
+    q = urllib.parse.quote(blog_id)
+    out, seen = [], set()
+    try:
+        total = None
+        for page in range(1, max_pages + 1):
+            url = (f"https://blog.naver.com/PostTitleListAsync.naver?blogId={q}&viewdate=&currentPage={page}"
+                   "&categoryNo=0&parentCategoryNo=&countPerPage=30")
+            _, _, data, hdr = http_get(url, headers={"User-Agent": UA_DESKTOP,
+                                                     "Referer": f"https://blog.naver.com/PostList.naver?blogId={q}"})
+            doc = parse_loose_json(decode(data, hdr))
+            items = doc.get("postList") or []
+            if total is None:
+                total = int(num(doc.get("totalCount")) or 0)
+            new = 0
+            for it in items:
+                no = str(it.get("logNo") or "").strip()
+                if not no.isdigit() or no in seen:
+                    continue
+                seen.add(no)
+                new += 1
+                title = urllib.parse.unquote_plus(str(it.get("title") or ""))
+                out.append({"no": no, "title": strip_html(title)[:300], "date": parse_date(it.get("addDate")),
+                            "category": str(it.get("categoryNo") or "")})
+            if not items or not new or (total and len(out) >= total):
+                break
+            time.sleep(POLITE_DELAY)
+        if out:
+            return out
+        errors.append("PC 글 목록이 비어 있음")
+    except (FetchError, ValueError, AttributeError, TypeError) as e:
+        errors.append(f"PC 글 목록: {e}")
+    out, seen = [], set()
+    try:
+        for page in range(1, max_pages + 1):
+            url = f"https://m.blog.naver.com/api/blogs/{q}/post-list?categoryNo=0&itemCount=24&page={page}"
+            _, _, data, hdr = http_get(url, headers={"User-Agent": UA_MOBILE, "Accept": "application/json",
+                                                     "Referer": f"https://m.blog.naver.com/{q}?tab=1"})
+            doc = parse_loose_json(decode(data, hdr))
+            res = doc.get("result") if isinstance(doc.get("result"), dict) else doc
+            items = res.get("items") or res.get("postList") or []
+            new = 0
+            for it in items:
+                no = str(it.get("logNo") or "").strip()
+                if not no.isdigit() or no in seen:
+                    continue
+                seen.add(no)
+                new += 1
+                title = it.get("titleWithInspectMessage") or it.get("title") or ""
+                out.append({"no": no, "title": strip_html(str(title))[:300], "date": _epoch_date(it.get("addDate")),
+                            "category": str(it.get("categoryNo") or "")})
+            if not items or not new:
+                break
+            time.sleep(POLITE_DELAY)
+        if out:
+            return out
+        errors.append("모바일 글 목록이 비어 있음")
+    except (FetchError, ValueError, AttributeError, TypeError) as e:
+        errors.append(f"모바일 글 목록: {e}")
+    raise FetchError("; ".join(errors))
+
+
+NON_POST = {"category", "tag", "tags", "page", "author", "guestbook", "notice", "search", "archive", "archives",
+            "feed", "location", "media", "rss", "manage", "admin", "wp-content", "wp-admin", "about"}
+
+
+def list_sitemap_posts(base, max_maps=30):
+    """사이트맵에 있는 글 주소 [{url, date}] (티스토리·워드프레스 등)."""
+    base = base if "://" in base else "https://" + base
+
+    def local(tag):
+        return str(tag).rsplit("}", 1)[-1].lower()
+
+    def get_xml(u):
+        _, _, data, _ = http_get(u, headers={"Accept": "application/xml, text/xml;q=0.9, */*;q=0.5"})
+        return ET.fromstring(data)
+
+    root = get_xml(base.rstrip("/") + "/sitemap.xml")
+    roots = []
+    if local(root.tag) == "sitemapindex":
+        for sm in root:
+            loc = next(((c.text or "").strip() for c in sm if local(c.tag) == "loc"), "")
+            if loc and len(roots) < max_maps:
+                try:
+                    roots.append(get_xml(loc))
+                except (FetchError, ET.ParseError):
+                    pass
+                time.sleep(POLITE_DELAY)
+    else:
+        roots = [root]
+    out, seen = [], set()
+    for r in roots:
+        for el in r:
+            if local(el.tag) != "url":
+                continue
+            loc = next(((c.text or "").strip() for c in el if local(c.tag) == "loc"), "")
+            mod = next(((c.text or "").strip() for c in el if local(c.tag) == "lastmod"), "")
+            if not loc or loc in seen:
+                continue
+            segs = [x for x in urllib.parse.urlparse(loc).path.split("/") if x]
+            if not segs or segs[0].lower() in NON_POST:
+                continue
+            seen.add(loc)
+            out.append({"url": loc, "date": parse_date(mod)})
+    return out
+
+
+def list_source(src):
+    """블로그의 전체 글 목록 → ([(post, 제목, 날짜, 카테고리)], 가져온 방법)."""
+    if src.get("platform") == "naver":
+        bid = src.get("blog_id") or src.get("id")
+        items = list_naver_posts(bid)
+        return [({"platform": "naver", "blog": bid, "no": it["no"]}, it["title"], it["date"], it["category"])
+                for it in items], "네이버 글 목록"
+    if src.get("url"):
+        out = []
+        for it in list_sitemap_posts(src["url"]):
+            p = parse_post_url(it["url"])
+            if p and p["platform"] == "web":
+                slug = urllib.parse.unquote(urllib.parse.urlparse(it["url"]).path.rstrip("/").split("/")[-1])
+                out.append((p, re.sub(r"[-_]+", " ", slug), it["date"], ""))
+        if out:
+            return out, "사이트맵"
+    raise FetchError("전체 글 목록을 가져올 방법이 없습니다")
+
+
 # ----------------------------------------------------------------------------- 본문 가져오기
 
 def fetch_post(p, feed_text=""):
@@ -734,7 +895,11 @@ class Ctx:
         self.max_uses = int(settings.get("web_search_max_uses", 3) or 3)
         self.notes = []
         self.usage = {"input_tokens": 0, "output_tokens": 0, "web_searches": 0, "calls": 0}
-        self.models_used = set()
+        self.by_model = {}
+
+    @property
+    def models_used(self):
+        return set(self.by_model)
 
     def note(self, msg):
         if msg not in self.notes:
@@ -744,22 +909,29 @@ class Ctx:
     def add_usage(self, u, model):
         if not u:
             return
-        self.usage["calls"] += 1
-        self.usage["input_tokens"] += int(u.get("input_tokens") or 0) + int(u.get("cache_creation_input_tokens") or 0) \
+        i = int(u.get("input_tokens") or 0) + int(u.get("cache_creation_input_tokens") or 0) \
             + int(u.get("cache_read_input_tokens") or 0)
-        self.usage["output_tokens"] += int(u.get("output_tokens") or 0)
-        self.usage["web_searches"] += int((u.get("server_tool_use") or {}).get("web_search_requests") or 0)
-        self.models_used.add(model)
+        o = int(u.get("output_tokens") or 0)
+        w = int((u.get("server_tool_use") or {}).get("web_search_requests") or 0)
+        self.usage["calls"] += 1
+        self.usage["input_tokens"] += i
+        self.usage["output_tokens"] += o
+        self.usage["web_searches"] += w
+        m = self.by_model.setdefault(model, [0, 0, 0])
+        m[0] += i
+        m[1] += o
+        m[2] += w
 
     def cost(self):
-        if len(self.models_used) != 1:
+        if not self.by_model:
             return None
-        p = PRICES.get(next(iter(self.models_used)))
-        if not p:
-            return None
-        u = self.usage
-        return round(u["input_tokens"] / 1e6 * p[0] + u["output_tokens"] / 1e6 * p[1]
-                     + u["web_searches"] * WEB_SEARCH_PRICE, 4)
+        total = 0.0
+        for model, (i, o, w) in self.by_model.items():
+            p = PRICES.get(model)
+            if not p:
+                return None
+            total += i / 1e6 * p[0] + o / 1e6 * p[1] + w * WEB_SEARCH_PRICE
+        return round(total, 4)
 
 
 def related_context(text, wines, limit=8):
@@ -848,6 +1020,101 @@ def extract(src, p, content, key, ctx, wines):
         messages.append({"role": "user", "content": "확인한 내용으로 지금 record_wines 도구를 호출해 결과를 제출하세요."})
         forced = True
     raise ApiError("record_wines 결과를 받지 못했습니다.")
+
+
+# ----------------------------------------------------------------------------- 제목으로 와인 글 고르기
+
+FILTER_SYSTEM = """블로그 글 제목 목록에서 와인을 직접 마셔 보고 쓴 글일 수 있는 글을 고릅니다.
+포함: 와인 리뷰·시음기, 시음회·와인 모임·와인 디너·와인바 후기, 와인을 곁들인 식사 후기, 여러 와인 비교,
+제목에 와인 이름이나 생산자(샤토, 도멘, 바인구트, 보데가, 테누타 등)·빈티지 연도·품종·산지가 있는 글.
+제외: 와인과 관계없는 글(일상, 여행만, 육아, 공지 등), 위스키·맥주·사케·칵테일만 다룬 글, 와인 구입·할인 정보만 있는 글.
+애매하면 포함합니다. [분류 N]은 블로그 카테고리 번호입니다. 와인 글이 많이 모인 번호의 글은 제목이 애매해도 포함하세요.
+pick_wine_posts 도구로 고른 글의 번호를 제출합니다."""
+
+FILTER_TOOL = {
+    "name": "pick_wine_posts",
+    "description": "와인 시음·리뷰일 수 있는 글의 번호 목록을 제출합니다.",
+    "input_schema": {"type": "object", "properties": {"ids": {"type": "array", "items": {"type": "integer"}}},
+                     "required": ["ids"]},
+}
+
+
+def fatal_from(e):
+    low = (e.body or "").lower()
+    if e.status == 401:
+        return Fatal("Claude API 키가 올바르지 않습니다. 저장소 Secret ANTHROPIC_API_KEY를 확인하세요.")
+    if e.status == 403:
+        return Fatal("Claude API 키에 이 작업 권한이 없습니다. Console에서 키와 조직 설정을 확인하세요.")
+    if e.status == 400 and ("credit" in low or "billing" in low):
+        return Fatal("Claude API 크레딧이 부족합니다. Console의 Billing에서 충전하세요.")
+    return None
+
+
+def classify_titles(rows, key, ctx, model):
+    """rows: [(제목, 카테고리)] → 와인 글일 수 있는 번호 집합. 실패하면 None(모두 포함)."""
+    lines = "\n".join(f"{j}. {t or '(제목 없음)'}" + (f" [분류 {c}]" if c else "") for j, (t, c) in enumerate(rows))
+    body = {"model": model, "max_tokens": 4000, "system": FILTER_SYSTEM,
+            "messages": [{"role": "user", "content": "제목 목록:\n" + lines}],
+            "tools": [FILTER_TOOL], "tool_choice": {"type": "tool", "name": "pick_wine_posts"}}
+    models = [model] + [m for m in (DEFAULT_FILTER_MODEL, DEFAULT_MODEL) if m != model]
+    while models:
+        body["model"] = models[0]
+        try:
+            resp = call_claude(body, key, timeout=240)
+        except ApiError as e:
+            f = fatal_from(e)
+            if f:
+                raise f
+            if e.status == 404 and len(models) > 1:
+                models.pop(0)
+                continue
+            ctx.note("제목으로 와인 글을 고르지 못한 묶음은 모두 정리 대상으로 넣었습니다.")
+            return None
+        ctx.add_usage(resp.get("usage"), models[0])
+        rec = next((b for b in resp.get("content") or [] if b.get("type") == "tool_use"), None)
+        if not rec:
+            return None
+        picks = set()
+        for x in (rec.get("input") or {}).get("ids") or []:
+            if isinstance(x, (int, float)) and not isinstance(x, bool) and 0 <= int(x) < len(rows):
+                picks.add(int(x))
+        return picks | {j for j, (t, _) in enumerate(rows) if not (t or "").strip()}
+    return None
+
+
+def apply_title_filter(state, only, key, ctx, settings, enabled):
+    """'listed' 글을 정리 대상(queued)과 제외(skip)로 나눕니다. → (고른 수, 뺀 수)"""
+    posts = state["posts"]
+    listed = [k for k, st in posts.items() if st.get("status") == "listed" and (not only or st.get("source") == only)]
+    if not enabled:
+        for k in listed:
+            posts[k]["status"] = "queued"
+        back = 0
+        for st in posts.values():
+            if st.get("status") == "skip" and st.get("kind") == TITLE_SKIP and (not only or st.get("source") == only):
+                st["status"] = "queued"
+                st.pop("kind", None)
+                back += 1
+        return len(listed) + back, 0
+    kept = dropped = 0
+    model = settings.get("filter_model") or DEFAULT_FILTER_MODEL
+    by_src = {}
+    for k in listed:
+        by_src.setdefault(posts[k].get("source"), []).append(k)
+    for keys in by_src.values():
+        keys.sort(key=lambda k: posts[k].get("date") or "")
+        for i in range(0, len(keys), 150):
+            batch = keys[i:i + 150]
+            picks = classify_titles([(posts[k].get("title") or "", posts[k].get("cat") or "") for k in batch],
+                                    key, ctx, model)
+            for j, k in enumerate(batch):
+                if picks is None or j in picks:
+                    posts[k]["status"] = "queued"
+                    kept += 1
+                else:
+                    posts[k].update({"status": "skip", "kind": TITLE_SKIP, "at": now_iso()})
+                    dropped += 1
+    return kept, dropped
 
 
 # ----------------------------------------------------------------------------- 결과 정리
@@ -992,52 +1259,112 @@ def post_from_state(st):
 
 # ----------------------------------------------------------------------------- 실행
 
-def poll_feeds(cfg, state, only, report, feed_cache):
+def add_listed(state, src, p, title, date, category, origin):
+    """목록에서 찾은 글을 기록합니다. 새 글이면 True."""
+    k = post_key(p)
+    st = state["posts"].get(k)
+    if st is None:
+        st = state["posts"][k] = {"status": "listed", "tries": 0, "source": src["id"], "platform": p["platform"],
+                                  "url": post_link(p), "origin": origin, "queued_at": now_iso()}
+        if p["platform"] == "naver":
+            st.update({"blog": p["blog"], "no": p["no"]})
+        if title:
+            st["title"] = title[:300]
+        if date:
+            st["date"] = date
+        if category:
+            st["cat"] = str(category)
+        return True
+    if title and not st.get("title"):
+        st["title"] = title[:300]
+    if date and not st.get("date"):
+        st["date"] = date
+    if category and not st.get("cat"):
+        st["cat"] = str(category)
+    return False
+
+
+def gather(cfg, state, only, report, feed_cache, chain):
+    """대상 블로그의 전체 글 목록을 모읍니다(목록이 안 되면 RSS의 최근 글)."""
+    srcstate = state.setdefault("sources", {})
     for src in cfg["sources"]:
         if only and src.get("id") != only:
             continue
         r = {"id": src.get("id"), "name": src.get("name")}
         report.append(r)
-        if not src.get("enabled", True):
-            r["rss"] = "off"
+        if not only and not src.get("enabled", True):
+            r["list"] = "off"
             continue
-        if not src.get("rss"):
-            r["rss"] = "none"
-            continue
-        try:
-            _, _, data, _ = http_get(src["rss"], headers={"Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.5"})
-            title, items = parse_feed(data)
-        except (FetchError, ET.ParseError) as e:
-            r["rss"] = "error"
-            r["error"] = str(e)[:200]
-            log(f"[{src['id']}] RSS 실패: {e}")
-            continue
-        if title and (not src.get("name") or src.get("name") == src.get("id")):
-            src["name"] = title[:80]
-            r["name"] = src["name"]
-            cfg["_dirty"] = True
-        new = 0
-        for it in items:
-            p = parse_post_url(it["link"])
-            if not p:
+        ss = srcstate.setdefault(src["id"], {})
+        if chain > 0 and ss.get("listed_at"):
+            try:
+                fresh = datetime.now(KST) - datetime.fromisoformat(ss["listed_at"]) < timedelta(hours=20)
+            except ValueError:
+                fresh = False
+            if fresh:
+                r.update({"list": "cached", "total": ss.get("total"), "how": ss.get("how")})
                 continue
-            k = post_key(p)
-            feed_cache[k] = it
-            st = state["posts"].get(k)
-            if st is None:
-                state["posts"][k] = {"status": "queued", "tries": 0, "source": src["id"], "platform": p["platform"],
-                                     "url": post_link(p), "title": it["title"], "date": it["date"], "origin": "rss",
-                                     "queued_at": now_iso()}
-                if p["platform"] == "naver":
-                    state["posts"][k].update({"blog": p["blog"], "no": p["no"]})
-                new += 1
-            else:
-                st.setdefault("title", it["title"])
-                st.setdefault("date", it["date"])
-        r.update({"rss": "ok", "items": len(items), "new": new,
-                  "latest": max((it["date"] for it in items if it["date"]), default=None)})
-        log(f"[{src['id']}] RSS {len(items)}개, 새 글 {new}개")
+        added, listed_ok = 0, False
+        try:
+            items, how = list_source(src)
+            for p, title, date, cat in items:
+                if add_listed(state, src, p, title, date, cat, "list"):
+                    added += 1
+            dates = sorted(d for _, _, d, _ in items if d)
+            ss.update({"listed_at": now_iso(), "total": len(items), "how": how})
+            r.update({"list": "ok", "how": how, "total": len(items), "new": added,
+                      "oldest": dates[0] if dates else None, "latest": dates[-1] if dates else None})
+            listed_ok = True
+            log(f"[{src['id']}] {how}: 글 {len(items)}개, 새로 찾은 글 {added}개")
+        except (FetchError, ValueError, ET.ParseError) as e:
+            r.update({"list": "error", "error": str(e)[:200]})
+            log(f"[{src['id']}] 전체 목록 실패: {e}")
+        needs_name = src.get("name") in (None, "", src.get("id"))
+        if src.get("rss") and (not listed_ok or needs_name):
+            time.sleep(POLITE_DELAY)
+            try:
+                _, _, data, _ = http_get(src["rss"], headers={"Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.5"})
+                title, feed = parse_feed(data)
+                if title and needs_name:
+                    src["name"] = title[:80]
+                    r["name"] = src["name"]
+                    cfg["_dirty"] = True
+                n = 0
+                for it in feed:
+                    p = parse_post_url(it["link"])
+                    if not p:
+                        continue
+                    feed_cache[post_key(p)] = it
+                    if add_listed(state, src, p, it["title"], it["date"], it["category"], "rss"):
+                        n += 1
+                r.update({"rss": "ok", "items": len(feed)})
+                if not listed_ok:
+                    r["new"] = n
+                    log(f"[{src['id']}] RSS로 최근 글 {len(feed)}개만 가져왔습니다(새 글 {n}개)")
+            except (FetchError, ET.ParseError) as e:
+                r.update({"rss": "error", "rss_error": str(e)[:200]})
         time.sleep(POLITE_DELAY)
+
+
+def rss_items_for(src, feed_cache, loaded):
+    """본문을 못 가져온 글을 위해 그 블로그의 RSS를 한 번 읽어 둡니다(실행마다 블로그당 한 번)."""
+    if src.get("id") in loaded or not src.get("rss"):
+        return
+    loaded.add(src.get("id"))
+    try:
+        _, _, data, _ = http_get(src["rss"], headers={"Accept": "application/rss+xml, application/xml;q=0.9, */*;q=0.5"})
+        _, feed = parse_feed(data)
+    except (FetchError, ET.ParseError):
+        return
+    for it in feed:
+        p = parse_post_url(it["link"])
+        if p:
+            feed_cache.setdefault(post_key(p), it)
+
+
+def count_status(state, only, status):
+    return sum(1 for st in state["posts"].values()
+               if st.get("status") == status and (not only or st.get("source") == only))
 
 
 def pending_keys(state, only, mode):
@@ -1046,108 +1373,145 @@ def pending_keys(state, only, mode):
         if only and st.get("source") != only:
             continue
         if mode == "reprocess":
-            if st.get("status") in ("ok", "skip"):
+            if st.get("status") in ("ok", "skip") and st.get("kind") != TITLE_SKIP:
                 keys.append(k)
         elif st.get("status") == "queued" or (st.get("status") == "error" and st.get("tries", 0) < MAX_TRIES):
             keys.append(k)
     if mode == "reprocess":
         keys.sort(key=lambda k: state["posts"][k].get("at") or "")
     else:
-        # RSS 새 글 먼저(최근 글부터), 그다음 과거 글, 마지막에 다시 시도할 글
-        order = {"rss": 0, "backfill": 1, "manual": 1}
+        # 최근 글부터, 다시 시도할 글은 마지막에
         keys.sort(key=lambda k: state["posts"][k].get("date") or "", reverse=True)
-        keys.sort(key=lambda k: (1 if state["posts"][k].get("status") == "error" else 0,
-                                 order.get(state["posts"][k].get("origin"), 2)))
+        keys.sort(key=lambda k: 1 if state["posts"][k].get("status") == "error" else 0)
     return keys
 
 
-def run_check(cfg, state, only, status_doc, started):
+def fmt_month(d):
+    return d[:7].replace("-", ".") if d else ""
+
+
+def run_check(cfg, only, started):
     report = []
     for src in cfg["sources"]:
         if only and src.get("id") != only:
             continue
         r = {"id": src.get("id"), "name": src.get("name")}
         report.append(r)
-        if not src.get("enabled", True):
-            r["rss"] = "off"
+        if not only and not src.get("enabled", True):
+            r["list"] = "off"
             continue
-        if not src.get("rss"):
-            r["rss"] = "none"
-            continue
+        sample = None
         try:
-            _, _, data, _ = http_get(src["rss"])
-            title, items = parse_feed(data)
-            r.update({"rss": "ok", "items": len(items), "channel": title[:80],
-                      "latest": max((it["date"] for it in items if it["date"]), default=None)})
-        except Exception as e:
-            r.update({"rss": "error", "error": str(e)[:200]})
-            continue
-        for it in items[:1]:
-            p = parse_post_url(it["link"])
-            if not p:
-                r["post_fetch"] = {"ok": False, "error": "글 주소를 해석하지 못함"}
-                continue
+            items, how = list_source(src)
+            dates = sorted(d for _, _, d, _ in items if d)
+            r.update({"list": "ok", "how": how, "total": len(items),
+                      "oldest": dates[0] if dates else None, "latest": dates[-1] if dates else None})
+            sample = items[0][0] if items else None
+        except (FetchError, ValueError, ET.ParseError) as e:
+            r.update({"list": "error", "error": str(e)[:200]})
+        needs_name = src.get("name") in (None, "", src.get("id"))
+        if src.get("rss") and (sample is None or needs_name):
             time.sleep(POLITE_DELAY)
             try:
-                c = fetch_post(p, it.get("summary", ""))
-                r["post_fetch"] = {"ok": True, "chars": len(c["text"]), "date_found": bool(c.get("date"))}
+                _, _, data, _ = http_get(src["rss"])
+                title, feed = parse_feed(data)
+                if title and needs_name:
+                    src["name"] = title[:80]
+                    r["name"] = src["name"]
+                    cfg["_dirty"] = True
+                r.update({"rss": "ok", "items": len(feed)})
+                if sample is None:
+                    sample = next((p for p in (parse_post_url(it["link"]) for it in feed) if p), None)
+            except (FetchError, ET.ParseError) as e:
+                r.update({"rss": "error", "rss_error": str(e)[:200]})
+        if sample:
+            time.sleep(POLITE_DELAY)
+            try:
+                c = fetch_post(sample)
+                r["post_fetch"] = {"ok": True, "chars": len(c["text"])}
             except FetchError as e:
                 r["post_fetch"] = {"ok": False, "error": str(e)[:200]}
-                r["rss_summary_chars"] = len(it.get("summary") or "")
         time.sleep(POLITE_DELAY)
-    ok = all(x.get("rss") in ("ok", "none", "off") and (x.get("post_fetch") or {}).get("ok", True) for x in report)
-    msgs = []
+    ok, msgs = True, []
     for x in report:
-        if x.get("rss") == "off":
+        if x.get("list") == "off":
             continue
-        if x.get("rss") == "ok":
-            pf = x.get("post_fetch") or {}
-            msgs.append(f"{x['id']}: RSS {x.get('items', 0)}개" + (", 본문 OK" if pf.get("ok") else f", 본문 실패({pf.get('error', '')})"))
+        if x.get("list") == "ok":
+            span = f", {fmt_month(x.get('oldest'))}~{fmt_month(x.get('latest'))}" if x.get("oldest") else ""
+            line = f"{x['id']}: 글 {x['total']}개{span}"
+        elif x.get("rss") == "ok":
+            line = f"{x['id']}: 전체 목록 실패, RSS 최근 글 {x.get('items', 0)}개만 가능"
+            ok = False
         else:
-            msgs.append(f"{x['id']}: RSS {x.get('rss')}" + (f"({x.get('error')})" if x.get("error") else ""))
+            line = f"{x['id']}: 목록 실패({x.get('error', '')})"
+            ok = False
+        pf = x.get("post_fetch")
+        if pf:
+            line += ", 본문 읽기 OK" if pf.get("ok") else f", 본문 읽기 실패({pf.get('error', '')})"
+            ok = ok and bool(pf.get("ok"))
+        msgs.append(line)
     return {"at": started, "finished": now_iso(), "mode": "check", "ok": ok,
-            "message": "접속 점검 · " + " / ".join(msgs), "sources": report}
+            "message": "접속 점검 · " + (" / ".join(msgs) or "점검할 블로그가 없습니다"), "sources": report}
 
 
-def summarize(n_ok, n_skip, n_err, added, pending, notes, fatal):
+def summarize(n_ok, n_skip, n_err, added, remaining, fatal, filt, cont):
     parts = []
     if fatal:
         parts.append(fatal)
+    if filt and (filt[0] or filt[1]):
+        parts.append(f"제목으로 와인 글 {filt[0]}개 고름(나머지 {filt[1]}개 제외)")
     if n_ok:
         parts.append(f"글 {n_ok}개 정리 · 와인 {added}개 반영")
     if n_skip:
         parts.append(f"와인 글이 아닌 글 {n_skip}개 건너뜀")
     if n_err:
         parts.append(f"실패 {n_err}개")
-    if pending:
-        parts.append(f"남은 글 {pending}개(다음 실행에서 이어서)")
+    if remaining:
+        parts.append(f"남은 글 {remaining}개" + ("(자동으로 이어서 정리)" if cont else "(다시 실행하면 이어서 정리)"))
     if not parts:
-        parts.append("새 글 없음")
+        parts.append("정리할 새 글 없음")
     return " · ".join(parts)
+
+
+def gh_output(**kv):
+    path = os.environ.get("GITHUB_OUTPUT")
+    if not path:
+        return
+    with open(path, "a", encoding="utf-8") as f:
+        for k, v in kv.items():
+            f.write(f"{k}={v}\n")
 
 
 def main():
     started = now_iso()
     t0 = time.time()
-    mode = (os.environ.get("MODE") or "new").strip().lower()
-    if mode not in ("new", "reprocess", "check"):
-        mode = "new"
+    mode = (os.environ.get("MODE") or "all").strip().lower()
+    if mode == "new":
+        mode = "all"
+    if mode not in ("all", "reprocess", "check"):
+        mode = "all"
     only = (os.environ.get("SOURCE") or "").strip() or None
+    try:
+        chain = int(os.environ.get("CHAIN") or 0)
+    except ValueError:
+        chain = 0
 
     cfg = load_json(P_SOURCES, {"sources": [], "settings": {}})
     cfg.setdefault("sources", [])
     settings = cfg.setdefault("settings", {})
+    tf = (os.environ.get("TITLE_FILTER") or "").strip().lower()
+    title_filter_on = bool(settings.get("title_filter", True)) if not tf else tf not in ("off", "false", "0", "no")
     state = load_json(P_STATE, {"posts": {}})
     state.setdefault("posts", {})
     wines_doc = load_json(P_WINES, {"version": 1, "wines": []})
     wines_doc.setdefault("wines", [])
     status_doc = load_json(P_STATUS, {"history": []})
     try:
-        limit = int(os.environ.get("LIMIT") or settings.get("max_posts_per_run") or 20)
+        limit = int(os.environ.get("LIMIT") or settings.get("max_posts_per_run") or 40)
     except ValueError:
-        limit = 20
-    limit = max(1, min(limit, 200))
-    budget = float(os.environ.get("TIME_BUDGET_MIN") or 45) * 60
+        limit = 40
+    limit = max(1, min(limit, 500))
+    budget = float(os.environ.get("TIME_BUDGET_MIN") or 100) * 60
 
     run_url = None
     if os.environ.get("GITHUB_RUN_ID") and REPO:
@@ -1160,45 +1524,66 @@ def main():
         hist = status_doc.setdefault("history", [])
         hist.insert(0, prune({k: last.get(k) for k in ("at", "mode", "ok", "message", "processed", "added", "failed")}))
         del hist[20:]
-        status_doc["totals"] = {"wines": len(wines_doc["wines"]),
-                                "posts": sum(1 for x in state["posts"].values() if x.get("status") == "ok"),
-                                "pending": sum(1 for x in state["posts"].values()
-                                               if x.get("status") == "queued" or
-                                               (x.get("status") == "error" and x.get("tries", 0) < MAX_TRIES))}
+        posts = state["posts"].values()
+        status_doc["totals"] = {
+            "wines": len(wines_doc["wines"]),
+            "posts": sum(1 for x in posts if x.get("status") == "ok"),
+            "pending": sum(1 for x in posts if x.get("status") in ("queued", "listed") or
+                           (x.get("status") == "error" and x.get("tries", 0) < MAX_TRIES)),
+            "title_skipped": sum(1 for x in posts if x.get("status") == "skip" and x.get("kind") == TITLE_SKIP),
+            "listed": {sid: v.get("total") for sid, v in (state.get("sources") or {}).items() if v.get("total") is not None},
+        }
         save_json(P_STATUS, status_doc)
 
-    log(f"모드 {mode} · 블로그 {only or '전체'} · 최대 {limit}개")
+    def stop(msg, report, pending=0):
+        write_status({"at": started, "finished": now_iso(), "mode": mode, "ok": False, "message": msg,
+                      "sources": report, "processed": 0, "added": 0, "failed": 0, "pending": pending, "chain": chain})
+        gh_output(**{"continue": "false", "pending": pending, "chain_next": chain + 1})
+        log(msg)
+        return 1
+
+    log(f"모드 {mode} · 블로그 {only or '전체'} · 최대 {limit}개 · 제목 필터 {'켜짐' if title_filter_on else '꺼짐'} · 이어서 실행 {chain}회째")
 
     if mode == "check":
-        last = run_check(cfg, state, only, status_doc, started)
+        last = run_check(cfg, only, started)
+        if cfg.pop("_dirty", False):
+            save_json(P_SOURCES, cfg)
         write_status(last)
+        gh_output(**{"continue": "false"})
         log(last["message"])
         return 0
 
     key = (os.environ.get("ANTHROPIC_API_KEY") or "").strip()
+    no_key = "Claude API 키가 없습니다. 저장소 Settings → Secrets and variables → Actions에 ANTHROPIC_API_KEY를 넣어 주세요."
     report, feed_cache = [], {}
-    if mode == "new":
-        poll_feeds(cfg, state, only, report, feed_cache)
+    ctx = Ctx(settings)
+    filt = None
+    if mode == "all":
+        gather(cfg, state, only, report, feed_cache, chain)
         extra = re.split(r"[\s,]+", os.environ.get("POST_URLS") or "")
         for u in read_backfill() + [x for x in extra if x]:
             enqueue_url(u, cfg, state, "backfill")
-    if cfg.pop("_dirty", False):
-        save_json(P_SOURCES, cfg)
-    save_json(P_STATE, state)
+        if cfg.pop("_dirty", False):
+            save_json(P_SOURCES, cfg)
+        save_json(P_STATE, state)
+        if count_status(state, only, "listed") or not title_filter_on:
+            if title_filter_on and not key:
+                return stop(no_key, report, count_status(state, only, "listed"))
+            try:
+                filt = apply_title_filter(state, only, key, ctx, settings, title_filter_on)
+            except Fatal as e:
+                return stop(str(e), report, count_status(state, only, "listed"))
+            save_json(P_STATE, state)
+            log(f"제목 필터: 정리 대상 {filt[0]}개, 제외 {filt[1]}개")
 
     keys = pending_keys(state, only, mode)
     todo = keys[:limit]
     log(f"정리할 글 {len(keys)}개 중 이번에 {len(todo)}개")
-
     if todo and not key:
-        msg = "Claude API 키가 없습니다. 저장소 Settings → Secrets and variables → Actions에 ANTHROPIC_API_KEY를 넣어 주세요."
-        write_status({"at": started, "finished": now_iso(), "mode": mode, "ok": False, "message": msg,
-                      "sources": report, "processed": 0, "added": 0, "failed": 0, "pending": len(keys)})
-        log(msg)
-        return 1
+        return stop(no_key, report, len(keys))
 
-    ctx = Ctx(settings)
     src_by_id = {x.get("id"): x for x in cfg["sources"]}
+    rss_loaded = {r.get("id") for r in report if r.get("rss") == "ok"}
     n_ok = n_skip = n_err = added = 0
     errors = []
     fatal = None
@@ -1220,7 +1605,10 @@ def main():
         try:
             try:
                 content = fetch_post(p, feed_item.get("summary", ""))
-            except FetchError as e:
+            except FetchError:
+                if not feed_item:
+                    rss_items_for(src, feed_cache, rss_loaded)
+                    feed_item = feed_cache.get(k) or {}
                 summary = feed_item.get("summary") or ""
                 if len(summary) >= 80:
                     content = {"title": feed_item.get("title"), "date": feed_item.get("date"), "text": summary,
@@ -1228,7 +1616,7 @@ def main():
                     ctx.note("본문을 가져오지 못한 글은 RSS 요약만으로 정리했습니다(상세에 '요약만' 표시).")
                 else:
                     raise
-            # RSS의 제목·날짜가 더 정확하므로 있으면 그것을 씁니다.
+            # 목록·RSS의 제목과 날짜가 더 정확하므로 있으면 그것을 씁니다.
             content["title"] = st.get("title") or feed_item.get("title") or content.get("title")
             content["date"] = st.get("date") or feed_item.get("date") or content.get("date")
             if len((content.get("text") or "").strip()) < 5:
@@ -1279,16 +1667,25 @@ def main():
             save_json(P_SOURCES, cfg)
         time.sleep(POLITE_DELAY)
 
-    remaining = len(pending_keys(state, only, "new")) if mode == "new" else max(0, len(keys) - done)
-    msg = summarize(n_ok, n_skip, n_err, added, remaining, ctx.notes, fatal)
+    if mode == "all":
+        remaining = len(pending_keys(state, only, "all")) + count_status(state, only, "listed")
+    else:
+        remaining = max(0, len(keys) - done)
+    cont = mode == "all" and remaining > 0 and (n_ok + n_skip) > 0 and fatal is None and chain < MAX_CHAIN
+    msg = summarize(n_ok, n_skip, n_err, added, remaining, fatal, filt, cont)
     usage = dict(ctx.usage)
     usage["cost_usd"] = ctx.cost()
     usage["model"] = ", ".join(sorted(ctx.models_used)) or None
     write_status({"at": started, "finished": now_iso(), "mode": mode, "ok": fatal is None and n_err == 0,
                   "message": msg, "sources": report, "processed": n_ok, "skipped": n_skip, "failed": n_err,
-                  "added": added, "pending": remaining, "errors": errors[:30], "notes": ctx.notes, "usage": usage})
+                  "added": added, "pending": remaining, "errors": errors[:30], "notes": ctx.notes, "usage": usage,
+                  "filter": {"kept": filt[0], "dropped": filt[1]} if filt else None,
+                  "chain": chain, "continues": cont})
     wines_doc["updated"] = now_iso()
     save_json(P_WINES, wines_doc)
+    if cfg.pop("_dirty", False):
+        save_json(P_SOURCES, cfg)
+    gh_output(**{"continue": "true" if cont else "false", "pending": remaining, "chain_next": chain + 1})
     log(msg)
     return 1 if fatal else 0
 

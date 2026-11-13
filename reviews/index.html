@@ -365,6 +365,8 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
 .msg.err { color: var(--bad); } .msg.ok { color: var(--good); }
 .srcrow { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line-2); font-size: var(--fs-1); }
 .srcrow small { display: block; word-break: break-all; }
+.srcbtns { display: flex; gap: 6px; align-items: center; }
+.srcbtns .btn { padding: 4px 12px; font-size: var(--fs-0); }
 .toolrow { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin: 10px 0; font-size: var(--fs-0); color: var(--ink-2); }
 .toolrow select { width: auto; }
 .statbox { font-size: var(--fs-1); line-height: 1.6; }
@@ -425,7 +427,6 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     <div class="headbar">
       <div class="kpis" id="kpis"></div>
       <div class="acts">
-        <button class="btn go" id="refresh-btn" title="블로그 새 글을 수집해 반영합니다"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg><span>새로고침</span></button>
         <button class="btn alt" id="settings-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span>설정</span></button>
       </div>
     </div>
@@ -516,11 +517,22 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
   <button class="icon-btn x" data-close>닫기</button>
   <h2 id="set-title">설정</h2>
   <section class="sec">
-    <h3>수집 상태</h3>
+    <h3>정리 상태</h3>
     <div class="statbox" id="set-status"></div>
   </section>
   <section class="sec">
-    <h3>GitHub 연결 <small>새로고침·블로그 추가에 필요</small></h3>
+    <h3>블로그 정리</h3>
+    <p class="help">블로그의 전체 글 목록을 가져와 제목으로 와인 글을 고른 뒤 하나씩 정리합니다. 이미 정리한 글은 건너뛰므로, 나중에 다시 실행하면 그사이 새로 생긴 글만 정리해요. 글이 많으면 몇 시간 동안 GitHub에서 자동으로 이어서 진행합니다.</p>
+    <div class="toolrow"><button class="btn go" id="run-all" data-run>전체 정리 시작</button><button class="btn alt" id="run-check" data-run>접속 점검</button><span>접속 점검은 API 비용 없이 블로그별 글 수와 본문 읽기를 확인해요.</span></div>
+    <p class="msg" id="run-msg"></p>
+    <div id="src-list"></div>
+    <h3>블로그 추가</h3>
+    <div class="field"><input type="url" id="src-url" placeholder="블로그 주소 (네이버·티스토리) 또는 RSS 주소" autocomplete="off"><button class="btn alt" id="src-add">추가</button></div>
+    <p class="msg" id="src-msg"></p>
+  </section>
+  <section class="sec">
+    <h3>GitHub 연결 <small>이 페이지에서 정리를 실행하려면 필요</small></h3>
+    <p class="help">토큰 없이도 <a id="actions-link" href="#" target="_blank" rel="noopener">GitHub Actions</a>에서 Run workflow를 눌러 실행할 수 있어요.</p>
     <ol class="help">
       <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub 토큰 만들기</a> (Fine-grained token)</li>
       <li>Repository access: <b>Only select repositories</b> → <b id="repo-name1"></b></li>
@@ -535,23 +547,16 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     </details>
   </section>
   <section class="sec">
-    <h3>블로그</h3>
-    <div id="src-list"></div>
-    <div class="field"><input type="url" id="src-url" placeholder="블로그 주소 (네이버·티스토리) 또는 RSS 주소" autocomplete="off"><button class="btn alt" id="src-add">추가</button></div>
-    <p class="msg" id="src-msg"></p>
-  </section>
-  <section class="sec">
-    <h3>과거 글 추가</h3>
-    <p class="help">RSS에는 최근 글만 나옵니다. 예전 리뷰는 글 주소를 한 줄에 하나씩 붙여 넣으면 차례로 정리합니다(한 번 실행에 설정한 개수만큼, 남은 글은 다음 실행에서 이어서).</p>
-    <textarea id="bf" rows="5" placeholder="https://blog.naver.com/orfeo21/2230…&#10;https://m.blog.naver.com/fascinoya/2231…"></textarea>
-    <div class="field"><button class="btn go" id="bf-add">추가하고 정리 시작</button></div>
+    <h3>글 주소로 추가</h3>
+    <p class="help">전체 목록을 읽지 못하는 블로그나 특정 글만 정리하고 싶을 때, 글 주소를 한 줄에 하나씩 붙여 넣으세요.</p>
+    <textarea id="bf" rows="4" placeholder="https://blog.naver.com/아이디/글번호"></textarea>
+    <div class="field"><button class="btn go" id="bf-add" data-run>추가하고 정리 시작</button></div>
     <p class="msg" id="bf-msg"></p>
   </section>
   <section class="sec">
     <h3>도구</h3>
-    <div class="toolrow"><button class="btn alt" id="run-check">접속 점검</button><span>블로그 RSS와 본문을 읽을 수 있는지만 확인합니다. API 비용이 없습니다.</span></div>
-    <div class="toolrow"><select id="rp-src"></select><button class="btn alt" id="run-reprocess">다시 정리</button><span>이미 정리한 글을 다시 정리합니다. 한 번에 설정한 개수만큼 처리하고 API 비용이 듭니다.</span></div>
-    <div class="toolrow"><button class="btn alt" id="demo-toggle">샘플 데이터로 보기</button><span>설정 전에 화면을 미리 볼 수 있는 예시 데이터입니다.</span></div>
+    <div class="toolrow"><select id="rp-src"></select><button class="btn alt" id="run-reprocess" data-run>다시 정리</button><span>이미 정리한 글을 다시 정리합니다. 한 번에 설정한 개수만큼 처리하고 API 비용이 들어요.</span></div>
+    <div class="toolrow"><button class="btn alt" id="demo-toggle">샘플 데이터로 보기</button><span>실제 리뷰가 아닌 예시 데이터로 화면을 미리 봅니다.</span></div>
     <p class="msg" id="tool-msg"></p>
   </section>
 </div></div>
@@ -823,7 +828,7 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
       var r = d && d.workflow_runs && d.workflow_runs[0]; return r ? r.id : 0;
     });
   }
-  function runWorkflow(inputs, onp) {
+  function runWorkflow(inputs, onp, untilStarted) {
     var t0 = Date.now(), before = 0;
     return latestRunId().catch(function () { return 0; }).then(function (id) {
       before = id;
@@ -837,13 +842,17 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
         }).then(function (d) {
           var run = (d.workflow_runs || []).filter(function (r) { return r.id > before; }).sort(function (a, b) { return a.id - b.id; })[0];
           if (run) return run;
-          if (tries > 25) throw new Error('실행을 찾지 못했어요. GitHub Actions 화면에서 확인해 주세요.');
+          if (tries > (untilStarted ? 8 : 25)) {
+            if (untilStarted) return { html_url: repoUrl('/actions/workflows/' + CFG.wf) };
+            throw new Error('실행을 찾지 못했어요. GitHub Actions 화면에서 확인해 주세요.');
+          }
           onp && onp('queued', Date.now() - t0);
           return find();
         });
       }
       return find();
     }).then(function (run) {
+      if (untilStarted) return run;
       function poll(r) {
         onp && onp(r.status, Date.now() - t0, r);
         if (r.status === 'completed') return r;
@@ -903,27 +912,27 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     var el = $('#runline');
     el.classList.remove('warn');
     if (progress) { el.innerHTML = progress; return; }
-    var st = S.status && S.status.last_run;
     if (S.demo) { el.textContent = ''; return; }
-    if (!st) { el.textContent = '아직 수집한 적이 없어요.'; return; }
-    var t = '마지막 수집 ' + ago(st.finished || st.at) + ' · ' + (st.message || '');
-    if (S.status.totals && S.status.totals.pending) t += ' · 대기 중인 글 ' + S.status.totals.pending + '개';
-    el.innerHTML = esc(t) + (st.run_url ? ' · <a href="' + esc(st.run_url) + '" target="_blank" rel="noopener">실행 기록</a>' : '');
-    if (st.ok === false) el.classList.add('warn');
+    var st = S.status && S.status.last_run;
+    if (!st) { el.textContent = '아직 정리를 시작하지 않았어요.'; return; }
+    var head = st.continues ? '정리 진행 중 (' + ago(st.finished || st.at) + ' 갱신) · ' : '마지막 정리 ' + ago(st.finished || st.at) + ' · ';
+    el.innerHTML = esc(head + (st.message || '')) + (st.run_url ? ' · <a href="' + esc(st.run_url) + '" target="_blank" rel="noopener">실행 기록</a>' : '');
+    if (st.ok === false && !st.continues) el.classList.add('warn');
   }
   function renderSetup() {
     var box = $('#setup');
     if (S.all.length || S.demo) { box.hidden = true; return; }
     var st = S.status && S.status.last_run;
-    var warn = st && st.ok === false ? '<p class="runline warn">' + esc(st.message || '') + '</p>' : '';
-    box.innerHTML = '<h2>아직 정리된 리뷰가 없어요</h2>' + warn +
+    var note = st ? '<p class="runline' + (st.ok === false && !st.continues ? ' warn' : '') + '">' + esc((st.continues ? '정리 진행 중 · ' : '최근 실행 · ') + (st.message || '')) + '</p>' : '';
+    var act = repoUrl('/actions/workflows/' + CFG.wf);
+    box.innerHTML = '<h2>아직 정리된 리뷰가 없어요</h2>' + note +
       '<ol>' +
       '<li><b>Claude API 키 넣기</b> — <a href="https://platform.claude.com/settings/keys" target="_blank" rel="noopener">Claude Console</a>에서 키를 만들어 ' +
       '<a href="' + repoUrl('/settings/secrets/actions/new') + '" target="_blank" rel="noopener">저장소 Secret</a>에 이름 <code>ANTHROPIC_API_KEY</code>로 저장합니다.</li>' +
-      '<li><b>웹 검색 켜기(권장)</b> — <a href="https://platform.claude.com/settings/privacy" target="_blank" rel="noopener">Console 설정</a>에서 웹 검색을 켜면 양조 정보를 생산자 자료로 보강합니다.</li>' +
-      '<li><b>새로고침 버튼 연결(선택)</b> — 설정에서 GitHub 토큰을 넣으면 이 페이지에서 바로 수집을 실행합니다.</li>' +
-      '<li><b>첫 수집</b> — 위의 새로고침을 누르거나 <a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub Actions</a>에서 Run workflow를 누릅니다. 이후에는 매일 아침 자동으로 새 글을 반영합니다.</li>' +
-      '</ol><p class="small">예전 리뷰는 설정 → 과거 글 추가에 글 주소를 붙여 넣으세요. <button class="linkbtn" data-act="demo">샘플 데이터로 미리보기</button></p>';
+      '<li><b>웹 검색 켜기(권장)</b> — <a href="https://platform.claude.com/settings/privacy" target="_blank" rel="noopener">Console 설정</a>에서 켜면 양조 정보를 생산자 자료로 보강합니다.</li>' +
+      '<li><b>접속 점검(비용 없음)</b> — <a href="' + act + '" target="_blank" rel="noopener">GitHub Actions</a>에서 Run workflow를 누르고 mode를 <code>check</code>로 실행하면 블로그별 글 수와 본문 읽기 결과가 여기에 표시돼요.</li>' +
+      '<li><b>전체 정리 한 번 실행</b> — 같은 곳에서 mode <code>all</code>로 실행합니다. 글이 많으면 몇 시간 동안 자동으로 이어서 정리하고, 진행 상황이 이 페이지에 나타나요.</li>' +
+      '</ol><p class="small">설정에 GitHub 토큰을 넣으면 이 페이지에서 바로 실행할 수 있어요. <button class="linkbtn" data-act="demo">샘플 데이터로 미리보기</button></p>';
     box.hidden = false;
   }
 
@@ -1296,32 +1305,53 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
   }
 
   /* ================================================================ 설정 */
-  function msg(id, text, kind) { var el = $('#' + id); el.textContent = text || ''; el.className = 'msg' + (kind ? ' ' + kind : ''); }
+  function msg(id, text, kind) { var el = $('#' + id); if (!el) return; el.textContent = text || ''; el.className = 'msg' + (kind ? ' ' + kind : ''); }
+  var MODE_KO = { all: '전체 정리', check: '접속 점검', reprocess: '다시 정리', 'new': '정리' };
+  function srcLine(s) {
+    var parts = [];
+    if (s.list === 'off') parts.push('정리 제외');
+    else if (s.list === 'ok') parts.push((s.how || '글 목록') + ' ' + (s.total || 0) + '개' + (s.new ? ', 새 글 ' + s.new + '개' : '') + (s.oldest ? ' (' + fmtDate(s.oldest).slice(0, 7) + '~' + fmtDate(s.latest).slice(0, 7) + ')' : ''));
+    else if (s.list === 'cached') parts.push('글 목록 ' + (s.total || 0) + '개(앞 실행에서 가져옴)');
+    else if (s.list === 'error') parts.push('전체 목록 실패: ' + (s.error || ''));
+    if (s.rss === 'ok' && s.list !== 'ok') parts.push('RSS 최근 글 ' + (s.items || 0) + '개');
+    else if (s.rss === 'error' && s.list !== 'ok') parts.push('RSS 오류 ' + (s.rss_error || s.error || ''));
+    if (s.post_fetch) parts.push('본문 ' + (s.post_fetch.ok ? '읽기 OK' : '읽기 실패 ' + (s.post_fetch.error || '')));
+    return '<li>' + esc((s.name || s.id) + ': ' + (parts.join(' · ') || '-')) + '</li>';
+  }
   function renderSettings() {
     $('#repo-name1').textContent = CFG.owner + '/' + CFG.repo;
     $('#repo-in').value = CFG.owner + '/' + CFG.repo; $('#branch-in').value = CFG.branch;
     $('#tok').value = ''; $('#tok').placeholder = token() ? '저장된 토큰 있음 (바꾸려면 새로 입력)' : 'github_pat_…';
+    $('#actions-link').href = repoUrl('/actions/workflows/' + CFG.wf);
     $('#demo-toggle').textContent = S.demo ? '샘플 보기 끄기' : '샘플 데이터로 보기';
-    var st = S.status && S.status.last_run, out = '';
+    var st = S.status && S.status.last_run, tot = (S.status && S.status.totals) || {}, out = '';
     if (st) {
-      out += '<p><b>' + esc(st.mode === 'check' ? '접속 점검' : st.mode === 'reprocess' ? '다시 정리' : '수집') + '</b> · ' + esc(ago(st.finished || st.at)) + (st.ok === false ? ' · <span style="color:var(--bad)">문제 있음</span>' : '') + '<br>' + esc(st.message || '') + '</p>';
-      if (st.sources && st.sources.length) out += '<ul>' + st.sources.map(function (s) {
-        return '<li>' + esc(s.name || s.id) + ': ' + esc(s.rss === 'ok' ? 'RSS ' + (s.items || 0) + '개' + (s.new != null ? ', 새 글 ' + s.new + '개' : '') + (s.latest ? ', 최근 ' + fmtDate(s.latest) : '') : s.rss === 'off' ? '수집 꺼짐' : s.rss === 'none' ? 'RSS 주소 없음' : 'RSS 오류 ' + (s.error || '')) +
-          (s.post_fetch ? ' · 본문 ' + (s.post_fetch.ok ? '읽기 OK(' + s.post_fetch.chars + '자)' : '실패 ' + esc(s.post_fetch.error || '')) : '') + '</li>';
-      }).join('') + '</ul>';
+      out += '<p><b>' + esc(MODE_KO[st.mode] || st.mode || '') + '</b> · ' + esc(ago(st.finished || st.at)) + (st.continues ? ' · <b>자동으로 이어서 진행 중</b>' : '') +
+        (st.ok === false && !st.continues ? ' · <span style="color:var(--bad)">문제 있음</span>' : '') + '<br>' + esc(st.message || '') + '</p>';
+      if (st.sources && st.sources.length) out += '<ul>' + st.sources.map(srcLine).join('') + '</ul>';
       if (st.errors && st.errors.length) out += '<p class="small">실패한 글</p><ul>' + st.errors.slice(0, 8).map(function (e) { return '<li><a href="' + esc(e.post) + '" target="_blank" rel="noopener">' + esc(e.title || e.post) + '</a> — ' + esc(e.error) + '</li>'; }).join('') + '</ul>';
       if (st.notes && st.notes.length) out += '<ul>' + st.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>';
-      if (st.usage && st.usage.calls) out += '<p class="small">API 사용: 호출 ' + st.usage.calls + '회, 입력 ' + Math.round(st.usage.input_tokens / 1000) + 'k·출력 ' + Math.round(st.usage.output_tokens / 1000) + 'k 토큰, 웹 검색 ' + st.usage.web_searches + '회' + (st.usage.cost_usd != null ? ', 약 $' + st.usage.cost_usd : '') + '</p>';
-    } else out = '<p>아직 수집한 적이 없어요.</p>';
-    if (S.status && S.status.totals) out += '<p class="small">정리한 글 ' + S.status.totals.posts + '개 · 와인 ' + S.status.totals.wines + '개 · 대기 ' + S.status.totals.pending + '개</p>';
+      if (st.usage && st.usage.calls) out += '<p class="small">이번 실행 API 사용: 호출 ' + st.usage.calls + '회, 입력 ' + Math.round(st.usage.input_tokens / 1000) + 'k·출력 ' + Math.round(st.usage.output_tokens / 1000) + 'k 토큰, 웹 검색 ' + st.usage.web_searches + '회' + (st.usage.cost_usd != null ? ', 약 $' + st.usage.cost_usd : '') + '</p>';
+    } else out = '<p>아직 정리를 시작하지 않았어요.</p>';
+    if (S.status && S.status.totals) out += '<p class="small">정리한 글 ' + (tot.posts || 0) + '개 · 와인 ' + (tot.wines || 0) + '개 · 남은 글 ' + (tot.pending || 0) + '개' + (tot.title_skipped ? ' · 제목으로 제외한 글 ' + tot.title_skipped + '개' : '') + '</p>';
     out += '<p class="small"><a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub Actions 실행 기록</a> · <a href="' + repoUrl('/blob/' + CFG.branch + '/reviews/README.md') + '" target="_blank" rel="noopener">사용 설명</a></p>';
     $('#set-status').innerHTML = out;
-    var srcHTML = S.srcList.map(function (s) {
-      return '<div class="srcrow"><div><b>' + esc(s.name || s.id) + '</b> <span class="small">(' + esc(s.id) + ' · ' + esc(s.platform || '') + ')</span><small>' +
-        (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url) + '</a>' : '') + (s.rss ? '' : ' · RSS 주소 없음') + '</small></div>' +
-        '<button class="chip" data-src-toggle="' + esc(s.id) + '" aria-pressed="' + (s.enabled !== false) + '">' + (s.enabled !== false ? '수집 중' : '수집 꺼짐') + '</button></div>';
-    }).join('');
-    $('#src-list').innerHTML = srcHTML || '<p class="small">등록된 블로그가 없어요.</p>';
+    var cnt = counted(S.demo ? [] : S.all.map(function (w) { return w.source; })), listed = {};
+    ((st && st.sources) || []).forEach(function (x) { if (x.total != null) listed[x.id] = x.total; });
+    Object.keys(tot.listed || {}).forEach(function (k) { if (listed[k] == null) listed[k] = tot.listed[k]; });
+    $('#src-list').innerHTML = S.srcList.filter(function (s) { return s.id !== 'sample'; }).map(function (s) {
+      var on = s.enabled !== false, meta = [];
+      if (listed[s.id] != null) meta.push('글 ' + listed[s.id] + '개');
+      if (cnt[s.id]) meta.push('와인 ' + cnt[s.id] + '개');
+      return '<div class="srcrow"><div><b>' + esc(s.name || s.id) + '</b> <span class="small">(' + esc(s.id) + ')</span><small>' +
+        (s.url ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(String(s.url).replace(/^https?:\/\//, '')) + '</a>' : '') +
+        (meta.length ? ' · ' + meta.join(' · ') : '') + '</small></div>' +
+        '<div class="srcbtns"><button class="chip" data-src-toggle="' + esc(s.id) + '" aria-pressed="' + on + '" title="전체 정리에 포함할지 정합니다">' + (on ? '포함' : '제외') + '</button>' +
+        '<button class="btn alt" data-run-src="' + esc(s.id) + '" data-run>정리</button></div></div>';
+    }).join('') || '<p class="small">등록된 블로그가 없어요.</p>';
+    var rp = $('#rp-src');
+    rp.innerHTML = '<option value="">모든 블로그</option>' + S.srcList.filter(function (s) { return s.id !== 'sample'; }).map(function (s) { return '<option value="' + esc(s.id) + '">' + esc(s.name || s.id) + '</option>'; }).join('');
+    $$('[data-run]').forEach(function (b) { b.disabled = !!S.running; });
   }
   function needToken(id) {
     if (token()) return false;
@@ -1362,9 +1392,9 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     msg('src-msg', '추가하는 중…');
     var added = null;
     editSources(function (doc) {
-      if (doc.sources.some(function (x) { return x.rss === s.rss || (x.platform === 'naver' && s.platform === 'naver' && (x.blog_id || x.id).toLowerCase() === s.blog_id.toLowerCase()); })) {
-        var ex = doc.sources.filter(function (x) { return x.rss === s.rss || (x.blog_id || x.id).toLowerCase() === (s.blog_id || s.id).toLowerCase(); })[0];
-        if (ex && ex.enabled === false) { ex.enabled = true; added = ex; return; }
+      var same = doc.sources.filter(function (x) { return x.rss === s.rss || (x.blog_id || x.id || '').toLowerCase() === (s.blog_id || s.id).toLowerCase(); })[0];
+      if (same) {
+        if (same.enabled === false) { same.enabled = true; added = same; return; }
         added = 'dup'; return false;
       }
       var ids = doc.sources.map(function (x) { return x.id; }), id = s.id.toLowerCase().replace(/[^a-z0-9_\-]/g, '-') || 'blog', n = 2;
@@ -1373,9 +1403,11 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
       doc.sources.push(s); added = s;
     }, 'reviews: 블로그 추가 ' + s.id).then(function () {
       if (added === 'dup') return msg('src-msg', '이미 등록된 블로그예요.', 'ok');
-      msg('src-msg', '추가했어요: ' + (added.name || added.id) + ' (' + added.rss + '). 새로고침을 누르면 이 블로그의 최근 글부터 정리합니다.', 'ok');
       $('#src-url').value = '';
-      return load(true).then(renderSettings);
+      return load(true).then(function () {
+        renderSettings();
+        msg('src-msg', '추가했어요: ' + (added.name || added.id) + '. 위 목록에서 이 블로그의 [정리]를 누르면 전체 글을 정리합니다.', 'ok');
+      });
     }).catch(function (e) { msg('src-msg', e.message, 'err'); });
   }
   function toggleSource(id) {
@@ -1385,9 +1417,11 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
       var s = doc.sources.filter(function (x) { return x.id === id; })[0];
       if (!s) return false;
       s.enabled = s.enabled === false; now = s.enabled;
-    }, 'reviews: 블로그 수집 ' + id).then(function () {
-      msg('src-msg', id + ' 수집을 ' + (now ? '켰어요.' : '껐어요. 이미 정리한 와인은 그대로 남습니다.'), 'ok');
-      return load(true).then(renderSettings);
+    }, 'reviews: 블로그 정리 대상 변경 ' + id).then(function () {
+      return load(true).then(function () {
+        renderSettings();
+        msg('src-msg', id + ': ' + (now ? '전체 정리에 포함해요.' : '전체 정리에서 빼요. 이미 정리한 와인은 그대로 남습니다.'), 'ok');
+      });
     }).catch(function (e) { msg('src-msg', e.message, 'err'); });
   }
   function addBackfill() {
@@ -1407,58 +1441,63 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
       if (!fresh.length) return null;
       var d = new Date();
       return text.replace(/\s*$/, '\n') + '# ' + d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate() + ' 추가\n' + fresh.join('\n') + '\n';
-    }, 'reviews: 과거 글 주소 ' + urls.length + '개 추가').then(function () {
+    }, 'reviews: 글 주소 ' + urls.length + '개 추가').then(function () {
       $('#bf').value = '';
       msg('bf-msg', (addedN ? addedN + '개를 추가했어요.' : '모두 이미 목록에 있어요.') + ' 정리를 시작합니다.', 'ok');
-      closeSheets();
-      refresh();
+      runCollect({ mode: 'all' });
     }).catch(function (e) { msg('bf-msg', e.message, 'err'); });
   }
 
-  /* ================================================================ 새로고침 */
+  /* ================================================================ 정리 실행 */
   var toastT = null;
   function toast(html, kind, ms) {
     var t = $('#toast'); t.innerHTML = html; t.className = 'toast' + (kind ? ' ' + kind : ''); t.hidden = false;
     clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, ms || 6000);
   }
-  function setBusy(on, label) {
-    S.busy = on;
-    var b = $('#refresh-btn'); b.disabled = on; b.classList.toggle('spin', on);
-    b.querySelector('span').textContent = on ? (label || '수집 중…') : '새로고침';
-  }
   function fmtElapsed(ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + '분 ' + (s % 60) + '초'; }
-  function refresh(inputs) {
-    if (S.busy) return;
-    if (S.demo) { S.demo = false; store.set('wr-demo', null); }
-    if (!token()) {
-      setBusy(true, '불러오는 중…');
-      return load(true).then(function () {
-        toast('최신 데이터를 다시 불러왔어요. 블로그 새 글까지 지금 수집하려면 설정에서 GitHub 토큰을 연결하세요. ' +
-          '(<a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub에서 실행</a>)', '', 9000);
-      }).catch(function (e) { toast(esc(e.message), 'err'); }).then(function () { setBusy(false); });
+  function setRunning(on) { S.running = on; $$('[data-run]').forEach(function (b) { b.disabled = on; }); }
+  var armed = null;
+  function startRun(inputs, btn) {
+    if (S.running) return;
+    if (inputs.mode !== 'check' && btn) {
+      if (armed !== btn) {
+        if (armed) armed.textContent = armed.dataset.label;
+        armed = btn; btn.dataset.label = btn.textContent; btn.textContent = '한 번 더 누르면 시작';
+        msg('run-msg', 'Claude API 비용이 들어요(와인 글 하나에 대략 $0.03~0.15). 이미 정리한 글은 건너뜁니다.');
+        setTimeout(function () { if (armed === btn) { btn.textContent = btn.dataset.label; armed = null; } }, 6000);
+        return;
+      }
+      btn.textContent = btn.dataset.label; armed = null;
     }
-    var mode = (inputs && inputs.mode) || 'new';
-    var label = mode === 'check' ? '접속 점검' : mode === 'reprocess' ? '다시 정리' : '수집';
-    setBusy(true, label + ' 요청 중…');
-    renderRunline('GitHub에 ' + label + '을 요청하고 있어요…');
-    var finalRun = null;
-    return runWorkflow(inputs || { mode: 'new' }, function (status, ms, run) {
-      var st = { queued: '대기 중', waiting: '대기 중', pending: '대기 중', requested: '대기 중', in_progress: '실행 중', completed: '마무리 중' }[status] || status;
-      setBusy(true, label + ' ' + st + '…');
-      renderRunline('GitHub에서 ' + label + ' ' + st + ' · ' + fmtElapsed(ms) + (run && run.html_url ? ' · <a href="' + esc(run.html_url) + '" target="_blank" rel="noopener">진행 상황</a>' : '') +
-        '<br><span class="small">새 글이 많으면 몇 분 걸려요. 이 페이지를 닫아도 GitHub에서 계속 진행됩니다.</span>');
-    }).then(function (run) {
-      finalRun = run;
-      return sleep(1500).then(function () { return load(true); });
-    }).then(function () {
-      var st = S.status && S.status.last_run;
-      var ok = finalRun && finalRun.conclusion === 'success';
-      toast(esc(ok ? (st && st.message) || '완료했어요.' : (st && st.message) || '실행이 실패했어요.') +
-        (finalRun && !ok ? ' <a href="' + esc(finalRun.html_url) + '" target="_blank" rel="noopener">기록 보기</a>' : ''), ok ? '' : 'err', 10000);
-    }).catch(function (e) {
-      renderRunline();
-      toast(esc(e.message), 'err', 10000);
-    }).then(function () { setBusy(false); renderRunline(); });
+    runCollect(inputs);
+  }
+  function runCollect(inputs) {
+    var mode = inputs.mode || 'all', label = MODE_KO[mode] || '정리';
+    if (!token()) {
+      toast('이 페이지에서 바로 실행하려면 설정에서 GitHub 토큰을 연결하세요. 토큰 없이도 <a href="' + repoUrl('/actions/workflows/' + CFG.wf) + '" target="_blank" rel="noopener">GitHub Actions</a>에서 Run workflow로 실행할 수 있어요.', '', 10000);
+      return Promise.resolve();
+    }
+    var wait = mode === 'check';
+    setRunning(true);
+    closeSheets();
+    renderRunline('GitHub에 ' + esc(label) + '을 요청하고 있어요…');
+    return runWorkflow(inputs, function (status, ms, run) {
+      var stt = { queued: '대기 중', waiting: '대기 중', pending: '대기 중', requested: '대기 중', in_progress: '실행 중', completed: '마무리 중' }[status] || status;
+      renderRunline(esc(label) + ' ' + esc(stt) + ' · ' + fmtElapsed(ms) + (run && run.html_url ? ' · <a href="' + esc(run.html_url) + '" target="_blank" rel="noopener">진행 상황</a>' : ''));
+    }, !wait).then(function (run) {
+      if (!wait) {
+        renderRunline(esc(label) + '을 시작했어요. 글이 많으면 몇 시간 동안 GitHub에서 자동으로 이어서 진행하고, 이 페이지를 나중에 다시 열면 정리된 와인이 보여요.' +
+          (run && run.html_url ? ' · <a href="' + esc(run.html_url) + '" target="_blank" rel="noopener">진행 상황</a>' : ''));
+        toast(esc(label) + '을 시작했어요. 페이지를 닫아도 GitHub에서 계속 진행됩니다.', '', 8000);
+        return;
+      }
+      return sleep(1500).then(function () { return load(true); }).then(function () {
+        var st = S.status && S.status.last_run, ok = run.conclusion === 'success';
+        toast(esc((st && st.message) || (ok ? '완료했어요.' : '실행이 실패했어요.')) + (!ok && run.html_url ? ' <a href="' + esc(run.html_url) + '" target="_blank" rel="noopener">기록 보기</a>' : ''), ok ? '' : 'err', 12000);
+        renderRunline();
+      });
+    }).catch(function (e) { renderRunline(); toast(esc(e.message), 'err', 10000); })
+      .then(function () { setRunning(false); });
   }
 
   /* ================================================================ 테마·목차 */
@@ -1514,7 +1553,6 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     });
     $('#groups').addEventListener('toggle', function (e) { if (e.target.open) fillGroup(e.target); }, true);
     $('#map-fit').addEventListener('click', function () { fitAll(); });
-    $('#refresh-btn').addEventListener('click', function () { refresh(); });
     $('#settings-btn').addEventListener('click', function () {
       ['tok-msg', 'src-msg', 'bf-msg', 'tool-msg'].forEach(function (id) { msg(id, ''); });
       renderSettings(); openSheet('settings'); $('#settings .panel').scrollTop = 0;
@@ -1532,6 +1570,7 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
         ty.setAttribute('aria-pressed', String(i < 0)); apply(); return;
       }
       var sg = t.closest('[data-src-toggle]'); if (sg) { toggleSource(sg.getAttribute('data-src-toggle')); return; }
+      var rs = t.closest('[data-run-src]'); if (rs) { startRun({ mode: 'all', source: rs.getAttribute('data-run-src') }, rs); return; }
       var act = t.closest('[data-act="demo"]'); if (act) { setDemo(true); return; }
       if (t.closest('[data-close]') || t.classList.contains('sheet')) { closeSheets(); return; }
       if (!$('#drawer').hidden && !t.closest('#drawer') && !t.closest('#menu-btn')) { $('#drawer').hidden = true; $('#menu-btn').setAttribute('aria-expanded', 'false'); }
@@ -1556,11 +1595,9 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
     });
     $('#src-add').addEventListener('click', addSource);
     $('#bf-add').addEventListener('click', addBackfill);
-    $('#run-check').addEventListener('click', function () { if (needToken('tool-msg')) return; closeSheets(); refresh({ mode: 'check' }); });
-    $('#run-reprocess').addEventListener('click', function () {
-      if (needToken('tool-msg')) return;
-      var src = $('#rp-src').value; closeSheets(); refresh({ mode: 'reprocess', source: src });
-    });
+    $('#run-all').addEventListener('click', function () { startRun({ mode: 'all' }, this); });
+    $('#run-check').addEventListener('click', function () { startRun({ mode: 'check' }, this); });
+    $('#run-reprocess').addEventListener('click', function () { startRun({ mode: 'reprocess', source: $('#rp-src').value }, this); });
     $('#demo-toggle').addEventListener('click', function () { closeSheets(); setDemo(!S.demo); });
   }
   function testToken() {
@@ -1596,7 +1633,7 @@ textarea { resize: vertical; font-size: var(--fs-0); line-height: 1.5; }
   }).catch(function (e) { console.error(e); S.loaded = true; S.loadError = true; renderView(); });
   if ('requestIdleCallback' in window) requestIdleCallback(function () { loadLeaflet().catch(function () {}); });
   else setTimeout(function () { loadLeaflet().catch(function () {}); }, 1500);
-  window.WR = { S: S, M: M, CFG: CFG, refresh: refresh, openDetail: openDetail };
+  window.WR = { S: S, M: M, CFG: CFG, run: runCollect, openDetail: openDetail };
 })();
 </script>
 </body>

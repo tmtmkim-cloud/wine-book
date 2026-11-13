@@ -1,29 +1,39 @@
-# 와인 리뷰 수집: 블로그 RSS의 새 글과 reviews/data/backfill.txt 의 과거 글을
-# Claude API로 정리해 reviews/data/*.json 에 저장합니다.
-# 리뷰 페이지(reviews/index.html)의 '새로고침' 버튼이나 Actions 탭의 'Run workflow'로 바로 실행할 수 있습니다.
-name: 와인 리뷰 수집
+# 와인 리뷰 정리: reviews/data/sources.json 에 적힌 블로그의 전체 글을 Claude API로 정리해
+# reviews/data/*.json 에 저장합니다. 자동 예약 실행은 없고, 필요할 때 직접 실행합니다.
+#   - Actions 탭 → 와인 리뷰 정리 → Run workflow
+#   - 또는 리뷰 페이지(reviews/index.html) 설정의 '전체 정리 시작' / 블로그별 '정리' 버튼
+# 이미 정리한 글은 건너뛰고, 남은 글이 있으면 다음 실행을 스스로 이어 붙입니다.
+name: 와인 리뷰 정리
 
 on:
-  schedule:
-    - cron: "37 21 * * *"   # 매일 오전 6시 37분(한국 시간)
   workflow_dispatch:
     inputs:
       mode:
-        description: "new = 새 글과 과거 글 정리 / reprocess = 정리한 글 다시 정리 / check = 접속 점검(API 미사용)"
+        description: "all = 블로그 전체 글 정리(이미 정리한 글은 건너뜀) / check = 접속 점검(API 비용 없음) / reprocess = 정리한 글 다시 정리"
         type: choice
-        options: [new, reprocess, check]
-        default: new
+        options: [all, check, reprocess]
+        default: all
       source:
-        description: "이 블로그 id만 처리 (비우면 전체)"
+        description: "이 블로그 id만 처리 (비우면 sources.json에서 켜 둔 블로그 전체)"
         type: string
         default: ""
+      title_filter:
+        description: "제목으로 와인 글을 먼저 고를지 (off면 모든 글을 정리하고, 전에 제목으로 거른 글도 다시 봅니다)"
+        type: choice
+        options: ["on", "off"]
+        default: "on"
       limit:
-        description: "이번에 정리할 최대 글 수 (비우면 sources.json 설정값)"
+        description: "한 번 실행에서 정리할 최대 글 수 (비우면 sources.json 설정값)"
         type: string
         default: ""
+      chain:
+        description: "자동으로 이어서 실행한 횟수 (직접 실행할 때는 0 그대로)"
+        type: string
+        default: "0"
 
 permissions:
   contents: write
+  actions: write
   pages: write
 
 concurrency:
@@ -33,11 +43,14 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     env:
-      MODE: ${{ inputs.mode || 'new' }}
+      MODE: ${{ inputs.mode || 'all' }}
       SOURCE: ${{ inputs.source || '' }}
+      TITLE_FILTER: ${{ inputs.title_filter || 'on' }}
       LIMIT: ${{ inputs.limit || '' }}
+      CHAIN: ${{ inputs.chain || '0' }}
+      TIME_BUDGET_MIN: "100"
     steps:
       - uses: actions/checkout@v4
 
@@ -45,7 +58,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: 리뷰 수집·정리
+      - name: 리뷰 정리
+        id: collect
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python reviews/collector/collect.py
@@ -66,6 +80,15 @@ jobs:
             git pull --rebase origin "${GITHUB_REF_NAME}"
           done
           exit 1
+
+      - name: 남은 글 이어서 정리
+        if: success() && steps.collect.outputs.continue == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NEXT_CHAIN: ${{ steps.collect.outputs.chain_next }}
+        run: |
+          gh workflow run wine-reviews.yml --repo "${GITHUB_REPOSITORY}" --ref "${GITHUB_REF_NAME}" \
+            -f mode=all -f source="${SOURCE}" -f title_filter="${TITLE_FILTER}" -f limit="${LIMIT}" -f chain="${NEXT_CHAIN}"
 
       - name: 페이지 다시 빌드 요청
         if: always()
